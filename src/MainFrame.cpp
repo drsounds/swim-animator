@@ -1,6 +1,7 @@
 #include "MainFrame.h"
 #include "View.h"
 #include "App.h"
+#include "DrawIds.h"
 #include <wx/aui/aui.h>
 #include <wx/panel.h>
 #include <wx/menu.h>
@@ -8,6 +9,23 @@
 #include <wx/artprov.h>
 #include <wx/msgdlg.h>
 #include <wx/settings.h>
+#include <wx/dcmemory.h>
+
+// ---------------------------------------------------------------------------
+// FlatToolBarArt – removes the button bevel in the normal (idle) state while
+// keeping hover and pressed feedback from the default art provider.
+// ---------------------------------------------------------------------------
+
+class FlatToolBarArt : public wxAuiDefaultToolBarArt {
+public:
+    void DrawBackground(wxDC& dc, wxWindow* wnd, const wxRect& rect) override
+    {
+        // Fill with the plain window colour – no gradient, no bevel.
+        dc.SetBrush(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
+        dc.SetPen(*wxTRANSPARENT_PEN);
+        dc.DrawRectangle(rect);
+    }
+};
 
 // ---------------------------------------------------------------------------
 // Event table
@@ -18,6 +36,10 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxDocParentFrame)
     EVT_AUINOTEBOOK_PAGE_CHANGED(wxID_ANY, MainFrame::OnNotebookPageChanged)
     EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
     EVT_CLOSE(MainFrame::OnClose)
+    EVT_UPDATE_UI(ID_TOOL_SELECT, MainFrame::OnUpdateDrawTool)
+    EVT_UPDATE_UI(ID_TOOL_RECT,   MainFrame::OnUpdateDrawTool)
+    EVT_UPDATE_UI(ID_TOOL_CIRCLE, MainFrame::OnUpdateDrawTool)
+    EVT_UPDATE_UI(ID_TOOL_TEXT,   MainFrame::OnUpdateDrawTool)
 wxEND_EVENT_TABLE()
 
 // ---------------------------------------------------------------------------
@@ -96,21 +118,72 @@ void MainFrame::CreateMenuBar() {
     docMgr->FileHistoryUseMenu(fileMenu);
 }
 
+static wxBitmap MakeBmp(void (*draw)(wxMemoryDC&)) {
+    wxBitmap bmp(16, 16);
+    wxMemoryDC dc(bmp);
+    dc.SetBackground(*wxWHITE_BRUSH);
+    dc.Clear();
+    draw(dc);
+    return bmp;
+}
+
 void MainFrame::CreateToolBar() {
-    auto* tb = wxFrame::CreateToolBar(wxTB_FLAT | wxTB_HORIZONTAL);
+    m_toolbar = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxDefaultSize,
+                                 wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_HORZ_LAYOUT | wxAUI_TB_PLAIN_BACKGROUND);
 
-    tb->AddTool(wxID_NEW,  "New",  wxArtProvider::GetBitmap(wxART_NEW,        wxART_TOOLBAR));
-    tb->AddTool(wxID_OPEN, "Open", wxArtProvider::GetBitmap(wxART_FILE_OPEN,  wxART_TOOLBAR));
-    tb->AddTool(wxID_SAVE, "Save", wxArtProvider::GetBitmap(wxART_FILE_SAVE,  wxART_TOOLBAR));
-    tb->AddSeparator();
-    tb->AddTool(wxID_UNDO, "Undo", wxArtProvider::GetBitmap(wxART_UNDO,       wxART_TOOLBAR));
-    tb->AddTool(wxID_REDO, "Redo", wxArtProvider::GetBitmap(wxART_REDO,       wxART_TOOLBAR));
-    tb->AddSeparator();
-    tb->AddTool(wxID_CUT,  "Cut",  wxArtProvider::GetBitmap(wxART_CUT,        wxART_TOOLBAR));
-    tb->AddTool(wxID_COPY, "Copy", wxArtProvider::GetBitmap(wxART_COPY,       wxART_TOOLBAR));
-    tb->AddTool(wxID_PASTE,"Paste",wxArtProvider::GetBitmap(wxART_PASTE,      wxART_TOOLBAR));
+    m_toolbar->AddTool(wxID_NEW,  "New",  wxArtProvider::GetBitmap(wxART_NEW,        wxART_TOOLBAR));
+    m_toolbar->AddTool(wxID_OPEN, "Open", wxArtProvider::GetBitmap(wxART_FILE_OPEN,  wxART_TOOLBAR));
+    m_toolbar->AddTool(wxID_SAVE, "Save", wxArtProvider::GetBitmap(wxART_FILE_SAVE,  wxART_TOOLBAR));
+    m_toolbar->AddSeparator();
+    m_toolbar->AddTool(wxID_UNDO, "Undo", wxArtProvider::GetBitmap(wxART_UNDO,       wxART_TOOLBAR));
+    m_toolbar->AddTool(wxID_REDO, "Redo", wxArtProvider::GetBitmap(wxART_REDO,       wxART_TOOLBAR));
+    m_toolbar->AddSeparator();
+    m_toolbar->AddTool(wxID_CUT,  "Cut",  wxArtProvider::GetBitmap(wxART_CUT,        wxART_TOOLBAR));
+    m_toolbar->AddTool(wxID_COPY, "Copy", wxArtProvider::GetBitmap(wxART_COPY,       wxART_TOOLBAR));
+    m_toolbar->AddTool(wxID_PASTE,"Paste",wxArtProvider::GetBitmap(wxART_PASTE,      wxART_TOOLBAR));
+    m_toolbar->AddSeparator();
 
-    tb->Realize();
+    auto selectBmp = MakeBmp([](wxMemoryDC& dc) {
+        dc.SetPen(*wxBLACK_PEN);
+        dc.SetBrush(*wxWHITE_BRUSH);
+        wxPoint arrow[] = {{3,1},{3,11},{6,8},{8,13},{10,12},{8,7},{12,7}};
+        dc.DrawPolygon(7, arrow);
+    });
+    auto rectBmp = MakeBmp([](wxMemoryDC& dc) {
+        dc.SetPen(*wxBLACK_PEN);
+        dc.SetBrush(*wxTRANSPARENT_BRUSH);
+        dc.DrawRectangle(2, 3, 12, 9);
+    });
+    auto circleBmp = MakeBmp([](wxMemoryDC& dc) {
+        dc.SetPen(*wxBLACK_PEN);
+        dc.SetBrush(*wxTRANSPARENT_BRUSH);
+        dc.DrawEllipse(2, 2, 12, 12);
+    });
+    auto textBmp = MakeBmp([](wxMemoryDC& dc) {
+        dc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT,
+                          wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+        dc.SetTextForeground(*wxBLACK);
+        dc.DrawText("T", 4, 1);
+    });
+
+    m_toolbar->AddTool(ID_TOOL_SELECT, "Select", selectBmp, "Select (click shapes to select)", wxITEM_CHECK);
+    m_toolbar->AddTool(ID_TOOL_RECT,   "Rect",   rectBmp,   "Draw Rectangle (drag to create)", wxITEM_CHECK);
+    m_toolbar->AddTool(ID_TOOL_CIRCLE, "Circle", circleBmp, "Draw Circle (drag to create)",    wxITEM_CHECK);
+    m_toolbar->AddTool(ID_TOOL_TEXT,   "Text",   textBmp,   "Draw Text (drag to create)",      wxITEM_CHECK);
+
+    m_toolbar->SetArtProvider(new FlatToolBarArt());
+    m_toolbar->Realize();
+
+    m_auiMgr.AddPane(m_toolbar,
+        wxAuiPaneInfo()
+            .Name("Toolbar")
+            .Caption("Toolbar")
+            .ToolbarPane()
+            .Top()
+            .LeftDockable(true)
+            .RightDockable(true)
+            .Floatable(true)
+            .Gripper(true));
 }
 
 void MainFrame::CreateStatusBar_() {
@@ -167,6 +240,12 @@ void MainFrame::CreateAuiPanes() {
 // ---------------------------------------------------------------------------
 // Event handlers
 // ---------------------------------------------------------------------------
+
+void MainFrame::OnUpdateDrawTool(wxUpdateUIEvent& e) {
+    // Default: disabled. An active DrawView overrides this via PushEventHandler.
+    e.Enable(false);
+    e.Check(false);
+}
 
 void MainFrame::OnNotebookPageClose(wxAuiNotebookEvent& event) {
     // Find the View that owns the page being closed and close its document.

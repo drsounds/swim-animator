@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "spacely"
+			"path" : "spacily-app"
 		}
 	],
 	"backtrace" : 1,
@@ -30,13 +30,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 17,
+				"line" : 19,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 19,
+				"line" : 21,
 				"parent" : 0
 			},
 			{
@@ -58,7 +58,7 @@
 			{
 				"command" : 4,
 				"file" : 0,
-				"line" : 20,
+				"line" : 22,
 				"parent" : 0
 			},
 			{
@@ -75,7 +75,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -pthread -g -std=gnu++17"
+					"fragment" : "-g -fsanitize=address -pthread -g -std=gnu++17"
 				}
 			],
 			"defines" : 
@@ -124,21 +124,23 @@
 				0,
 				1,
 				2,
-				3
+				3,
+				4,
+				5
 			]
 		}
 	],
-	"id" : "spacely::@6890427a1f51a3e7e1df",
+	"id" : "spacily-app::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-pthread -g",
+				"fragment" : "-g -fsanitize=address -pthread -g",
 				"role" : "flags"
 			},
 			{
-				"fragment" : "",
+				"fragment" : "-fsanitize=address",
 				"role" : "flags"
 			},
 			{
@@ -169,8 +171,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "spacely",
-	"nameOnDisk" : "spacely",
+	"name" : "spacily-app",
+	"nameOnDisk" : "spacily-app",
 	"paths" : 
 	{
 		"build" : ".",
@@ -185,7 +187,9 @@
 				0,
 				1,
 				2,
-				3
+				3,
+				4,
+				5
 			]
 		}
 	],
@@ -213,6 +217,18 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/View.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/DrawDoc.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/DrawView.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

@@ -2,6 +2,7 @@
 #include <wx/docview.h>
 #include <wx/aui/aui.h>
 #include <wx/aui/auibook.h>
+#include <wx/aui/auibar.h>
 #include <wx/toolbar.h>
 
 // ---------------------------------------------------------------------------
@@ -37,9 +38,11 @@ private:
     void OnNotebookPageChanged(wxAuiNotebookEvent& event);
     void OnAbout(wxCommandEvent& event);
     void OnClose(wxCloseEvent& event);
+    void OnUpdateDrawTool(wxUpdateUIEvent& event);
 
     wxAuiManager   m_auiMgr;
     wxAuiNotebook* m_notebook{nullptr};
+    wxAuiToolBar*  m_toolbar{nullptr};
 
     wxDECLARE_EVENT_TABLE();
 };

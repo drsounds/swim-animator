@@ -6,6 +6,9 @@ class MainFrame;
 
 class App : public wxApp {
 public:
+    // Called before GTK is initialised — used to inject the Trinity GTK2 rc.
+    bool Initialize(int& argc, wxChar** argv) override;
+
     bool OnInit() override;
     int  OnExit() override;
 

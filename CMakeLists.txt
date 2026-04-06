@@ -12,15 +12,18 @@ set(SOURCES
     src/MainFrame.cpp
     src/Document.cpp
     src/View.cpp
+    src/DrawDoc.cpp
+    src/DrawView.cpp
 )
 
-add_executable(${PROJECT_NAME} WIN32 MACOSX_BUNDLE ${SOURCES})
+add_executable(spacily-app WIN32 MACOSX_BUNDLE ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE ${wxWidgets_LIBRARIES})
-target_include_directories(${PROJECT_NAME} PRIVATE src)
+target_link_libraries(spacily-app PRIVATE ${wxWidgets_LIBRARIES})
+target_include_directories(spacily-app PRIVATE src)
 
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER "com.example.spacely"
+set_target_properties(spacily-app PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER "se.spacify.spacely"
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
 )
+

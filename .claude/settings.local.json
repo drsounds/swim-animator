@@ -1,7 +1,28 @@
 {
   "permissions": {
     "allow": [
-      "Bash(cmake .. -DCMAKE_BUILD_TYPE=Debug)"
+      "Bash(cmake .. -DCMAKE_BUILD_TYPE=Debug)",
+      "Read(//home/alecca/.trinity/**)",
+      "Bash(/dev/null -name *.css -o -name gtkrc -o -name kdeglobals)",
+      "Read(//home/alecca/.config/**)",
+      "Bash(wx-config --version)",
+      "Bash(wx-config --libs)",
+      "Bash(pkg-config --modversion gtk+-2.0)",
+      "Bash(pkg-config --modversion gtk+-3.0)",
+      "Bash(/dev/null find:*)",
+      "Bash(/dev/null ls:*)",
+      "Bash(dpkg -l)",
+      "Bash(head -5 find /usr/share/themes/Q4OS* -name gtkrc 2)",
+      "Bash(/dev/null dpkg:*)",
+      "Bash(dpkg -L lookswitcher-trinity)",
+      "Bash(grep -v \"^/$\\\\|share/doc\")",
+      "Bash(find /usr -name *.lswtheme -o -name lookswitcher* -name *.conf)",
+      "Bash(dpkg -L lswthemes-wineclassic-trinity)",
+      "Bash(grep -v \"^/$\\\\|doc\")",
+      "Bash(cmake --build .)",
+      "Bash(cmake --build /home/alecca/Documents/spacely/build)",
+      "Bash(timeout 5 ./build/spacily-app)",
+      "Bash(G_DEBUG=fatal-criticals ./build/spacily-app --new-file /tmp/test.drw)"
     ]
   }
 }

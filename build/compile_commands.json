@@ -1,26 +1,38 @@
 [
 {
   "directory": "/home/alecca/Documents/spacely/build",
-  "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2  -pthread -g -std=gnu++17 -o CMakeFiles/spacely.dir/src/App.cpp.o -c /home/alecca/Documents/spacely/src/App.cpp",
+  "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2 -g -fsanitize=address -pthread -g -std=gnu++17 -o CMakeFiles/spacily-app.dir/src/App.cpp.o -c /home/alecca/Documents/spacely/src/App.cpp",
   "file": "/home/alecca/Documents/spacely/src/App.cpp",
-  "output": "CMakeFiles/spacely.dir/src/App.cpp.o"
+  "output": "CMakeFiles/spacily-app.dir/src/App.cpp.o"
 },
 {
   "directory": "/home/alecca/Documents/spacely/build",
-  "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2  -pthread -g -std=gnu++17 -o CMakeFiles/spacely.dir/src/MainFrame.cpp.o -c /home/alecca/Documents/spacely/src/MainFrame.cpp",
+  "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2 -g -fsanitize=address -pthread -g -std=gnu++17 -o CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o -c /home/alecca/Documents/spacely/src/MainFrame.cpp",
   "file": "/home/alecca/Documents/spacely/src/MainFrame.cpp",
-  "output": "CMakeFiles/spacely.dir/src/MainFrame.cpp.o"
+  "output": "CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o"
 },
 {
   "directory": "/home/alecca/Documents/spacely/build",
-  "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2  -pthread -g -std=gnu++17 -o CMakeFiles/spacely.dir/src/Document.cpp.o -c /home/alecca/Documents/spacely/src/Document.cpp",
+  "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2 -g -fsanitize=address -pthread -g -std=gnu++17 -o CMakeFiles/spacily-app.dir/src/Document.cpp.o -c /home/alecca/Documents/spacely/src/Document.cpp",
   "file": "/home/alecca/Documents/spacely/src/Document.cpp",
-  "output": "CMakeFiles/spacely.dir/src/Document.cpp.o"
+  "output": "CMakeFiles/spacily-app.dir/src/Document.cpp.o"
 },
 {
   "directory": "/home/alecca/Documents/spacely/build",
-  "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2  -pthread -g -std=gnu++17 -o CMakeFiles/spacely.dir/src/View.cpp.o -c /home/alecca/Documents/spacely/src/View.cpp",
+  "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2 -g -fsanitize=address -pthread -g -std=gnu++17 -o CMakeFiles/spacily-app.dir/src/View.cpp.o -c /home/alecca/Documents/spacely/src/View.cpp",
   "file": "/home/alecca/Documents/spacely/src/View.cpp",
-  "output": "CMakeFiles/spacely.dir/src/View.cpp.o"
+  "output": "CMakeFiles/spacily-app.dir/src/View.cpp.o"
+},
+{
+  "directory": "/home/alecca/Documents/spacely/build",
+  "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2 -g -fsanitize=address -pthread -g -std=gnu++17 -o CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o -c /home/alecca/Documents/spacely/src/DrawDoc.cpp",
+  "file": "/home/alecca/Documents/spacely/src/DrawDoc.cpp",
+  "output": "CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o"
+},
+{
+  "directory": "/home/alecca/Documents/spacely/build",
+  "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2 -g -fsanitize=address -pthread -g -std=gnu++17 -o CMakeFiles/spacily-app.dir/src/DrawView.cpp.o -c /home/alecca/Documents/spacely/src/DrawView.cpp",
+  "file": "/home/alecca/Documents/spacely/src/DrawView.cpp",
+  "output": "CMakeFiles/spacily-app.dir/src/DrawView.cpp.o"
 }
 ]

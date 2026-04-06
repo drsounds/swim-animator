@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named spacely
+# Target rules for targets named spacily-app
 
 # Build rule for target.
-spacely: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 spacely
-.PHONY : spacely
+spacily-app: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 spacily-app
+.PHONY : spacily-app
 
 # fast build rule for target.
-spacely/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacely.dir/build.make CMakeFiles/spacely.dir/build
-.PHONY : spacely/fast
+spacily-app/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/build
+.PHONY : spacily-app/fast
 
 src/App.o: src/App.cpp.o
 .PHONY : src/App.o
 
 # target to build an object file
 src/App.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacely.dir/build.make CMakeFiles/spacely.dir/src/App.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/App.cpp.o
 .PHONY : src/App.cpp.o
 
 src/App.i: src/App.cpp.i
@@ -142,7 +142,7 @@ src/App.i: src/App.cpp.i
 
 # target to preprocess a source file
 src/App.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacely.dir/build.make CMakeFiles/spacely.dir/src/App.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/App.cpp.i
 .PHONY : src/App.cpp.i
 
 src/App.s: src/App.cpp.s
@@ -150,7 +150,7 @@ src/App.s: src/App.cpp.s
 
 # target to generate assembly for a file
 src/App.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacely.dir/build.make CMakeFiles/spacely.dir/src/App.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/App.cpp.s
 .PHONY : src/App.cpp.s
 
 src/Document.o: src/Document.cpp.o
@@ -158,7 +158,7 @@ src/Document.o: src/Document.cpp.o
 
 # target to build an object file
 src/Document.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacely.dir/build.make CMakeFiles/spacely.dir/src/Document.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/Document.cpp.o
 .PHONY : src/Document.cpp.o
 
 src/Document.i: src/Document.cpp.i
@@ -166,7 +166,7 @@ src/Document.i: src/Document.cpp.i
 
 # target to preprocess a source file
 src/Document.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacely.dir/build.make CMakeFiles/spacely.dir/src/Document.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/Document.cpp.i
 .PHONY : src/Document.cpp.i
 
 src/Document.s: src/Document.cpp.s
@@ -174,15 +174,63 @@ src/Document.s: src/Document.cpp.s
 
 # target to generate assembly for a file
 src/Document.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacely.dir/build.make CMakeFiles/spacely.dir/src/Document.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/Document.cpp.s
 .PHONY : src/Document.cpp.s
+
+src/DrawDoc.o: src/DrawDoc.cpp.o
+.PHONY : src/DrawDoc.o
+
+# target to build an object file
+src/DrawDoc.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o
+.PHONY : src/DrawDoc.cpp.o
+
+src/DrawDoc.i: src/DrawDoc.cpp.i
+.PHONY : src/DrawDoc.i
+
+# target to preprocess a source file
+src/DrawDoc.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.i
+.PHONY : src/DrawDoc.cpp.i
+
+src/DrawDoc.s: src/DrawDoc.cpp.s
+.PHONY : src/DrawDoc.s
+
+# target to generate assembly for a file
+src/DrawDoc.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.s
+.PHONY : src/DrawDoc.cpp.s
+
+src/DrawView.o: src/DrawView.cpp.o
+.PHONY : src/DrawView.o
+
+# target to build an object file
+src/DrawView.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/DrawView.cpp.o
+.PHONY : src/DrawView.cpp.o
+
+src/DrawView.i: src/DrawView.cpp.i
+.PHONY : src/DrawView.i
+
+# target to preprocess a source file
+src/DrawView.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/DrawView.cpp.i
+.PHONY : src/DrawView.cpp.i
+
+src/DrawView.s: src/DrawView.cpp.s
+.PHONY : src/DrawView.s
+
+# target to generate assembly for a file
+src/DrawView.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/DrawView.cpp.s
+.PHONY : src/DrawView.cpp.s
 
 src/MainFrame.o: src/MainFrame.cpp.o
 .PHONY : src/MainFrame.o
 
 # target to build an object file
 src/MainFrame.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacely.dir/build.make CMakeFiles/spacely.dir/src/MainFrame.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o
 .PHONY : src/MainFrame.cpp.o
 
 src/MainFrame.i: src/MainFrame.cpp.i
@@ -190,7 +238,7 @@ src/MainFrame.i: src/MainFrame.cpp.i
 
 # target to preprocess a source file
 src/MainFrame.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacely.dir/build.make CMakeFiles/spacely.dir/src/MainFrame.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/MainFrame.cpp.i
 .PHONY : src/MainFrame.cpp.i
 
 src/MainFrame.s: src/MainFrame.cpp.s
@@ -198,7 +246,7 @@ src/MainFrame.s: src/MainFrame.cpp.s
 
 # target to generate assembly for a file
 src/MainFrame.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacely.dir/build.make CMakeFiles/spacely.dir/src/MainFrame.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/MainFrame.cpp.s
 .PHONY : src/MainFrame.cpp.s
 
 src/View.o: src/View.cpp.o
@@ -206,7 +254,7 @@ src/View.o: src/View.cpp.o
 
 # target to build an object file
 src/View.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacely.dir/build.make CMakeFiles/spacely.dir/src/View.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/View.cpp.o
 .PHONY : src/View.cpp.o
 
 src/View.i: src/View.cpp.i
@@ -214,7 +262,7 @@ src/View.i: src/View.cpp.i
 
 # target to preprocess a source file
 src/View.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacely.dir/build.make CMakeFiles/spacely.dir/src/View.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/View.cpp.i
 .PHONY : src/View.cpp.i
 
 src/View.s: src/View.cpp.s
@@ -222,7 +270,7 @@ src/View.s: src/View.cpp.s
 
 # target to generate assembly for a file
 src/View.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacely.dir/build.make CMakeFiles/spacely.dir/src/View.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/View.cpp.s
 .PHONY : src/View.cpp.s
 
 # Help Target
@@ -233,13 +281,19 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... spacely"
+	@echo "... spacily-app"
 	@echo "... src/App.o"
 	@echo "... src/App.i"
 	@echo "... src/App.s"
 	@echo "... src/Document.o"
 	@echo "... src/Document.i"
 	@echo "... src/Document.s"
+	@echo "... src/DrawDoc.o"
+	@echo "... src/DrawDoc.i"
+	@echo "... src/DrawDoc.s"
+	@echo "... src/DrawView.o"
+	@echo "... src/DrawView.i"
+	@echo "... src/DrawView.s"
 	@echo "... src/MainFrame.o"
 	@echo "... src/MainFrame.i"
 	@echo "... src/MainFrame.s"
