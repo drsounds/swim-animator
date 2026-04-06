@@ -1,0 +1,1 @@
+/usr/bin/c++  -pthread -g -Wl,--dependency-file=CMakeFiles/spacely.dir/link.d CMakeFiles/spacely.dir/src/App.cpp.o CMakeFiles/spacely.dir/src/MainFrame.cpp.o CMakeFiles/spacely.dir/src/Document.cpp.o CMakeFiles/spacely.dir/src/View.cpp.o -o spacely  -L/usr/lib/x86_64-linux-gnu -pthread -lwx_gtk3u_core-3.2 -lwx_baseu-3.2 -lwx_gtk3u_aui-3.2
