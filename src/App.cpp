@@ -5,6 +5,9 @@
 #include "DrawDoc.h"
 #include "DrawView.h"
 #include <wx/filefn.h>
+#include <wx/filename.h>
+#include <wx/stdpaths.h>
+#include <wx/splash.h>
 #include <wx/utils.h>
 
 wxIMPLEMENT_APP(App);
@@ -58,6 +61,25 @@ bool App::OnInit() {
 
     // Limit to one view per document; change to 0 for unlimited.
     m_docManager->SetMaxDocsOpen(10);
+
+    // Show a splash screen if Splash.png exists next to the executable
+    // or in the current working directory.
+    {
+        wxString exeDir = wxFileName(wxStandardPaths::Get().GetExecutablePath()).GetPath();
+        wxString splashPath = exeDir + wxFILE_SEP_PATH + "Splash.png";
+        if (!wxFileExists(splashPath))
+            splashPath = wxGetCwd() + wxFILE_SEP_PATH + "Splash.png";
+
+        if (wxFileExists(splashPath)) {
+            wxBitmap bmp(splashPath, wxBITMAP_TYPE_PNG);
+            if (bmp.IsOk()) {
+                new wxSplashScreen(bmp,
+                    wxSPLASH_CENTRE_ON_SCREEN | wxSPLASH_TIMEOUT,
+                    3000, nullptr, wxID_ANY);
+                wxYield();
+            }
+        }
+    }
 
     auto* frame = new MainFrame(m_docManager, nullptr, wxID_ANY,
                                 GetAppName(),

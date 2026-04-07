@@ -273,6 +273,30 @@ src/MainFrame.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/MainFrame.cpp.s
 .PHONY : src/MainFrame.cpp.s
 
+src/PropPanel.o: src/PropPanel.cpp.o
+.PHONY : src/PropPanel.o
+
+# target to build an object file
+src/PropPanel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o
+.PHONY : src/PropPanel.cpp.o
+
+src/PropPanel.i: src/PropPanel.cpp.i
+.PHONY : src/PropPanel.i
+
+# target to preprocess a source file
+src/PropPanel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/PropPanel.cpp.i
+.PHONY : src/PropPanel.cpp.i
+
+src/PropPanel.s: src/PropPanel.cpp.s
+.PHONY : src/PropPanel.s
+
+# target to generate assembly for a file
+src/PropPanel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/PropPanel.cpp.s
+.PHONY : src/PropPanel.cpp.s
+
 src/View.o: src/View.cpp.o
 .PHONY : src/View.o
 
@@ -324,6 +348,9 @@ help:
 	@echo "... src/MainFrame.o"
 	@echo "... src/MainFrame.i"
 	@echo "... src/MainFrame.s"
+	@echo "... src/PropPanel.o"
+	@echo "... src/PropPanel.i"
+	@echo "... src/PropPanel.s"
 	@echo "... src/View.o"
 	@echo "... src/View.i"
 	@echo "... src/View.s"

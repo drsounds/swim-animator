@@ -329,6 +329,26 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /home/alecca/Documents/spacely/src/DrawView.h \
  /home/alecca/Documents/spacely/src/DrawShape.h \
  /home/alecca/Documents/spacely/src/DrawIds.h \
+ /home/alecca/Documents/spacely/src/PropPanel.h \
+ /usr/include/wx-3.2/wx/spinctrl.h /usr/include/wx-3.2/wx/spinbutt.h \
+ /usr/include/wx-3.2/wx/range.h /usr/include/wx-3.2/wx/gtk/spinbutt.h \
+ /usr/include/wx-3.2/wx/gtk/spinctrl.h /usr/include/wx-3.2/wx/button.h \
+ /usr/include/wx-3.2/wx/anybutton.h \
+ /usr/include/wx-3.2/wx/gtk/anybutton.h \
+ /usr/include/wx-3.2/wx/gtk/button.h /usr/include/wx-3.2/wx/stattext.h \
+ /usr/include/wx-3.2/wx/gtk/stattext.h /usr/include/wx-3.2/wx/textctrl.h \
+ /usr/include/wx-3.2/wx/textentry.h \
+ /usr/include/wx-3.2/wx/gtk/textentry.h /usr/include/wx-3.2/wx/ioswrap.h \
+ /usr/include/c++/14/iostream /usr/include/c++/14/ostream \
+ /usr/include/c++/14/ios /usr/include/c++/14/bits/basic_ios.h \
+ /usr/include/c++/14/bits/locale_facets.h /usr/include/c++/14/cwctype \
+ /usr/include/x86_64-linux-gnu/c++/14/bits/ctype_base.h \
+ /usr/include/x86_64-linux-gnu/c++/14/bits/ctype_inline.h \
+ /usr/include/c++/14/bits/locale_facets.tcc \
+ /usr/include/c++/14/bits/basic_ios.tcc \
+ /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
+ /usr/include/c++/14/bits/istream.tcc \
+ /usr/include/wx-3.2/wx/gtk/textctrl.h \
  /home/alecca/Documents/spacely/src/View.h \
  /home/alecca/Documents/spacely/src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
@@ -356,8 +376,10 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
- /usr/include/wx-3.2/wx/gtk/app.h /usr/include/wx-3.2/wx/artprov.h \
- /usr/include/wx-3.2/wx/msgdlg.h /usr/include/wx-3.2/wx/stockitem.h \
+ /usr/include/wx-3.2/wx/gtk/app.h \
+ /home/alecca/Documents/spacely/src/DrawDoc.h \
+ /usr/include/wx-3.2/wx/artprov.h /usr/include/wx-3.2/wx/msgdlg.h \
+ /usr/include/wx-3.2/wx/stockitem.h \
  /usr/include/wx-3.2/wx/generic/msgdlgg.h \
  /usr/include/wx-3.2/wx/gtk/msgdlg.h /usr/include/wx-3.2/wx/settings.h \
  /usr/include/wx-3.2/wx/dcmemory.h

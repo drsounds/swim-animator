@@ -9,6 +9,7 @@ spacily-app: \
   CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o \
   CMakeFiles/spacily-app.dir/src/DrawView.cpp.o \
   CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o \
+  CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o \
   /usr/lib/x86_64-linux-gnu/libwx_gtk3u_core-3.2.so \
   /usr/lib/x86_64-linux-gnu/libwx_baseu-3.2.so \
   /usr/lib/x86_64-linux-gnu/libwx_gtk3u_aui-3.2.so \
@@ -139,6 +140,8 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o:
 CMakeFiles/spacily-app.dir/src/DrawView.cpp.o:
 
 CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o:
+
+CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o:
 
 /usr/lib/x86_64-linux-gnu/libwx_gtk3u_core-3.2.so:
 

@@ -16,9 +16,10 @@ class DrawCanvas : public wxPanel {
 public:
     DrawCanvas(DrawView* owner, wxWindow* parent);
 
-    DrawTool  GetTool() const    { return m_tool; }
-    void      SetTool(DrawTool t){ m_tool = t; m_bezierStep = 0; Refresh(); }
-    DrawView* GetView()          { return m_owner; }
+    DrawTool  GetTool() const       { return m_tool; }
+    void      SetTool(DrawTool t)   { m_tool = t; m_bezierStep = 0; Refresh(); }
+    DrawView* GetView()             { return m_owner; }
+    int       GetSelectedIndex() const { return m_selected; }
     void      ValidateSelection();
 
     // Which select-mode drag is active (public so file-scope helpers can use it)
@@ -85,6 +86,9 @@ public:
     void OnActivateView(bool activate, wxView*, wxView*) override;
 
     DrawCanvas* GetCanvas() { return m_canvas; }
+
+    // Called by DrawCanvas and OnUpdate to push selection state to the properties pane.
+    void NotifySelectionChanged();
 
 private:
     DrawCanvas* m_canvas{ nullptr };
