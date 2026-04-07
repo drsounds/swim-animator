@@ -1,8 +1,8 @@
 Add support for fill color in beizer curve.
 
-/feature-dev:feature-dev Add support for color swatches, import and export in the GIMP Palette format (.gpl format), and assigner of back and foreground colors like in many 2D drawing software.
+/feature-dev:feature-dev Add support for color swatches, import and export in the GIMP Palette format (.gpl format), and assigner of back and foreground colors of selected and newly created object(s) like in many 2D drawing software. The color swatches should be a dockable pane default  docked in the right bar above the propertyp pane
 
-/feature-dev:feature-dev replace fill and border colors with generic brush type that can be either gradient or solid.
+/feature-dev:feature-dev replace fill and border colors with generic brush type that can be either gradient or solid and stored as swatches like colors in Gimp's .gbr format.
 
 /feature-dev:feature-dev Add a text object type, with colors, size, style (bold italic) and fonts, ability to resize them in a box (layout) or artistic (size whole text).
 
