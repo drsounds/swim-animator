@@ -515,20 +515,19 @@ void DrawCanvas::OnMotion(wxMouseEvent& e) {
 }
 
 void DrawCanvas::OnLeftUp(wxMouseEvent& e) {
-    // End a select-mode move/resize drag — submit a single undo command.
+    // End a select-mode move/resize drag — commit the preview to the document.
     if (m_tool == DrawTool::Select && m_dragMode != DragMode::None) {
         auto* doc = GetDoc();
         if (doc && m_selected >= 0 && m_selected < (int)doc->GetShapes().size()) {
-            const DrawShape& after = doc->GetShapes()[m_selected];
-            if (after.bounds != m_dragOrigShape.bounds ||
-                after.pts[0] != m_dragOrigShape.pts[0] ||
-                after.pts[1] != m_dragOrigShape.pts[1] ||
-                after.pts[2] != m_dragOrigShape.pts[2] ||
-                after.pts[3] != m_dragOrigShape.pts[3])
+            if (m_dragPreview.bounds != m_dragOrigShape.bounds ||
+                m_dragPreview.pts[0] != m_dragOrigShape.pts[0] ||
+                m_dragPreview.pts[1] != m_dragOrigShape.pts[1] ||
+                m_dragPreview.pts[2] != m_dragOrigShape.pts[2] ||
+                m_dragPreview.pts[3] != m_dragOrigShape.pts[3])
             {
                 wxString name = (m_dragMode == DragMode::Move) ? "Move Shape" : "Resize Shape";
                 doc->GetCommandProcessor()->Submit(
-                    new UpdateShapeCmd(doc, m_selected, m_dragOrigShape, after, name));
+                    new UpdateShapeCmd(doc, m_selected, m_dragOrigShape, m_dragPreview, name));
             }
         }
         m_dragMode = DragMode::None;

@@ -3429,6 +3429,7 @@ spacily-app
  /usr/lib/x86_64-linux-gnu/libwx_gtk3u_core-3.2.so
  /home/alecca/Documents/spacely/build/CMakeFiles/spacily-app.dir/src/App.cpp.o
  /home/alecca/Documents/spacely/build/CMakeFiles/spacily-app.dir/src/Document.cpp.o
+ /home/alecca/Documents/spacely/build/CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o
  /home/alecca/Documents/spacely/build/CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o
  /home/alecca/Documents/spacely/build/CMakeFiles/spacily-app.dir/src/DrawView.cpp.o
  /home/alecca/Documents/spacely/build/CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o

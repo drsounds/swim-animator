@@ -3421,6 +3421,7 @@ spacily-app: /lib/x86_64-linux-gnu/libICE.so.6 \
   /usr/lib/x86_64-linux-gnu/libwx_gtk3u_core-3.2.so \
   CMakeFiles/spacily-app.dir/src/App.cpp.o \
   CMakeFiles/spacily-app.dir/src/Document.cpp.o \
+  CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o \
   CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o \
   CMakeFiles/spacily-app.dir/src/DrawView.cpp.o \
   CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o \
@@ -3430,6 +3431,8 @@ spacily-app: /lib/x86_64-linux-gnu/libICE.so.6 \
 CMakeFiles/spacily-app.dir/src/View.cpp.o:
 
 CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o:
+
+CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o:
 
 CMakeFiles/spacily-app.dir/src/Document.cpp.o:
 
