@@ -5,6 +5,9 @@
 #include <wx/aui/auibar.h>
 #include <wx/toolbar.h>
 #include "DrawView.h"
+#include "PropPanel.h"
+
+class DrawDoc;
 
 // ---------------------------------------------------------------------------
 // MainFrame
@@ -32,6 +35,7 @@ private:
     void CreateMenuBar();
     void CreateToolBar();
     void CreateDrawToolBar();
+    void CreatePropertiesPane();
     void CreateStatusBar_();
     void CreateAuiPanes();
 
@@ -46,13 +50,17 @@ private:
 
 public:
     // Draw-tool routing – called by DrawView::OnActivateView.
-    void SetActiveDrawView(DrawView* view) { m_activeDrawView = view; }
+    void SetActiveDrawView(DrawView* view);
+
+    // Properties pane – called by DrawView when selection changes.
+    void OnSelectionChanged(DrawDoc* doc, int idx);
 
 private:
     wxAuiManager   m_auiMgr;
     wxAuiNotebook* m_notebook{nullptr};
-    wxToolBar*  m_toolbar{nullptr};
-    wxToolBar*  m_drawToolbar{nullptr};
+    wxToolBar*     m_toolbar{nullptr};
+    wxToolBar*     m_drawToolbar{nullptr};
+    PropPanel*     m_propPanel{nullptr};
     DrawView*      m_activeDrawView{nullptr};
 
     wxDECLARE_EVENT_TABLE();

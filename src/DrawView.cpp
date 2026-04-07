@@ -3,6 +3,7 @@
 #include "DrawCommands.h"
 #include "App.h"
 #include "MainFrame.h"
+#include "PropPanel.h"
 #include <wx/dcbuffer.h>
 #include <wx/settings.h>
 #include <wx/colordlg.h>
@@ -409,6 +410,7 @@ void DrawCanvas::OnLeftDown(wxMouseEvent& e) {
             if (doc) {
                 doc->GetCommandProcessor()->Submit(new AddShapeCmd(doc, s));
                 m_selected = static_cast<int>(doc->GetShapes().size()) - 1;
+                m_owner->NotifySelectionChanged();
             }
             m_bezierStep = 0;
         }
@@ -470,6 +472,7 @@ void DrawCanvas::OnLeftDown(wxMouseEvent& e) {
         } else {
             m_selected = -1;
         }
+        m_owner->NotifySelectionChanged();
         Refresh();
     } else {
         m_dragging    = true;
@@ -564,6 +567,7 @@ void DrawCanvas::OnLeftUp(wxMouseEvent& e) {
     if (doc) {
         doc->GetCommandProcessor()->Submit(new AddShapeCmd(doc, s));
         m_selected = static_cast<int>(doc->GetShapes().size()) - 1;
+        m_owner->NotifySelectionChanged();
     }
 
     Refresh();
@@ -586,6 +590,7 @@ void DrawCanvas::OnKeyDown(wxKeyEvent& e) {
             DrawShape shape = doc->GetShapes()[m_selected];
             int idx = m_selected;
             m_selected = -1;
+            m_owner->NotifySelectionChanged();
             doc->GetCommandProcessor()->Submit(new RemoveShapeCmd(doc, idx, shape));
             Refresh();
         }
@@ -614,6 +619,14 @@ void DrawCanvas::ValidateSelection() {
     auto* doc = GetDoc();
     if (!doc || m_selected >= (int)doc->GetShapes().size())
         m_selected = -1;
+}
+
+void DrawView::NotifySelectionChanged() {
+    auto* mf = wxDynamicCast(wxGetApp().GetTopWindow(), MainFrame);
+    if (!mf) return;
+    DrawDoc* doc = m_canvas ? wxDynamicCast(GetDocument(), DrawDoc) : nullptr;
+    int idx = m_canvas ? m_canvas->GetSelectedIndex() : -1;
+    mf->OnSelectionChanged(doc, idx);
 }
 
 // ---------------------------------------------------------------------------
@@ -645,6 +658,7 @@ void DrawView::OnUpdate(wxView* /*sender*/, wxObject* /*hint*/) {
         m_canvas->ValidateSelection();
         m_canvas->Refresh();
     }
+    NotifySelectionChanged();
 }
 
 void DrawView::OnActivateView(bool activate, wxView*, wxView*) {
@@ -665,6 +679,11 @@ void DrawView::OnActivateView(bool activate, wxView*, wxView*) {
 
 bool DrawView::OnClose(bool deleteWindow) {
     if (!wxView::OnClose(deleteWindow)) return false;
+
+    // Always clear the properties pane for this document — even if this view
+    // was not the active one — to prevent a dangling DrawDoc* in PropPanel.
+    auto* mf = wxDynamicCast(wxGetApp().GetTopWindow(), MainFrame);
+    if (mf) mf->OnSelectionChanged(nullptr, -1);
 
     Activate(false);
 

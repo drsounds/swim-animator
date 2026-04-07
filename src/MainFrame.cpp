@@ -2,6 +2,7 @@
 #include "View.h"
 #include "App.h"
 #include "DrawIds.h"
+#include "DrawDoc.h"
 #include <wx/aui/aui.h>
 #include <wx/panel.h>
 #include <wx/menu.h>
@@ -86,6 +87,7 @@ MainFrame::MainFrame(wxDocManager* manager, wxFrame* parent, wxWindowID id,
     CreateMenuBar();
     CreateToolBar();
     CreateDrawToolBar();
+    CreatePropertiesPane();
     CreateStatusBar_();
     CreateAuiPanes();
 
@@ -248,6 +250,31 @@ void MainFrame::CreateDrawToolBar() {
             .Left()
             .Row(0)
             .Gripper(true));
+}
+
+void MainFrame::CreatePropertiesPane() {
+    m_propPanel = new PropPanel(this);
+    m_auiMgr.AddPane(m_propPanel,
+        wxAuiPaneInfo()
+            .Name("Properties")
+            .Caption("Properties")
+            .Right()
+            .BestSize(200, -1)
+            .MinSize(160, -1)
+            .CloseButton(true)
+            .Floatable(true)
+            .Show(true));
+}
+
+void MainFrame::SetActiveDrawView(DrawView* view) {
+    m_activeDrawView = view;
+    if (m_propPanel)
+        m_propPanel->ShowShape(nullptr, -1);
+}
+
+void MainFrame::OnSelectionChanged(DrawDoc* doc, int idx) {
+    if (m_propPanel)
+        m_propPanel->ShowShape(doc, idx);
 }
 
 void MainFrame::CreateStatusBar_() {

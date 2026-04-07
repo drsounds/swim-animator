@@ -12,6 +12,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/spacily-app.dir/src/DrawView.cpp.o.d"
   "CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o"
   "CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o.d"
+  "CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o"
+  "CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o.d"
   "CMakeFiles/spacily-app.dir/src/View.cpp.o"
   "CMakeFiles/spacily-app.dir/src/View.cpp.o.d"
   "spacily-app"
