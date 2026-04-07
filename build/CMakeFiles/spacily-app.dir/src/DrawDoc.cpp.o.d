@@ -310,6 +310,7 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: \
  /usr/include/wx-3.2/wx/affinematrix2dbase.h \
  /usr/include/wx-3.2/wx/geometry.h \
  /home/alecca/Documents/spacely/src/DrawShape.h \
- /usr/include/wx-3.2/wx/wfstream.h /usr/include/wx-3.2/wx/file.h \
- /usr/include/wx-3.2/wx/convauto.h /usr/include/wx-3.2/wx/ffile.h \
- /usr/include/wx-3.2/wx/txtstrm.h /usr/include/wx-3.2/wx/wxcrtvararg.h
+ /usr/include/wx-3.2/wx/cmdproc.h /usr/include/wx-3.2/wx/wfstream.h \
+ /usr/include/wx-3.2/wx/file.h /usr/include/wx-3.2/wx/convauto.h \
+ /usr/include/wx-3.2/wx/ffile.h /usr/include/wx-3.2/wx/txtstrm.h \
+ /usr/include/wx-3.2/wx/wxcrtvararg.h

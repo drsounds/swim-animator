@@ -6,11 +6,12 @@
 class DrawDoc : public wxDocument {
     wxDECLARE_DYNAMIC_CLASS(DrawDoc);
 public:
-    DrawDoc() = default;
+    DrawDoc();
 
     const std::vector<DrawShape>& GetShapes() const { return m_shapes; }
 
-    int  AddShape(const DrawShape& s);          // returns new index
+    int  AddShape(const DrawShape& s);          // appends, returns new index
+    void InsertShape(int idx, const DrawShape& s); // inserts at idx (for undo)
     void UpdateShape(int idx, const DrawShape& s);
     void RemoveShape(int idx);
 

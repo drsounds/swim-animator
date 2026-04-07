@@ -353,9 +353,9 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o: \
  /usr/include/wx-3.2/wx/gtk/menuitem.h /usr/include/wx-3.2/wx/gtk/menu.h \
  /usr/include/wx-3.2/wx/gtk/mdi.h /usr/include/wx-3.2/wx/toolbar.h \
  /usr/include/wx-3.2/wx/tbarbase.h /usr/include/wx-3.2/wx/gtk/toolbar.h \
+ /home/alecca/Documents/spacely/src/DrawView.h \
+ /home/alecca/Documents/spacely/src/DrawShape.h \
+ /home/alecca/Documents/spacely/src/DrawIds.h \
  /home/alecca/Documents/spacely/src/Document.h \
  /home/alecca/Documents/spacely/src/View.h \
- /home/alecca/Documents/spacely/src/DrawDoc.h \
- /home/alecca/Documents/spacely/src/DrawShape.h \
- /home/alecca/Documents/spacely/src/DrawView.h \
- /home/alecca/Documents/spacely/src/DrawIds.h
+ /home/alecca/Documents/spacely/src/DrawDoc.h

@@ -2,14 +2,13 @@ spacily-app: \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o \
-  /usr/lib/gcc/x86_64-linux-gnu/14/libasan_preinit.o \
-  /usr/lib/gcc/x86_64-linux-gnu/14/libasan.so \
   CMakeFiles/spacily-app.dir/src/App.cpp.o \
   CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o \
   CMakeFiles/spacily-app.dir/src/Document.cpp.o \
   CMakeFiles/spacily-app.dir/src/View.cpp.o \
   CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o \
   CMakeFiles/spacily-app.dir/src/DrawView.cpp.o \
+  CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o \
   /usr/lib/x86_64-linux-gnu/libwx_gtk3u_core-3.2.so \
   /usr/lib/x86_64-linux-gnu/libwx_baseu-3.2.so \
   /usr/lib/x86_64-linux-gnu/libwx_gtk3u_aui-3.2.so \
@@ -64,6 +63,7 @@ spacily-app: \
   /lib/x86_64-linux-gnu/libpng16.so.16 \
   /lib/x86_64-linux-gnu/libjpeg.so.62 \
   /lib/x86_64-linux-gnu/libtiff.so.6 \
+  /lib/x86_64-linux-gnu/libm.so.6 \
   /lib/x86_64-linux-gnu/libz.so.1 \
   /lib/x86_64-linux-gnu/liblzma.so.5 \
   /lib/x86_64-linux-gnu/libpcre2-32.so.0 \
@@ -126,10 +126,6 @@ spacily-app: \
 
 /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o:
 
-/usr/lib/gcc/x86_64-linux-gnu/14/libasan_preinit.o:
-
-/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:
-
 CMakeFiles/spacily-app.dir/src/App.cpp.o:
 
 CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o:
@@ -141,6 +137,8 @@ CMakeFiles/spacily-app.dir/src/View.cpp.o:
 CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o:
 
 CMakeFiles/spacily-app.dir/src/DrawView.cpp.o:
+
+CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o:
 
 /usr/lib/x86_64-linux-gnu/libwx_gtk3u_core-3.2.so:
 
@@ -249,6 +247,8 @@ CMakeFiles/spacily-app.dir/src/DrawView.cpp.o:
 /lib/x86_64-linux-gnu/libjpeg.so.62:
 
 /lib/x86_64-linux-gnu/libtiff.so.6:
+
+/lib/x86_64-linux-gnu/libm.so.6:
 
 /lib/x86_64-linux-gnu/libz.so.1:
 

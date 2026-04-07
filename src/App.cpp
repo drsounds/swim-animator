@@ -17,12 +17,6 @@ bool App::Initialize(int& argc, wxChar** argv) {
     // the variable (i.e. when the app is launched outside a live TDE session,
     // such as from a terminal or from KDevelop).
     wxString rcFiles;
-    if (!wxGetEnv("GTK2_RC_FILES", &rcFiles) || rcFiles.IsEmpty()) {
-        const wxString tdeRc =
-            wxGetHomeDir() + "/.trinity/share/config/gtkrc-2.0";
-        if (wxFileExists(tdeRc))
-            wxSetEnv("GTK2_RC_FILES", tdeRc);
-    }
 
     return wxApp::Initialize(argc, argv);
 }

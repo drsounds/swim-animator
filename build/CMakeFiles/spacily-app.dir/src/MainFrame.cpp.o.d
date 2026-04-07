@@ -326,6 +326,9 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /usr/include/wx-3.2/wx/gtk/menuitem.h /usr/include/wx-3.2/wx/gtk/menu.h \
  /usr/include/wx-3.2/wx/gtk/mdi.h /usr/include/wx-3.2/wx/toolbar.h \
  /usr/include/wx-3.2/wx/tbarbase.h /usr/include/wx-3.2/wx/gtk/toolbar.h \
+ /home/alecca/Documents/spacely/src/DrawView.h \
+ /home/alecca/Documents/spacely/src/DrawShape.h \
+ /home/alecca/Documents/spacely/src/DrawIds.h \
  /home/alecca/Documents/spacely/src/View.h \
  /home/alecca/Documents/spacely/src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
@@ -353,10 +356,8 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
- /usr/include/wx-3.2/wx/gtk/app.h \
- /home/alecca/Documents/spacely/src/DrawIds.h \
- /usr/include/wx-3.2/wx/artprov.h /usr/include/wx-3.2/wx/msgdlg.h \
- /usr/include/wx-3.2/wx/stockitem.h \
+ /usr/include/wx-3.2/wx/gtk/app.h /usr/include/wx-3.2/wx/artprov.h \
+ /usr/include/wx-3.2/wx/msgdlg.h /usr/include/wx-3.2/wx/stockitem.h \
  /usr/include/wx-3.2/wx/generic/msgdlgg.h \
  /usr/include/wx-3.2/wx/gtk/msgdlg.h /usr/include/wx-3.2/wx/settings.h \
  /usr/include/wx-3.2/wx/dcmemory.h

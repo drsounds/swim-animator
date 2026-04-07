@@ -14,6 +14,7 @@ set(SOURCES
     src/View.cpp
     src/DrawDoc.cpp
     src/DrawView.cpp
+    src/DrawCommands.cpp
 )
 
 add_executable(spacily-app WIN32 MACOSX_BUNDLE ${SOURCES})

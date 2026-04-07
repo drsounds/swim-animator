@@ -7,7 +7,7 @@
 class DrawDoc;
 class DrawView;
 
-enum class DrawTool { Select, Rect, Circle, Text };
+enum class DrawTool { Select, Rect, Circle, Text, Bezier };
 
 // ---------------------------------------------------------------------------
 // DrawCanvas – interactive wxPanel living inside the AUI notebook tab.
@@ -17,8 +17,19 @@ public:
     DrawCanvas(DrawView* owner, wxWindow* parent);
 
     DrawTool  GetTool() const    { return m_tool; }
-    void      SetTool(DrawTool t){ m_tool = t; }
+    void      SetTool(DrawTool t){ m_tool = t; m_bezierStep = 0; Refresh(); }
     DrawView* GetView()          { return m_owner; }
+    void      ValidateSelection();
+
+    // Which select-mode drag is active (public so file-scope helpers can use it)
+    enum class DragMode {
+        None,
+        Move,
+        ResizeNW, ResizeN, ResizeNE,
+        ResizeE,  ResizeSE, ResizeS,
+        ResizeSW, ResizeW,
+        BezierPt  // dragging one Bezier control point in Select mode
+    };
 
 private:
     DrawDoc* GetDoc();
@@ -37,9 +48,24 @@ private:
     DrawView* m_owner;
     DrawTool  m_tool    { DrawTool::Select };
     int       m_selected{ -1 };
+
+    // Shape-creation rubber-band state
     bool      m_dragging{ false };
     wxPoint   m_dragStart;
     wxPoint   m_dragCurrent;
+
+    // Select-mode move/resize state
+    DragMode  m_dragMode         { DragMode::None };
+    wxPoint   m_dragOrigin;
+    wxRect    m_dragOrigBounds;
+    wxPoint   m_dragOrigPts[4];  // original Bezier pts for Move / BezierPt drags
+    DrawShape m_dragOrigShape;   // full before-state of the dragged shape (for undo)
+    DrawShape m_dragPreview;     // current drag position rendered without touching doc
+    int       m_bezierHandleIdx  { -1 };
+
+    // Bezier creation state (active while DrawTool::Bezier is selected)
+    int       m_bezierStep  { 0 };   // how many pts have been placed (0–3 during creation)
+    wxPoint   m_bezierPts[4];        // pts placed so far
 
     wxDECLARE_EVENT_TABLE();
 };
@@ -61,17 +87,5 @@ public:
     DrawCanvas* GetCanvas() { return m_canvas; }
 
 private:
-    void PushHandler();
-    void PopHandler();
-
-    void OnToolSelect(wxCommandEvent&);
-    void OnToolRect(wxCommandEvent&);
-    void OnToolCircle(wxCommandEvent&);
-    void OnToolText(wxCommandEvent&);
-    void OnUpdateDrawTool(wxUpdateUIEvent&);
-
-    DrawCanvas* m_canvas       { nullptr };
-    bool        m_handlerPushed{ false  };
-
-    wxDECLARE_EVENT_TABLE();
+    DrawCanvas* m_canvas{ nullptr };
 };

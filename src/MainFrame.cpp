@@ -12,18 +12,42 @@
 #include <wx/dcmemory.h>
 
 // ---------------------------------------------------------------------------
-// FlatToolBarArt – removes the button bevel in the normal (idle) state while
-// keeping hover and pressed feedback from the default art provider.
+// BeveledToolBarArt – draws a raised 3-D border on every button in its idle
+// state; falls back to the default art for hover, pressed and checked states.
 // ---------------------------------------------------------------------------
 
-class FlatToolBarArt : public wxAuiDefaultToolBarArt {
+class BeveledToolBarArt : public wxAuiDefaultToolBarArt {
 public:
-    void DrawBackground(wxDC& dc, wxWindow* wnd, const wxRect& rect) override
+    void DrawButton(wxDC& dc, wxWindow* wnd,
+                    const wxAuiToolBarItem& item, const wxRect& rect) override
     {
-        // Fill with the plain window colour – no gradient, no bevel.
-        dc.SetBrush(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
-        dc.SetPen(*wxTRANSPARENT_PEN);
-        dc.DrawRectangle(rect);
+        int state = item.GetState();
+        bool active = (state & wxAUI_BUTTON_STATE_HOVER)   ||
+                      (state & wxAUI_BUTTON_STATE_PRESSED)  ||
+                      (state & wxAUI_BUTTON_STATE_CHECKED);
+
+        if (active || (state & wxAUI_BUTTON_STATE_DISABLED)) {
+            wxAuiDefaultToolBarArt::DrawButton(dc, wnd, item, rect);
+            return;
+        }
+
+        // Raised 3-D border
+        int x1 = rect.x,             y1 = rect.y;
+        int x2 = rect.GetRight() - 1, y2 = rect.GetBottom() - 1;
+
+        dc.SetPen(wxPen(wxSystemSettings::GetColour(wxSYS_COLOUR_3DHIGHLIGHT)));
+        dc.DrawLine(x1, y1, x2, y1);   // top
+        dc.DrawLine(x1, y1, x1, y2);   // left
+        dc.SetPen(wxPen(wxSystemSettings::GetColour(wxSYS_COLOUR_3DSHADOW)));
+        dc.DrawLine(x2, y1, x2, y2);   // right
+        dc.DrawLine(x1, y2, x2, y2);   // bottom
+
+        wxBitmap bmp = item.GetBitmap();
+        if (bmp.IsOk()) {
+            int bx = rect.x + (rect.width  - bmp.GetWidth())  / 2;
+            int by = rect.y + (rect.height - bmp.GetHeight()) / 2;
+            dc.DrawBitmap(bmp, bx, by, true);
+        }
     }
 };
 
@@ -36,10 +60,16 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxDocParentFrame)
     EVT_AUINOTEBOOK_PAGE_CHANGED(wxID_ANY, MainFrame::OnNotebookPageChanged)
     EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
     EVT_CLOSE(MainFrame::OnClose)
+    EVT_MENU(ID_TOOL_SELECT, MainFrame::OnDrawTool)
+    EVT_MENU(ID_TOOL_RECT,   MainFrame::OnDrawTool)
+    EVT_MENU(ID_TOOL_CIRCLE, MainFrame::OnDrawTool)
+    EVT_MENU(ID_TOOL_TEXT,   MainFrame::OnDrawTool)
+    EVT_MENU(ID_TOOL_BEZIER, MainFrame::OnDrawTool)
     EVT_UPDATE_UI(ID_TOOL_SELECT, MainFrame::OnUpdateDrawTool)
     EVT_UPDATE_UI(ID_TOOL_RECT,   MainFrame::OnUpdateDrawTool)
     EVT_UPDATE_UI(ID_TOOL_CIRCLE, MainFrame::OnUpdateDrawTool)
     EVT_UPDATE_UI(ID_TOOL_TEXT,   MainFrame::OnUpdateDrawTool)
+    EVT_UPDATE_UI(ID_TOOL_BEZIER, MainFrame::OnUpdateDrawTool)
 wxEND_EVENT_TABLE()
 
 // ---------------------------------------------------------------------------
@@ -55,6 +85,7 @@ MainFrame::MainFrame(wxDocManager* manager, wxFrame* parent, wxWindowID id,
 
     CreateMenuBar();
     CreateToolBar();
+    CreateDrawToolBar();
     CreateStatusBar_();
     CreateAuiPanes();
 
@@ -128,8 +159,7 @@ static wxBitmap MakeBmp(void (*draw)(wxMemoryDC&)) {
 }
 
 void MainFrame::CreateToolBar() {
-    m_toolbar = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxDefaultSize,
-                                 wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_HORZ_LAYOUT | wxAUI_TB_PLAIN_BACKGROUND);
+    m_toolbar = new wxToolBar(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL);
 
     m_toolbar->AddTool(wxID_NEW,  "New",  wxArtProvider::GetBitmap(wxART_NEW,        wxART_TOOLBAR));
     m_toolbar->AddTool(wxID_OPEN, "Open", wxArtProvider::GetBitmap(wxART_FILE_OPEN,  wxART_TOOLBAR));
@@ -141,7 +171,24 @@ void MainFrame::CreateToolBar() {
     m_toolbar->AddTool(wxID_CUT,  "Cut",  wxArtProvider::GetBitmap(wxART_CUT,        wxART_TOOLBAR));
     m_toolbar->AddTool(wxID_COPY, "Copy", wxArtProvider::GetBitmap(wxART_COPY,       wxART_TOOLBAR));
     m_toolbar->AddTool(wxID_PASTE,"Paste",wxArtProvider::GetBitmap(wxART_PASTE,      wxART_TOOLBAR));
-    m_toolbar->AddSeparator();
+
+
+    m_toolbar->Realize();
+
+    m_auiMgr.AddPane(m_toolbar,
+        wxAuiPaneInfo()
+            .Name("Toolbar")
+            .Caption("Toolbar")
+            .ToolbarPane()
+            .Top()
+            .LeftDockable(true)
+            .RightDockable(true)
+            .Floatable(true)
+            .Gripper(true));
+}
+
+void MainFrame::CreateDrawToolBar() {
+    m_drawToolbar = new wxToolBar(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_VERTICAL);
 
     auto selectBmp = MakeBmp([](wxMemoryDC& dc) {
         dc.SetPen(*wxBLACK_PEN);
@@ -166,23 +213,40 @@ void MainFrame::CreateToolBar() {
         dc.DrawText("T", 4, 1);
     });
 
-    m_toolbar->AddTool(ID_TOOL_SELECT, "Select", selectBmp, "Select (click shapes to select)", wxITEM_CHECK);
-    m_toolbar->AddTool(ID_TOOL_RECT,   "Rect",   rectBmp,   "Draw Rectangle (drag to create)", wxITEM_CHECK);
-    m_toolbar->AddTool(ID_TOOL_CIRCLE, "Circle", circleBmp, "Draw Circle (drag to create)",    wxITEM_CHECK);
-    m_toolbar->AddTool(ID_TOOL_TEXT,   "Text",   textBmp,   "Draw Text (drag to create)",      wxITEM_CHECK);
+    auto bezierBmp = MakeBmp([](wxMemoryDC& dc) {
+        // S-shaped cubic Bezier icon
+        dc.SetPen(*wxBLACK_PEN);
+        wxPoint p[4] = {{2,13},{3,2},{13,14},{14,3}};
+        wxPoint prev = p[0];
+        for (int i = 1; i <= 24; i++) {
+            float t = i/24.0f, mt = 1.0f-t;
+            int x = (int)(mt*mt*mt*p[0].x + 3*mt*mt*t*p[1].x + 3*mt*t*t*p[2].x + t*t*t*p[3].x);
+            int y = (int)(mt*mt*mt*p[0].y + 3*mt*mt*t*p[1].y + 3*mt*t*t*p[2].y + t*t*t*p[3].y);
+            dc.DrawLine(prev, wxPoint(x, y));
+            prev = wxPoint(x, y);
+        }
+        // Anchor dots
+        dc.SetBrush(*wxBLACK_BRUSH);
+        dc.DrawCircle(p[0], 2);
+        dc.DrawCircle(p[3], 2);
+    });
 
-    m_toolbar->SetArtProvider(new FlatToolBarArt());
-    m_toolbar->Realize();
+    m_drawToolbar->AddTool(ID_TOOL_SELECT, "Select", selectBmp, "Select",       wxITEM_CHECK);
+    m_drawToolbar->AddTool(ID_TOOL_RECT,   "Rect",   rectBmp,   "Rectangle",    wxITEM_CHECK);
+    m_drawToolbar->AddTool(ID_TOOL_CIRCLE, "Circle", circleBmp, "Circle",       wxITEM_CHECK);
+    m_drawToolbar->AddTool(ID_TOOL_TEXT,   "Text",   textBmp,   "Text",         wxITEM_CHECK);
+    m_drawToolbar->AddTool(ID_TOOL_BEZIER, "Bezier", bezierBmp, "Bezier Curve", wxITEM_CHECK);
 
-    m_auiMgr.AddPane(m_toolbar,
+
+    m_drawToolbar->Realize();
+
+    m_auiMgr.AddPane(m_drawToolbar,
         wxAuiPaneInfo()
-            .Name("Toolbar")
-            .Caption("Toolbar")
+            .Name("DrawToolbar")
+            .Caption("Draw")
             .ToolbarPane()
-            .Top()
-            .LeftDockable(true)
-            .RightDockable(true)
-            .Floatable(true)
+            .Left()
+            .Row(0)
             .Gripper(true));
 }
 
@@ -206,89 +270,72 @@ void MainFrame::CreateAuiPanes() {
             .Caption("Documents")
             .PaneBorder(false));
 
-    // --- Left pane: placeholder (e.g. project explorer / outline) ---
-    auto* sidePanel = new wxPanel(this, wxID_ANY);
-    sidePanel->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
 
-    m_auiMgr.AddPane(sidePanel,
-        wxAuiPaneInfo()
-            .Left()
-            .Name("SidePanel")
-            .Caption("Explorer")
-            .BestSize(wxSize(200, -1))
-            .MinSize(wxSize(120, -1))
-            .Floatable(false)
-            .CloseButton(true)
-            .Layer(1));
-
-    // --- Bottom pane: placeholder (e.g. output / log / console) ---
-    auto* outputPanel = new wxPanel(this, wxID_ANY);
-    outputPanel->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
-
-    m_auiMgr.AddPane(outputPanel,
-        wxAuiPaneInfo()
-            .Bottom()
-            .Name("OutputPanel")
-            .Caption("Output")
-            .BestSize(wxSize(-1, 150))
-            .MinSize(wxSize(-1, 80))
-            .Floatable(false)
-            .CloseButton(true)
-            .Layer(1));
 }
 
 // ---------------------------------------------------------------------------
 // Event handlers
 // ---------------------------------------------------------------------------
 
+void MainFrame::OnDrawTool(wxCommandEvent& e) {
+    if (!m_activeDrawView || !m_activeDrawView->GetCanvas()) return;
+    DrawCanvas* c = m_activeDrawView->GetCanvas();
+    switch (e.GetId()) {
+        case ID_TOOL_SELECT: c->SetTool(DrawTool::Select); break;
+        case ID_TOOL_RECT:   c->SetTool(DrawTool::Rect);   break;
+        case ID_TOOL_CIRCLE: c->SetTool(DrawTool::Circle); break;
+        case ID_TOOL_TEXT:   c->SetTool(DrawTool::Text);   break;
+        case ID_TOOL_BEZIER: c->SetTool(DrawTool::Bezier); break;
+    }
+}
+
 void MainFrame::OnUpdateDrawTool(wxUpdateUIEvent& e) {
-    // Default: disabled. An active DrawView overrides this via PushEventHandler.
-    e.Enable(false);
-    e.Check(false);
+    if (!m_activeDrawView || !m_activeDrawView->GetCanvas()) {
+        e.Enable(false);
+        e.Check(false);
+        return;
+    }
+    e.Enable(true);
+    DrawTool cur = m_activeDrawView->GetCanvas()->GetTool();
+    e.Check((e.GetId() == ID_TOOL_SELECT && cur == DrawTool::Select) ||
+            (e.GetId() == ID_TOOL_RECT   && cur == DrawTool::Rect)   ||
+            (e.GetId() == ID_TOOL_CIRCLE && cur == DrawTool::Circle) ||
+            (e.GetId() == ID_TOOL_TEXT   && cur == DrawTool::Text)   ||
+            (e.GetId() == ID_TOOL_BEZIER && cur == DrawTool::Bezier));
 }
 
 void MainFrame::OnNotebookPageClose(wxAuiNotebookEvent& event) {
-    // Find the View that owns the page being closed and close its document.
     wxWindow* page = m_notebook->GetPage(event.GetSelection());
-    auto* canvas = wxDynamicCast(page, ViewCanvas);
-    if (!canvas) {
-        event.Skip();
-        return;
-    }
 
-    View* view = canvas->GetView();
-    if (!view) {
-        event.Skip();
-        return;
-    }
+    // Determine which view owns this page.
+    wxView* view = nullptr;
+    if (auto* c = wxDynamicCast(page, ViewCanvas))
+        view = c->GetView();
+    else if (auto* c = wxDynamicCast(page, DrawCanvas))
+        view = c->GetView();
+
+    if (!view) { event.Skip(); return; }
 
     // Ask the document if it is safe to close (prompts save-changes dialog).
     wxDocument* doc = view->GetDocument();
     if (doc && !doc->Close()) {
-        // User cancelled – veto the notebook close.
         event.Veto();
         return;
     }
-
-    // Prevent OnClose from trying to delete the page again (we are already
-    // inside the notebook's close sequence).
-    // The document close above will invoke View::OnClose(deleteWindow=true),
-    // but by this point the notebook is already removing the page, so we
-    // simply let it proceed.
     event.Skip();
 }
 
 void MainFrame::OnNotebookPageChanged(wxAuiNotebookEvent& event) {
     int sel = event.GetSelection();
-    if (sel == wxNOT_FOUND) {
-        event.Skip();
-        return;
-    }
+    if (sel == wxNOT_FOUND) { event.Skip(); return; }
 
     wxWindow* page = m_notebook->GetPage(sel);
-    auto* canvas = wxDynamicCast(page, ViewCanvas);
-    if (canvas && canvas->GetView())
-        canvas->GetView()->Activate(true);
+
+    if (auto* c = wxDynamicCast(page, ViewCanvas)) {
+        if (c->GetView()) c->GetView()->Activate(true);
+    } else if (auto* c = wxDynamicCast(page, DrawCanvas)) {
+        if (c->GetView()) c->GetView()->Activate(true);
+    }
 
     event.Skip();
 }

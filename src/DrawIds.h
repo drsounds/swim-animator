@@ -6,4 +6,5 @@ enum {
     ID_TOOL_RECT,
     ID_TOOL_CIRCLE,
     ID_TOOL_TEXT,
+    ID_TOOL_BEZIER,
 };

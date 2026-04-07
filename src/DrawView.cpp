@@ -1,5 +1,6 @@
 #include "DrawView.h"
 #include "DrawDoc.h"
+#include "DrawCommands.h"
 #include "App.h"
 #include "MainFrame.h"
 #include <wx/dcbuffer.h>
@@ -11,6 +12,7 @@
 #include <wx/stattext.h>
 #include <wx/button.h>
 #include <wx/textctrl.h>
+#include <algorithm>
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -22,6 +24,124 @@ static wxRect NormalizedRect(const wxPoint& a, const wxPoint& b) {
     int w = a.x < b.x ? b.x - a.x : a.x - b.x;
     int h = a.y < b.y ? b.y - a.y : a.y - b.y;
     return wxRect(x, y, w, h);
+}
+
+// ---------------------------------------------------------------------------
+// Bezier curve helpers
+// ---------------------------------------------------------------------------
+
+// Sample a cubic Bezier and draw it as polyline segments.
+static void DrawBezierCurve(wxDC& dc, const wxPoint p[4]) {
+    wxPoint prev = p[0];
+    for (int i = 1; i <= 48; i++) {
+        float t = i / 48.0f, mt = 1.0f - t;
+        int x = (int)(mt*mt*mt*p[0].x + 3*mt*mt*t*p[1].x +
+                      3*mt*t*t*p[2].x  + t*t*t*p[3].x);
+        int y = (int)(mt*mt*mt*p[0].y + 3*mt*mt*t*p[1].y +
+                      3*mt*t*t*p[2].y  + t*t*t*p[3].y);
+        wxPoint cur(x, y);
+        dc.DrawLine(prev, cur);
+        prev = cur;
+    }
+}
+
+// Bounding box of the 4 Bezier control points (conservative approximation).
+static wxRect BezierBounds(const wxPoint p[4]) {
+    int minX = p[0].x, maxX = p[0].x, minY = p[0].y, maxY = p[0].y;
+    for (int i = 1; i < 4; i++) {
+        minX = std::min(minX, p[i].x); maxX = std::max(maxX, p[i].x);
+        minY = std::min(minY, p[i].y); maxY = std::max(maxY, p[i].y);
+    }
+    return wxRect(minX, minY, maxX - minX, maxY - minY);
+}
+
+// Hit-test the 4 Bezier control point handles; returns 0-3 or -1.
+static int HitTestBezierPt(const wxPoint& pt, const wxPoint p[4]) {
+    for (int i = 0; i < 4; i++) {
+        int dx = pt.x - p[i].x, dy = pt.y - p[i].y;
+        if (dx*dx + dy*dy <= 5*5) return i;
+    }
+    return -1;
+}
+
+// ---------------------------------------------------------------------------
+// Handle helpers (selection handles for move/resize)
+// ---------------------------------------------------------------------------
+
+// Returns the 8 handle centres (NW, N, NE, E, SE, S, SW, W) for a shape rect.
+static void GetHandleCentres(const wxRect& bounds, wxPoint out[8]) {
+    wxRect sel = bounds;
+    sel.Inflate(3);
+    int cx = sel.x + sel.width  / 2;
+    int cy = sel.y + sel.height / 2;
+    out[0] = { sel.x,          sel.y          }; // NW
+    out[1] = { cx,             sel.y          }; // N
+    out[2] = { sel.GetRight(), sel.y          }; // NE
+    out[3] = { sel.GetRight(), cy             }; // E
+    out[4] = { sel.GetRight(), sel.GetBottom()}; // SE
+    out[5] = { cx,             sel.GetBottom()}; // S
+    out[6] = { sel.x,          sel.GetBottom()}; // SW
+    out[7] = { sel.x,          cy             }; // W
+}
+
+static wxRect HandleRect(const wxPoint& c) {
+    return wxRect(c.x - 3, c.y - 3, 7, 7);
+}
+
+// Hit-test the 8 handles; returns the matching DragMode or None.
+static DrawCanvas::DragMode HitTestHandle(const wxPoint& pt, const wxRect& bounds) {
+    using DM = DrawCanvas::DragMode;
+    static const DM modes[8] = {
+        DM::ResizeNW, DM::ResizeN, DM::ResizeNE, DM::ResizeE,
+        DM::ResizeSE, DM::ResizeS, DM::ResizeSW, DM::ResizeW
+    };
+    wxPoint centres[8];
+    GetHandleCentres(bounds, centres);
+    for (int i = 0; i < 8; i++)
+        if (HandleRect(centres[i]).Contains(pt))
+            return modes[i];
+    return DM::None;
+}
+
+// Apply a delta to a rect according to which handle is being dragged.
+static wxRect ApplyDragMode(DrawCanvas::DragMode dm, const wxRect& orig,
+                             int dx, int dy) {
+    using DM = DrawCanvas::DragMode;
+    wxRect r = orig;
+    switch (dm) {
+        case DM::Move:
+            r.x += dx; r.y += dy;
+            break;
+        case DM::ResizeNW:
+            r.x += dx; r.y += dy; r.width -= dx; r.height -= dy;
+            break;
+        case DM::ResizeN:
+            r.y += dy; r.height -= dy;
+            break;
+        case DM::ResizeNE:
+            r.y += dy; r.width += dx; r.height -= dy;
+            break;
+        case DM::ResizeE:
+            r.width += dx;
+            break;
+        case DM::ResizeSE:
+            r.width += dx; r.height += dy;
+            break;
+        case DM::ResizeS:
+            r.height += dy;
+            break;
+        case DM::ResizeSW:
+            r.x += dx; r.width -= dx; r.height += dy;
+            break;
+        case DM::ResizeW:
+            r.x += dx; r.width -= dx;
+            break;
+        default:
+            break;
+    }
+    r.width  = std::max(r.width,  4);
+    r.height = std::max(r.height, 4);
+    return r;
 }
 
 // ---------------------------------------------------------------------------
@@ -150,13 +270,45 @@ void DrawCanvas::DrawShapeOnDC(wxDC& dc, const DrawShape& s, bool selected) {
             dc.SetTextBackground(s.bgColour);
             dc.DrawLabel(s.label, s.bounds, wxALIGN_CENTER);
             break;
+        case ShapeKind::Bezier:
+            dc.SetBrush(*wxTRANSPARENT_BRUSH);
+            DrawBezierCurve(dc, s.pts);
+            break;
     }
 
     if (selected) {
-        dc.SetPen(wxPen(*wxBLUE, 1, wxPENSTYLE_DOT));
-        dc.SetBrush(*wxTRANSPARENT_BRUSH);
-        wxRect sel = s.bounds;
-        dc.DrawRectangle(sel.Inflate(3));
+        if (s.kind == ShapeKind::Bezier) {
+            // Tangent handle lines
+            dc.SetPen(wxPen(wxColour(100, 100, 100), 1, wxPENSTYLE_DOT));
+            dc.DrawLine(s.pts[0], s.pts[1]);
+            dc.DrawLine(s.pts[3], s.pts[2]);
+
+            // Control point handles: squares for anchors, circles for handles
+            dc.SetPen(*wxBLACK_PEN);
+            dc.SetBrush(*wxWHITE_BRUSH);
+            // Anchors (pt[0], pt[3]) — filled squares
+            for (int i : {0, 3})
+                dc.DrawRectangle(HandleRect(s.pts[i]));
+            // Control points (pt[1], pt[2]) — filled circles
+            dc.SetBrush(wxBrush(wxColour(180, 220, 255)));
+            for (int i : {1, 2})
+                dc.DrawEllipse(HandleRect(s.pts[i]));
+        } else {
+            // Dashed selection outline
+            dc.SetPen(wxPen(*wxBLUE, 1, wxPENSTYLE_DOT));
+            dc.SetBrush(*wxTRANSPARENT_BRUSH);
+            wxRect sel = s.bounds;
+            sel.Inflate(3);
+            dc.DrawRectangle(sel);
+
+            // Resize handles
+            wxPoint centres[8];
+            GetHandleCentres(s.bounds, centres);
+            dc.SetPen(*wxBLACK_PEN);
+            dc.SetBrush(*wxWHITE_BRUSH);
+            for (int i = 0; i < 8; i++)
+                dc.DrawRectangle(HandleRect(centres[i]));
+        }
     }
 }
 
@@ -169,11 +321,15 @@ void DrawCanvas::OnPaint(wxPaintEvent&) {
     if (!doc) return;
 
     const auto& shapes = doc->GetShapes();
-    for (int i = 0; i < (int)shapes.size(); i++)
-        DrawShapeOnDC(dc, shapes[i], i == m_selected);
+    for (int i = 0; i < (int)shapes.size(); i++) {
+        // During a drag, render the live preview instead of the stored shape.
+        const DrawShape& s = (m_dragMode != DragMode::None && i == m_selected)
+                             ? m_dragPreview : shapes[i];
+        DrawShapeOnDC(dc, s, i == m_selected);
+    }
 
     // Rubber-band preview while drawing a new shape
-    if (m_dragging && m_tool != DrawTool::Select) {
+    if (m_dragging && m_tool != DrawTool::Select && m_tool != DrawTool::Bezier) {
         wxRect r = NormalizedRect(m_dragStart, m_dragCurrent);
         if (r.width > 0 && r.height > 0) {
             dc.SetPen(wxPen(*wxBLACK, 1, wxPENSTYLE_DOT));
@@ -182,6 +338,35 @@ void DrawCanvas::OnPaint(wxPaintEvent&) {
                 dc.DrawEllipse(r);
             else
                 dc.DrawRectangle(r);
+        }
+    }
+
+    // Bezier creation preview
+    if (m_tool == DrawTool::Bezier && m_bezierStep > 0) {
+        // Fill in unset points with the current mouse position.
+        wxPoint p[4];
+        for (int i = 0; i < 4; i++)
+            p[i] = (i < m_bezierStep) ? m_bezierPts[i] : m_dragCurrent;
+
+        dc.SetPen(wxPen(*wxBLACK, 1, wxPENSTYLE_DOT));
+        dc.SetBrush(*wxTRANSPARENT_BRUSH);
+        DrawBezierCurve(dc, p);
+
+        // Tangent handle lines
+        dc.SetPen(wxPen(wxColour(130, 130, 130), 1, wxPENSTYLE_DOT));
+        dc.DrawLine(p[0], p[1]);
+        dc.DrawLine(p[3], p[2]);
+
+        // Already-placed control points
+        dc.SetPen(*wxBLACK_PEN);
+        for (int i = 0; i < m_bezierStep; i++) {
+            if (i == 0 || i == 3) {
+                dc.SetBrush(*wxWHITE_BRUSH);
+                dc.DrawRectangle(HandleRect(p[i]));
+            } else {
+                dc.SetBrush(wxBrush(wxColour(180, 220, 255)));
+                dc.DrawEllipse(HandleRect(p[i]));
+            }
         }
     }
 }
@@ -209,8 +394,82 @@ int DrawCanvas::HitTest(const wxPoint& pt) const {
 void DrawCanvas::OnLeftDown(wxMouseEvent& e) {
     SetFocus();
 
+    if (m_tool == DrawTool::Bezier) {
+        // Place the next control point.
+        m_bezierPts[m_bezierStep] = e.GetPosition();
+        m_bezierStep++;
+
+        if (m_bezierStep == 4) {
+            // All 4 points placed — commit the shape.
+            DrawShape s;
+            s.kind = ShapeKind::Bezier;
+            for (int i = 0; i < 4; i++) s.pts[i] = m_bezierPts[i];
+            s.bounds = BezierBounds(s.pts);
+            auto* doc = GetDoc();
+            if (doc) {
+                doc->GetCommandProcessor()->Submit(new AddShapeCmd(doc, s));
+                m_selected = static_cast<int>(doc->GetShapes().size()) - 1;
+            }
+            m_bezierStep = 0;
+        }
+        Refresh();
+        e.Skip();
+        return;
+    }
+
     if (m_tool == DrawTool::Select) {
-        m_selected = HitTest(e.GetPosition());
+        wxPoint pt = e.GetPosition();
+        auto* doc = GetDoc();
+
+        // 1. Check control-point handles on a selected Bezier first.
+        if (m_selected >= 0 && doc &&
+            m_selected < (int)doc->GetShapes().size())
+        {
+            const DrawShape& sel = doc->GetShapes()[m_selected];
+            if (sel.kind == ShapeKind::Bezier) {
+                int hi = HitTestBezierPt(pt, sel.pts);
+                if (hi >= 0) {
+                    m_dragMode         = DragMode::BezierPt;
+                    m_bezierHandleIdx  = hi;
+                    m_dragOrigin       = pt;
+                    for (int i = 0; i < 4; i++) m_dragOrigPts[i] = sel.pts[i];
+                    m_dragOrigShape    = sel;
+                    m_dragPreview      = sel;
+                    CaptureMouse();
+                    e.Skip();
+                    return;
+                }
+            } else {
+                // Check resize handles for non-Bezier shapes.
+                DragMode dm = HitTestHandle(pt, sel.bounds);
+                if (dm != DragMode::None) {
+                    m_dragMode       = dm;
+                    m_dragOrigin     = pt;
+                    m_dragOrigBounds = sel.bounds;
+                    m_dragOrigShape  = sel;
+                    m_dragPreview    = sel;
+                    CaptureMouse();
+                    e.Skip();
+                    return;
+                }
+            }
+        }
+
+        // 2. Hit-test all shapes.
+        int hit = HitTest(pt);
+        if (hit >= 0 && doc) {
+            m_selected   = hit;
+            const DrawShape& hs = doc->GetShapes()[hit];
+            m_dragMode       = DragMode::Move;
+            m_dragOrigin     = pt;
+            m_dragOrigBounds = hs.bounds;
+            for (int i = 0; i < 4; i++) m_dragOrigPts[i] = hs.pts[i];
+            m_dragOrigShape  = hs;
+            m_dragPreview    = hs;
+            CaptureMouse();
+        } else {
+            m_selected = -1;
+        }
         Refresh();
     } else {
         m_dragging    = true;
@@ -222,14 +481,62 @@ void DrawCanvas::OnLeftDown(wxMouseEvent& e) {
 }
 
 void DrawCanvas::OnMotion(wxMouseEvent& e) {
-    if (m_dragging) {
-        m_dragCurrent = e.GetPosition();
+    // Always track mouse for the Bezier creation preview.
+    m_dragCurrent = e.GetPosition();
+
+    if (m_tool == DrawTool::Bezier && m_bezierStep > 0) {
+        Refresh();
+    } else if (m_tool == DrawTool::Select && m_dragMode != DragMode::None) {
+        wxPoint pt = e.GetPosition();
+        int dx = pt.x - m_dragOrigin.x;
+        int dy = pt.y - m_dragOrigin.y;
+
+        // Update the local preview without touching the document.
+        // The document is only committed once in OnLeftUp.
+        m_dragPreview = m_dragOrigShape;
+        if (m_dragMode == DragMode::BezierPt) {
+            m_dragPreview.pts[m_bezierHandleIdx].x += dx;
+            m_dragPreview.pts[m_bezierHandleIdx].y += dy;
+            m_dragPreview.bounds = BezierBounds(m_dragPreview.pts);
+        } else if (m_dragOrigShape.kind == ShapeKind::Bezier) {
+            for (int i = 0; i < 4; i++) {
+                m_dragPreview.pts[i].x += dx;
+                m_dragPreview.pts[i].y += dy;
+            }
+            m_dragPreview.bounds = BezierBounds(m_dragPreview.pts);
+        } else {
+            m_dragPreview.bounds = ApplyDragMode(m_dragMode, m_dragOrigBounds, dx, dy);
+        }
+        Refresh();
+    } else if (m_dragging) {
         Refresh();
     }
     e.Skip();
 }
 
 void DrawCanvas::OnLeftUp(wxMouseEvent& e) {
+    // End a select-mode move/resize drag — submit a single undo command.
+    if (m_tool == DrawTool::Select && m_dragMode != DragMode::None) {
+        auto* doc = GetDoc();
+        if (doc && m_selected >= 0 && m_selected < (int)doc->GetShapes().size()) {
+            const DrawShape& after = doc->GetShapes()[m_selected];
+            if (after.bounds != m_dragOrigShape.bounds ||
+                after.pts[0] != m_dragOrigShape.pts[0] ||
+                after.pts[1] != m_dragOrigShape.pts[1] ||
+                after.pts[2] != m_dragOrigShape.pts[2] ||
+                after.pts[3] != m_dragOrigShape.pts[3])
+            {
+                wxString name = (m_dragMode == DragMode::Move) ? "Move Shape" : "Resize Shape";
+                doc->GetCommandProcessor()->Submit(
+                    new UpdateShapeCmd(doc, m_selected, m_dragOrigShape, after, name));
+            }
+        }
+        m_dragMode = DragMode::None;
+        if (HasCapture()) ReleaseMouse();
+        e.Skip();
+        return;
+    }
+
     if (!m_dragging) { e.Skip(); return; }
 
     m_dragging = false;
@@ -255,8 +562,10 @@ void DrawCanvas::OnLeftUp(wxMouseEvent& e) {
     }
 
     auto* doc = GetDoc();
-    if (doc)
-        m_selected = doc->AddShape(s);
+    if (doc) {
+        doc->GetCommandProcessor()->Submit(new AddShapeCmd(doc, s));
+        m_selected = static_cast<int>(doc->GetShapes().size()) - 1;
+    }
 
     Refresh();
     e.Skip();
@@ -269,11 +578,16 @@ void DrawCanvas::OnLeftDClick(wxMouseEvent& e) {
 }
 
 void DrawCanvas::OnKeyDown(wxKeyEvent& e) {
-    if (e.GetKeyCode() == WXK_DELETE && m_selected >= 0) {
+    if (e.GetKeyCode() == WXK_ESCAPE && m_tool == DrawTool::Bezier && m_bezierStep > 0) {
+        m_bezierStep = 0;
+        Refresh();
+    } else if (e.GetKeyCode() == WXK_DELETE && m_selected >= 0) {
         auto* doc = GetDoc();
-        if (doc) {
-            doc->RemoveShape(m_selected);
+        if (doc && m_selected < (int)doc->GetShapes().size()) {
+            DrawShape shape = doc->GetShapes()[m_selected];
+            int idx = m_selected;
             m_selected = -1;
+            doc->GetCommandProcessor()->Submit(new RemoveShapeCmd(doc, idx, shape));
             Refresh();
         }
     } else {
@@ -287,48 +601,27 @@ void DrawCanvas::OpenPropertiesDialog(int idx) {
     const auto& shapes = doc->GetShapes();
     if (idx < 0 || idx >= (int)shapes.size()) return;
 
-    DrawShape s = shapes[idx];
-    ShapePropertiesDialog dlg(this, s);
+    DrawShape before = shapes[idx];
+    DrawShape after  = before;
+    ShapePropertiesDialog dlg(this, after);
     if (dlg.ShowModal() == wxID_OK) {
-        dlg.Apply(s);
-        doc->UpdateShape(idx, s);
+        dlg.Apply(after);
+        doc->GetCommandProcessor()->Submit(
+            new UpdateShapeCmd(doc, idx, before, after, "Edit Properties"));
     }
 }
 
-// ---------------------------------------------------------------------------
-// DrawView – event table
-// ---------------------------------------------------------------------------
+void DrawCanvas::ValidateSelection() {
+    auto* doc = GetDoc();
+    if (!doc || m_selected >= (int)doc->GetShapes().size())
+        m_selected = -1;
+}
 
-wxBEGIN_EVENT_TABLE(DrawView, wxView)
-    EVT_MENU(ID_TOOL_SELECT, DrawView::OnToolSelect)
-    EVT_MENU(ID_TOOL_RECT,   DrawView::OnToolRect)
-    EVT_MENU(ID_TOOL_CIRCLE, DrawView::OnToolCircle)
-    EVT_MENU(ID_TOOL_TEXT,   DrawView::OnToolText)
-    EVT_UPDATE_UI(ID_TOOL_SELECT, DrawView::OnUpdateDrawTool)
-    EVT_UPDATE_UI(ID_TOOL_RECT,   DrawView::OnUpdateDrawTool)
-    EVT_UPDATE_UI(ID_TOOL_CIRCLE, DrawView::OnUpdateDrawTool)
-    EVT_UPDATE_UI(ID_TOOL_TEXT,   DrawView::OnUpdateDrawTool)
-wxEND_EVENT_TABLE()
+// ---------------------------------------------------------------------------
+// DrawView
+// ---------------------------------------------------------------------------
 
 wxIMPLEMENT_DYNAMIC_CLASS(DrawView, wxView);
-
-// ---------------------------------------------------------------------------
-// DrawView – lifecycle
-// ---------------------------------------------------------------------------
-
-void DrawView::PushHandler() {
-    if (!m_handlerPushed) {
-        wxGetApp().GetTopWindow()->PushEventHandler(this);
-        m_handlerPushed = true;
-    }
-}
-
-void DrawView::PopHandler() {
-    if (m_handlerPushed) {
-        wxGetApp().GetTopWindow()->RemoveEventHandler(this);
-        m_handlerPushed = false;
-    }
-}
 
 bool DrawView::OnCreate(wxDocument* doc, long flags) {
     if (!wxView::OnCreate(doc, flags)) return false;
@@ -346,40 +639,35 @@ bool DrawView::OnCreate(wxDocument* doc, long flags) {
     return true;
 }
 
-void DrawView::OnDraw(wxDC* /*dc*/) {
-    // Rendering is handled entirely inside DrawCanvas::OnPaint.
-}
+void DrawView::OnDraw(wxDC* /*dc*/) {}
 
 void DrawView::OnUpdate(wxView* /*sender*/, wxObject* /*hint*/) {
-    if (m_canvas) m_canvas->Refresh();
+    if (m_canvas) {
+        m_canvas->ValidateSelection();
+        m_canvas->Refresh();
+    }
 }
 
-void DrawView::OnActivateView(bool activate, wxView* /*activeView*/,
-                              wxView* /*deactiveView*/) {
-    if (activate) {
-        PushHandler();
-        // Sync notebook selection when activated programmatically.
-        if (m_canvas) {
-            auto* mf = wxDynamicCast(wxGetApp().GetTopWindow(), MainFrame);
-            if (mf) {
-                wxAuiNotebook* nb = mf->GetNotebook();
-                if (nb) {
-                    int idx = nb->GetPageIndex(m_canvas);
-                    if (idx != wxNOT_FOUND && nb->GetSelection() != idx)
-                        nb->SetSelection(idx);
-                }
-            }
+void DrawView::OnActivateView(bool activate, wxView*, wxView*) {
+    auto* mf = wxDynamicCast(wxGetApp().GetTopWindow(), MainFrame);
+    if (!mf) return;
+
+    mf->SetActiveDrawView(activate ? this : nullptr);
+
+    if (activate && m_canvas) {
+        wxAuiNotebook* nb = mf->GetNotebook();
+        if (nb) {
+            int idx = nb->GetPageIndex(m_canvas);
+            if (idx != wxNOT_FOUND && nb->GetSelection() != idx)
+                nb->SetSelection(idx);
         }
-    } else {
-        PopHandler();
     }
 }
 
 bool DrawView::OnClose(bool deleteWindow) {
     if (!wxView::OnClose(deleteWindow)) return false;
 
-    Activate(false);  // triggers OnActivateView(false) → PopHandler()
-    PopHandler();     // safe no-op if already popped
+    Activate(false);
 
     if (deleteWindow && m_canvas) {
         auto* mf = wxDynamicCast(wxGetApp().GetTopWindow(), MainFrame);
@@ -394,23 +682,4 @@ bool DrawView::OnClose(bool deleteWindow) {
         m_canvas = nullptr;
     }
     return true;
-}
-
-// ---------------------------------------------------------------------------
-// DrawView – toolbar command handlers
-// ---------------------------------------------------------------------------
-
-void DrawView::OnToolSelect(wxCommandEvent&) { if (m_canvas) m_canvas->SetTool(DrawTool::Select); }
-void DrawView::OnToolRect  (wxCommandEvent&) { if (m_canvas) m_canvas->SetTool(DrawTool::Rect);   }
-void DrawView::OnToolCircle(wxCommandEvent&) { if (m_canvas) m_canvas->SetTool(DrawTool::Circle); }
-void DrawView::OnToolText  (wxCommandEvent&) { if (m_canvas) m_canvas->SetTool(DrawTool::Text);   }
-
-void DrawView::OnUpdateDrawTool(wxUpdateUIEvent& e) {
-    e.Enable(true);
-    if (!m_canvas) return;
-    DrawTool cur = m_canvas->GetTool();
-    e.Check((e.GetId() == ID_TOOL_SELECT && cur == DrawTool::Select) ||
-            (e.GetId() == ID_TOOL_RECT   && cur == DrawTool::Rect)   ||
-            (e.GetId() == ID_TOOL_CIRCLE && cur == DrawTool::Circle) ||
-            (e.GetId() == ID_TOOL_TEXT   && cur == DrawTool::Text));
 }

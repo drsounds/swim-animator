@@ -177,6 +177,30 @@ src/Document.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/Document.cpp.s
 .PHONY : src/Document.cpp.s
 
+src/DrawCommands.o: src/DrawCommands.cpp.o
+.PHONY : src/DrawCommands.o
+
+# target to build an object file
+src/DrawCommands.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o
+.PHONY : src/DrawCommands.cpp.o
+
+src/DrawCommands.i: src/DrawCommands.cpp.i
+.PHONY : src/DrawCommands.i
+
+# target to preprocess a source file
+src/DrawCommands.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.i
+.PHONY : src/DrawCommands.cpp.i
+
+src/DrawCommands.s: src/DrawCommands.cpp.s
+.PHONY : src/DrawCommands.s
+
+# target to generate assembly for a file
+src/DrawCommands.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.s
+.PHONY : src/DrawCommands.cpp.s
+
 src/DrawDoc.o: src/DrawDoc.cpp.o
 .PHONY : src/DrawDoc.o
 
@@ -288,6 +312,9 @@ help:
 	@echo "... src/Document.o"
 	@echo "... src/Document.i"
 	@echo "... src/Document.s"
+	@echo "... src/DrawCommands.o"
+	@echo "... src/DrawCommands.i"
+	@echo "... src/DrawCommands.s"
 	@echo "... src/DrawDoc.o"
 	@echo "... src/DrawDoc.i"
 	@echo "... src/DrawDoc.s"
