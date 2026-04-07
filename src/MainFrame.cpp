@@ -162,7 +162,9 @@ static wxBitmap MakeBmp(void (*draw)(wxMemoryDC&)) {
 
 void MainFrame::CreateToolBar() {
     m_toolbar = new wxToolBar(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL);
-
+    m_auiMgr.GetArtProvider()->SetMetric(wxAUI_DOCKART_PANE_BORDER_SIZE, 0);
+    m_auiMgr.GetArtProvider()->SetColor(wxAUI_DOCKART_BACKGROUND_COLOUR,
+                                     wxSystemSettings::GetColour(wxSYS_COLOUR_FRAMEBK));
     m_toolbar->AddTool(wxID_NEW,  "New",  wxArtProvider::GetBitmap(wxART_NEW,        wxART_TOOLBAR));
     m_toolbar->AddTool(wxID_OPEN, "Open", wxArtProvider::GetBitmap(wxART_FILE_OPEN,  wxART_TOOLBAR));
     m_toolbar->AddTool(wxID_SAVE, "Save", wxArtProvider::GetBitmap(wxART_FILE_SAVE,  wxART_TOOLBAR));

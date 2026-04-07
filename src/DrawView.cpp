@@ -271,10 +271,24 @@ void DrawCanvas::DrawShapeOnDC(wxDC& dc, const DrawShape& s, bool selected) {
             dc.SetTextBackground(s.bgColour);
             dc.DrawLabel(s.label, s.bounds, wxALIGN_CENTER);
             break;
-        case ShapeKind::Bezier:
-            dc.SetBrush(*wxTRANSPARENT_BRUSH);
+        case ShapeKind::Bezier: {
+            // Sample the curve into a polygon and fill, then draw the outline.
+            const int N = 48;
+            wxPoint poly[N + 1];
+            for (int i = 0; i <= N; i++) {
+                float t = i / (float)N, mt = 1.0f - t;
+                poly[i].x = (int)(mt*mt*mt*s.pts[0].x + 3*mt*mt*t*s.pts[1].x +
+                                  3*mt*t*t*s.pts[2].x  + t*t*t*s.pts[3].x);
+                poly[i].y = (int)(mt*mt*mt*s.pts[0].y + 3*mt*mt*t*s.pts[1].y +
+                                  3*mt*t*t*s.pts[2].y  + t*t*t*s.pts[3].y);
+            }
+            dc.SetBrush(wxBrush(s.bgColour));
+            dc.SetPen(*wxTRANSPARENT_PEN);
+            dc.DrawPolygon(N + 1, poly);
+            dc.SetPen(wxPen(s.fgColour, 2));
             DrawBezierCurve(dc, s.pts);
             break;
+        }
     }
 
     if (selected) {

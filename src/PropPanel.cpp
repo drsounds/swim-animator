@@ -190,7 +190,7 @@ void PropPanel::ShowShape(DrawDoc* doc, int idx) {
 
         // Show/hide sections per shape kind
         m_shapePanel->GetSizer()->Show(m_boundsPanel, !isBezier);
-        m_shapePanel->GetSizer()->Show(m_bgPanel,     !isBezier);
+        m_shapePanel->GetSizer()->Show(m_bgPanel,     true);
         m_shapePanel->GetSizer()->Show(m_labelPanel,  isText);
         m_shapePanel->GetSizer()->Show(m_bezierPanel, isBezier);
 
@@ -204,10 +204,8 @@ void PropPanel::ShowShape(DrawDoc* doc, int idx) {
         m_fgBtn->SetBackgroundColour(s.fgColour);
         m_fgBtn->Refresh();
 
-        if (!isBezier) {
-            m_bgBtn->SetBackgroundColour(s.bgColour);
-            m_bgBtn->Refresh();
-        }
+        m_bgBtn->SetBackgroundColour(s.bgColour);
+        m_bgBtn->Refresh();
 
         if (isText)
             m_labelCtrl->ChangeValue(s.label);
