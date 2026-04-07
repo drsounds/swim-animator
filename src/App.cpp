@@ -4,6 +4,7 @@
 #include "View.h"
 #include "DrawDoc.h"
 #include "DrawView.h"
+#include "Palette.h"
 #include <wx/filefn.h>
 #include <wx/filename.h>
 #include <wx/stdpaths.h>
@@ -30,6 +31,16 @@ bool App::OnInit() {
 
     SetAppName("Spacely");
     SetVendorName("Example");
+
+    // Load palette: start with the built-in default, then try the saved one.
+    m_palette = DefaultPalette();
+    {
+        wxString dir  = wxStandardPaths::Get().GetUserDataDir();
+        wxString path = dir + wxFILE_SEP_PATH + "palette.gpl";
+        Palette loaded;
+        if (LoadGplPalette(path, loaded))
+            m_palette = std::move(loaded);
+    }
 
     m_docManager = new wxDocManager();
 
@@ -91,6 +102,13 @@ bool App::OnInit() {
 }
 
 int App::OnExit() {
+    SavePaletteToConfig();
     delete m_docManager;
     return wxApp::OnExit();
+}
+
+void App::SavePaletteToConfig() {
+    wxString dir = wxStandardPaths::Get().GetUserDataDir();
+    wxFileName::Mkdir(dir, 0755, wxPATH_MKDIR_FULL);
+    SaveGplPalette(dir + wxFILE_SEP_PATH + "palette.gpl", m_palette);
 }

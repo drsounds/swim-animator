@@ -1,6 +1,8 @@
 #pragma once
 #include <wx/app.h>
 #include <wx/docview.h>
+#include <wx/colour.h>
+#include "Palette.h"
 
 class MainFrame;
 
@@ -14,8 +16,24 @@ public:
 
     wxDocManager* GetDocManager() { return m_docManager; }
 
+    // Active foreground / background colours (used when creating new shapes
+    // and shown in the colour-swatch indicator).
+    wxColour GetFgColour() const          { return m_fgColour; }
+    wxColour GetBgColour() const          { return m_bgColour; }
+    void     SetFgColour(const wxColour& c) { m_fgColour = c; }
+    void     SetBgColour(const wxColour& c) { m_bgColour = c; }
+
+    // The active colour palette (global, shared across all documents).
+    Palette& GetPalette() { return m_palette; }
+
+    // Persist the current palette to the user data directory.
+    void SavePaletteToConfig();
+
 private:
     wxDocManager* m_docManager{nullptr};
+    wxColour      m_fgColour{  0,   0,   0};
+    wxColour      m_bgColour{255, 255, 255};
+    Palette       m_palette;
 };
 
 wxDECLARE_APP(App);

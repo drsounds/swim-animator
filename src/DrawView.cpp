@@ -417,7 +417,9 @@ void DrawCanvas::OnLeftDown(wxMouseEvent& e) {
         if (m_bezierStep == 4) {
             // All 4 points placed — commit the shape.
             DrawShape s;
-            s.kind = ShapeKind::Bezier;
+            s.kind     = ShapeKind::Bezier;
+            s.fgColour = wxGetApp().GetFgColour();
+            s.bgColour = wxGetApp().GetBgColour();
             for (int i = 0; i < 4; i++) s.pts[i] = m_bezierPts[i];
             s.bounds = BezierBounds(s.pts);
             auto* doc = GetDoc();
@@ -562,7 +564,9 @@ void DrawCanvas::OnLeftUp(wxMouseEvent& e) {
     if (r.width < 4 || r.height < 4) { Refresh(); return; } // too small
 
     DrawShape s;
-    s.bounds = r;
+    s.bounds   = r;
+    s.fgColour = wxGetApp().GetFgColour();
+    s.bgColour = wxGetApp().GetBgColour();
 
     switch (m_tool) {
         case DrawTool::Rect:   s.kind = ShapeKind::Rect;   break;

@@ -338,6 +338,7 @@ CMakeFiles/spacily-app.dir/src/View.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
  /usr/include/wx-3.2/wx/gtk/app.h \
+ /home/alecca/Documents/spacely/src/Palette.h \
  /home/alecca/Documents/spacely/src/MainFrame.h \
  /usr/include/wx-3.2/wx/aui/aui.h \
  /usr/include/wx-3.2/wx/aui/framemanager.h /usr/include/wx-3.2/wx/timer.h \
@@ -377,6 +378,7 @@ CMakeFiles/spacily-app.dir/src/View.cpp.o: \
  /usr/include/c++/14/bits/basic_ios.tcc \
  /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
  /usr/include/c++/14/bits/istream.tcc \
- /usr/include/wx-3.2/wx/gtk/textctrl.h /usr/include/wx-3.2/wx/dcbuffer.h \
- /usr/include/wx-3.2/wx/dcmemory.h /usr/include/wx-3.2/wx/dcclient.h \
- /usr/include/wx-3.2/wx/settings.h
+ /usr/include/wx-3.2/wx/gtk/textctrl.h \
+ /home/alecca/Documents/spacely/src/ColorSwatchPanel.h \
+ /usr/include/wx-3.2/wx/dcbuffer.h /usr/include/wx-3.2/wx/dcmemory.h \
+ /usr/include/wx-3.2/wx/dcclient.h /usr/include/wx-3.2/wx/settings.h

@@ -16,6 +16,8 @@ set(SOURCES
     src/DrawView.cpp
     src/DrawCommands.cpp
     src/PropPanel.cpp
+    src/Palette.cpp
+    src/ColorSwatchPanel.cpp
 )
 
 add_executable(spacily-app WIN32 MACOSX_BUNDLE ${SOURCES})

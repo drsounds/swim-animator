@@ -153,6 +153,30 @@ src/App.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/App.cpp.s
 .PHONY : src/App.cpp.s
 
+src/ColorSwatchPanel.o: src/ColorSwatchPanel.cpp.o
+.PHONY : src/ColorSwatchPanel.o
+
+# target to build an object file
+src/ColorSwatchPanel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o
+.PHONY : src/ColorSwatchPanel.cpp.o
+
+src/ColorSwatchPanel.i: src/ColorSwatchPanel.cpp.i
+.PHONY : src/ColorSwatchPanel.i
+
+# target to preprocess a source file
+src/ColorSwatchPanel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.i
+.PHONY : src/ColorSwatchPanel.cpp.i
+
+src/ColorSwatchPanel.s: src/ColorSwatchPanel.cpp.s
+.PHONY : src/ColorSwatchPanel.s
+
+# target to generate assembly for a file
+src/ColorSwatchPanel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.s
+.PHONY : src/ColorSwatchPanel.cpp.s
+
 src/Document.o: src/Document.cpp.o
 .PHONY : src/Document.o
 
@@ -273,6 +297,30 @@ src/MainFrame.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/MainFrame.cpp.s
 .PHONY : src/MainFrame.cpp.s
 
+src/Palette.o: src/Palette.cpp.o
+.PHONY : src/Palette.o
+
+# target to build an object file
+src/Palette.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/Palette.cpp.o
+.PHONY : src/Palette.cpp.o
+
+src/Palette.i: src/Palette.cpp.i
+.PHONY : src/Palette.i
+
+# target to preprocess a source file
+src/Palette.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/Palette.cpp.i
+.PHONY : src/Palette.cpp.i
+
+src/Palette.s: src/Palette.cpp.s
+.PHONY : src/Palette.s
+
+# target to generate assembly for a file
+src/Palette.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/Palette.cpp.s
+.PHONY : src/Palette.cpp.s
+
 src/PropPanel.o: src/PropPanel.cpp.o
 .PHONY : src/PropPanel.o
 
@@ -333,6 +381,9 @@ help:
 	@echo "... src/App.o"
 	@echo "... src/App.i"
 	@echo "... src/App.s"
+	@echo "... src/ColorSwatchPanel.o"
+	@echo "... src/ColorSwatchPanel.i"
+	@echo "... src/ColorSwatchPanel.s"
 	@echo "... src/Document.o"
 	@echo "... src/Document.i"
 	@echo "... src/Document.s"
@@ -348,6 +399,9 @@ help:
 	@echo "... src/MainFrame.o"
 	@echo "... src/MainFrame.i"
 	@echo "... src/MainFrame.s"
+	@echo "... src/Palette.o"
+	@echo "... src/Palette.i"
+	@echo "... src/Palette.s"
 	@echo "... src/PropPanel.o"
 	@echo "... src/PropPanel.i"
 	@echo "... src/PropPanel.s"

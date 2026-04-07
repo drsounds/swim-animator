@@ -349,6 +349,7 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
  /usr/include/c++/14/bits/istream.tcc \
  /usr/include/wx-3.2/wx/gtk/textctrl.h \
+ /home/alecca/Documents/spacely/src/ColorSwatchPanel.h \
  /home/alecca/Documents/spacely/src/View.h \
  /home/alecca/Documents/spacely/src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
@@ -377,9 +378,15 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
  /usr/include/wx-3.2/wx/gtk/app.h \
+ /home/alecca/Documents/spacely/src/Palette.h \
  /home/alecca/Documents/spacely/src/DrawDoc.h \
  /usr/include/wx-3.2/wx/artprov.h /usr/include/wx-3.2/wx/msgdlg.h \
  /usr/include/wx-3.2/wx/stockitem.h \
  /usr/include/wx-3.2/wx/generic/msgdlgg.h \
  /usr/include/wx-3.2/wx/gtk/msgdlg.h /usr/include/wx-3.2/wx/settings.h \
- /usr/include/wx-3.2/wx/dcmemory.h
+ /usr/include/wx-3.2/wx/dcmemory.h /usr/include/wx-3.2/wx/filedlg.h \
+ /usr/include/wx-3.2/wx/gtk/filedlg.h \
+ /usr/include/wx-3.2/wx/gtk/filectrl.h /usr/include/wx-3.2/wx/filectrl.h \
+ /usr/include/wx-3.2/wx/stdpaths.h /usr/include/wx-3.2/wx/unix/stdpaths.h \
+ /usr/include/wx-3.2/wx/filename.h /usr/include/wx-3.2/wx/file.h \
+ /usr/include/wx-3.2/wx/convauto.h

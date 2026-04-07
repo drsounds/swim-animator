@@ -336,6 +336,7 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o: \
  /usr/include/wx-3.2/wx/affinematrix2d.h \
  /usr/include/wx-3.2/wx/affinematrix2dbase.h \
  /usr/include/wx-3.2/wx/geometry.h \
+ /home/alecca/Documents/spacely/src/Palette.h \
  /home/alecca/Documents/spacely/src/MainFrame.h \
  /usr/include/wx-3.2/wx/aui/aui.h \
  /usr/include/wx-3.2/wx/aui/framemanager.h /usr/include/wx-3.2/wx/timer.h \
@@ -376,6 +377,7 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o: \
  /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
  /usr/include/c++/14/bits/istream.tcc \
  /usr/include/wx-3.2/wx/gtk/textctrl.h \
+ /home/alecca/Documents/spacely/src/ColorSwatchPanel.h \
  /home/alecca/Documents/spacely/src/Document.h \
  /home/alecca/Documents/spacely/src/View.h \
  /home/alecca/Documents/spacely/src/DrawDoc.h \

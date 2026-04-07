@@ -3,6 +3,7 @@
 #include "App.h"
 #include "DrawIds.h"
 #include "DrawDoc.h"
+#include "Palette.h"
 #include <wx/aui/aui.h>
 #include <wx/panel.h>
 #include <wx/menu.h>
@@ -11,6 +12,9 @@
 #include <wx/msgdlg.h>
 #include <wx/settings.h>
 #include <wx/dcmemory.h>
+#include <wx/filedlg.h>
+#include <wx/stdpaths.h>
+#include <wx/filename.h>
 
 // ---------------------------------------------------------------------------
 // BeveledToolBarArt – draws a raised 3-D border on every button in its idle
@@ -59,18 +63,20 @@ public:
 wxBEGIN_EVENT_TABLE(MainFrame, wxDocParentFrame)
     EVT_AUINOTEBOOK_PAGE_CLOSE(  wxID_ANY, MainFrame::OnNotebookPageClose)
     EVT_AUINOTEBOOK_PAGE_CHANGED(wxID_ANY, MainFrame::OnNotebookPageChanged)
-    EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
-    EVT_CLOSE(MainFrame::OnClose)
-    EVT_MENU(ID_TOOL_SELECT, MainFrame::OnDrawTool)
-    EVT_MENU(ID_TOOL_RECT,   MainFrame::OnDrawTool)
-    EVT_MENU(ID_TOOL_CIRCLE, MainFrame::OnDrawTool)
-    EVT_MENU(ID_TOOL_TEXT,   MainFrame::OnDrawTool)
-    EVT_MENU(ID_TOOL_BEZIER, MainFrame::OnDrawTool)
+    EVT_MENU(wxID_ABOUT,        MainFrame::OnAbout)
+    EVT_CLOSE(                  MainFrame::OnClose)
+    EVT_MENU(ID_TOOL_SELECT,    MainFrame::OnDrawTool)
+    EVT_MENU(ID_TOOL_RECT,      MainFrame::OnDrawTool)
+    EVT_MENU(ID_TOOL_CIRCLE,    MainFrame::OnDrawTool)
+    EVT_MENU(ID_TOOL_TEXT,      MainFrame::OnDrawTool)
+    EVT_MENU(ID_TOOL_BEZIER,    MainFrame::OnDrawTool)
     EVT_UPDATE_UI(ID_TOOL_SELECT, MainFrame::OnUpdateDrawTool)
     EVT_UPDATE_UI(ID_TOOL_RECT,   MainFrame::OnUpdateDrawTool)
     EVT_UPDATE_UI(ID_TOOL_CIRCLE, MainFrame::OnUpdateDrawTool)
     EVT_UPDATE_UI(ID_TOOL_TEXT,   MainFrame::OnUpdateDrawTool)
     EVT_UPDATE_UI(ID_TOOL_BEZIER, MainFrame::OnUpdateDrawTool)
+    EVT_MENU(ID_PALETTE_IMPORT,   MainFrame::OnPaletteImport)
+    EVT_MENU(ID_PALETTE_EXPORT,   MainFrame::OnPaletteExport)
 wxEND_EVENT_TABLE()
 
 // ---------------------------------------------------------------------------
@@ -87,6 +93,7 @@ MainFrame::MainFrame(wxDocManager* manager, wxFrame* parent, wxWindowID id,
     CreateMenuBar();
     CreateToolBar();
     CreateDrawToolBar();
+    CreateColorSwatchPane();
     CreatePropertiesPane();
     CreateStatusBar_();
     CreateAuiPanes();
@@ -116,6 +123,9 @@ void MainFrame::CreateMenuBar() {
     fileMenu->AppendSeparator();
     fileMenu->Append(wxID_SAVE);
     fileMenu->Append(wxID_SAVEAS);
+    fileMenu->AppendSeparator();
+    fileMenu->Append(ID_PALETTE_IMPORT, "Import Palette...", "Load a GIMP palette (.gpl) file");
+    fileMenu->Append(ID_PALETTE_EXPORT, "Export Palette...", "Save the current palette as a GIMP palette (.gpl) file");
     fileMenu->AppendSeparator();
     // Recent files will be inserted here by wxDocManager automatically.
     fileMenu->Append(wxID_EXIT);
@@ -254,6 +264,20 @@ void MainFrame::CreateDrawToolBar() {
             .Gripper(true));
 }
 
+void MainFrame::CreateColorSwatchPane() {
+    m_swatchPanel = new ColorSwatchPanel(this, this);
+    m_auiMgr.AddPane(m_swatchPanel,
+        wxAuiPaneInfo()
+            .Name("ColorSwatches")
+            .Caption("Color Swatches")
+            .Right()
+            .BestSize(200, 180)
+            .MinSize(160, 80)
+            .CloseButton(true)
+            .Floatable(true)
+            .Show(true));
+}
+
 void MainFrame::CreatePropertiesPane() {
     m_propPanel = new PropPanel(this);
     m_auiMgr.AddPane(m_propPanel,
@@ -272,11 +296,24 @@ void MainFrame::SetActiveDrawView(DrawView* view) {
     m_activeDrawView = view;
     if (m_propPanel)
         m_propPanel->ShowShape(nullptr, -1);
+    if (m_swatchPanel)
+        m_swatchPanel->UpdateColors();
 }
 
 void MainFrame::OnSelectionChanged(DrawDoc* doc, int idx) {
     if (m_propPanel)
         m_propPanel->ShowShape(doc, idx);
+
+    // Sync the app-level FG/BG from the newly selected shape so that the
+    // colour-swatch indicator and the next drawn shape share those colours.
+    if (doc && idx >= 0 && idx < (int)doc->GetShapes().size()) {
+        const DrawShape& s = doc->GetShapes()[idx];
+        wxGetApp().SetFgColour(s.fgColour);
+        wxGetApp().SetBgColour(s.bgColour);
+    }
+
+    if (m_swatchPanel)
+        m_swatchPanel->UpdateColors();
 }
 
 void MainFrame::CreateStatusBar_() {
@@ -384,4 +421,33 @@ void MainFrame::OnClose(wxCloseEvent& event) {
         return;
     }
     event.Skip(); // allow default destruction
+}
+
+void MainFrame::OnPaletteImport(wxCommandEvent& /*event*/) {
+    wxFileDialog dlg(this, "Import Palette", "", "",
+                     "GIMP Palette (*.gpl)|*.gpl|All files (*.*)|*.*",
+                     wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+    if (dlg.ShowModal() != wxID_OK) return;
+
+    Palette loaded;
+    if (!LoadGplPalette(dlg.GetPath(), loaded)) {
+        wxMessageBox("Failed to load palette file.", "Import Palette",
+                     wxOK | wxICON_ERROR, this);
+        return;
+    }
+    wxGetApp().GetPalette() = std::move(loaded);
+    wxGetApp().SavePaletteToConfig();
+    if (m_swatchPanel) m_swatchPanel->RefreshPalette();
+}
+
+void MainFrame::OnPaletteExport(wxCommandEvent& /*event*/) {
+    wxFileDialog dlg(this, "Export Palette", "", "palette.gpl",
+                     "GIMP Palette (*.gpl)|*.gpl|All files (*.*)|*.*",
+                     wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+    if (dlg.ShowModal() != wxID_OK) return;
+
+    if (!SaveGplPalette(dlg.GetPath(), wxGetApp().GetPalette())) {
+        wxMessageBox("Failed to save palette file.", "Export Palette",
+                     wxOK | wxICON_ERROR, this);
+    }
 }

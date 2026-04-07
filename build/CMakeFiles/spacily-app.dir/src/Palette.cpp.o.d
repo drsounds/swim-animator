@@ -1,7 +1,7 @@
-CMakeFiles/spacily-app.dir/src/DrawView.cpp.o: \
- /home/alecca/Documents/spacely/src/DrawView.cpp \
- /usr/include/stdc-predef.h /home/alecca/Documents/spacely/src/DrawView.h \
- /usr/include/wx-3.2/wx/docview.h /usr/include/wx-3.2/wx/defs.h \
+CMakeFiles/spacily-app.dir/src/Palette.cpp.o: \
+ /home/alecca/Documents/spacely/src/Palette.cpp \
+ /usr/include/stdc-predef.h /home/alecca/Documents/spacely/src/Palette.h \
+ /usr/include/wx-3.2/wx/colour.h /usr/include/wx-3.2/wx/defs.h \
  /usr/include/wx-3.2/wx/platform.h /usr/include/wx-3.2/wx/compiler.h \
  /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2/wx/setup.h \
  /usr/include/wx-3.2/wx/chkconf.h /usr/include/wx-3.2/wx/gtk/chkconf.h \
@@ -64,7 +64,7 @@ CMakeFiles/spacily-app.dir/src/DrawView.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/wx-3.2/wx/features.h /usr/include/wx-3.2/wx/list.h \
+ /usr/include/wx-3.2/wx/features.h /usr/include/wx-3.2/wx/gdiobj.h \
  /usr/include/wx-3.2/wx/object.h /usr/include/wx-3.2/wx/memory.h \
  /usr/include/wx-3.2/wx/string.h /usr/include/string.h \
  /usr/include/strings.h /usr/include/stdio.h \
@@ -173,11 +173,12 @@ CMakeFiles/spacily-app.dir/src/DrawView.cpp.o: \
  /usr/include/c++/14/compare /usr/include/wx-3.2/wx/iosfwrap.h \
  /usr/include/wx-3.2/wx/msgout.h /usr/include/wx-3.2/wx/xti.h \
  /usr/include/wx-3.2/wx/rtti.h /usr/include/wx-3.2/wx/flags.h \
- /usr/include/wx-3.2/wx/xti2.h /usr/include/wx-3.2/wx/vector.h \
- /usr/include/wx-3.2/wx/scopeguard.h /usr/include/wx-3.2/wx/except.h \
- /usr/include/wx-3.2/wx/meta/movable.h /usr/include/wx-3.2/wx/meta/pod.h \
- /usr/include/wx-3.2/wx/meta/if.h /usr/include/c++/14/iterator \
- /usr/include/c++/14/bits/stream_iterator.h \
+ /usr/include/wx-3.2/wx/xti2.h /usr/include/wx-3.2/wx/variant.h \
+ /usr/include/wx-3.2/wx/arrstr.h /usr/include/wx-3.2/wx/dynarray.h \
+ /usr/include/wx-3.2/wx/vector.h /usr/include/wx-3.2/wx/scopeguard.h \
+ /usr/include/wx-3.2/wx/except.h /usr/include/wx-3.2/wx/meta/movable.h \
+ /usr/include/wx-3.2/wx/meta/pod.h /usr/include/wx-3.2/wx/meta/if.h \
+ /usr/include/c++/14/iterator /usr/include/c++/14/bits/stream_iterator.h \
  /usr/include/c++/14/bits/streambuf_iterator.h \
  /usr/include/c++/14/streambuf /usr/include/c++/14/bits/ios_base.h \
  /usr/include/c++/14/ext/atomicity.h \
@@ -207,9 +208,12 @@ CMakeFiles/spacily-app.dir/src/DrawView.cpp.o: \
  /usr/include/c++/14/bits/exception_ptr.h \
  /usr/include/c++/14/bits/cxxabi_init_exception.h \
  /usr/include/c++/14/bits/nested_exception.h \
- /usr/include/c++/14/bits/streambuf.tcc /usr/include/wx-3.2/wx/dlist.h \
- /usr/include/wx-3.2/wx/utils.h /usr/include/wx-3.2/wx/filefn.h \
- /usr/include/wx-3.2/wx/arrstr.h /usr/include/wx-3.2/wx/dynarray.h \
+ /usr/include/c++/14/bits/streambuf.tcc /usr/include/wx-3.2/wx/list.h \
+ /usr/include/wx-3.2/wx/longlong.h /usr/include/c++/14/limits \
+ /usr/include/wx-3.2/wx/datetime.h /usr/include/wx-3.2/wx/anystr.h \
+ /usr/include/wx-3.2/wx/any.h /usr/include/wx-3.2/wx/typeinfo.h \
+ /usr/include/wx-3.2/wx/gtk/colour.h /usr/include/wx-3.2/wx/wfstream.h \
+ /usr/include/wx-3.2/wx/stream.h /usr/include/wx-3.2/wx/filefn.h \
  /usr/include/x86_64-linux-gnu/sys/stat.h \
  /usr/include/x86_64-linux-gnu/bits/stat.h \
  /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
@@ -229,164 +233,16 @@ CMakeFiles/spacily-app.dir/src/DrawView.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/fcntl.h \
  /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
- /usr/include/linux/falloc.h /usr/include/wx-3.2/wx/hashmap.h \
- /usr/include/wx-3.2/wx/wxcrt.h /usr/include/wx-3.2/wx/versioninfo.h \
- /usr/include/wx-3.2/wx/meta/implicitconversion.h \
- /usr/include/wx-3.2/wx/gdicmn.h /usr/include/wx-3.2/wx/math.h \
- /usr/include/c++/14/math.h /usr/include/c++/14/cmath /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-macros.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
- /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
- /usr/include/c++/14/bits/specfun.h /usr/include/c++/14/limits \
- /usr/include/c++/14/tr1/gamma.tcc \
- /usr/include/c++/14/tr1/special_function_util.h \
- /usr/include/c++/14/tr1/bessel_function.tcc \
- /usr/include/c++/14/tr1/beta_function.tcc \
- /usr/include/c++/14/tr1/ell_integral.tcc \
- /usr/include/c++/14/tr1/exp_integral.tcc \
- /usr/include/c++/14/tr1/hypergeometric.tcc \
- /usr/include/c++/14/tr1/legendre_function.tcc \
- /usr/include/c++/14/tr1/modified_bessel_func.tcc \
- /usr/include/c++/14/tr1/poly_hermite.tcc \
- /usr/include/c++/14/tr1/poly_laguerre.tcc \
- /usr/include/c++/14/tr1/riemann_zeta.tcc \
- /usr/include/wx-3.2/wx/mousestate.h /usr/include/wx-3.2/wx/kbdstate.h \
- /usr/include/wx-3.2/wx/longlong.h /usr/include/wx-3.2/wx/platinfo.h \
- /usr/include/wx-3.2/wx/frame.h /usr/include/wx-3.2/wx/toplevel.h \
- /usr/include/wx-3.2/wx/nonownedwnd.h /usr/include/wx-3.2/wx/window.h \
- /usr/include/wx-3.2/wx/event.h /usr/include/wx-3.2/wx/clntdata.h \
- /usr/include/wx-3.2/wx/cursor.h /usr/include/wx-3.2/wx/gdiobj.h \
- /usr/include/wx-3.2/wx/gtk/cursor.h /usr/include/wx-3.2/wx/thread.h \
- /usr/include/wx-3.2/wx/tracker.h /usr/include/wx-3.2/wx/typeinfo.h \
- /usr/include/wx-3.2/wx/any.h /usr/include/wx-3.2/wx/datetime.h \
- /usr/include/wx-3.2/wx/anystr.h /usr/include/wx-3.2/wx/variant.h \
- /usr/include/wx-3.2/wx/meta/convertible.h \
- /usr/include/wx-3.2/wx/meta/removeref.h /usr/include/wx-3.2/wx/font.h \
- /usr/include/wx-3.2/wx/gtk/font.h /usr/include/wx-3.2/wx/colour.h \
- /usr/include/wx-3.2/wx/gtk/colour.h /usr/include/wx-3.2/wx/region.h \
- /usr/include/wx-3.2/wx/gtk/region.h /usr/include/wx-3.2/wx/intl.h \
- /usr/include/wx-3.2/wx/localedefs.h /usr/include/wx-3.2/wx/translation.h \
- /usr/include/wx-3.2/wx/language.h /usr/include/wx-3.2/wx/scopedptr.h \
- /usr/include/wx-3.2/wx/checkeddelete.h /usr/include/wx-3.2/wx/validate.h \
- /usr/include/wx-3.2/wx/windowid.h /usr/include/wx-3.2/wx/palette.h \
- /usr/include/wx-3.2/wx/generic/paletteg.h /usr/include/wx-3.2/wx/accel.h \
- /usr/include/wx-3.2/wx/gtk/accel.h \
- /usr/include/wx-3.2/wx/generic/accel.h \
- /usr/include/wx-3.2/wx/gtk/window.h \
- /usr/include/wx-3.2/wx/gtk/nonownedwnd.h \
- /usr/include/wx-3.2/wx/iconbndl.h /usr/include/wx-3.2/wx/icon.h \
- /usr/include/wx-3.2/wx/iconloc.h /usr/include/wx-3.2/wx/generic/icon.h \
- /usr/include/wx-3.2/wx/bitmap.h /usr/include/wx-3.2/wx/image.h \
- /usr/include/wx-3.2/wx/stream.h /usr/include/wx-3.2/wx/imagbmp.h \
- /usr/include/wx-3.2/wx/imagpng.h /usr/include/wx-3.2/wx/imaggif.h \
- /usr/include/wx-3.2/wx/imagpcx.h /usr/include/wx-3.2/wx/imagjpeg.h \
- /usr/include/wx-3.2/wx/imagtga.h /usr/include/wx-3.2/wx/imagtiff.h \
- /usr/include/wx-3.2/wx/imagpnm.h /usr/include/wx-3.2/wx/imagxpm.h \
- /usr/include/wx-3.2/wx/imagiff.h /usr/include/wx-3.2/wx/gtk/bitmap.h \
- /usr/include/wx-3.2/wx/weakref.h /usr/include/wx-3.2/wx/meta/int2type.h \
- /usr/include/wx-3.2/wx/gtk/toplevel.h /usr/include/wx-3.2/wx/statusbr.h \
- /usr/include/wx-3.2/wx/control.h /usr/include/wx-3.2/wx/gtk/control.h \
- /usr/include/wx-3.2/wx/generic/statusbr.h /usr/include/wx-3.2/wx/pen.h \
- /usr/include/wx-3.2/wx/peninfobase.h /usr/include/wx-3.2/wx/gtk/pen.h \
- /usr/include/wx-3.2/wx/gtk/frame.h /usr/include/wx-3.2/wx/filehistory.h \
- /usr/include/wx-3.2/wx/gtk/filehistory.h /usr/include/wx-3.2/wx/print.h \
- /usr/include/wx-3.2/wx/generic/printps.h \
- /usr/include/wx-3.2/wx/prntbase.h /usr/include/wx-3.2/wx/cmndata.h \
- /usr/include/wx-3.2/wx/panel.h /usr/include/wx-3.2/wx/containr.h \
- /usr/include/wx-3.2/wx/generic/panelg.h \
- /usr/include/wx-3.2/wx/scrolwin.h /usr/include/wx-3.2/wx/gtk/scrolwin.h \
- /usr/include/wx-3.2/wx/dialog.h /usr/include/wx-3.2/wx/sharedptr.h \
- /usr/include/wx-3.2/wx/atomic.h /usr/include/wx-3.2/wx/gtk/dialog.h \
- /usr/include/wx-3.2/wx/dc.h /usr/include/wx-3.2/wx/brush.h \
- /usr/include/wx-3.2/wx/gtk/brush.h \
- /usr/include/wx-3.2/wx/affinematrix2d.h \
- /usr/include/wx-3.2/wx/affinematrix2dbase.h \
- /usr/include/wx-3.2/wx/geometry.h \
- /home/alecca/Documents/spacely/src/DrawShape.h \
- /home/alecca/Documents/spacely/src/DrawIds.h \
- /home/alecca/Documents/spacely/src/DrawDoc.h \
- /home/alecca/Documents/spacely/src/DrawCommands.h \
- /usr/include/wx-3.2/wx/cmdproc.h \
- /home/alecca/Documents/spacely/src/App.h /usr/include/wx-3.2/wx/app.h \
- /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
- /usr/include/wx-3.2/wx/cmdargs.h /usr/include/wx-3.2/wx/init.h \
- /usr/include/wx-3.2/wx/log.h /usr/include/wx-3.2/wx/time.h \
- /usr/include/wx-3.2/wx/generic/logg.h /usr/include/wx-3.2/wx/unix/app.h \
- /usr/include/signal.h \
- /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
- /usr/include/x86_64-linux-gnu/bits/signum-arch.h \
- /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
- /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
- /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
- /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
- /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
- /usr/include/x86_64-linux-gnu/bits/sigaction.h \
- /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
- /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
- /usr/include/x86_64-linux-gnu/sys/ucontext.h \
- /usr/include/x86_64-linux-gnu/bits/sigstack.h \
- /usr/include/x86_64-linux-gnu/bits/sigstksz.h \
- /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
- /usr/include/x86_64-linux-gnu/bits/sigthread.h \
- /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
- /usr/include/wx-3.2/wx/gtk/app.h \
- /home/alecca/Documents/spacely/src/Palette.h \
- /home/alecca/Documents/spacely/src/MainFrame.h \
- /usr/include/wx-3.2/wx/aui/aui.h \
- /usr/include/wx-3.2/wx/aui/framemanager.h /usr/include/wx-3.2/wx/timer.h \
- /usr/include/wx-3.2/wx/stopwatch.h /usr/include/wx-3.2/wx/sizer.h \
- /usr/include/wx-3.2/wx/bmpbndl.h /usr/include/wx-3.2/wx/aui/dockart.h \
- /usr/include/wx-3.2/wx/aui/floatpane.h /usr/include/wx-3.2/wx/minifram.h \
- /usr/include/wx-3.2/wx/gtk/minifram.h \
- /usr/include/wx-3.2/wx/aui/auibar.h /usr/include/wx-3.2/wx/aui/auibook.h \
- /usr/include/wx-3.2/wx/aui/tabart.h /usr/include/wx-3.2/wx/bookctrl.h \
- /usr/include/wx-3.2/wx/withimages.h /usr/include/wx-3.2/wx/imaglist.h \
- /usr/include/wx-3.2/wx/generic/imaglist.h \
- /usr/include/wx-3.2/wx/notebook.h /usr/include/wx-3.2/wx/gtk/notebook.h \
- /usr/include/wx-3.2/wx/aui/tabmdi.h /usr/include/wx-3.2/wx/mdi.h \
- /usr/include/wx-3.2/wx/menu.h /usr/include/wx-3.2/wx/menuitem.h \
- /usr/include/wx-3.2/wx/gtk/menuitem.h /usr/include/wx-3.2/wx/gtk/menu.h \
- /usr/include/wx-3.2/wx/gtk/mdi.h /usr/include/wx-3.2/wx/toolbar.h \
- /usr/include/wx-3.2/wx/tbarbase.h /usr/include/wx-3.2/wx/gtk/toolbar.h \
- /home/alecca/Documents/spacely/src/PropPanel.h \
- /usr/include/wx-3.2/wx/spinctrl.h /usr/include/wx-3.2/wx/spinbutt.h \
- /usr/include/wx-3.2/wx/range.h /usr/include/wx-3.2/wx/gtk/spinbutt.h \
- /usr/include/wx-3.2/wx/gtk/spinctrl.h /usr/include/wx-3.2/wx/button.h \
- /usr/include/wx-3.2/wx/anybutton.h \
- /usr/include/wx-3.2/wx/gtk/anybutton.h \
- /usr/include/wx-3.2/wx/gtk/button.h /usr/include/wx-3.2/wx/stattext.h \
- /usr/include/wx-3.2/wx/gtk/stattext.h /usr/include/wx-3.2/wx/textctrl.h \
- /usr/include/wx-3.2/wx/textentry.h \
- /usr/include/wx-3.2/wx/gtk/textentry.h /usr/include/wx-3.2/wx/ioswrap.h \
- /usr/include/c++/14/iostream /usr/include/c++/14/ostream \
+ /usr/include/linux/falloc.h /usr/include/wx-3.2/wx/file.h \
+ /usr/include/wx-3.2/wx/convauto.h /usr/include/wx-3.2/wx/ffile.h \
+ /usr/include/wx-3.2/wx/txtstrm.h /usr/include/wx-3.2/wx/tokenzr.h \
+ /usr/include/c++/14/sstream /usr/include/c++/14/istream \
  /usr/include/c++/14/ios /usr/include/c++/14/bits/basic_ios.h \
  /usr/include/c++/14/bits/locale_facets.h /usr/include/c++/14/cwctype \
  /usr/include/x86_64-linux-gnu/c++/14/bits/ctype_base.h \
  /usr/include/x86_64-linux-gnu/c++/14/bits/ctype_inline.h \
  /usr/include/c++/14/bits/locale_facets.tcc \
- /usr/include/c++/14/bits/basic_ios.tcc \
- /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
+ /usr/include/c++/14/bits/basic_ios.tcc /usr/include/c++/14/ostream \
+ /usr/include/c++/14/bits/ostream.tcc \
  /usr/include/c++/14/bits/istream.tcc \
- /usr/include/wx-3.2/wx/gtk/textctrl.h \
- /home/alecca/Documents/spacely/src/ColorSwatchPanel.h \
- /usr/include/wx-3.2/wx/dcbuffer.h /usr/include/wx-3.2/wx/dcmemory.h \
- /usr/include/wx-3.2/wx/dcclient.h /usr/include/wx-3.2/wx/settings.h \
- /usr/include/wx-3.2/wx/colordlg.h /usr/include/wx-3.2/wx/colourdata.h \
- /usr/include/wx-3.2/wx/gtk/colordlg.h /usr/include/wx-3.2/wx/textdlg.h \
- /usr/include/wx-3.2/wx/generic/textdlgg.h \
- /usr/include/wx-3.2/wx/valtext.h /usr/include/wx-3.2/wx/msgdlg.h \
- /usr/include/wx-3.2/wx/stockitem.h \
- /usr/include/wx-3.2/wx/generic/msgdlgg.h \
- /usr/include/wx-3.2/wx/gtk/msgdlg.h
+ /usr/include/c++/14/bits/sstream.tcc
