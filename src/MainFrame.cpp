@@ -303,15 +303,6 @@ void MainFrame::SetActiveDrawView(DrawView* view) {
 void MainFrame::OnSelectionChanged(DrawDoc* doc, int idx) {
     if (m_propPanel)
         m_propPanel->ShowShape(doc, idx);
-
-    // Sync the app-level FG/BG from the newly selected shape so that the
-    // colour-swatch indicator and the next drawn shape share those colours.
-    if (doc && idx >= 0 && idx < (int)doc->GetShapes().size()) {
-        const DrawShape& s = doc->GetShapes()[idx];
-        wxGetApp().SetFgColour(s.fgColour);
-        wxGetApp().SetBgColour(s.bgColour);
-    }
-
     if (m_swatchPanel)
         m_swatchPanel->UpdateColors();
 }

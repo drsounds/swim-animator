@@ -110,7 +110,6 @@ public:
         : wxScrolledWindow(parent, wxID_ANY)
         , m_frame(frame)
     {
-        SetBackgroundStyle(wxBG_STYLE_PAINT);
         Bind(wxEVT_PAINT,      &SwatchGridCtrl::OnPaint,     this);
         Bind(wxEVT_SIZE,       &SwatchGridCtrl::OnSize,      this);
         Bind(wxEVT_LEFT_DOWN,  &SwatchGridCtrl::OnLeftDown,  this);
@@ -141,7 +140,7 @@ private:
     int HitTest(const wxPoint& pt) const {
         int ux, uy;
         CalcUnscrolledPosition(pt.x, pt.y, &ux, &uy);
-        if (m_cols == 0) return -1;
+        if (m_cols == 0 || ux < 0 || uy < 0) return -1;
         int col = ux / (kSwatchSz + kGap);
         int row = uy / (kSwatchSz + kGap);
         int lx  = ux - col * (kSwatchSz + kGap);
@@ -153,7 +152,7 @@ private:
     }
 
     void OnPaint(wxPaintEvent&) {
-        wxAutoBufferedPaintDC dc(this);
+        wxPaintDC dc(this);
         DoPrepareDC(dc);
         dc.SetBackground(wxBrush(GetBackgroundColour()));
         dc.Clear();

@@ -43,42 +43,44 @@ bool LoadGplPalette(const wxString& path, Palette& out) {
     bool inHeader = true;
     wxString comments;
 
-    while (!fis.Eof()) {
+    // Use a read-then-check-eof loop so that the last line is not dropped when
+    // the file has no trailing newline (wx sets Eof after the read, not before).
+    for (;;) {
         wxString line = in.ReadLine();
         wxString trimmed = line.Trim(false).Trim(true);
-        if (trimmed.IsEmpty()) continue;
 
-        if (inHeader && trimmed.StartsWith("Name:")) {
-            p.name = trimmed.AfterFirst(':').Trim(false).Trim(true);
-            continue;
-        }
-        if (inHeader && trimmed.StartsWith("Columns:"))
-            continue;
-
-        if (trimmed.StartsWith("#")) {
-            wxString text = trimmed.Mid(1).Trim(false);
-            if (!text.IsEmpty()) {
-                if (!comments.IsEmpty()) comments += "\n";
-                comments += text;
+        if (!trimmed.IsEmpty()) {
+            if (inHeader && trimmed.StartsWith("Name:")) {
+                p.name = trimmed.AfterFirst(':').Trim(false).Trim(true);
+            } else if (inHeader && trimmed.StartsWith("Columns:")) {
+                // ignored
+            } else if (trimmed.StartsWith("#")) {
+                wxString text = trimmed.Mid(1).Trim(false);
+                if (!text.IsEmpty()) {
+                    if (!comments.IsEmpty()) comments += "\n";
+                    comments += text;
+                }
+            } else {
+                inHeader = false;
+                // Colour line: R G B<whitespace>Name
+                std::istringstream iss(trimmed.ToStdString());
+                int r, g, b;
+                if (iss >> r >> g >> b) {
+                    std::string name;
+                    std::getline(iss, name);
+                    size_t start = name.find_first_not_of(" \t");
+                    if (start != std::string::npos)
+                        name = name.substr(start);
+                    auto clamp = [](int v) {
+                        return (unsigned char)std::max(0, std::min(255, v));
+                    };
+                    p.entries.push_back({wxColour(clamp(r), clamp(g), clamp(b)),
+                                         wxString::FromUTF8(name)});
+                }
             }
-            continue;
         }
-        inHeader = false;
 
-        // Colour line: R G B<whitespace>Name
-        std::istringstream iss(trimmed.ToStdString());
-        int r, g, b;
-        if (!(iss >> r >> g >> b)) continue;
-
-        std::string name;
-        std::getline(iss, name);
-        size_t start = name.find_first_not_of(" \t");
-        if (start != std::string::npos)
-            name = name.substr(start);
-
-        auto clamp = [](int v) { return (unsigned char)std::max(0, std::min(255, v)); };
-        p.entries.push_back({wxColour(clamp(r), clamp(g), clamp(b)),
-                              wxString::FromUTF8(name)});
+        if (fis.Eof()) break;
     }
 
     p.comment = comments;
