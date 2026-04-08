@@ -308,7 +308,8 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: \
  /usr/include/c++/14/bits/basic_ios.tcc \
  /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
  /usr/include/c++/14/bits/istream.tcc \
- /usr/include/wx-3.2/wx/gtk/textctrl.h \
+ /usr/include/wx-3.2/wx/gtk/textctrl.h /usr/include/wx-3.2/wx/choice.h \
+ /usr/include/wx-3.2/wx/ctrlsub.h /usr/include/wx-3.2/wx/gtk/choice.h \
  /home/alecca/Documents/spacely/src/DrawShape.h \
  /home/alecca/Documents/spacely/src/DrawDoc.h \
  /usr/include/wx-3.2/wx/docview.h /usr/include/wx-3.2/wx/dlist.h \
@@ -335,4 +336,5 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: \
  /home/alecca/Documents/spacely/src/DrawCommands.h \
  /usr/include/wx-3.2/wx/cmdproc.h /usr/include/wx-3.2/wx/colordlg.h \
  /usr/include/wx-3.2/wx/colourdata.h \
- /usr/include/wx-3.2/wx/gtk/colordlg.h /usr/include/wx-3.2/wx/sizer.h
+ /usr/include/wx-3.2/wx/gtk/colordlg.h /usr/include/wx-3.2/wx/sizer.h \
+ /usr/include/wx-3.2/wx/statline.h /usr/include/wx-3.2/wx/gtk/statline.h

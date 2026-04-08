@@ -4,6 +4,7 @@
 #include <wx/colordlg.h>
 #include <wx/sizer.h>
 #include <wx/colour.h>
+#include <wx/statline.h>
 #include <algorithm>
 
 // ---------------------------------------------------------------------------
@@ -40,7 +41,22 @@ PropPanel::PropPanel(wxWindow* parent)
     BuildUI();
 }
 
+// Preset table shared with NewDrawingDialog
+struct DocPreset { const char* label; int w; int h; };
+static const DocPreset kDocPresets[] = {
+    { "1920 × 1080  (Full HD landscape)", 1920, 1080 },
+    { "1080 × 1920  (Full HD portrait)",  1080, 1920 },
+    { "1024 × 768",                       1024,  768 },
+    { "640 × 480",                         640,  480 },
+    { "Custom",                              -1,   -1 },
+};
+static const int kDocPresetCount = (int)(sizeof(kDocPresets) / sizeof(kDocPresets[0]));
+static const int kDocCustomIndex = kDocPresetCount - 1;
+
 void PropPanel::BuildUI() {
+    const int M = 6;  // outer margin
+    const int G = 4;  // inner grid gap
+
     auto* outer = new wxBoxSizer(wxVERTICAL);
 
     // --- No-selection label ---
@@ -49,14 +65,75 @@ void PropPanel::BuildUI() {
                                     wxALIGN_CENTER_HORIZONTAL);
     outer->Add(m_noSelLabel, 0, wxALL | wxEXPAND, 10);
 
+    // --- Document properties panel (shown when a doc is active, no shape selected) ---
+    m_docPanel = new wxPanel(this, wxID_ANY);
+    {
+        auto* sizer = new wxBoxSizer(wxVERTICAL);
+        sizer->Add(new wxStaticText(m_docPanel, wxID_ANY, "Document"),
+                   0, wxLEFT | wxTOP, M);
+        sizer->Add(new wxStaticLine(m_docPanel), 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, M);
+
+        auto* grid = new wxFlexGridSizer(2, wxSize(G, 3));
+        grid->AddGrowableCol(1);
+
+        wxArrayString presetLabels;
+        for (int i = 0; i < kDocPresetCount; i++)
+            presetLabels.Add(kDocPresets[i].label);
+
+        m_docPreset = new wxChoice(m_docPanel, wxID_ANY,
+                                   wxDefaultPosition, wxDefaultSize, presetLabels);
+        AddRow(m_docPanel, grid, "Preset:", m_docPreset);
+
+        m_docWidthSpin  = new wxSpinCtrl(m_docPanel, wxID_ANY, "",
+                                         wxDefaultPosition, wxDefaultSize,
+                                         wxSP_ARROW_KEYS, 1, 32768, 1920);
+        m_docHeightSpin = new wxSpinCtrl(m_docPanel, wxID_ANY, "",
+                                         wxDefaultPosition, wxDefaultSize,
+                                         wxSP_ARROW_KEYS, 1, 32768, 1080);
+        AddRow(m_docPanel, grid, "Width:",  m_docWidthSpin);
+        AddRow(m_docPanel, grid, "Height:", m_docHeightSpin);
+
+        m_docBgBtn = new wxButton(m_docPanel, wxID_ANY, "",
+                                  wxDefaultPosition, wxSize(-1, 22));
+        AddRow(m_docPanel, grid, "Background:", m_docBgBtn);
+
+        sizer->Add(grid, 0, wxEXPAND | wxALL, M);
+        m_docPanel->SetSizer(sizer);
+
+        m_docPreset->Bind(wxEVT_CHOICE, [this](wxCommandEvent&) {
+            if (m_updating) return;
+            int sel = m_docPreset->GetSelection();
+            const bool isCustom = (sel == kDocCustomIndex);
+            if (!isCustom && sel >= 0 && sel < kDocCustomIndex) {
+                m_updating = true;
+                m_docWidthSpin->SetValue(kDocPresets[sel].w);
+                m_docHeightSpin->SetValue(kDocPresets[sel].h);
+                m_updating = false;
+                SubmitDocSizeChange();
+            }
+            m_docWidthSpin->Enable(isCustom);
+            m_docHeightSpin->Enable(isCustom);
+        });
+
+        auto onDocSpin = [this](wxSpinEvent&) {
+            if (m_updating) return;
+            // Mark as custom when the user manually edits a spin
+            m_docPreset->SetSelection(kDocCustomIndex);
+            m_docWidthSpin->Enable(true);
+            m_docHeightSpin->Enable(true);
+            SubmitDocSizeChange();
+        };
+        m_docWidthSpin->Bind(wxEVT_SPINCTRL,  onDocSpin);
+        m_docHeightSpin->Bind(wxEVT_SPINCTRL, onDocSpin);
+        m_docBgBtn->Bind(wxEVT_BUTTON, [this](wxCommandEvent&) { PickDocBgColour(); });
+    }
+    outer->Add(m_docPanel, 0, wxEXPAND);
+
     // --- Shape panel (shown when a shape is selected) ---
     m_shapePanel = new wxPanel(this, wxID_ANY);
     auto* shapeSizer = new wxBoxSizer(wxVERTICAL);
     m_shapePanel->SetSizer(shapeSizer);
     outer->Add(m_shapePanel, 1, wxEXPAND);
-
-    const int M = 6;  // outer margin
-    const int G = 4;  // inner grid gap
 
     // Kind row
     {
@@ -212,9 +289,34 @@ void PropPanel::ShowShape(DrawDoc* doc, int idx) {
 
     const bool hasSel = (doc != nullptr && idx >= 0 &&
                          idx < (int)doc->GetShapes().size());
+    const bool hasDoc = (doc != nullptr && !hasSel);
 
-    m_noSelLabel->Show(!hasSel);
+    m_noSelLabel->Show(!hasSel && !hasDoc);
+    m_docPanel->Show(hasDoc);
     m_shapePanel->Show(hasSel);
+
+    if (hasDoc) {
+        // Populate document properties
+        int w = doc->GetPageWidth(), h = doc->GetPageHeight();
+        m_docWidthSpin->SetValue(w);
+        m_docHeightSpin->SetValue(h);
+        m_docBgBtn->SetBackgroundColour(doc->GetBgColour());
+        m_docBgBtn->Refresh();
+
+        // Select matching preset or "Custom"
+        int presetSel = kDocCustomIndex;
+        for (int i = 0; i < kDocCustomIndex; i++) {
+            if (kDocPresets[i].w == w && kDocPresets[i].h == h) {
+                presetSel = i;
+                break;
+            }
+        }
+        m_docPreset->SetSelection(presetSel);
+        m_docWidthSpin->Enable(presetSel == kDocCustomIndex);
+        m_docHeightSpin->Enable(presetSel == kDocCustomIndex);
+
+        m_docPanel->Layout();
+    }
 
     if (hasSel) {
         const DrawShape& s = doc->GetShapes()[idx];
@@ -368,6 +470,27 @@ void PropPanel::SubmitBorderChange() {
 
     m_doc->GetCommandProcessor()->Submit(
         new UpdateShapeCmd(m_doc, m_idx, before, after, "Edit Border"));
+}
+
+void PropPanel::SubmitDocSizeChange() {
+    if (!m_doc) return;
+    int w = m_docWidthSpin->GetValue();
+    int h = m_docHeightSpin->GetValue();
+    if (w == m_doc->GetPageWidth() && h == m_doc->GetPageHeight()) return;
+    m_doc->SetPageSize(w, h);
+}
+
+void PropPanel::PickDocBgColour() {
+    if (!m_doc) return;
+    wxColourData cd;
+    cd.SetChooseFull(true);
+    cd.SetColour(m_doc->GetBgColour());
+    wxColourDialog dlg(this, &cd);
+    if (dlg.ShowModal() != wxID_OK) return;
+    wxColour c = dlg.GetColourData().GetColour();
+    m_docBgBtn->SetBackgroundColour(c);
+    m_docBgBtn->Refresh();
+    m_doc->SetBgColour(c);
 }
 
 void PropPanel::PickColour(bool fg) {

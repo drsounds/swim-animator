@@ -220,6 +220,7 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o: /home/alecca/Documents/spacely/src/App
   /usr/include/wx-3.2/wx/chartype.h \
   /usr/include/wx-3.2/wx/checkeddelete.h \
   /usr/include/wx-3.2/wx/chkconf.h \
+  /usr/include/wx-3.2/wx/choice.h \
   /usr/include/wx-3.2/wx/clntdata.h \
   /usr/include/wx-3.2/wx/cmdargs.h \
   /usr/include/wx-3.2/wx/cmndata.h \
@@ -229,6 +230,7 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o: /home/alecca/Documents/spacely/src/App
   /usr/include/wx-3.2/wx/control.h \
   /usr/include/wx-3.2/wx/convauto.h \
   /usr/include/wx-3.2/wx/cpp.h \
+  /usr/include/wx-3.2/wx/ctrlsub.h \
   /usr/include/wx-3.2/wx/cursor.h \
   /usr/include/wx-3.2/wx/datetime.h \
   /usr/include/wx-3.2/wx/dc.h \
@@ -271,6 +273,7 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o: /home/alecca/Documents/spacely/src/App
   /usr/include/wx-3.2/wx/gtk/brush.h \
   /usr/include/wx-3.2/wx/gtk/button.h \
   /usr/include/wx-3.2/wx/gtk/chkconf.h \
+  /usr/include/wx-3.2/wx/gtk/choice.h \
   /usr/include/wx-3.2/wx/gtk/colour.h \
   /usr/include/wx-3.2/wx/gtk/control.h \
   /usr/include/wx-3.2/wx/gtk/cursor.h \
@@ -782,6 +785,7 @@ CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o: /home/alecca/Documents/s
   /usr/include/wx-3.2/wx/generic/accel.h \
   /usr/include/wx-3.2/wx/generic/icon.h \
   /usr/include/wx-3.2/wx/generic/imaglist.h \
+  /usr/include/wx-3.2/wx/generic/msgdlgg.h \
   /usr/include/wx-3.2/wx/generic/paletteg.h \
   /usr/include/wx-3.2/wx/generic/panelg.h \
   /usr/include/wx-3.2/wx/generic/printps.h \
@@ -804,6 +808,7 @@ CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o: /home/alecca/Documents/s
   /usr/include/wx-3.2/wx/gtk/filehistory.h \
   /usr/include/wx-3.2/wx/gtk/font.h \
   /usr/include/wx-3.2/wx/gtk/frame.h \
+  /usr/include/wx-3.2/wx/gtk/msgdlg.h \
   /usr/include/wx-3.2/wx/gtk/nonownedwnd.h \
   /usr/include/wx-3.2/wx/gtk/notebook.h \
   /usr/include/wx-3.2/wx/gtk/pen.h \
@@ -849,6 +854,7 @@ CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o: /home/alecca/Documents/s
   /usr/include/wx-3.2/wx/meta/pod.h \
   /usr/include/wx-3.2/wx/meta/removeref.h \
   /usr/include/wx-3.2/wx/mousestate.h \
+  /usr/include/wx-3.2/wx/msgdlg.h \
   /usr/include/wx-3.2/wx/msgout.h \
   /usr/include/wx-3.2/wx/nonownedwnd.h \
   /usr/include/wx-3.2/wx/notebook.h \
@@ -870,6 +876,7 @@ CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o: /home/alecca/Documents/s
   /usr/include/wx-3.2/wx/sizer.h \
   /usr/include/wx-3.2/wx/stattext.h \
   /usr/include/wx-3.2/wx/statusbr.h \
+  /usr/include/wx-3.2/wx/stockitem.h \
   /usr/include/wx-3.2/wx/strconv.h \
   /usr/include/wx-3.2/wx/stream.h \
   /usr/include/wx-3.2/wx/string.h \
@@ -1244,6 +1251,7 @@ CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o: /home/alecca/Documents/sp
   /usr/include/wx-3.2/wx/chartype.h \
   /usr/include/wx-3.2/wx/checkeddelete.h \
   /usr/include/wx-3.2/wx/chkconf.h \
+  /usr/include/wx-3.2/wx/choice.h \
   /usr/include/wx-3.2/wx/clntdata.h \
   /usr/include/wx-3.2/wx/cmdargs.h \
   /usr/include/wx-3.2/wx/cmdproc.h \
@@ -1256,6 +1264,7 @@ CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o: /home/alecca/Documents/sp
   /usr/include/wx-3.2/wx/control.h \
   /usr/include/wx-3.2/wx/convauto.h \
   /usr/include/wx-3.2/wx/cpp.h \
+  /usr/include/wx-3.2/wx/ctrlsub.h \
   /usr/include/wx-3.2/wx/cursor.h \
   /usr/include/wx-3.2/wx/datetime.h \
   /usr/include/wx-3.2/wx/dc.h \
@@ -1298,6 +1307,7 @@ CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o: /home/alecca/Documents/sp
   /usr/include/wx-3.2/wx/gtk/brush.h \
   /usr/include/wx-3.2/wx/gtk/button.h \
   /usr/include/wx-3.2/wx/gtk/chkconf.h \
+  /usr/include/wx-3.2/wx/gtk/choice.h \
   /usr/include/wx-3.2/wx/gtk/colordlg.h \
   /usr/include/wx-3.2/wx/gtk/colour.h \
   /usr/include/wx-3.2/wx/gtk/control.h \
@@ -2435,6 +2445,7 @@ CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o: /home/alecca/Documents/spacel
 CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src/DrawDoc.cpp \
   /home/alecca/Documents/spacely/src/DrawDoc.h \
   /home/alecca/Documents/spacely/src/DrawShape.h \
+  /home/alecca/Documents/spacely/src/NewDrawingDialog.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
   /usr/include/asm-generic/errno-base.h \
@@ -2589,6 +2600,7 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src
   /usr/include/math.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
+  /usr/include/signal.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
@@ -2603,17 +2615,24 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src
   /usr/include/wx-3.2/wx/affinematrix2dbase.h \
   /usr/include/wx-3.2/wx/afterstd.h \
   /usr/include/wx-3.2/wx/any.h \
+  /usr/include/wx-3.2/wx/anybutton.h \
   /usr/include/wx-3.2/wx/anystr.h \
+  /usr/include/wx-3.2/wx/app.h \
   /usr/include/wx-3.2/wx/arrstr.h \
   /usr/include/wx-3.2/wx/atomic.h \
   /usr/include/wx-3.2/wx/beforestd.h \
   /usr/include/wx-3.2/wx/bitmap.h \
+  /usr/include/wx-3.2/wx/bmpbndl.h \
   /usr/include/wx-3.2/wx/brush.h \
   /usr/include/wx-3.2/wx/buffer.h \
+  /usr/include/wx-3.2/wx/build.h \
+  /usr/include/wx-3.2/wx/button.h \
   /usr/include/wx-3.2/wx/chartype.h \
   /usr/include/wx-3.2/wx/checkeddelete.h \
   /usr/include/wx-3.2/wx/chkconf.h \
+  /usr/include/wx-3.2/wx/choice.h \
   /usr/include/wx-3.2/wx/clntdata.h \
+  /usr/include/wx-3.2/wx/cmdargs.h \
   /usr/include/wx-3.2/wx/cmdproc.h \
   /usr/include/wx-3.2/wx/cmndata.h \
   /usr/include/wx-3.2/wx/colour.h \
@@ -2622,6 +2641,7 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src
   /usr/include/wx-3.2/wx/control.h \
   /usr/include/wx-3.2/wx/convauto.h \
   /usr/include/wx-3.2/wx/cpp.h \
+  /usr/include/wx-3.2/wx/ctrlsub.h \
   /usr/include/wx-3.2/wx/cursor.h \
   /usr/include/wx-3.2/wx/datetime.h \
   /usr/include/wx-3.2/wx/dc.h \
@@ -2633,6 +2653,7 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src
   /usr/include/wx-3.2/wx/docview.h \
   /usr/include/wx-3.2/wx/dynarray.h \
   /usr/include/wx-3.2/wx/event.h \
+  /usr/include/wx-3.2/wx/eventfilter.h \
   /usr/include/wx-3.2/wx/except.h \
   /usr/include/wx-3.2/wx/features.h \
   /usr/include/wx-3.2/wx/filefn.h \
@@ -2645,15 +2666,20 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src
   /usr/include/wx-3.2/wx/gdiobj.h \
   /usr/include/wx-3.2/wx/generic/accel.h \
   /usr/include/wx-3.2/wx/generic/icon.h \
+  /usr/include/wx-3.2/wx/generic/logg.h \
   /usr/include/wx-3.2/wx/generic/paletteg.h \
   /usr/include/wx-3.2/wx/generic/panelg.h \
   /usr/include/wx-3.2/wx/generic/printps.h \
   /usr/include/wx-3.2/wx/generic/statusbr.h \
   /usr/include/wx-3.2/wx/geometry.h \
   /usr/include/wx-3.2/wx/gtk/accel.h \
+  /usr/include/wx-3.2/wx/gtk/anybutton.h \
+  /usr/include/wx-3.2/wx/gtk/app.h \
   /usr/include/wx-3.2/wx/gtk/bitmap.h \
   /usr/include/wx-3.2/wx/gtk/brush.h \
+  /usr/include/wx-3.2/wx/gtk/button.h \
   /usr/include/wx-3.2/wx/gtk/chkconf.h \
+  /usr/include/wx-3.2/wx/gtk/choice.h \
   /usr/include/wx-3.2/wx/gtk/colour.h \
   /usr/include/wx-3.2/wx/gtk/control.h \
   /usr/include/wx-3.2/wx/gtk/cursor.h \
@@ -2665,6 +2691,8 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src
   /usr/include/wx-3.2/wx/gtk/pen.h \
   /usr/include/wx-3.2/wx/gtk/region.h \
   /usr/include/wx-3.2/wx/gtk/scrolwin.h \
+  /usr/include/wx-3.2/wx/gtk/spinbutt.h \
+  /usr/include/wx-3.2/wx/gtk/spinctrl.h \
   /usr/include/wx-3.2/wx/gtk/toplevel.h \
   /usr/include/wx-3.2/wx/gtk/window.h \
   /usr/include/wx-3.2/wx/hashmap.h \
@@ -2682,12 +2710,14 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src
   /usr/include/wx-3.2/wx/imagtga.h \
   /usr/include/wx-3.2/wx/imagtiff.h \
   /usr/include/wx-3.2/wx/imagxpm.h \
+  /usr/include/wx-3.2/wx/init.h \
   /usr/include/wx-3.2/wx/intl.h \
   /usr/include/wx-3.2/wx/iosfwrap.h \
   /usr/include/wx-3.2/wx/kbdstate.h \
   /usr/include/wx-3.2/wx/language.h \
   /usr/include/wx-3.2/wx/list.h \
   /usr/include/wx-3.2/wx/localedefs.h \
+  /usr/include/wx-3.2/wx/log.h \
   /usr/include/wx-3.2/wx/longlong.h \
   /usr/include/wx-3.2/wx/math.h \
   /usr/include/wx-3.2/wx/memory.h \
@@ -2710,12 +2740,15 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src
   /usr/include/wx-3.2/wx/platinfo.h \
   /usr/include/wx-3.2/wx/print.h \
   /usr/include/wx-3.2/wx/prntbase.h \
+  /usr/include/wx-3.2/wx/range.h \
   /usr/include/wx-3.2/wx/region.h \
   /usr/include/wx-3.2/wx/rtti.h \
   /usr/include/wx-3.2/wx/scopedptr.h \
   /usr/include/wx-3.2/wx/scopeguard.h \
   /usr/include/wx-3.2/wx/scrolwin.h \
   /usr/include/wx-3.2/wx/sharedptr.h \
+  /usr/include/wx-3.2/wx/spinbutt.h \
+  /usr/include/wx-3.2/wx/spinctrl.h \
   /usr/include/wx-3.2/wx/statusbr.h \
   /usr/include/wx-3.2/wx/strconv.h \
   /usr/include/wx-3.2/wx/stream.h \
@@ -2725,12 +2758,14 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src
   /usr/include/wx-3.2/wx/strvararg.h \
   /usr/include/wx-3.2/wx/textbuf.h \
   /usr/include/wx-3.2/wx/thread.h \
+  /usr/include/wx-3.2/wx/time.h \
   /usr/include/wx-3.2/wx/toplevel.h \
   /usr/include/wx-3.2/wx/tracker.h \
   /usr/include/wx-3.2/wx/translation.h \
   /usr/include/wx-3.2/wx/typeinfo.h \
   /usr/include/wx-3.2/wx/types.h \
   /usr/include/wx-3.2/wx/unichar.h \
+  /usr/include/wx-3.2/wx/unix/app.h \
   /usr/include/wx-3.2/wx/unix/chkconf.h \
   /usr/include/wx-3.2/wx/utils.h \
   /usr/include/wx-3.2/wx/validate.h \
@@ -2786,6 +2821,19 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src
   /usr/include/x86_64-linux-gnu/bits/sched.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
+  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+  /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+  /usr/include/x86_64-linux-gnu/bits/signum-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/sigstksz.h \
+  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
   /usr/include/x86_64-linux-gnu/bits/stat.h \
   /usr/include/x86_64-linux-gnu/bits/statx-generic.h \
   /usr/include/x86_64-linux-gnu/bits/statx.h \
@@ -2808,18 +2856,25 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_statx_timestamp.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
@@ -2854,6 +2909,7 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
   /usr/include/x86_64-linux-gnu/sys/stat.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
+  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/limits.h \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/stdarg.h \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/stddef.h \
@@ -3082,6 +3138,7 @@ CMakeFiles/spacily-app.dir/src/DrawView.cpp.o: /home/alecca/Documents/spacely/sr
   /usr/include/wx-3.2/wx/chartype.h \
   /usr/include/wx-3.2/wx/checkeddelete.h \
   /usr/include/wx-3.2/wx/chkconf.h \
+  /usr/include/wx-3.2/wx/choice.h \
   /usr/include/wx-3.2/wx/clntdata.h \
   /usr/include/wx-3.2/wx/cmdargs.h \
   /usr/include/wx-3.2/wx/cmdproc.h \
@@ -3094,6 +3151,7 @@ CMakeFiles/spacily-app.dir/src/DrawView.cpp.o: /home/alecca/Documents/spacely/sr
   /usr/include/wx-3.2/wx/control.h \
   /usr/include/wx-3.2/wx/convauto.h \
   /usr/include/wx-3.2/wx/cpp.h \
+  /usr/include/wx-3.2/wx/ctrlsub.h \
   /usr/include/wx-3.2/wx/cursor.h \
   /usr/include/wx-3.2/wx/datetime.h \
   /usr/include/wx-3.2/wx/dc.h \
@@ -3138,6 +3196,7 @@ CMakeFiles/spacily-app.dir/src/DrawView.cpp.o: /home/alecca/Documents/spacely/sr
   /usr/include/wx-3.2/wx/gtk/brush.h \
   /usr/include/wx-3.2/wx/gtk/button.h \
   /usr/include/wx-3.2/wx/gtk/chkconf.h \
+  /usr/include/wx-3.2/wx/gtk/choice.h \
   /usr/include/wx-3.2/wx/gtk/colordlg.h \
   /usr/include/wx-3.2/wx/gtk/colour.h \
   /usr/include/wx-3.2/wx/gtk/control.h \
@@ -3635,6 +3694,7 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: /home/alecca/Documents/spacely/s
   /usr/include/wx-3.2/wx/chartype.h \
   /usr/include/wx-3.2/wx/checkeddelete.h \
   /usr/include/wx-3.2/wx/chkconf.h \
+  /usr/include/wx-3.2/wx/choice.h \
   /usr/include/wx-3.2/wx/clntdata.h \
   /usr/include/wx-3.2/wx/cmdargs.h \
   /usr/include/wx-3.2/wx/cmndata.h \
@@ -3644,6 +3704,7 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: /home/alecca/Documents/spacely/s
   /usr/include/wx-3.2/wx/control.h \
   /usr/include/wx-3.2/wx/convauto.h \
   /usr/include/wx-3.2/wx/cpp.h \
+  /usr/include/wx-3.2/wx/ctrlsub.h \
   /usr/include/wx-3.2/wx/cursor.h \
   /usr/include/wx-3.2/wx/datetime.h \
   /usr/include/wx-3.2/wx/dc.h \
@@ -3689,6 +3750,7 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: /home/alecca/Documents/spacely/s
   /usr/include/wx-3.2/wx/gtk/brush.h \
   /usr/include/wx-3.2/wx/gtk/button.h \
   /usr/include/wx-3.2/wx/gtk/chkconf.h \
+  /usr/include/wx-3.2/wx/gtk/choice.h \
   /usr/include/wx-3.2/wx/gtk/colour.h \
   /usr/include/wx-3.2/wx/gtk/control.h \
   /usr/include/wx-3.2/wx/gtk/cursor.h \
@@ -4496,6 +4558,7 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: /home/alecca/Documents/spacely/s
   /usr/include/wx-3.2/wx/chartype.h \
   /usr/include/wx-3.2/wx/checkeddelete.h \
   /usr/include/wx-3.2/wx/chkconf.h \
+  /usr/include/wx-3.2/wx/choice.h \
   /usr/include/wx-3.2/wx/clntdata.h \
   /usr/include/wx-3.2/wx/cmdproc.h \
   /usr/include/wx-3.2/wx/cmndata.h \
@@ -4506,6 +4569,7 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: /home/alecca/Documents/spacely/s
   /usr/include/wx-3.2/wx/containr.h \
   /usr/include/wx-3.2/wx/control.h \
   /usr/include/wx-3.2/wx/cpp.h \
+  /usr/include/wx-3.2/wx/ctrlsub.h \
   /usr/include/wx-3.2/wx/cursor.h \
   /usr/include/wx-3.2/wx/datetime.h \
   /usr/include/wx-3.2/wx/dc.h \
@@ -4540,6 +4604,7 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: /home/alecca/Documents/spacely/s
   /usr/include/wx-3.2/wx/gtk/brush.h \
   /usr/include/wx-3.2/wx/gtk/button.h \
   /usr/include/wx-3.2/wx/gtk/chkconf.h \
+  /usr/include/wx-3.2/wx/gtk/choice.h \
   /usr/include/wx-3.2/wx/gtk/colordlg.h \
   /usr/include/wx-3.2/wx/gtk/colour.h \
   /usr/include/wx-3.2/wx/gtk/control.h \
@@ -4554,6 +4619,7 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: /home/alecca/Documents/spacely/s
   /usr/include/wx-3.2/wx/gtk/scrolwin.h \
   /usr/include/wx-3.2/wx/gtk/spinbutt.h \
   /usr/include/wx-3.2/wx/gtk/spinctrl.h \
+  /usr/include/wx-3.2/wx/gtk/statline.h \
   /usr/include/wx-3.2/wx/gtk/stattext.h \
   /usr/include/wx-3.2/wx/gtk/textctrl.h \
   /usr/include/wx-3.2/wx/gtk/textentry.h \
@@ -4613,6 +4679,7 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: /home/alecca/Documents/spacely/s
   /usr/include/wx-3.2/wx/sizer.h \
   /usr/include/wx-3.2/wx/spinbutt.h \
   /usr/include/wx-3.2/wx/spinctrl.h \
+  /usr/include/wx-3.2/wx/statline.h \
   /usr/include/wx-3.2/wx/stattext.h \
   /usr/include/wx-3.2/wx/statusbr.h \
   /usr/include/wx-3.2/wx/strconv.h \
@@ -6901,6 +6968,7 @@ spacily-app: /lib/x86_64-linux-gnu/libICE.so.6 \
   /usr/lib/x86_64-linux-gnu/libwx_gtk3u_aui-3.2.so \
   /usr/lib/x86_64-linux-gnu/libwx_gtk3u_core-3.2.so \
   CMakeFiles/spacily-app.dir/src/App.cpp.o \
+  CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o \
   CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o \
   CMakeFiles/spacily-app.dir/src/Document.cpp.o \
   CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o \
@@ -6909,10 +6977,17 @@ spacily-app: /lib/x86_64-linux-gnu/libICE.so.6 \
   CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o \
   CMakeFiles/spacily-app.dir/src/Palette.cpp.o \
   CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o \
+  CMakeFiles/spacily-app.dir/src/SpaDoc.cpp.o \
+  CMakeFiles/spacily-app.dir/src/SpaSaveAsDialog.cpp.o \
+  CMakeFiles/spacily-app.dir/src/SpaView.cpp.o \
   CMakeFiles/spacily-app.dir/src/View.cpp.o
 
 
 CMakeFiles/spacily-app.dir/src/View.cpp.o:
+
+CMakeFiles/spacily-app.dir/src/SpaView.cpp.o:
+
+CMakeFiles/spacily-app.dir/src/SpaSaveAsDialog.cpp.o:
 
 CMakeFiles/spacily-app.dir/src/Palette.cpp.o:
 
@@ -6921,6 +6996,8 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o:
 CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o:
 
 CMakeFiles/spacily-app.dir/src/Document.cpp.o:
+
+CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o:
 
 CMakeFiles/spacily-app.dir/src/App.cpp.o:
 
@@ -7054,8 +7131,6 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o:
 
 /usr/include/wx-3.2/wx/gtk/radiobox.h:
 
-/usr/include/wx-3.2/wx/ctrlsub.h:
-
 /usr/include/stdint.h:
 
 /usr/include/c++/14/pstl/glue_memory_defs.h:
@@ -7078,6 +7153,10 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o:
 
 /home/alecca/Documents/spacely/src/SpaDoc.cpp:
 
+/usr/include/wx-3.2/wx/statline.h:
+
+/usr/include/wx-3.2/wx/gtk/statline.h:
+
 /usr/include/c++/14/sstream:
 
 /home/alecca/Documents/spacely/src/Palette.cpp:
@@ -7090,11 +7169,11 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o:
 
 /usr/include/wx-3.2/wx/artprov.h:
 
-/usr/include/wx-3.2/wx/gtk/msgdlg.h:
-
 /home/alecca/Documents/spacely/src/DrawView.cpp:
 
 /usr/include/wx-3.2/wx/wxcrtvararg.h:
+
+/home/alecca/Documents/spacely/src/NewDrawingDialog.h:
 
 /usr/include/wx-3.2/wx/wfstream.h:
 
@@ -7120,6 +7199,8 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o:
 
 /usr/include/wx-3.2/wx/textdlg.h:
 
+/usr/include/wx-3.2/wx/gtk/msgdlg.h:
+
 /usr/include/wx-3.2/wx/gtk/dirdlg.h:
 
 /usr/include/wx-3.2/wx/gtk/filedlg.h:
@@ -7133,6 +7214,18 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o:
 /usr/include/c++/14/bits/stl_tree.h:
 
 /usr/include/c++/14/bits/stl_multimap.h:
+
+/lib/x86_64-linux-gnu/libfontconfig.so.1:
+
+/lib/x86_64-linux-gnu/libcairo-gobject.so.2:
+
+/usr/lib/linux/uapi/x86/asm/posix_types_64.h:
+
+/usr/lib/linux/uapi/x86/asm/posix_types.h:
+
+/lib/x86_64-linux-gnu/libjbig.so.0:
+
+/usr/lib/linux/uapi/x86/asm/errno.h:
 
 /usr/include/wx-3.2/wx/generic/accel.h:
 
@@ -7150,15 +7243,13 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o:
 
 /usr/include/wx-3.2/wx/except.h:
 
-/usr/include/c++/14/bits/range_access.h:
-
-/usr/include/wx-3.2/wx/toolbar.h:
-
 /usr/include/wx-3.2/wx/docview.h:
 
 /usr/include/wx-3.2/wx/dialog.h:
 
 /usr/include/wx-3.2/wx/defs.h:
+
+/usr/include/wx-3.2/wx/ctrlsub.h:
 
 /usr/include/wx-3.2/wx/debug.h:
 
@@ -7181,6 +7272,10 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o:
 /usr/include/wx-3.2/wx/cmndata.h:
 
 /usr/include/wx-3.2/wx/bmpbndl.h:
+
+/usr/include/wx-3.2/wx/choice.h:
+
+/usr/include/x86_64-linux-gnu/bits/signum-generic.h:
 
 /usr/include/wx-3.2/wx/button.h:
 
@@ -7312,6 +7407,8 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o:
 
 /usr/include/c++/14/tr1/poly_hermite.tcc:
 
+/usr/include/wx-3.2/wx/gtk/choice.h:
+
 /usr/include/c++/14/bits/stl_map.h:
 
 /usr/include/x86_64-linux-gnu/bits/iscanonical.h:
@@ -7339,10 +7436,6 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o:
 /usr/include/c++/14/bits/functional_hash.h:
 
 /usr/include/stdio.h:
-
-/lib/x86_64-linux-gnu/libjbig.so.0:
-
-/usr/lib/linux/uapi/x86/asm/errno.h:
 
 /usr/include/c++/14/bits/locale_facets.tcc:
 
@@ -7608,6 +7701,8 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o:
 
 /home/alecca/Documents/spacely/src/DrawIds.h:
 
+CMakeFiles/spacily-app.dir/src/SpaDoc.cpp.o:
+
 /usr/include/c++/14/bits/string_view.tcc:
 
 /usr/include/linux/stddef.h:
@@ -7655,6 +7750,10 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o:
 /usr/include/c++/14/bits/predefined_ops.h:
 
 /usr/include/c++/14/bits/stl_construct.h:
+
+/usr/include/c++/14/bits/range_access.h:
+
+/usr/include/wx-3.2/wx/toolbar.h:
 
 /lib/x86_64-linux-gnu/libdeflate.so.0:
 
@@ -7904,12 +8003,6 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o:
 
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
-/lib/x86_64-linux-gnu/libfontconfig.so.1:
-
-/lib/x86_64-linux-gnu/libcairo-gobject.so.2:
-
-/usr/lib/linux/uapi/x86/asm/posix_types_64.h:
-
 /usr/include/unistd.h:
 
 /usr/include/wx-3.2/wx/gtk/textentry.h:
@@ -8064,8 +8157,6 @@ CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o:
 
 /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
 
-/usr/lib/linux/uapi/x86/asm/posix_types.h:
-
 /usr/include/wx-3.2/wx/scopedptr.h:
 
 /usr/include/wx-3.2/wx/sharedptr.h:
@@ -8211,8 +8302,6 @@ CMakeFiles/spacily-app.dir/src/DrawView.cpp.o:
 /usr/include/x86_64-linux-gnu/bits/sched.h:
 
 /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h:
-
-/usr/include/x86_64-linux-gnu/bits/signum-generic.h:
 
 /usr/include/x86_64-linux-gnu/bits/sigthread.h:
 

@@ -5,6 +5,7 @@
 #include <wx/stattext.h>
 #include <wx/textctrl.h>
 #include <wx/panel.h>
+#include <wx/choice.h>
 #include "DrawShape.h"
 
 class DrawDoc;
@@ -13,13 +14,18 @@ class DrawDoc;
 // PropPanel – dockable right-side pane showing editable properties for the
 // currently selected shape.  All edits are submitted through the document's
 // wxCommandProcessor so they participate in undo/redo.
+//
+// When a DrawDoc is active but no shape is selected, the pane shows document
+// properties (page size and background colour) instead.
 // ---------------------------------------------------------------------------
 class PropPanel : public wxScrolledWindow {
 public:
     PropPanel(wxWindow* parent);
 
     // Call whenever selection or document state changes.
-    // Pass doc=nullptr or idx=-1 to show "No selection".
+    // doc=nullptr, idx=-1  → "No selection"
+    // doc!=nullptr, idx=-1 → document properties
+    // doc!=nullptr, idx>=0 → shape properties
     void ShowShape(DrawDoc* doc, int idx);
 
 private:
@@ -32,8 +38,20 @@ private:
     void SubmitBorderChange();
     void PickColour(bool fg);
 
+    // Document-property helpers
+    void SubmitDocSizeChange();
+    void PickDocBgColour();
+
     // ---- Controls ----
     wxStaticText* m_noSelLabel   {nullptr};
+
+    // Document properties panel (shown when a DrawDoc is active, no shape selected)
+    wxPanel*      m_docPanel     {nullptr};
+    wxChoice*     m_docPreset    {nullptr};
+    wxSpinCtrl*   m_docWidthSpin {nullptr};
+    wxSpinCtrl*   m_docHeightSpin{nullptr};
+    wxButton*     m_docBgBtn     {nullptr};
+
     wxPanel*      m_shapePanel   {nullptr};
 
     wxStaticText* m_kindValue    {nullptr};

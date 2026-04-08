@@ -1,4 +1,6 @@
 #include "DrawDoc.h"
+#include "NewDrawingDialog.h"
+#include <wx/app.h>
 #include <wx/cmdproc.h>
 #include <wx/wxcrtvararg.h>
 #include <wx/xml/xml.h>
@@ -14,6 +16,29 @@ wxIMPLEMENT_DYNAMIC_CLASS(DrawDoc, wxDocument);
 // Each document gets its own independent undo/redo stack.
 DrawDoc::DrawDoc() {
     SetCommandProcessor(new wxCommandProcessor);
+}
+
+bool DrawDoc::OnNewDocument() {
+    if (!wxDocument::OnNewDocument()) return false;
+    NewDrawingDialog dlg(wxTheApp->GetTopWindow());
+    if (dlg.ShowModal() != wxID_OK) return false;
+    m_pageWidth  = dlg.GetPageWidth();
+    m_pageHeight = dlg.GetPageHeight();
+    m_bgColour   = dlg.GetBgColour();
+    return true;
+}
+
+void DrawDoc::SetPageSize(int w, int h) {
+    m_pageWidth  = w;
+    m_pageHeight = h;
+    Modify(true);
+    UpdateAllViews();
+}
+
+void DrawDoc::SetBgColour(const wxColour& c) {
+    m_bgColour = c;
+    Modify(true);
+    UpdateAllViews();
 }
 
 int DrawDoc::AddShape(const DrawShape& s) {
@@ -92,6 +117,9 @@ bool DrawDoc::DoSaveDocument(const wxString& filename) {
     root->AddAttribute("xmlns",      "http://www.w3.org/2000/svg");
     root->AddAttribute("xmlns:swim", "https://swim.spacify.se/TR/");
     root->AddAttribute("version",    "1.1");
+    root->AddAttribute("width",      wxString::Format("%d", m_pageWidth));
+    root->AddAttribute("height",     wxString::Format("%d", m_pageHeight));
+    root->AddAttribute("swim:bgColor", ColourToHex(m_bgColour));
     doc.SetRoot(root);
 
     for (const DrawShape& s : m_shapes) {
@@ -179,6 +207,16 @@ bool DrawDoc::DoOpenDocument(const wxString& filename) {
 
     wxXmlNode* root = doc.GetRoot();
     if (!root || root->GetName() != "svg") return false;
+
+    // Read page dimensions and background (with backward-compat defaults)
+    {
+        long pw = 1920, ph = 1080;
+        root->GetAttribute("width",  "1920").ToLong(&pw);
+        root->GetAttribute("height", "1080").ToLong(&ph);
+        m_pageWidth  = (int)pw;
+        m_pageHeight = (int)ph;
+        m_bgColour   = HexToColour(root->GetAttribute("swim:bgColor", "#FFFFFF"));
+    }
 
     m_shapes.clear();
     GetCommandProcessor()->ClearCommands();

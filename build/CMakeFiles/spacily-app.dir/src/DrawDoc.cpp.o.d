@@ -310,6 +310,41 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: \
  /usr/include/wx-3.2/wx/affinematrix2dbase.h \
  /usr/include/wx-3.2/wx/geometry.h \
  /home/alecca/Documents/spacely/src/DrawShape.h \
- /usr/include/wx-3.2/wx/cmdproc.h /usr/include/wx-3.2/wx/wxcrtvararg.h \
- /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
- /usr/include/wx-3.2/wx/convauto.h
+ /home/alecca/Documents/spacely/src/NewDrawingDialog.h \
+ /usr/include/wx-3.2/wx/choice.h /usr/include/wx-3.2/wx/ctrlsub.h \
+ /usr/include/wx-3.2/wx/gtk/choice.h /usr/include/wx-3.2/wx/spinctrl.h \
+ /usr/include/wx-3.2/wx/spinbutt.h /usr/include/wx-3.2/wx/range.h \
+ /usr/include/wx-3.2/wx/gtk/spinbutt.h \
+ /usr/include/wx-3.2/wx/gtk/spinctrl.h /usr/include/wx-3.2/wx/button.h \
+ /usr/include/wx-3.2/wx/anybutton.h /usr/include/wx-3.2/wx/bmpbndl.h \
+ /usr/include/wx-3.2/wx/gtk/anybutton.h \
+ /usr/include/wx-3.2/wx/gtk/button.h /usr/include/wx-3.2/wx/app.h \
+ /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
+ /usr/include/wx-3.2/wx/cmdargs.h /usr/include/wx-3.2/wx/init.h \
+ /usr/include/wx-3.2/wx/log.h /usr/include/wx-3.2/wx/time.h \
+ /usr/include/wx-3.2/wx/generic/logg.h /usr/include/wx-3.2/wx/unix/app.h \
+ /usr/include/signal.h \
+ /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/signum-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+ /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+ /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+ /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+ /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+ /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/sigstksz.h \
+ /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+ /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+ /usr/include/wx-3.2/wx/gtk/app.h /usr/include/wx-3.2/wx/cmdproc.h \
+ /usr/include/wx-3.2/wx/wxcrtvararg.h /usr/include/wx-3.2/wx/xml/xml.h \
+ /usr/include/wx-3.2/wx/textbuf.h /usr/include/wx-3.2/wx/convauto.h

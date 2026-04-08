@@ -22,6 +22,7 @@ set(SOURCES
     src/SpaView.cpp
     src/SpaSaveAsDialog.cpp
     src/AssetManagerPanel.cpp
+    src/NewDrawingDialog.cpp
 )
 
 add_executable(spacily-app WIN32 MACOSX_BUNDLE ${SOURCES})

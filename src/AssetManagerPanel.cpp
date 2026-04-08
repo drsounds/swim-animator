@@ -258,11 +258,9 @@ void AssetManagerPanel::OnItemActivated(wxTreeEvent& event) {
 
     wxString localPath;
     if (data->isScene) {
-        localPath = m_doc->ExtractAssetToCache(-1);  // scenes not in m_assets
-        // For scenes: find them in the bundle directly.
-        // ExtractAssetToCache(-1) is a no-op; handle scenes separately.
         if (m_doc->IsFolderBundle()) {
-            localPath = m_doc->GetFilename() + wxFILE_SEP_PATH +
+            localPath = wxFileName::DirName(m_doc->GetFilename()).GetFullPath() +
+                        wxFILE_SEP_PATH +
                         wxFileName(data->logicalPath, wxPATH_UNIX).GetFullPath();
         } else {
             // Would need to add scene extraction – use the doc manager for now.

@@ -110,8 +110,14 @@ Debug/src_View.cpp.o: src/View.cpp src/View.h \
  /usr/include/wx-3.2/wx/textentry.h \
  /usr/include/wx-3.2/wx/gtk/textentry.h /usr/include/wx-3.2/wx/ioswrap.h \
  /usr/include/wx-3.2/wx/gtk/textctrl.h src/ColorSwatchPanel.h \
- /usr/include/wx-3.2/wx/dcbuffer.h /usr/include/wx-3.2/wx/dcmemory.h \
- /usr/include/wx-3.2/wx/dcclient.h /usr/include/wx-3.2/wx/settings.h
+ src/AssetManagerPanel.h /usr/include/wx-3.2/wx/treectrl.h \
+ /usr/include/wx-3.2/wx/treebase.h /usr/include/wx-3.2/wx/itemid.h \
+ /usr/include/wx-3.2/wx/systhemectrl.h \
+ /usr/include/wx-3.2/wx/generic/treectlg.h src/SpaDoc.h \
+ /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
+ /usr/include/wx-3.2/wx/convauto.h /usr/include/wx-3.2/wx/dcbuffer.h \
+ /usr/include/wx-3.2/wx/dcmemory.h /usr/include/wx-3.2/wx/dcclient.h \
+ /usr/include/wx-3.2/wx/settings.h
 src/View.h:
 /usr/include/wx-3.2/wx/docview.h:
 /usr/include/wx-3.2/wx/defs.h:
@@ -322,6 +328,16 @@ src/PropPanel.h:
 /usr/include/wx-3.2/wx/ioswrap.h:
 /usr/include/wx-3.2/wx/gtk/textctrl.h:
 src/ColorSwatchPanel.h:
+src/AssetManagerPanel.h:
+/usr/include/wx-3.2/wx/treectrl.h:
+/usr/include/wx-3.2/wx/treebase.h:
+/usr/include/wx-3.2/wx/itemid.h:
+/usr/include/wx-3.2/wx/systhemectrl.h:
+/usr/include/wx-3.2/wx/generic/treectlg.h:
+src/SpaDoc.h:
+/usr/include/wx-3.2/wx/xml/xml.h:
+/usr/include/wx-3.2/wx/textbuf.h:
+/usr/include/wx-3.2/wx/convauto.h:
 /usr/include/wx-3.2/wx/dcbuffer.h:
 /usr/include/wx-3.2/wx/dcmemory.h:
 /usr/include/wx-3.2/wx/dcclient.h:

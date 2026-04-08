@@ -200,8 +200,10 @@ bool SpaDoc::SaveAsZip(const wxString& targetPath) {
         if (!zipOut.Close()) { wxRemoveFile(tmpPath); return false; }
     }
 
-    if (wxFileExists(targetPath))
-        wxRemoveFile(targetPath);
+    if (wxFileExists(targetPath) && !wxRemoveFile(targetPath)) {
+        wxRemoveFile(tmpPath);
+        return false;
+    }
     return wxRenameFile(tmpPath, targetPath);
 }
 
@@ -296,22 +298,29 @@ wxXmlDocument SpaDoc::BuildAssetsXml() const {
     root->AddAttribute("bundle-mode", m_isFolderBundle ? "folder" : "zip");
     doc.SetRoot(root);
 
+    // Use AddChild (append) rather than the parent-pointer constructor (prepend)
+    // to preserve insertion order on save/load round-trips.
+
     if (!m_sceneOrder.empty()) {
-        wxXmlNode* scenes = new wxXmlNode(root, wxXML_ELEMENT_NODE, "scenes");
+        wxXmlNode* scenes = new wxXmlNode(nullptr, wxXML_ELEMENT_NODE, "scenes");
         for (const auto& p : m_sceneOrder) {
-            wxXmlNode* s = new wxXmlNode(scenes, wxXML_ELEMENT_NODE, "scene");
+            wxXmlNode* s = new wxXmlNode(nullptr, wxXML_ELEMENT_NODE, "scene");
             s->AddAttribute("path", p);
+            scenes->AddChild(s);
         }
+        root->AddChild(scenes);
     }
 
     if (!m_assets.empty()) {
-        wxXmlNode* assets = new wxXmlNode(root, wxXML_ELEMENT_NODE, "assets");
+        wxXmlNode* assets = new wxXmlNode(nullptr, wxXML_ELEMENT_NODE, "assets");
         for (const auto& a : m_assets) {
-            wxXmlNode* node = new wxXmlNode(assets, wxXML_ELEMENT_NODE, "asset");
+            wxXmlNode* node = new wxXmlNode(nullptr, wxXML_ELEMENT_NODE, "asset");
             node->AddAttribute("path", a.logicalPath);
             node->AddAttribute("mime", a.mimeType);
             node->AddAttribute("size", wxString::Format("%llu", a.sizeBytes.GetValue()));
+            assets->AddChild(node);
         }
+        root->AddChild(assets);
     }
 
     return doc;
@@ -383,7 +392,7 @@ void SpaDoc::RenameAsset(int idx, const wxString& newName) {
         wxString newCache = m_cacheDir + wxFILE_SEP_PATH +
                             wxFileName(newLp, wxPATH_UNIX).GetFullPath();
         wxFileName::Mkdir(wxFileName(newCache).GetPath(), 0755, wxPATH_MKDIR_FULL);
-        wxRenameFile(oldCache, newCache);
+        if (!wxRenameFile(oldCache, newCache)) return;  // bail — don't corrupt logicalPath
     }
 
     a.logicalPath = newLp;

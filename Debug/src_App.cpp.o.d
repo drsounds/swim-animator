@@ -112,9 +112,14 @@ Debug/src_App.cpp.o: src/App.cpp src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/textentry.h \
  /usr/include/wx-3.2/wx/gtk/textentry.h /usr/include/wx-3.2/wx/ioswrap.h \
  /usr/include/wx-3.2/wx/gtk/textctrl.h src/ColorSwatchPanel.h \
- src/Document.h src/View.h src/DrawDoc.h \
- /usr/include/wx-3.2/wx/filename.h /usr/include/wx-3.2/wx/file.h \
- /usr/include/wx-3.2/wx/convauto.h /usr/include/wx-3.2/wx/stdpaths.h \
+ src/AssetManagerPanel.h /usr/include/wx-3.2/wx/treectrl.h \
+ /usr/include/wx-3.2/wx/treebase.h /usr/include/wx-3.2/wx/itemid.h \
+ /usr/include/wx-3.2/wx/systhemectrl.h \
+ /usr/include/wx-3.2/wx/generic/treectlg.h src/SpaDoc.h \
+ /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
+ /usr/include/wx-3.2/wx/convauto.h src/Document.h src/View.h \
+ src/DrawDoc.h src/SpaView.h /usr/include/wx-3.2/wx/filename.h \
+ /usr/include/wx-3.2/wx/file.h /usr/include/wx-3.2/wx/stdpaths.h \
  /usr/include/wx-3.2/wx/unix/stdpaths.h /usr/include/wx-3.2/wx/splash.h \
  /usr/include/wx-3.2/wx/generic/splash.h
 src/App.h:
@@ -325,12 +330,22 @@ src/PropPanel.h:
 /usr/include/wx-3.2/wx/ioswrap.h:
 /usr/include/wx-3.2/wx/gtk/textctrl.h:
 src/ColorSwatchPanel.h:
+src/AssetManagerPanel.h:
+/usr/include/wx-3.2/wx/treectrl.h:
+/usr/include/wx-3.2/wx/treebase.h:
+/usr/include/wx-3.2/wx/itemid.h:
+/usr/include/wx-3.2/wx/systhemectrl.h:
+/usr/include/wx-3.2/wx/generic/treectlg.h:
+src/SpaDoc.h:
+/usr/include/wx-3.2/wx/xml/xml.h:
+/usr/include/wx-3.2/wx/textbuf.h:
+/usr/include/wx-3.2/wx/convauto.h:
 src/Document.h:
 src/View.h:
 src/DrawDoc.h:
+src/SpaView.h:
 /usr/include/wx-3.2/wx/filename.h:
 /usr/include/wx-3.2/wx/file.h:
-/usr/include/wx-3.2/wx/convauto.h:
 /usr/include/wx-3.2/wx/stdpaths.h:
 /usr/include/wx-3.2/wx/unix/stdpaths.h:
 /usr/include/wx-3.2/wx/splash.h:

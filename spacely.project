@@ -3,6 +3,13 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <File Name="src/AssetManagerPanel.cpp"/>
+    <File Name="src/SpaView.h"/>
+    <File Name="src/SpaView.cpp"/>
+    <File Name="src/SpaSaveAsDialog.h"/>
+    <File Name="src/SpaSaveAsDialog.cpp"/>
+    <File Name="src/SpaDoc.h"/>
+    <File Name="src/SpaDoc.cpp"/>
     <File Name="src/View.cpp"/>
     <File Name="src/PropPanel.cpp"/>
     <File Name="src/DrawDoc.cpp"/>

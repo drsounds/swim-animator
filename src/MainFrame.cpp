@@ -321,8 +321,10 @@ void MainFrame::CreatePropertiesPane() {
 
 void MainFrame::SetActiveDrawView(DrawView* view) {
     m_activeDrawView = view;
-    if (m_propPanel)
-        m_propPanel->ShowShape(nullptr, -1);
+    if (m_propPanel) {
+        DrawDoc* doc = view ? wxDynamicCast(view->GetDocument(), DrawDoc) : nullptr;
+        m_propPanel->ShowShape(doc, -1);
+    }
     if (m_swatchPanel)
         m_swatchPanel->UpdateColors();
 }

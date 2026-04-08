@@ -321,6 +321,30 @@ src/MainFrame.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/MainFrame.cpp.s
 .PHONY : src/MainFrame.cpp.s
 
+src/NewDrawingDialog.o: src/NewDrawingDialog.cpp.o
+.PHONY : src/NewDrawingDialog.o
+
+# target to build an object file
+src/NewDrawingDialog.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/NewDrawingDialog.cpp.o
+.PHONY : src/NewDrawingDialog.cpp.o
+
+src/NewDrawingDialog.i: src/NewDrawingDialog.cpp.i
+.PHONY : src/NewDrawingDialog.i
+
+# target to preprocess a source file
+src/NewDrawingDialog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/NewDrawingDialog.cpp.i
+.PHONY : src/NewDrawingDialog.cpp.i
+
+src/NewDrawingDialog.s: src/NewDrawingDialog.cpp.s
+.PHONY : src/NewDrawingDialog.s
+
+# target to generate assembly for a file
+src/NewDrawingDialog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/NewDrawingDialog.cpp.s
+.PHONY : src/NewDrawingDialog.cpp.s
+
 src/Palette.o: src/Palette.cpp.o
 .PHONY : src/Palette.o
 
@@ -498,6 +522,9 @@ help:
 	@echo "... src/MainFrame.o"
 	@echo "... src/MainFrame.i"
 	@echo "... src/MainFrame.s"
+	@echo "... src/NewDrawingDialog.o"
+	@echo "... src/NewDrawingDialog.i"
+	@echo "... src/NewDrawingDialog.s"
 	@echo "... src/Palette.o"
 	@echo "... src/Palette.i"
 	@echo "... src/Palette.s"

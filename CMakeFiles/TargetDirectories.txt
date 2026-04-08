@@ -1,0 +1,3 @@
+/home/alecca/Documents/spacely/CMakeFiles/spacily-app.dir
+/home/alecca/Documents/spacely/CMakeFiles/edit_cache.dir
+/home/alecca/Documents/spacely/CMakeFiles/rebuild_cache.dir

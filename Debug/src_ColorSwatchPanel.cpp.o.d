@@ -106,16 +106,20 @@ Debug/src_ColorSwatchPanel.cpp.o: src/ColorSwatchPanel.cpp \
  /usr/include/wx-3.2/wx/gtk/stattext.h /usr/include/wx-3.2/wx/textctrl.h \
  /usr/include/wx-3.2/wx/textentry.h \
  /usr/include/wx-3.2/wx/gtk/textentry.h /usr/include/wx-3.2/wx/ioswrap.h \
- /usr/include/wx-3.2/wx/gtk/textctrl.h src/App.h \
- /usr/include/wx-3.2/wx/app.h /usr/include/wx-3.2/wx/eventfilter.h \
- /usr/include/wx-3.2/wx/build.h /usr/include/wx-3.2/wx/cmdargs.h \
- /usr/include/wx-3.2/wx/init.h /usr/include/wx-3.2/wx/log.h \
- /usr/include/wx-3.2/wx/generic/logg.h /usr/include/wx-3.2/wx/unix/app.h \
- /usr/include/wx-3.2/wx/gtk/app.h src/Palette.h src/DrawDoc.h \
- src/DrawCommands.h /usr/include/wx-3.2/wx/cmdproc.h \
- /usr/include/wx-3.2/wx/dcbuffer.h /usr/include/wx-3.2/wx/dcmemory.h \
- /usr/include/wx-3.2/wx/dcclient.h /usr/include/wx-3.2/wx/colordlg.h \
- /usr/include/wx-3.2/wx/colourdata.h \
+ /usr/include/wx-3.2/wx/gtk/textctrl.h src/AssetManagerPanel.h \
+ /usr/include/wx-3.2/wx/treectrl.h /usr/include/wx-3.2/wx/treebase.h \
+ /usr/include/wx-3.2/wx/itemid.h /usr/include/wx-3.2/wx/systhemectrl.h \
+ /usr/include/wx-3.2/wx/generic/treectlg.h src/SpaDoc.h \
+ /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
+ /usr/include/wx-3.2/wx/convauto.h src/App.h /usr/include/wx-3.2/wx/app.h \
+ /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
+ /usr/include/wx-3.2/wx/cmdargs.h /usr/include/wx-3.2/wx/init.h \
+ /usr/include/wx-3.2/wx/log.h /usr/include/wx-3.2/wx/generic/logg.h \
+ /usr/include/wx-3.2/wx/unix/app.h /usr/include/wx-3.2/wx/gtk/app.h \
+ src/Palette.h src/DrawDoc.h src/DrawCommands.h \
+ /usr/include/wx-3.2/wx/cmdproc.h /usr/include/wx-3.2/wx/dcbuffer.h \
+ /usr/include/wx-3.2/wx/dcmemory.h /usr/include/wx-3.2/wx/dcclient.h \
+ /usr/include/wx-3.2/wx/colordlg.h /usr/include/wx-3.2/wx/colourdata.h \
  /usr/include/wx-3.2/wx/gtk/colordlg.h
 src/ColorSwatchPanel.h:
 /usr/include/wx-3.2/wx/panel.h:
@@ -314,6 +318,16 @@ src/PropPanel.h:
 /usr/include/wx-3.2/wx/gtk/textentry.h:
 /usr/include/wx-3.2/wx/ioswrap.h:
 /usr/include/wx-3.2/wx/gtk/textctrl.h:
+src/AssetManagerPanel.h:
+/usr/include/wx-3.2/wx/treectrl.h:
+/usr/include/wx-3.2/wx/treebase.h:
+/usr/include/wx-3.2/wx/itemid.h:
+/usr/include/wx-3.2/wx/systhemectrl.h:
+/usr/include/wx-3.2/wx/generic/treectlg.h:
+src/SpaDoc.h:
+/usr/include/wx-3.2/wx/xml/xml.h:
+/usr/include/wx-3.2/wx/textbuf.h:
+/usr/include/wx-3.2/wx/convauto.h:
 src/App.h:
 /usr/include/wx-3.2/wx/app.h:
 /usr/include/wx-3.2/wx/eventfilter.h:

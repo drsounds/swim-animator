@@ -414,11 +414,19 @@ void DrawCanvas::DrawShapeOnDC(wxDC& dc, const DrawShape& s, bool selected) {
 
 void DrawCanvas::OnPaint(wxPaintEvent&) {
     wxAutoBufferedPaintDC dc(this);
-    dc.SetBackground(*wxWHITE_BRUSH);
+
+    // Medium-grey area outside the page
+    dc.SetBackground(wxBrush(wxColour(160, 160, 160)));
     dc.Clear();
 
     auto* doc = GetDoc();
     if (!doc) return;
+
+    // Draw page background and border
+    wxRect pageRect(0, 0, doc->GetPageWidth(), doc->GetPageHeight());
+    dc.SetBrush(wxBrush(doc->GetBgColour()));
+    dc.SetPen(wxPen(wxColour(80, 80, 80)));
+    dc.DrawRectangle(pageRect);
 
     const auto& shapes = doc->GetShapes();
     for (int i = 0; i < (int)shapes.size(); i++) {
