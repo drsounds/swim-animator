@@ -2,9 +2,9 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: \
  /home/alecca/Documents/spacely/src/PropPanel.cpp \
  /usr/include/stdc-predef.h \
  /home/alecca/Documents/spacely/src/PropPanel.h \
- /usr/include/wx-3.2/wx/scrolwin.h /usr/include/wx-3.2/wx/control.h \
- /usr/include/wx-3.2/wx/defs.h /usr/include/wx-3.2/wx/platform.h \
- /usr/include/wx-3.2/wx/compiler.h \
+ /usr/include/wx-3.2/wx/panel.h /usr/include/wx-3.2/wx/window.h \
+ /usr/include/wx-3.2/wx/event.h /usr/include/wx-3.2/wx/defs.h \
+ /usr/include/wx-3.2/wx/platform.h /usr/include/wx-3.2/wx/compiler.h \
  /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2/wx/setup.h \
  /usr/include/wx-3.2/wx/chkconf.h /usr/include/wx-3.2/wx/gtk/chkconf.h \
  /usr/include/wx-3.2/wx/unix/chkconf.h /usr/include/wx-3.2/wx/version.h \
@@ -66,8 +66,7 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/wx-3.2/wx/features.h /usr/include/wx-3.2/wx/window.h \
- /usr/include/wx-3.2/wx/event.h /usr/include/wx-3.2/wx/object.h \
+ /usr/include/wx-3.2/wx/features.h /usr/include/wx-3.2/wx/object.h \
  /usr/include/wx-3.2/wx/memory.h /usr/include/wx-3.2/wx/string.h \
  /usr/include/string.h /usr/include/strings.h /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
@@ -279,8 +278,7 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: \
  /usr/include/wx-3.2/wx/generic/paletteg.h /usr/include/wx-3.2/wx/accel.h \
  /usr/include/wx-3.2/wx/gtk/accel.h \
  /usr/include/wx-3.2/wx/generic/accel.h \
- /usr/include/wx-3.2/wx/gtk/window.h /usr/include/wx-3.2/wx/gtk/control.h \
- /usr/include/wx-3.2/wx/panel.h /usr/include/wx-3.2/wx/containr.h \
+ /usr/include/wx-3.2/wx/gtk/window.h /usr/include/wx-3.2/wx/containr.h \
  /usr/include/wx-3.2/wx/generic/panelg.h /usr/include/wx-3.2/wx/bitmap.h \
  /usr/include/wx-3.2/wx/image.h /usr/include/wx-3.2/wx/stream.h \
  /usr/include/wx-3.2/wx/imagbmp.h /usr/include/wx-3.2/wx/imagpng.h \
@@ -288,12 +286,19 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: \
  /usr/include/wx-3.2/wx/imagjpeg.h /usr/include/wx-3.2/wx/imagtga.h \
  /usr/include/wx-3.2/wx/imagtiff.h /usr/include/wx-3.2/wx/imagpnm.h \
  /usr/include/wx-3.2/wx/imagxpm.h /usr/include/wx-3.2/wx/imagiff.h \
- /usr/include/wx-3.2/wx/gtk/bitmap.h \
+ /usr/include/wx-3.2/wx/gtk/bitmap.h /usr/include/wx-3.2/wx/notebook.h \
+ /usr/include/wx-3.2/wx/bookctrl.h /usr/include/wx-3.2/wx/control.h \
+ /usr/include/wx-3.2/wx/gtk/control.h /usr/include/wx-3.2/wx/withimages.h \
+ /usr/include/wx-3.2/wx/bmpbndl.h /usr/include/wx-3.2/wx/icon.h \
+ /usr/include/wx-3.2/wx/iconloc.h /usr/include/wx-3.2/wx/generic/icon.h \
+ /usr/include/wx-3.2/wx/imaglist.h \
+ /usr/include/wx-3.2/wx/generic/imaglist.h \
+ /usr/include/wx-3.2/wx/gtk/notebook.h /usr/include/wx-3.2/wx/scrolwin.h \
  /usr/include/wx-3.2/wx/gtk/scrolwin.h /usr/include/wx-3.2/wx/spinctrl.h \
  /usr/include/wx-3.2/wx/spinbutt.h /usr/include/wx-3.2/wx/range.h \
  /usr/include/wx-3.2/wx/gtk/spinbutt.h \
  /usr/include/wx-3.2/wx/gtk/spinctrl.h /usr/include/wx-3.2/wx/button.h \
- /usr/include/wx-3.2/wx/anybutton.h /usr/include/wx-3.2/wx/bmpbndl.h \
+ /usr/include/wx-3.2/wx/anybutton.h \
  /usr/include/wx-3.2/wx/gtk/anybutton.h \
  /usr/include/wx-3.2/wx/gtk/button.h /usr/include/wx-3.2/wx/stattext.h \
  /usr/include/wx-3.2/wx/gtk/stattext.h /usr/include/wx-3.2/wx/textctrl.h \
@@ -316,9 +321,8 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: \
  /usr/include/wx-3.2/wx/frame.h /usr/include/wx-3.2/wx/toplevel.h \
  /usr/include/wx-3.2/wx/nonownedwnd.h \
  /usr/include/wx-3.2/wx/gtk/nonownedwnd.h \
- /usr/include/wx-3.2/wx/iconbndl.h /usr/include/wx-3.2/wx/icon.h \
- /usr/include/wx-3.2/wx/iconloc.h /usr/include/wx-3.2/wx/generic/icon.h \
- /usr/include/wx-3.2/wx/weakref.h /usr/include/wx-3.2/wx/meta/int2type.h \
+ /usr/include/wx-3.2/wx/iconbndl.h /usr/include/wx-3.2/wx/weakref.h \
+ /usr/include/wx-3.2/wx/meta/int2type.h \
  /usr/include/wx-3.2/wx/gtk/toplevel.h /usr/include/wx-3.2/wx/statusbr.h \
  /usr/include/wx-3.2/wx/generic/statusbr.h /usr/include/wx-3.2/wx/pen.h \
  /usr/include/wx-3.2/wx/peninfobase.h /usr/include/wx-3.2/wx/gtk/pen.h \

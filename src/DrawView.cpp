@@ -304,13 +304,16 @@ private:
 // ---------------------------------------------------------------------------
 
 wxBEGIN_EVENT_TABLE(DrawCanvas, wxPanel)
-    EVT_PAINT(    DrawCanvas::OnPaint)
-    EVT_SIZE(     DrawCanvas::OnSize)
-    EVT_LEFT_DOWN(DrawCanvas::OnLeftDown)
-    EVT_LEFT_UP(  DrawCanvas::OnLeftUp)
-    EVT_MOTION(   DrawCanvas::OnMotion)
+    EVT_PAINT(      DrawCanvas::OnPaint)
+    EVT_SIZE(       DrawCanvas::OnSize)
+    EVT_LEFT_DOWN(  DrawCanvas::OnLeftDown)
+    EVT_LEFT_UP(    DrawCanvas::OnLeftUp)
+    EVT_MOTION(     DrawCanvas::OnMotion)
+    EVT_MIDDLE_DOWN(DrawCanvas::OnMiddleDown)
+    EVT_MIDDLE_UP(  DrawCanvas::OnMiddleUp)
+    EVT_MOUSEWHEEL( DrawCanvas::OnMouseWheel)
     EVT_LEFT_DCLICK(DrawCanvas::OnLeftDClick)
-    EVT_KEY_DOWN( DrawCanvas::OnKeyDown)
+    EVT_KEY_DOWN(   DrawCanvas::OnKeyDown)
 wxEND_EVENT_TABLE()
 
 DrawCanvas::DrawCanvas(DrawView* owner, wxWindow* parent)
@@ -412,6 +415,22 @@ void DrawCanvas::DrawShapeOnDC(wxDC& dc, const DrawShape& s, bool selected) {
     }
 }
 
+// ---------------------------------------------------------------------------
+// Viewport coordinate helpers
+// ---------------------------------------------------------------------------
+
+wxPoint DrawCanvas::ScreenToDoc(wxPoint pt) const {
+    return wxPoint(
+        (int)std::round((pt.x - m_viewOffset.x) / m_zoom),
+        (int)std::round((pt.y - m_viewOffset.y) / m_zoom));
+}
+
+wxPoint DrawCanvas::DocToScreen(wxPoint pt) const {
+    return wxPoint(
+        (int)std::round(pt.x * m_zoom + m_viewOffset.x),
+        (int)std::round(pt.y * m_zoom + m_viewOffset.y));
+}
+
 void DrawCanvas::OnPaint(wxPaintEvent&) {
     wxAutoBufferedPaintDC dc(this);
 
@@ -421,6 +440,10 @@ void DrawCanvas::OnPaint(wxPaintEvent&) {
 
     auto* doc = GetDoc();
     if (!doc) return;
+
+    // Apply pan + zoom transform.  Everything below uses logical (document) coords.
+    dc.SetDeviceOrigin(m_viewOffset.x, m_viewOffset.y);
+    dc.SetUserScale(m_zoom, m_zoom);
 
     // Draw page background, then an inset border in the contrast colour.
     wxRect pageRect(0, 0, doc->GetPageWidth(), doc->GetPageHeight());
@@ -514,7 +537,7 @@ void DrawCanvas::OnLeftDown(wxMouseEvent& e) {
 
     if (m_tool == DrawTool::Bezier) {
         // Place the next control point.
-        m_bezierPts[m_bezierStep] = e.GetPosition();
+        m_bezierPts[m_bezierStep] = ScreenToDoc(e.GetPosition());
         m_bezierStep++;
 
         if (m_bezierStep == 4) {
@@ -539,7 +562,7 @@ void DrawCanvas::OnLeftDown(wxMouseEvent& e) {
     }
 
     if (m_tool == DrawTool::Select) {
-        wxPoint pt = e.GetPosition();
+        wxPoint pt = ScreenToDoc(e.GetPosition());
         auto* doc = GetDoc();
 
         // 1. Check control-point handles on a selected Bezier first.
@@ -595,7 +618,7 @@ void DrawCanvas::OnLeftDown(wxMouseEvent& e) {
         Refresh();
     } else {
         m_dragging    = true;
-        m_dragStart   = e.GetPosition();
+        m_dragStart   = ScreenToDoc(e.GetPosition());
         m_dragCurrent = m_dragStart;
         CaptureMouse();
     }
@@ -603,13 +626,29 @@ void DrawCanvas::OnLeftDown(wxMouseEvent& e) {
 }
 
 void DrawCanvas::OnMotion(wxMouseEvent& e) {
-    // Always track mouse for the Bezier creation preview.
-    m_dragCurrent = e.GetPosition();
+    // Track mouse position in document coords for rubber-band and Bezier previews.
+    m_dragCurrent = ScreenToDoc(e.GetPosition());
+
+    // Pan mode: middle button held — update view offset in screen space.
+    if (m_panning) {
+        if (!e.MiddleIsDown()) {
+            // Button released outside window; clean up.
+            m_panning = false;
+            if (HasCapture()) ReleaseMouse();
+            SetCursor(wxNullCursor);
+        } else {
+            wxPoint delta = e.GetPosition() - m_panStart;
+            m_viewOffset = m_panStartOffset + delta;
+            Refresh();
+        }
+        e.Skip();
+        return;
+    }
 
     if (m_tool == DrawTool::Bezier && m_bezierStep > 0) {
         Refresh();
     } else if (m_tool == DrawTool::Select && m_dragMode != DragMode::None) {
-        wxPoint pt = e.GetPosition();
+        wxPoint pt = ScreenToDoc(e.GetPosition());
         int dx = pt.x - m_dragOrigin.x;
         int dy = pt.y - m_dragOrigin.y;
 
@@ -663,7 +702,7 @@ void DrawCanvas::OnLeftUp(wxMouseEvent& e) {
     m_dragging = false;
     if (HasCapture()) ReleaseMouse();
 
-    wxRect r = NormalizedRect(m_dragStart, e.GetPosition());
+    wxRect r = NormalizedRect(m_dragStart, ScreenToDoc(e.GetPosition()));
     if (r.width < 4 || r.height < 4) { Refresh(); return; } // too small
 
     DrawShape s;
@@ -718,6 +757,49 @@ void DrawCanvas::OnKeyDown(wxKeyEvent& e) {
     } else {
         e.Skip();
     }
+}
+
+// ---------------------------------------------------------------------------
+// Viewport navigation — pan (middle-mouse drag) and zoom (Ctrl+wheel)
+// ---------------------------------------------------------------------------
+
+void DrawCanvas::OnMiddleDown(wxMouseEvent& e) {
+    m_panning         = true;
+    m_panStart        = e.GetPosition();
+    m_panStartOffset  = m_viewOffset;
+    CaptureMouse();
+    SetCursor(wxCursor(wxCURSOR_HAND));
+    e.Skip();
+}
+
+void DrawCanvas::OnMiddleUp(wxMouseEvent& e) {
+    if (m_panning) {
+        m_panning = false;
+        if (HasCapture()) ReleaseMouse();
+        SetCursor(wxNullCursor);
+    }
+    e.Skip();
+}
+
+void DrawCanvas::OnMouseWheel(wxMouseEvent& e) {
+    if (!e.ControlDown()) { e.Skip(); return; }
+
+    // Zoom towards the point under the cursor.
+    static constexpr double kFactor = 1.15;
+    static constexpr double kMinZoom = 0.05;
+    static constexpr double kMaxZoom = 20.0;
+
+    const wxPoint mouse  = e.GetPosition();         // screen coords
+    const double  logX   = (mouse.x - m_viewOffset.x) / m_zoom;
+    const double  logY   = (mouse.y - m_viewOffset.y) / m_zoom;
+    const double  newZoom = std::max(kMinZoom, std::min(kMaxZoom,
+                              m_zoom * (e.GetWheelRotation() > 0 ? kFactor : 1.0/kFactor)));
+
+    m_viewOffset.x = (int)std::round(mouse.x - logX * newZoom);
+    m_viewOffset.y = (int)std::round(mouse.y - logY * newZoom);
+    m_zoom         = newZoom;
+
+    Refresh();
 }
 
 void DrawCanvas::OpenPropertiesDialog(int idx) {

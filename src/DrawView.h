@@ -43,8 +43,15 @@ private:
     void OnLeftDown(wxMouseEvent&);
     void OnLeftUp(wxMouseEvent&);
     void OnMotion(wxMouseEvent&);
+    void OnMiddleDown(wxMouseEvent&);
+    void OnMiddleUp(wxMouseEvent&);
+    void OnMouseWheel(wxMouseEvent&);
     void OnLeftDClick(wxMouseEvent&);
     void OnKeyDown(wxKeyEvent&);
+
+    // Convert between screen pixels and document (logical) coordinates.
+    wxPoint ScreenToDoc(wxPoint screenPt) const;
+    wxPoint DocToScreen(wxPoint docPt)    const;
 
     DrawView* m_owner;
     DrawTool  m_tool    { DrawTool::Select };
@@ -67,6 +74,15 @@ private:
     // Bezier creation state (active while DrawTool::Bezier is selected)
     int       m_bezierStep  { 0 };   // how many pts have been placed (0–3 during creation)
     wxPoint   m_bezierPts[4];        // pts placed so far
+
+    // ---- Viewport state ----
+    wxPoint m_viewOffset{0, 0};   // screen-space origin of the document (0,0) point
+    double  m_zoom{1.0};          // current zoom factor
+
+    // ---- Pan state (middle-mouse drag) ----
+    bool    m_panning{false};
+    wxPoint m_panStart;           // screen position where pan began
+    wxPoint m_panStartOffset;     // m_viewOffset at the start of the pan
 
     wxDECLARE_EVENT_TABLE();
 };

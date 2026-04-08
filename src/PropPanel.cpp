@@ -35,9 +35,8 @@ static void AddRow(wxWindow* parent, wxSizer* grid,
 // ---------------------------------------------------------------------------
 
 PropPanel::PropPanel(wxWindow* parent)
-    : wxScrolledWindow(parent, wxID_ANY)
+    : wxPanel(parent, wxID_ANY)
 {
-    SetScrollRate(0, 5);
     BuildUI();
 }
 
@@ -57,16 +56,28 @@ void PropPanel::BuildUI() {
     const int M = 6;  // outer margin
     const int G = 4;  // inner grid gap
 
+    // Notebook fills the whole panel; tabs are added by callers over time.
+    m_notebook = new wxNotebook(this, wxID_ANY);
+    auto* panelSizer = new wxBoxSizer(wxVERTICAL);
+    panelSizer->Add(m_notebook, 1, wxEXPAND);
+    SetSizer(panelSizer);
+
+    // "Properties" tab — a scrolled window so tall content stays reachable.
+    m_propsPage = new wxScrolledWindow(m_notebook, wxID_ANY);
+    m_propsPage->SetScrollRate(0, 5);
+    m_notebook->AddPage(m_propsPage, "Properties");
+
+    // All remaining controls are children of m_propsPage.
     auto* outer = new wxBoxSizer(wxVERTICAL);
 
     // --- No-selection label ---
-    m_noSelLabel = new wxStaticText(this, wxID_ANY, "No selection",
+    m_noSelLabel = new wxStaticText(m_propsPage, wxID_ANY, "No selection",
                                     wxDefaultPosition, wxDefaultSize,
                                     wxALIGN_CENTER_HORIZONTAL);
     outer->Add(m_noSelLabel, 0, wxALL | wxEXPAND, 10);
 
     // --- Document properties panel (shown when a doc is active, no shape selected) ---
-    m_docPanel = new wxPanel(this, wxID_ANY);
+    m_docPanel = new wxPanel(m_propsPage, wxID_ANY);
     {
         auto* sizer = new wxBoxSizer(wxVERTICAL);
         sizer->Add(new wxStaticText(m_docPanel, wxID_ANY, "Document"),
@@ -130,7 +141,7 @@ void PropPanel::BuildUI() {
     outer->Add(m_docPanel, 0, wxEXPAND);
 
     // --- Shape panel (shown when a shape is selected) ---
-    m_shapePanel = new wxPanel(this, wxID_ANY);
+    m_shapePanel = new wxPanel(m_propsPage, wxID_ANY);
     auto* shapeSizer = new wxBoxSizer(wxVERTICAL);
     m_shapePanel->SetSizer(shapeSizer);
     outer->Add(m_shapePanel, 1, wxEXPAND);
@@ -273,7 +284,7 @@ void PropPanel::BuildUI() {
     }
     shapeSizer->Add(m_bezierPanel, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, M);
 
-    SetSizer(outer);
+    m_propsPage->SetSizer(outer);
     ShowShape(nullptr, -1);
 }
 
@@ -371,9 +382,9 @@ void PropPanel::ShowShape(DrawDoc* doc, int idx) {
         m_shapePanel->Layout();
     }
 
-    GetSizer()->Layout();
-    FitInside();
-    Refresh();
+    m_propsPage->GetSizer()->Layout();
+    m_propsPage->FitInside();
+    m_propsPage->Refresh();
 
     m_updating = false;
 }
