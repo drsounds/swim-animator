@@ -106,7 +106,11 @@ bool DrawDoc::DoSaveDocument(const wxString& filename) {
                 node->AddAttribute("height",       wxString::Format("%d", s.bounds.height));
                 node->AddAttribute("fill",         ColourToHex(s.bgColour));
                 node->AddAttribute("stroke",       ColourToHex(s.fgColour));
-                node->AddAttribute("stroke-width", "2");
+                node->AddAttribute("stroke-width", wxString::Format("%d", s.strokeWidth));
+                if (s.borderRadiusX > 0)
+                    node->AddAttribute("rx", wxString::Format("%d", s.borderRadiusX));
+                if (s.borderRadiusY > 0)
+                    node->AddAttribute("ry", wxString::Format("%d", s.borderRadiusY));
                 if (!s.label.IsEmpty())
                     node->AddAttribute("swim:label", s.label);
                 break;
@@ -125,7 +129,7 @@ bool DrawDoc::DoSaveDocument(const wxString& filename) {
                 node->AddAttribute("ry",           wxString::Format("%g", ry));
                 node->AddAttribute("fill",         ColourToHex(s.bgColour));
                 node->AddAttribute("stroke",       ColourToHex(s.fgColour));
-                node->AddAttribute("stroke-width", "2");
+                node->AddAttribute("stroke-width", wxString::Format("%d", s.strokeWidth));
                 if (!s.label.IsEmpty())
                     node->AddAttribute("swim:label", s.label);
                 break;
@@ -155,7 +159,7 @@ bool DrawDoc::DoSaveDocument(const wxString& filename) {
                     s.pts[3].x, s.pts[3].y));
                 node->AddAttribute("fill",         ColourToHex(s.bgColour));
                 node->AddAttribute("stroke",       ColourToHex(s.fgColour));
-                node->AddAttribute("stroke-width", "2");
+                node->AddAttribute("stroke-width", wxString::Format("%d", s.strokeWidth));
                 break;
             }
         }
@@ -187,28 +191,37 @@ bool DrawDoc::DoOpenDocument(const wxString& filename) {
 
         if (name == "rect") {
             s.kind = ShapeKind::Rect;
-            long x = 0, y = 0, w = 0, h = 0;
+            long x = 0, y = 0, w = 0, h = 0, sw = 1, brx = 0, bry = 0;
             child->GetAttribute("x").ToLong(&x);
             child->GetAttribute("y").ToLong(&y);
             child->GetAttribute("width").ToLong(&w);
             child->GetAttribute("height").ToLong(&h);
-            s.bounds   = wxRect(x, y, w, h);
-            s.bgColour = HexToColour(child->GetAttribute("fill"));
-            s.fgColour = HexToColour(child->GetAttribute("stroke"));
-            s.label    = child->GetAttribute("swim:label");
+            child->GetAttribute("stroke-width", "1").ToLong(&sw);
+            child->GetAttribute("rx", "0").ToLong(&brx);
+            child->GetAttribute("ry", "0").ToLong(&bry);
+            s.bounds        = wxRect(x, y, w, h);
+            s.bgColour      = HexToColour(child->GetAttribute("fill"));
+            s.fgColour      = HexToColour(child->GetAttribute("stroke"));
+            s.strokeWidth   = (int)sw;
+            s.borderRadiusX = (int)brx;
+            s.borderRadiusY = (int)bry;
+            s.label         = child->GetAttribute("swim:label");
 
         } else if (name == "ellipse") {
             s.kind = ShapeKind::Circle;
             double cx = 0, cy = 0, rx = 0, ry = 0;
+            long sw = 1;
             child->GetAttribute("cx").ToDouble(&cx);
             child->GetAttribute("cy").ToDouble(&cy);
             child->GetAttribute("rx").ToDouble(&rx);
             child->GetAttribute("ry").ToDouble(&ry);
-            s.bounds   = wxRect((int)std::lround(cx - rx), (int)std::lround(cy - ry),
-                                (int)std::lround(2 * rx),  (int)std::lround(2 * ry));
-            s.bgColour = HexToColour(child->GetAttribute("fill"));
-            s.fgColour = HexToColour(child->GetAttribute("stroke"));
-            s.label    = child->GetAttribute("swim:label");
+            child->GetAttribute("stroke-width", "1").ToLong(&sw);
+            s.bounds      = wxRect((int)std::lround(cx - rx), (int)std::lround(cy - ry),
+                                   (int)std::lround(2 * rx),  (int)std::lround(2 * ry));
+            s.bgColour    = HexToColour(child->GetAttribute("fill"));
+            s.fgColour    = HexToColour(child->GetAttribute("stroke"));
+            s.strokeWidth = (int)sw;
+            s.label       = child->GetAttribute("swim:label");
 
         } else if (name == "text") {
             s.kind = ShapeKind::Text;
@@ -231,13 +244,16 @@ bool DrawDoc::DoOpenDocument(const wxString& filename) {
             if (wxSscanf(d, "M %d,%d C %d,%d %d,%d %d,%d",
                          &x0,&y0,&x1,&y1,&x2,&y2,&x3,&y3) != 8)
                 continue;
+            long sw = 1;
+            child->GetAttribute("stroke-width", "1").ToLong(&sw);
             s.pts[0] = {x0,y0}; s.pts[1] = {x1,y1};
             s.pts[2] = {x2,y2}; s.pts[3] = {x3,y3};
             int minX = std::min({x0,x1,x2,x3}), maxX = std::max({x0,x1,x2,x3});
             int minY = std::min({y0,y1,y2,y3}), maxY = std::max({y0,y1,y2,y3});
-            s.bounds   = wxRect(minX, minY, maxX-minX, maxY-minY);
-            s.bgColour = HexToColour(child->GetAttribute("fill"));
-            s.fgColour = HexToColour(child->GetAttribute("stroke"));
+            s.bounds      = wxRect(minX, minY, maxX-minX, maxY-minY);
+            s.bgColour    = HexToColour(child->GetAttribute("fill"));
+            s.fgColour    = HexToColour(child->GetAttribute("stroke"));
+            s.strokeWidth = (int)sw;
 
         } else {
             continue; // unknown element — skip

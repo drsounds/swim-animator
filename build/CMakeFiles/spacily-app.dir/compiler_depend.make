@@ -2133,8 +2133,6 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src
   /usr/include/wx-3.2/wx/event.h \
   /usr/include/wx-3.2/wx/except.h \
   /usr/include/wx-3.2/wx/features.h \
-  /usr/include/wx-3.2/wx/ffile.h \
-  /usr/include/wx-3.2/wx/file.h \
   /usr/include/wx-3.2/wx/filefn.h \
   /usr/include/wx-3.2/wx/filehistory.h \
   /usr/include/wx-3.2/wx/flags.h \
@@ -2223,11 +2221,11 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src
   /usr/include/wx-3.2/wx/stringimpl.h \
   /usr/include/wx-3.2/wx/stringops.h \
   /usr/include/wx-3.2/wx/strvararg.h \
+  /usr/include/wx-3.2/wx/textbuf.h \
   /usr/include/wx-3.2/wx/thread.h \
   /usr/include/wx-3.2/wx/toplevel.h \
   /usr/include/wx-3.2/wx/tracker.h \
   /usr/include/wx-3.2/wx/translation.h \
-  /usr/include/wx-3.2/wx/txtstrm.h \
   /usr/include/wx-3.2/wx/typeinfo.h \
   /usr/include/wx-3.2/wx/types.h \
   /usr/include/wx-3.2/wx/unichar.h \
@@ -2239,12 +2237,12 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: /home/alecca/Documents/spacely/src
   /usr/include/wx-3.2/wx/version.h \
   /usr/include/wx-3.2/wx/versioninfo.h \
   /usr/include/wx-3.2/wx/weakref.h \
-  /usr/include/wx-3.2/wx/wfstream.h \
   /usr/include/wx-3.2/wx/window.h \
   /usr/include/wx-3.2/wx/windowid.h \
   /usr/include/wx-3.2/wx/wxcrt.h \
   /usr/include/wx-3.2/wx/wxcrtbase.h \
   /usr/include/wx-3.2/wx/wxcrtvararg.h \
+  /usr/include/wx-3.2/wx/xml/xml.h \
   /usr/include/wx-3.2/wx/xti.h \
   /usr/include/wx-3.2/wx/xti2.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
@@ -3196,6 +3194,7 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: /home/alecca/Documents/spacely/s
   /usr/include/wx-3.2/wx/gtk/scrolwin.h \
   /usr/include/wx-3.2/wx/gtk/spinbutt.h \
   /usr/include/wx-3.2/wx/gtk/spinctrl.h \
+  /usr/include/wx-3.2/wx/gtk/statbmp.h \
   /usr/include/wx-3.2/wx/gtk/stattext.h \
   /usr/include/wx-3.2/wx/gtk/textctrl.h \
   /usr/include/wx-3.2/wx/gtk/textentry.h \
@@ -3266,6 +3265,7 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: /home/alecca/Documents/spacely/s
   /usr/include/wx-3.2/wx/sizer.h \
   /usr/include/wx-3.2/wx/spinbutt.h \
   /usr/include/wx-3.2/wx/spinctrl.h \
+  /usr/include/wx-3.2/wx/statbmp.h \
   /usr/include/wx-3.2/wx/stattext.h \
   /usr/include/wx-3.2/wx/statusbr.h \
   /usr/include/wx-3.2/wx/stdpaths.h \
@@ -4865,6 +4865,7 @@ spacily-app: /lib/x86_64-linux-gnu/libICE.so.6 \
   /usr/lib/x86_64-linux-gnu/libm.so \
   /usr/lib/x86_64-linux-gnu/libpthread.a \
   /usr/lib/x86_64-linux-gnu/libwx_baseu-3.2.so \
+  /usr/lib/x86_64-linux-gnu/libwx_baseu_xml-3.2.so \
   /usr/lib/x86_64-linux-gnu/libwx_gtk3u_aui-3.2.so \
   /usr/lib/x86_64-linux-gnu/libwx_gtk3u_core-3.2.so \
   CMakeFiles/spacily-app.dir/src/App.cpp.o \
@@ -4892,6 +4893,8 @@ CMakeFiles/spacily-app.dir/src/Document.cpp.o:
 CMakeFiles/spacily-app.dir/src/App.cpp.o:
 
 /usr/lib/x86_64-linux-gnu/libwx_gtk3u_core-3.2.so:
+
+/usr/lib/x86_64-linux-gnu/libwx_baseu_xml-3.2.so:
 
 /usr/lib/x86_64-linux-gnu/libwx_baseu-3.2.so:
 
@@ -4957,8 +4960,6 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o:
 
 /lib/x86_64-linux-gnu/libffi.so.8:
 
-/lib/x86_64-linux-gnu/libexpat.so.1:
-
 /lib/x86_64-linux-gnu/libepoxy.so.0:
 
 /lib/x86_64-linux-gnu/libdatrie.so.1:
@@ -5013,6 +5014,12 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o:
 
 /home/alecca/Documents/spacely/src/Palette.cpp:
 
+/lib/x86_64-linux-gnu/libexpat.so.1:
+
+/usr/include/wx-3.2/wx/statbmp.h:
+
+/usr/include/wx-3.2/wx/gtk/statbmp.h:
+
 /usr/include/wx-3.2/wx/gtk/filedlg.h:
 
 /usr/include/wx-3.2/wx/filedlg.h:
@@ -5028,6 +5035,8 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o:
 /usr/include/wx-3.2/wx/gtk/msgdlg.h:
 
 /home/alecca/Documents/spacely/src/DrawView.cpp:
+
+/usr/include/wx-3.2/wx/xml/xml.h:
 
 /usr/include/wx-3.2/wx/wxcrtvararg.h:
 
@@ -5810,6 +5819,8 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o:
 /usr/include/c++/14/stdexcept:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
+
+/usr/include/wx-3.2/wx/textbuf.h:
 
 /usr/include/x86_64-linux-gnu/bits/time.h:
 

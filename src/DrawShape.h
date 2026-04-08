@@ -6,12 +6,15 @@
 enum class ShapeKind { Rect, Circle, Text, Bezier };
 
 struct DrawShape {
-    ShapeKind kind     = ShapeKind::Rect;
-    wxRect    bounds;                        // bounding box (all kinds)
-    wxColour  fgColour { 0,   0,   0   };   // pen / text colour
-    wxColour  bgColour { 255, 255, 255 };   // fill colour
-    wxString  label;                         // text content (Text kind only)
-    wxPoint   pts[4]   {};                   // cubic Bezier control points (Bezier kind only)
+    ShapeKind kind          = ShapeKind::Rect;
+    wxRect    bounds;                              // bounding box (all kinds)
+    wxColour  fgColour { 0,   0,   0   };          // pen / text colour
+    wxColour  bgColour { 255, 255, 255 };          // fill colour
+    wxString  label;                               // text content (Text kind only)
+    wxPoint   pts[4]   {};                         // cubic Bezier control points (Bezier kind only)
+    int       strokeWidth    = 1;                  // border width in pixels (Rect/Circle/Bezier)
+    int       borderRadiusX  = 0;                  // horizontal corner radius, pixels (Rect only)
+    int       borderRadiusY  = 0;                  // vertical   corner radius, pixels (Rect only)
 
     bool HitTest(const wxPoint& pt) const {
         if (kind != ShapeKind::Bezier)

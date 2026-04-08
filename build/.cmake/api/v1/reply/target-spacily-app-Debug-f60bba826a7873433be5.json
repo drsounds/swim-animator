@@ -171,6 +171,11 @@
 				"backtrace" : 2,
 				"fragment" : "-lwx_gtk3u_aui-3.2",
 				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-lwx_baseu_xml-3.2",
+				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"

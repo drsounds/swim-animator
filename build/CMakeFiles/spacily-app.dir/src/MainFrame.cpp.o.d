@@ -389,4 +389,5 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /usr/include/wx-3.2/wx/gtk/filectrl.h /usr/include/wx-3.2/wx/filectrl.h \
  /usr/include/wx-3.2/wx/stdpaths.h /usr/include/wx-3.2/wx/unix/stdpaths.h \
  /usr/include/wx-3.2/wx/filename.h /usr/include/wx-3.2/wx/file.h \
- /usr/include/wx-3.2/wx/convauto.h
+ /usr/include/wx-3.2/wx/convauto.h /usr/include/wx-3.2/wx/statbmp.h \
+ /usr/include/wx-3.2/wx/gtk/statbmp.h

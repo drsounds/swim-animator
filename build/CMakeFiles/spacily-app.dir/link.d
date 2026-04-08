@@ -15,6 +15,7 @@ spacily-app: \
   /usr/lib/x86_64-linux-gnu/libwx_gtk3u_core-3.2.so \
   /usr/lib/x86_64-linux-gnu/libwx_baseu-3.2.so \
   /usr/lib/x86_64-linux-gnu/libwx_gtk3u_aui-3.2.so \
+  /usr/lib/x86_64-linux-gnu/libwx_baseu_xml-3.2.so \
   /usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so \
   /usr/lib/x86_64-linux-gnu/libm.so \
   /usr/lib/x86_64-linux-gnu/libm.so \
@@ -66,10 +67,10 @@ spacily-app: \
   /lib/x86_64-linux-gnu/libpng16.so.16 \
   /lib/x86_64-linux-gnu/libjpeg.so.62 \
   /lib/x86_64-linux-gnu/libtiff.so.6 \
-  /lib/x86_64-linux-gnu/libm.so.6 \
   /lib/x86_64-linux-gnu/libz.so.1 \
   /lib/x86_64-linux-gnu/liblzma.so.5 \
   /lib/x86_64-linux-gnu/libpcre2-32.so.0 \
+  /lib/x86_64-linux-gnu/libexpat.so.1 \
   /lib64/ld-linux-x86-64.so.2 \
   /lib/x86_64-linux-gnu/libgmodule-2.0.so.0 \
   /lib/x86_64-linux-gnu/libharfbuzz.so.0 \
@@ -103,7 +104,6 @@ spacily-app: \
   /lib/x86_64-linux-gnu/libpcre2-8.so.0 \
   /lib/x86_64-linux-gnu/libICE.so.6 \
   /lib/x86_64-linux-gnu/libuuid.so.1 \
-  /lib/x86_64-linux-gnu/libexpat.so.1 \
   /lib/x86_64-linux-gnu/libwebp.so.7 \
   /lib/x86_64-linux-gnu/libzstd.so.1 \
   /lib/x86_64-linux-gnu/libLerc.so.4 \
@@ -154,6 +154,8 @@ CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o:
 /usr/lib/x86_64-linux-gnu/libwx_baseu-3.2.so:
 
 /usr/lib/x86_64-linux-gnu/libwx_gtk3u_aui-3.2.so:
+
+/usr/lib/x86_64-linux-gnu/libwx_baseu_xml-3.2.so:
 
 /usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so:
 
@@ -257,13 +259,13 @@ CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o:
 
 /lib/x86_64-linux-gnu/libtiff.so.6:
 
-/lib/x86_64-linux-gnu/libm.so.6:
-
 /lib/x86_64-linux-gnu/libz.so.1:
 
 /lib/x86_64-linux-gnu/liblzma.so.5:
 
 /lib/x86_64-linux-gnu/libpcre2-32.so.0:
+
+/lib/x86_64-linux-gnu/libexpat.so.1:
 
 /lib64/ld-linux-x86-64.so.2:
 
@@ -330,8 +332,6 @@ CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o:
 /lib/x86_64-linux-gnu/libICE.so.6:
 
 /lib/x86_64-linux-gnu/libuuid.so.1:
-
-/lib/x86_64-linux-gnu/libexpat.so.1:
 
 /lib/x86_64-linux-gnu/libwebp.so.7:
 

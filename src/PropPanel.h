@@ -29,6 +29,7 @@ private:
     void SubmitBoundsChange();
     void SubmitPtChange();
     void SubmitLabelChange();
+    void SubmitBorderChange();
     void PickColour(bool fg);
 
     // ---- Controls ----
@@ -46,12 +47,19 @@ private:
 
     // Colors
     wxButton*     m_fgBtn        {nullptr};
-    wxPanel*      m_bgPanel      {nullptr};  // hidden for Bezier
+    wxPanel*      m_bgPanel      {nullptr};
     wxButton*     m_bgBtn        {nullptr};
 
     // Label (Text shapes only)
     wxPanel*      m_labelPanel   {nullptr};
     wxTextCtrl*   m_labelCtrl    {nullptr};
+
+    // Border (stroke width + corner radius) — stroke hidden for Text, radius hidden for non-Rect
+    wxPanel*      m_strokePanel       {nullptr};
+    wxSpinCtrl*   m_strokeWidthSpin   {nullptr};
+    wxPanel*      m_borderRadiusPanel {nullptr};
+    wxSpinCtrl*   m_borderRadiusXSpin {nullptr};
+    wxSpinCtrl*   m_borderRadiusYSpin {nullptr};
 
     // Bezier control points (hidden for non-Bezier)
     wxPanel*      m_bezierPanel  {nullptr};

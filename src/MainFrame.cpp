@@ -288,7 +288,7 @@ void MainFrame::CreatePropertiesPane() {
         wxAuiPaneInfo()
             .Name("Properties")
             .Caption("Properties")
-            .Right()
+            .Bottom()
             .BestSize(200, -1)
             .MinSize(160, -1)
             .CloseButton(true)

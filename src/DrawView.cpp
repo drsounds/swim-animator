@@ -13,7 +13,10 @@
 #include <wx/stattext.h>
 #include <wx/button.h>
 #include <wx/textctrl.h>
+#include <wx/spinctrl.h>
 #include <algorithm>
+#include <cmath>
+#include <vector>
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -25,6 +28,42 @@ static wxRect NormalizedRect(const wxPoint& a, const wxPoint& b) {
     int w = a.x < b.x ? b.x - a.x : a.x - b.x;
     int h = a.y < b.y ? b.y - a.y : a.y - b.y;
     return wxRect(x, y, w, h);
+}
+
+// ---------------------------------------------------------------------------
+// Rounded rectangle helper
+// ---------------------------------------------------------------------------
+
+// Samples a rounded rectangle with separate horizontal (rx) and vertical (ry)
+// corner radii into a polygon. Each of the 4 corner arcs is sampled at
+// CORNER_STEPS points; straight sides are implicit polygon edges between arcs.
+static constexpr int CORNER_STEPS = 8;
+
+static std::vector<wxPoint> BuildRoundedRectPolygon(const wxRect& r, int rx, int ry) {
+    rx = std::min(rx, r.width  / 2);
+    ry = std::min(ry, r.height / 2);
+
+    std::vector<wxPoint> pts;
+    pts.reserve(4 * CORNER_STEPS);
+
+    // Each arc sweeps 90° around its corner centre. We sample CORNER_STEPS points
+    // per arc (exclusive of the endpoint, which is the start of the next arc) so
+    // there are no duplicate adjacent vertices in the resulting polygon.
+    auto addArc = [&](float cx, float cy, float startDeg, float endDeg) {
+        for (int i = 0; i < CORNER_STEPS; i++) {
+            float a = (startDeg + (endDeg - startDeg) * i / CORNER_STEPS)
+                      * (float)M_PI / 180.f;
+            pts.push_back({ (int)(cx + rx * std::cos(a)),
+                            (int)(cy + ry * std::sin(a)) });
+        }
+    };
+
+    addArc(r.x + r.width  - rx, r.y          + ry, -90.f,   0.f); // top-right
+    addArc(r.x + r.width  - rx, r.y + r.height - ry,  0.f,  90.f); // bottom-right
+    addArc(r.x          + rx, r.y + r.height - ry, 90.f, 180.f); // bottom-left
+    addArc(r.x          + rx, r.y          + ry, 180.f, 270.f); // top-left
+
+    return pts;
 }
 
 // ---------------------------------------------------------------------------
@@ -185,6 +224,35 @@ public:
         m_bgBtn->SetBackgroundColour(m_bg);
         grid->Add(m_bgBtn, 0);
 
+        // Border width (not for Text)
+        if (s.kind != ShapeKind::Text) {
+            grid->Add(new wxStaticText(this, wxID_ANY, "Border width:"),
+                      0, wxALIGN_CENTER_VERTICAL);
+            m_strokeSpin = new wxSpinCtrl(this, wxID_ANY, "",
+                                          wxDefaultPosition, wxDefaultSize,
+                                          wxSP_ARROW_KEYS, 0, 100, s.strokeWidth);
+            grid->Add(m_strokeSpin, 1, wxEXPAND);
+        }
+
+        // Border radius X/Y (Rect only)
+        if (s.kind == ShapeKind::Rect) {
+            int maxRx = s.bounds.width  / 2;
+            int maxRy = s.bounds.height / 2;
+            grid->Add(new wxStaticText(this, wxID_ANY, "Radius X:"),
+                      0, wxALIGN_CENTER_VERTICAL);
+            m_radiusXSpin = new wxSpinCtrl(this, wxID_ANY, "",
+                                           wxDefaultPosition, wxDefaultSize,
+                                           wxSP_ARROW_KEYS, 0, maxRx, s.borderRadiusX);
+            grid->Add(m_radiusXSpin, 1, wxEXPAND);
+
+            grid->Add(new wxStaticText(this, wxID_ANY, "Radius Y:"),
+                      0, wxALIGN_CENTER_VERTICAL);
+            m_radiusYSpin = new wxSpinCtrl(this, wxID_ANY, "",
+                                           wxDefaultPosition, wxDefaultSize,
+                                           wxSP_ARROW_KEYS, 0, maxRy, s.borderRadiusY);
+            grid->Add(m_radiusYSpin, 1, wxEXPAND);
+        }
+
         outer->Add(grid, 1, wxEXPAND | wxALL, 10);
         outer->Add(CreateButtonSizer(wxOK | wxCANCEL), 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 10);
         SetSizerAndFit(outer);
@@ -199,6 +267,12 @@ public:
         s.bgColour = m_bg;
         if (m_kind == ShapeKind::Text && m_labelCtrl)
             s.label = m_labelCtrl->GetValue();
+        if (m_kind != ShapeKind::Text && m_strokeSpin)
+            s.strokeWidth = m_strokeSpin->GetValue();
+        if (m_kind == ShapeKind::Rect && m_radiusXSpin && m_radiusYSpin) {
+            s.borderRadiusX = std::min(m_radiusXSpin->GetValue(), s.bounds.width  / 2);
+            s.borderRadiusY = std::min(m_radiusYSpin->GetValue(), s.bounds.height / 2);
+        }
     }
 
 private:
@@ -217,9 +291,12 @@ private:
     wxColour    m_fg, m_bg;
     wxString    m_label;
     ShapeKind   m_kind;
-    wxButton*   m_fgBtn   { nullptr };
-    wxButton*   m_bgBtn   { nullptr };
-    wxTextCtrl* m_labelCtrl{ nullptr };
+    wxButton*   m_fgBtn      { nullptr };
+    wxButton*   m_bgBtn      { nullptr };
+    wxTextCtrl* m_labelCtrl  { nullptr };
+    wxSpinCtrl* m_strokeSpin { nullptr };
+    wxSpinCtrl* m_radiusXSpin{ nullptr };
+    wxSpinCtrl* m_radiusYSpin{ nullptr };
 };
 
 // ---------------------------------------------------------------------------
@@ -253,12 +330,18 @@ DrawDoc* DrawCanvas::GetDoc() {
 // ---------------------------------------------------------------------------
 
 void DrawCanvas::DrawShapeOnDC(wxDC& dc, const DrawShape& s, bool selected) {
-    dc.SetPen(wxPen(s.fgColour, 2));
+    dc.SetPen(s.strokeWidth > 0 ? wxPen(s.fgColour, s.strokeWidth)
+                                : *wxTRANSPARENT_PEN);
     dc.SetBrush(wxBrush(s.bgColour));
 
     switch (s.kind) {
         case ShapeKind::Rect:
-            dc.DrawRectangle(s.bounds);
+            if (s.borderRadiusX > 0 || s.borderRadiusY > 0) {
+                auto poly = BuildRoundedRectPolygon(s.bounds, s.borderRadiusX, s.borderRadiusY);
+                dc.DrawPolygon((int)poly.size(), poly.data());
+            } else {
+                dc.DrawRectangle(s.bounds);
+            }
             break;
         case ShapeKind::Circle:
             dc.DrawEllipse(s.bounds);
@@ -285,8 +368,10 @@ void DrawCanvas::DrawShapeOnDC(wxDC& dc, const DrawShape& s, bool selected) {
             dc.SetBrush(wxBrush(s.bgColour));
             dc.SetPen(*wxTRANSPARENT_PEN);
             dc.DrawPolygon(N + 1, poly);
-            dc.SetPen(wxPen(s.fgColour, 2));
-            DrawBezierCurve(dc, s.pts);
+            if (s.strokeWidth > 0) {
+                dc.SetPen(wxPen(s.fgColour, s.strokeWidth));
+                DrawBezierCurve(dc, s.pts);
+            }
             break;
         }
     }

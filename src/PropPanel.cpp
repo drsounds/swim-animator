@@ -121,6 +121,41 @@ void PropPanel::BuildUI() {
     }
     shapeSizer->Add(m_bgPanel, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, M);
 
+    // Stroke width panel — hidden for Text shapes
+    m_strokePanel = new wxPanel(m_shapePanel, wxID_ANY);
+    {
+        auto* grid = new wxFlexGridSizer(2, wxSize(G, 3));
+        grid->AddGrowableCol(1);
+        m_strokeWidthSpin = new wxSpinCtrl(m_strokePanel, wxID_ANY, "",
+                                           wxDefaultPosition, wxDefaultSize,
+                                           wxSP_ARROW_KEYS, 0, 100, 1);
+        AddRow(m_strokePanel, grid, "Border width:", m_strokeWidthSpin);
+        m_strokePanel->SetSizer(grid);
+        m_strokeWidthSpin->Bind(wxEVT_SPINCTRL,
+            [this](wxSpinEvent&) { SubmitBorderChange(); });
+    }
+    shapeSizer->Add(m_strokePanel, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, M);
+
+    // Border radius panel — Rect shapes only
+    m_borderRadiusPanel = new wxPanel(m_shapePanel, wxID_ANY);
+    {
+        auto* grid = new wxFlexGridSizer(2, wxSize(G, 3));
+        grid->AddGrowableCol(1);
+        m_borderRadiusXSpin = new wxSpinCtrl(m_borderRadiusPanel, wxID_ANY, "",
+                                             wxDefaultPosition, wxDefaultSize,
+                                             wxSP_ARROW_KEYS, 0, 2500, 0);
+        m_borderRadiusYSpin = new wxSpinCtrl(m_borderRadiusPanel, wxID_ANY, "",
+                                             wxDefaultPosition, wxDefaultSize,
+                                             wxSP_ARROW_KEYS, 0, 2500, 0);
+        AddRow(m_borderRadiusPanel, grid, "Radius X:", m_borderRadiusXSpin);
+        AddRow(m_borderRadiusPanel, grid, "Radius Y:", m_borderRadiusYSpin);
+        m_borderRadiusPanel->SetSizer(grid);
+        auto onSpin = [this](wxSpinEvent&) { SubmitBorderChange(); };
+        m_borderRadiusXSpin->Bind(wxEVT_SPINCTRL, onSpin);
+        m_borderRadiusYSpin->Bind(wxEVT_SPINCTRL, onSpin);
+    }
+    shapeSizer->Add(m_borderRadiusPanel, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, M);
+
     // Label panel — Text shapes only
     m_labelPanel = new wxPanel(m_shapePanel, wxID_ANY);
     {
@@ -188,17 +223,31 @@ void PropPanel::ShowShape(DrawDoc* doc, int idx) {
 
         m_kindValue->SetLabel(KindName(s.kind));
 
+        const bool isRect = (s.kind == ShapeKind::Rect);
+
         // Show/hide sections per shape kind
-        m_shapePanel->GetSizer()->Show(m_boundsPanel, !isBezier);
-        m_shapePanel->GetSizer()->Show(m_bgPanel,     true);
-        m_shapePanel->GetSizer()->Show(m_labelPanel,  isText);
-        m_shapePanel->GetSizer()->Show(m_bezierPanel, isBezier);
+        m_shapePanel->GetSizer()->Show(m_boundsPanel,       !isBezier);
+        m_shapePanel->GetSizer()->Show(m_bgPanel,           true);
+        m_shapePanel->GetSizer()->Show(m_strokePanel,       !isText);
+        m_shapePanel->GetSizer()->Show(m_borderRadiusPanel, isRect);
+        m_shapePanel->GetSizer()->Show(m_labelPanel,        isText);
+        m_shapePanel->GetSizer()->Show(m_bezierPanel,       isBezier);
 
         if (!isBezier) {
             m_xSpin->SetValue(s.bounds.x);
             m_ySpin->SetValue(s.bounds.y);
             m_wSpin->SetValue(s.bounds.width);
             m_hSpin->SetValue(s.bounds.height);
+        }
+
+        if (!isText)
+            m_strokeWidthSpin->SetValue(s.strokeWidth);
+
+        if (isRect) {
+            m_borderRadiusXSpin->SetRange(0, s.bounds.width  / 2);
+            m_borderRadiusYSpin->SetRange(0, s.bounds.height / 2);
+            m_borderRadiusXSpin->SetValue(s.borderRadiusX);
+            m_borderRadiusYSpin->SetValue(s.borderRadiusY);
         }
 
         m_fgBtn->SetBackgroundColour(s.fgColour);
@@ -242,7 +291,13 @@ void PropPanel::SubmitBoundsChange() {
     after.bounds.width  = m_wSpin->GetValue();
     after.bounds.height = m_hSpin->GetValue();
 
-    if (after.bounds == before.bounds) return;
+    if (after.kind == ShapeKind::Rect) {
+        after.borderRadiusX = std::min(after.borderRadiusX, after.bounds.width  / 2);
+        after.borderRadiusY = std::min(after.borderRadiusY, after.bounds.height / 2);
+    }
+    if (after.bounds == before.bounds &&
+        after.borderRadiusX == before.borderRadiusX &&
+        after.borderRadiusY == before.borderRadiusY) return;
     m_doc->GetCommandProcessor()->Submit(
         new UpdateShapeCmd(m_doc, m_idx, before, after, "Edit Position/Size"));
 }
@@ -286,6 +341,33 @@ void PropPanel::SubmitLabelChange() {
     if (after.label == before.label) return;
     m_doc->GetCommandProcessor()->Submit(
         new UpdateShapeCmd(m_doc, m_idx, before, after, "Edit Label"));
+}
+
+void PropPanel::SubmitBorderChange() {
+    if (m_updating || !m_doc || m_idx < 0) return;
+    if (m_idx >= (int)m_doc->GetShapes().size()) return;
+
+    DrawShape before = m_doc->GetShapes()[m_idx];
+    DrawShape after  = before;
+
+    if (before.kind != ShapeKind::Text)
+        after.strokeWidth = m_strokeWidthSpin->GetValue();
+
+    if (before.kind == ShapeKind::Rect) {
+        int maxRx = before.bounds.width  / 2;
+        int maxRy = before.bounds.height / 2;
+        after.borderRadiusX = std::min(m_borderRadiusXSpin->GetValue(), maxRx);
+        after.borderRadiusY = std::min(m_borderRadiusYSpin->GetValue(), maxRy);
+    }
+
+    if (after.strokeWidth == before.strokeWidth &&
+        after.borderRadiusX == before.borderRadiusX &&
+        after.borderRadiusY == before.borderRadiusY) return;
+    // Note: for non-Rect shapes borderRadius fields are never modified above,
+    // so the radius comparisons trivially hold and only strokeWidth is checked.
+
+    m_doc->GetCommandProcessor()->Submit(
+        new UpdateShapeCmd(m_doc, m_idx, before, after, "Edit Border"));
 }
 
 void PropPanel::PickColour(bool fg) {
