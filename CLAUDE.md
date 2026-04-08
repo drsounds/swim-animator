@@ -5,4 +5,4 @@
 - If a solution requires an external library not already in the project, ASK for permission first.
 
 # File formats
-- If inventing a new file format, make it JSON based.
+- If inventing a new file format, make it XML based.

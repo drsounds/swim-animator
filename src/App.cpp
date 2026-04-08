@@ -61,9 +61,9 @@ bool App::OnInit() {
     new wxDocTemplate(
         m_docManager,
         "Drawing",
-        "*.drw",
+        "*.svg",
         "",
-        "drw",
+        "svg",
         "DrawDoc",
         "DrawView",
         wxCLASSINFO(DrawDoc),
@@ -95,6 +95,7 @@ bool App::OnInit() {
     auto* frame = new MainFrame(m_docManager, nullptr, wxID_ANY,
                                 GetAppName(),
                                 wxDefaultPosition, wxSize(1200, 800));
+    frame->Centre();
     frame->Show();
     SetTopWindow(frame);
 

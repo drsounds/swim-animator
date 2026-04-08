@@ -25,7 +25,12 @@
       "Bash(G_DEBUG=fatal-criticals ./build/spacily-app --new-file /tmp/test.drw)",
       "Bash(cmake -DCMAKE_CXX_FLAGS= -DCMAKE_EXE_LINKER_FLAGS= ..)",
       "Bash(make -j4)",
-      "Bash(dpkg -l libwxgtk3*)"
+      "Bash(dpkg -l libwxgtk3*)",
+      "Bash(wx-config --list)",
+      "Bash(wx-config --libs xml)",
+      "Bash(cmake -B build-Debug -DCMAKE_BUILD_TYPE=Debug)",
+      "Bash(cmake --build build-Debug --parallel)",
+      "WebSearch"
     ]
   }
 }

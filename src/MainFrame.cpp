@@ -15,6 +15,11 @@
 #include <wx/filedlg.h>
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
+#include <wx/dialog.h>
+#include <wx/sizer.h>
+#include <wx/statbmp.h>
+#include <wx/button.h>
+#include <wx/filefn.h>
 
 // ---------------------------------------------------------------------------
 // BeveledToolBarArt – draws a raised 3-D border on every button in its idle
@@ -206,7 +211,7 @@ void MainFrame::CreateDrawToolBar() {
 
     auto selectBmp = MakeBmp([](wxMemoryDC& dc) {
         dc.SetPen(*wxBLACK_PEN);
-        dc.SetBrush(*wxWHITE_BRUSH);
+        dc.SetBrush(*wxTRANSPARENT_BRUSH);
         wxPoint arrow[] = {{3,1},{3,11},{6,8},{8,13},{10,12},{8,7},{12,7}};
         dc.DrawPolygon(7, arrow);
     });
@@ -251,17 +256,16 @@ void MainFrame::CreateDrawToolBar() {
     m_drawToolbar->AddTool(ID_TOOL_TEXT,   "Text",   textBmp,   "Text",         wxITEM_CHECK);
     m_drawToolbar->AddTool(ID_TOOL_BEZIER, "Bezier", bezierBmp, "Bezier Curve", wxITEM_CHECK);
 
-
+    m_drawToolbar->SetRows(3);
     m_drawToolbar->Realize();
 
     m_auiMgr.AddPane(m_drawToolbar,
         wxAuiPaneInfo()
             .Name("DrawToolbar")
             .Caption("Draw")
-            .ToolbarPane()
+            .Floatable()
             .Left()
-            .Row(0)
-            .Gripper(true));
+            .Row(0));
 }
 
 void MainFrame::CreateColorSwatchPane() {
@@ -398,11 +402,29 @@ void MainFrame::OnNotebookPageChanged(wxAuiNotebookEvent& event) {
 }
 
 void MainFrame::OnAbout(wxCommandEvent& /*event*/) {
-    wxMessageBox(
-        wxGetApp().GetAppName() + "\n\nA wxWidgets Document/View + wxAUI application.",
-        "About " + wxGetApp().GetAppName(),
-        wxOK | wxICON_INFORMATION,
-        this);
+    wxString exeDir = wxFileName(wxStandardPaths::Get().GetExecutablePath()).GetPath();
+    wxString splashPath = exeDir + wxFILE_SEP_PATH + "Splash.png";
+    if (!wxFileExists(splashPath))
+        splashPath = wxGetCwd() + wxFILE_SEP_PATH + "Splash.png";
+
+    wxDialog dlg(this, wxID_ANY, "About " + wxGetApp().GetAppName(),
+                 wxDefaultPosition, wxDefaultSize,
+                 wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
+
+    auto* sizer = new wxBoxSizer(wxVERTICAL);
+
+    if (wxFileExists(splashPath)) {
+        wxBitmap bmp(splashPath, wxBITMAP_TYPE_PNG);
+        if (bmp.IsOk()) {
+            auto* img = new wxStaticBitmap(&dlg, wxID_ANY, bmp);
+            sizer->Add(img, 0, wxEXPAND);
+        }
+    }
+
+    sizer->Add(dlg.CreateButtonSizer(wxOK), 0, wxEXPAND | wxALL, 8);
+    dlg.SetSizerAndFit(sizer);
+    dlg.Centre();
+    dlg.ShowModal();
 }
 
 void MainFrame::OnClose(wxCloseEvent& event) {
