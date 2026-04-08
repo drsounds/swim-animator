@@ -350,6 +350,13 @@ CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o: \
  /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
  /usr/include/c++/14/bits/istream.tcc \
  /usr/include/wx-3.2/wx/gtk/textctrl.h \
+ /home/alecca/Documents/spacely/src/AssetManagerPanel.h \
+ /usr/include/wx-3.2/wx/treectrl.h /usr/include/wx-3.2/wx/treebase.h \
+ /usr/include/wx-3.2/wx/itemid.h /usr/include/wx-3.2/wx/systhemectrl.h \
+ /usr/include/wx-3.2/wx/generic/treectlg.h \
+ /home/alecca/Documents/spacely/src/SpaDoc.h \
+ /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
+ /usr/include/wx-3.2/wx/convauto.h \
  /home/alecca/Documents/spacely/src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
  /usr/include/wx-3.2/wx/cmdargs.h /usr/include/wx-3.2/wx/init.h \

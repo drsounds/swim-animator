@@ -58,5 +58,29 @@
   "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2  -pthread -g -std=gnu++17 -o CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o -c /home/alecca/Documents/spacely/src/ColorSwatchPanel.cpp",
   "file": "/home/alecca/Documents/spacely/src/ColorSwatchPanel.cpp",
   "output": "CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o"
+},
+{
+  "directory": "/home/alecca/Documents/spacely/build",
+  "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2  -pthread -g -std=gnu++17 -o CMakeFiles/spacily-app.dir/src/SpaDoc.cpp.o -c /home/alecca/Documents/spacely/src/SpaDoc.cpp",
+  "file": "/home/alecca/Documents/spacely/src/SpaDoc.cpp",
+  "output": "CMakeFiles/spacily-app.dir/src/SpaDoc.cpp.o"
+},
+{
+  "directory": "/home/alecca/Documents/spacely/build",
+  "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2  -pthread -g -std=gnu++17 -o CMakeFiles/spacily-app.dir/src/SpaView.cpp.o -c /home/alecca/Documents/spacely/src/SpaView.cpp",
+  "file": "/home/alecca/Documents/spacely/src/SpaView.cpp",
+  "output": "CMakeFiles/spacily-app.dir/src/SpaView.cpp.o"
+},
+{
+  "directory": "/home/alecca/Documents/spacely/build",
+  "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2  -pthread -g -std=gnu++17 -o CMakeFiles/spacily-app.dir/src/SpaSaveAsDialog.cpp.o -c /home/alecca/Documents/spacely/src/SpaSaveAsDialog.cpp",
+  "file": "/home/alecca/Documents/spacely/src/SpaSaveAsDialog.cpp",
+  "output": "CMakeFiles/spacily-app.dir/src/SpaSaveAsDialog.cpp.o"
+},
+{
+  "directory": "/home/alecca/Documents/spacely/build",
+  "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2  -pthread -g -std=gnu++17 -o CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o -c /home/alecca/Documents/spacely/src/AssetManagerPanel.cpp",
+  "file": "/home/alecca/Documents/spacely/src/AssetManagerPanel.cpp",
+  "output": "CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o"
 }
 ]

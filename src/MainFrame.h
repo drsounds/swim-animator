@@ -7,8 +7,10 @@
 #include "DrawView.h"
 #include "PropPanel.h"
 #include "ColorSwatchPanel.h"
+#include "AssetManagerPanel.h"
 
 class DrawDoc;
+class SpaDoc;
 
 // ---------------------------------------------------------------------------
 // MainFrame
@@ -40,6 +42,7 @@ private:
     void CreateToolBar();
     void CreateDrawToolBar();
     void CreateColorSwatchPane();
+    void CreateAssetManagerPane();
     void CreatePropertiesPane();
     void CreateStatusBar_();
     void CreateAuiPanes();
@@ -63,13 +66,17 @@ public:
     // Properties pane – called by DrawView when selection changes.
     void OnSelectionChanged(DrawDoc* doc, int idx);
 
+    // Asset manager pane – called by SpaView when the active project changes.
+    void SetActiveSpaDoc(SpaDoc* doc);
+
 private:
     wxAuiManager      m_auiMgr;
     wxAuiNotebook*    m_notebook{nullptr};
     wxToolBar*        m_toolbar{nullptr};
     wxToolBar*        m_drawToolbar{nullptr};
-    ColorSwatchPanel* m_swatchPanel{nullptr};
-    PropPanel*        m_propPanel{nullptr};
+    ColorSwatchPanel*  m_swatchPanel {nullptr};
+    AssetManagerPanel* m_assetPanel  {nullptr};
+    PropPanel*         m_propPanel   {nullptr};
     DrawView*         m_activeDrawView{nullptr};
 
     wxDECLARE_EVENT_TABLE();

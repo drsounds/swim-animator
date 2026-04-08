@@ -18,6 +18,10 @@ set(SOURCES
     src/PropPanel.cpp
     src/Palette.cpp
     src/ColorSwatchPanel.cpp
+    src/SpaDoc.cpp
+    src/SpaView.cpp
+    src/SpaSaveAsDialog.cpp
+    src/AssetManagerPanel.cpp
 )
 
 add_executable(spacily-app WIN32 MACOSX_BUNDLE ${SOURCES})

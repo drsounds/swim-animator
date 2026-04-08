@@ -3,6 +3,8 @@
 #include "App.h"
 #include "DrawIds.h"
 #include "DrawDoc.h"
+#include "SpaDoc.h"
+#include "SpaView.h"
 #include "Palette.h"
 #include <wx/aui/aui.h>
 #include <wx/panel.h>
@@ -99,6 +101,7 @@ MainFrame::MainFrame(wxDocManager* manager, wxFrame* parent, wxWindowID id,
     CreateToolBar();
     CreateDrawToolBar();
     CreateColorSwatchPane();
+    CreateAssetManagerPane();
     CreatePropertiesPane();
     CreateStatusBar_();
     CreateAuiPanes();
@@ -282,6 +285,26 @@ void MainFrame::CreateColorSwatchPane() {
             .Show(true));
 }
 
+void MainFrame::CreateAssetManagerPane() {
+    m_assetPanel = new AssetManagerPanel(this);
+    m_auiMgr.AddPane(m_assetPanel,
+        wxAuiPaneInfo()
+            .Name("AssetManager")
+            .Caption("Asset Manager")
+            .Right()
+            .Row(1)          // Row 1 = below ColorSwatches (Row 0)
+            .BestSize(200, 260)
+            .MinSize(160, 100)
+            .CloseButton(true)
+            .Floatable(true)
+            .Show(true));
+}
+
+void MainFrame::SetActiveSpaDoc(SpaDoc* doc) {
+    if (m_assetPanel)
+        m_assetPanel->Refresh(doc);
+}
+
 void MainFrame::CreatePropertiesPane() {
     m_propPanel = new PropPanel(this);
     m_auiMgr.AddPane(m_propPanel,
@@ -374,6 +397,8 @@ void MainFrame::OnNotebookPageClose(wxAuiNotebookEvent& event) {
         view = c->GetView();
     else if (auto* c = wxDynamicCast(page, DrawCanvas))
         view = c->GetView();
+    else if (auto* c = dynamic_cast<SpaCanvas*>(page))
+        view = c->GetView();
 
     if (!view) { event.Skip(); return; }
 
@@ -395,6 +420,8 @@ void MainFrame::OnNotebookPageChanged(wxAuiNotebookEvent& event) {
     if (auto* c = wxDynamicCast(page, ViewCanvas)) {
         if (c->GetView()) c->GetView()->Activate(true);
     } else if (auto* c = wxDynamicCast(page, DrawCanvas)) {
+        if (c->GetView()) c->GetView()->Activate(true);
+    } else if (auto* c = dynamic_cast<SpaCanvas*>(page)) {
         if (c->GetView()) c->GetView()->Activate(true);
     }
 

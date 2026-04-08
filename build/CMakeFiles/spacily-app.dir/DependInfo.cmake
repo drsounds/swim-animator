@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/alecca/Documents/spacely/src/App.cpp" "CMakeFiles/spacily-app.dir/src/App.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/App.cpp.o.d"
+  "/home/alecca/Documents/spacely/src/AssetManagerPanel.cpp" "CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o.d"
   "/home/alecca/Documents/spacely/src/ColorSwatchPanel.cpp" "CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o.d"
   "/home/alecca/Documents/spacely/src/Document.cpp" "CMakeFiles/spacily-app.dir/src/Document.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/Document.cpp.o.d"
   "/home/alecca/Documents/spacely/src/DrawCommands.cpp" "CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o.d"
@@ -17,6 +18,9 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/alecca/Documents/spacely/src/MainFrame.cpp" "CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o.d"
   "/home/alecca/Documents/spacely/src/Palette.cpp" "CMakeFiles/spacily-app.dir/src/Palette.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/Palette.cpp.o.d"
   "/home/alecca/Documents/spacely/src/PropPanel.cpp" "CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o.d"
+  "/home/alecca/Documents/spacely/src/SpaDoc.cpp" "CMakeFiles/spacily-app.dir/src/SpaDoc.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/SpaDoc.cpp.o.d"
+  "/home/alecca/Documents/spacely/src/SpaSaveAsDialog.cpp" "CMakeFiles/spacily-app.dir/src/SpaSaveAsDialog.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/SpaSaveAsDialog.cpp.o.d"
+  "/home/alecca/Documents/spacely/src/SpaView.cpp" "CMakeFiles/spacily-app.dir/src/SpaView.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/SpaView.cpp.o.d"
   "/home/alecca/Documents/spacely/src/View.cpp" "CMakeFiles/spacily-app.dir/src/View.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/View.cpp.o.d"
   "" "spacily-app" "gcc" "CMakeFiles/spacily-app.dir/link.d"
   )

@@ -381,9 +381,16 @@ CMakeFiles/spacily-app.dir/src/DrawView.cpp.o: \
  /usr/include/c++/14/bits/istream.tcc \
  /usr/include/wx-3.2/wx/gtk/textctrl.h \
  /home/alecca/Documents/spacely/src/ColorSwatchPanel.h \
- /usr/include/wx-3.2/wx/dcbuffer.h /usr/include/wx-3.2/wx/dcmemory.h \
- /usr/include/wx-3.2/wx/dcclient.h /usr/include/wx-3.2/wx/settings.h \
- /usr/include/wx-3.2/wx/colordlg.h /usr/include/wx-3.2/wx/colourdata.h \
+ /home/alecca/Documents/spacely/src/AssetManagerPanel.h \
+ /usr/include/wx-3.2/wx/treectrl.h /usr/include/wx-3.2/wx/treebase.h \
+ /usr/include/wx-3.2/wx/itemid.h /usr/include/wx-3.2/wx/systhemectrl.h \
+ /usr/include/wx-3.2/wx/generic/treectlg.h \
+ /home/alecca/Documents/spacely/src/SpaDoc.h \
+ /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
+ /usr/include/wx-3.2/wx/convauto.h /usr/include/wx-3.2/wx/dcbuffer.h \
+ /usr/include/wx-3.2/wx/dcmemory.h /usr/include/wx-3.2/wx/dcclient.h \
+ /usr/include/wx-3.2/wx/settings.h /usr/include/wx-3.2/wx/colordlg.h \
+ /usr/include/wx-3.2/wx/colourdata.h \
  /usr/include/wx-3.2/wx/gtk/colordlg.h /usr/include/wx-3.2/wx/textdlg.h \
  /usr/include/wx-3.2/wx/generic/textdlgg.h \
  /usr/include/wx-3.2/wx/valtext.h /usr/include/wx-3.2/wx/msgdlg.h \

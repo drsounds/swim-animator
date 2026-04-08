@@ -4,6 +4,8 @@
 #include "View.h"
 #include "DrawDoc.h"
 #include "DrawView.h"
+#include "SpaDoc.h"
+#include "SpaView.h"
 #include "Palette.h"
 #include <wx/filefn.h>
 #include <wx/filename.h>
@@ -68,6 +70,18 @@ bool App::OnInit() {
         "DrawView",
         wxCLASSINFO(DrawDoc),
         wxCLASSINFO(DrawView)
+    );
+
+    new wxDocTemplate(
+        m_docManager,
+        "Swim Animator Project",
+        "*.spa",
+        "",
+        "spa",
+        "SpaDoc",
+        "SpaView",
+        wxCLASSINFO(SpaDoc),
+        wxCLASSINFO(SpaView)
     );
 
     // Limit to one view per document; change to 0 for unlimited.

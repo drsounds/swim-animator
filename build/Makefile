@@ -153,6 +153,30 @@ src/App.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/App.cpp.s
 .PHONY : src/App.cpp.s
 
+src/AssetManagerPanel.o: src/AssetManagerPanel.cpp.o
+.PHONY : src/AssetManagerPanel.o
+
+# target to build an object file
+src/AssetManagerPanel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o
+.PHONY : src/AssetManagerPanel.cpp.o
+
+src/AssetManagerPanel.i: src/AssetManagerPanel.cpp.i
+.PHONY : src/AssetManagerPanel.i
+
+# target to preprocess a source file
+src/AssetManagerPanel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.i
+.PHONY : src/AssetManagerPanel.cpp.i
+
+src/AssetManagerPanel.s: src/AssetManagerPanel.cpp.s
+.PHONY : src/AssetManagerPanel.s
+
+# target to generate assembly for a file
+src/AssetManagerPanel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.s
+.PHONY : src/AssetManagerPanel.cpp.s
+
 src/ColorSwatchPanel.o: src/ColorSwatchPanel.cpp.o
 .PHONY : src/ColorSwatchPanel.o
 
@@ -345,6 +369,78 @@ src/PropPanel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/PropPanel.cpp.s
 .PHONY : src/PropPanel.cpp.s
 
+src/SpaDoc.o: src/SpaDoc.cpp.o
+.PHONY : src/SpaDoc.o
+
+# target to build an object file
+src/SpaDoc.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SpaDoc.cpp.o
+.PHONY : src/SpaDoc.cpp.o
+
+src/SpaDoc.i: src/SpaDoc.cpp.i
+.PHONY : src/SpaDoc.i
+
+# target to preprocess a source file
+src/SpaDoc.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SpaDoc.cpp.i
+.PHONY : src/SpaDoc.cpp.i
+
+src/SpaDoc.s: src/SpaDoc.cpp.s
+.PHONY : src/SpaDoc.s
+
+# target to generate assembly for a file
+src/SpaDoc.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SpaDoc.cpp.s
+.PHONY : src/SpaDoc.cpp.s
+
+src/SpaSaveAsDialog.o: src/SpaSaveAsDialog.cpp.o
+.PHONY : src/SpaSaveAsDialog.o
+
+# target to build an object file
+src/SpaSaveAsDialog.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SpaSaveAsDialog.cpp.o
+.PHONY : src/SpaSaveAsDialog.cpp.o
+
+src/SpaSaveAsDialog.i: src/SpaSaveAsDialog.cpp.i
+.PHONY : src/SpaSaveAsDialog.i
+
+# target to preprocess a source file
+src/SpaSaveAsDialog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SpaSaveAsDialog.cpp.i
+.PHONY : src/SpaSaveAsDialog.cpp.i
+
+src/SpaSaveAsDialog.s: src/SpaSaveAsDialog.cpp.s
+.PHONY : src/SpaSaveAsDialog.s
+
+# target to generate assembly for a file
+src/SpaSaveAsDialog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SpaSaveAsDialog.cpp.s
+.PHONY : src/SpaSaveAsDialog.cpp.s
+
+src/SpaView.o: src/SpaView.cpp.o
+.PHONY : src/SpaView.o
+
+# target to build an object file
+src/SpaView.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SpaView.cpp.o
+.PHONY : src/SpaView.cpp.o
+
+src/SpaView.i: src/SpaView.cpp.i
+.PHONY : src/SpaView.i
+
+# target to preprocess a source file
+src/SpaView.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SpaView.cpp.i
+.PHONY : src/SpaView.cpp.i
+
+src/SpaView.s: src/SpaView.cpp.s
+.PHONY : src/SpaView.s
+
+# target to generate assembly for a file
+src/SpaView.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SpaView.cpp.s
+.PHONY : src/SpaView.cpp.s
+
 src/View.o: src/View.cpp.o
 .PHONY : src/View.o
 
@@ -381,6 +477,9 @@ help:
 	@echo "... src/App.o"
 	@echo "... src/App.i"
 	@echo "... src/App.s"
+	@echo "... src/AssetManagerPanel.o"
+	@echo "... src/AssetManagerPanel.i"
+	@echo "... src/AssetManagerPanel.s"
 	@echo "... src/ColorSwatchPanel.o"
 	@echo "... src/ColorSwatchPanel.i"
 	@echo "... src/ColorSwatchPanel.s"
@@ -405,6 +504,15 @@ help:
 	@echo "... src/PropPanel.o"
 	@echo "... src/PropPanel.i"
 	@echo "... src/PropPanel.s"
+	@echo "... src/SpaDoc.o"
+	@echo "... src/SpaDoc.i"
+	@echo "... src/SpaDoc.s"
+	@echo "... src/SpaSaveAsDialog.o"
+	@echo "... src/SpaSaveAsDialog.i"
+	@echo "... src/SpaSaveAsDialog.s"
+	@echo "... src/SpaView.o"
+	@echo "... src/SpaView.i"
+	@echo "... src/SpaView.s"
 	@echo "... src/View.o"
 	@echo "... src/View.i"
 	@echo "... src/View.s"

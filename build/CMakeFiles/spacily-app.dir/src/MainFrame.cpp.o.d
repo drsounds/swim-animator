@@ -350,6 +350,13 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /usr/include/c++/14/bits/istream.tcc \
  /usr/include/wx-3.2/wx/gtk/textctrl.h \
  /home/alecca/Documents/spacely/src/ColorSwatchPanel.h \
+ /home/alecca/Documents/spacely/src/AssetManagerPanel.h \
+ /usr/include/wx-3.2/wx/treectrl.h /usr/include/wx-3.2/wx/treebase.h \
+ /usr/include/wx-3.2/wx/itemid.h /usr/include/wx-3.2/wx/systhemectrl.h \
+ /usr/include/wx-3.2/wx/generic/treectlg.h \
+ /home/alecca/Documents/spacely/src/SpaDoc.h \
+ /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
+ /usr/include/wx-3.2/wx/convauto.h \
  /home/alecca/Documents/spacely/src/View.h \
  /home/alecca/Documents/spacely/src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
@@ -380,6 +387,7 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /usr/include/wx-3.2/wx/gtk/app.h \
  /home/alecca/Documents/spacely/src/Palette.h \
  /home/alecca/Documents/spacely/src/DrawDoc.h \
+ /home/alecca/Documents/spacely/src/SpaView.h \
  /usr/include/wx-3.2/wx/artprov.h /usr/include/wx-3.2/wx/msgdlg.h \
  /usr/include/wx-3.2/wx/stockitem.h \
  /usr/include/wx-3.2/wx/generic/msgdlgg.h \
@@ -389,5 +397,4 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /usr/include/wx-3.2/wx/gtk/filectrl.h /usr/include/wx-3.2/wx/filectrl.h \
  /usr/include/wx-3.2/wx/stdpaths.h /usr/include/wx-3.2/wx/unix/stdpaths.h \
  /usr/include/wx-3.2/wx/filename.h /usr/include/wx-3.2/wx/file.h \
- /usr/include/wx-3.2/wx/convauto.h /usr/include/wx-3.2/wx/statbmp.h \
- /usr/include/wx-3.2/wx/gtk/statbmp.h
+ /usr/include/wx-3.2/wx/statbmp.h /usr/include/wx-3.2/wx/gtk/statbmp.h
