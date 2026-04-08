@@ -6,3 +6,6 @@
 
 # File formats
 - If inventing a new file format, make it XML based.
+
+# Committing
+- Always when ready, automatically git add, commit with relevant message and push to the repo.
