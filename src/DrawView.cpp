@@ -422,11 +422,21 @@ void DrawCanvas::OnPaint(wxPaintEvent&) {
     auto* doc = GetDoc();
     if (!doc) return;
 
-    // Draw page background and border
+    // Draw page background, then an inset border in the contrast colour.
     wxRect pageRect(0, 0, doc->GetPageWidth(), doc->GetPageHeight());
-    dc.SetBrush(wxBrush(doc->GetBgColour()));
-    dc.SetPen(wxPen(wxColour(80, 80, 80)));
+    const wxColour& bg = doc->GetBgColour();
+    // Perceived luminance (ITU-R BT.601); > 128 → light background → dark border
+    int lum = (299 * bg.Red() + 587 * bg.Green() + 114 * bg.Blue()) / 1000;
+    wxColour borderColour = (lum > 128) ? wxColour(0, 0, 0) : wxColour(255, 255, 255);
+
+    dc.SetBrush(wxBrush(bg));
+    dc.SetPen(*wxTRANSPARENT_PEN);
     dc.DrawRectangle(pageRect);
+
+    // Draw the border as an inset rectangle so it sits inside the page area.
+    dc.SetBrush(*wxTRANSPARENT_BRUSH);
+    dc.SetPen(wxPen(borderColour, 1));
+    dc.DrawRectangle(pageRect.x, pageRect.y, pageRect.width - 1, pageRect.height - 1);
 
     const auto& shapes = doc->GetShapes();
     for (int i = 0; i < (int)shapes.size(); i++) {
