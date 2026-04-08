@@ -1,8 +1,10 @@
 #pragma once
 #include <wx/docview.h>
 #include <wx/panel.h>
+#include <vector>
 #include "DrawShape.h"
 #include "DrawIds.h"
+#include "ShapePath.h"
 
 class DrawDoc;
 class DrawView;
@@ -19,8 +21,21 @@ public:
     DrawTool  GetTool() const       { return m_tool; }
     void      SetTool(DrawTool t)   { m_tool = t; m_bezierStep = 0; Refresh(); }
     DrawView* GetView()             { return m_owner; }
-    int       GetSelectedIndex() const { return m_selected; }
-    void      ValidateSelection();
+
+    // Returns the single "primary" selected shape index (-1 if none or multi).
+    int GetSelectedIndex() const    { return m_selected; }
+
+    // Returns the full selection set (root-level indices).
+    const std::vector<int>& GetSelection() const { return m_selection; }
+
+    // Set the selection externally (e.g. from the hierarchy panel).
+    void SetSelection(const std::vector<int>& sel) {
+        m_selection = sel;
+        m_selected  = sel.empty() ? -1 : sel.back();
+        Refresh();
+    }
+
+    void ValidateSelection();
 
     // Which select-mode drag is active (public so file-scope helpers can use it)
     enum class DragMode {
@@ -35,8 +50,16 @@ public:
 private:
     DrawDoc* GetDoc();
     void DrawShapeOnDC(wxDC& dc, const DrawShape& s, bool selected);
+    void DrawShapeOnDCRecursive(wxDC& dc, const DrawShape& s, bool selected);
     int  HitTest(const wxPoint& pt) const;
     void OpenPropertiesDialog(int idx);
+    void ClearSelection();
+    void SetSingleSelection(int idx);
+
+    // Returns the shapes list currently in scope (root shapes, or active group's children).
+    const std::vector<DrawShape>* CurrentShapes(DrawDoc* doc) const;
+    // Returns the command path for shape `idx` in current scope.
+    ShapePath CurrentPath(int idx) const;
 
     void OnPaint(wxPaintEvent&);
     void OnSize(wxSizeEvent&);
@@ -55,14 +78,22 @@ private:
 
     DrawView* m_owner;
     DrawTool  m_tool    { DrawTool::Select };
-    int       m_selected{ -1 };
+
+    // ---- Selection state ----
+    int             m_selected  { -1 };         // primary selected index (single-select / drag)
+    std::vector<int> m_selection;               // full selection set (multi-select)
+
+    // ---- Group isolation mode ----
+    // When >= 0: we are editing inside the root group at this index.
+    // m_selected / m_selection then refer to indices within that group's children.
+    int m_activeGroupIdx { -1 };
 
     // Shape-creation rubber-band state
     bool      m_dragging{ false };
     wxPoint   m_dragStart;
     wxPoint   m_dragCurrent;
 
-    // Select-mode move/resize state
+    // Select-mode move/resize state (single shape)
     DragMode  m_dragMode         { DragMode::None };
     wxPoint   m_dragOrigin;
     wxRect    m_dragOrigBounds;
@@ -70,6 +101,17 @@ private:
     DrawShape m_dragOrigShape;   // full before-state of the dragged shape (for undo)
     DrawShape m_dragPreview;     // current drag position rendered without touching doc
     int       m_bezierHandleIdx  { -1 };
+
+    // Multi-shape drag state
+    bool                   m_isMultiDrag  { false };
+    wxPoint                m_multiDragOrigin;
+    wxPoint                m_multiDragDelta;
+    std::vector<DrawShape> m_multiDragShapes;  // original shapes for all selected
+
+    // Rubber-band selection state (select tool, drag on empty area)
+    bool    m_rubberBanding  { false };
+    wxPoint m_rubberBandStart;    // doc coords
+    wxPoint m_rubberBandCurrent;  // doc coords
 
     // Bezier creation state (active while DrawTool::Bezier is selected)
     int       m_bezierStep  { 0 };   // how many pts have been placed (0–3 during creation)

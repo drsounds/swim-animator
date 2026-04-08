@@ -8,6 +8,8 @@
 #include "PropPanel.h"
 #include "ColorSwatchPanel.h"
 #include "AssetManagerPanel.h"
+#include "HierarchyPanel.h"
+#include <vector>
 
 class DrawDoc;
 class SpaDoc;
@@ -44,6 +46,7 @@ private:
     void CreateColorSwatchPane();
     void CreateAssetManagerPane();
     void CreatePropertiesPane();
+    void CreateHierarchyPane();
     void CreateStatusBar_();
     void CreateAuiPanes();
 
@@ -63,8 +66,11 @@ public:
     // Draw-tool routing – called by DrawView::OnActivateView.
     void SetActiveDrawView(DrawView* view);
 
-    // Properties pane – called by DrawView when selection changes.
-    void OnSelectionChanged(DrawDoc* doc, int idx);
+    // Properties + hierarchy panes – called by DrawView when selection changes.
+    void OnSelectionChanged(DrawDoc* doc, const std::vector<int>& selection);
+
+    // Called by HierarchyPanel when the user selects shapes in the tree.
+    void OnHierarchySelectionChanged(const std::vector<int>& indices);
 
     // Asset manager pane – called by SpaView when the active project changes.
     void SetActiveSpaDoc(SpaDoc* doc);
@@ -74,10 +80,11 @@ private:
     wxAuiNotebook*    m_notebook{nullptr};
     wxToolBar*        m_toolbar{nullptr};
     wxToolBar*        m_drawToolbar{nullptr};
-    ColorSwatchPanel*  m_swatchPanel {nullptr};
-    AssetManagerPanel* m_assetPanel  {nullptr};
-    PropPanel*         m_propPanel   {nullptr};
-    DrawView*         m_activeDrawView{nullptr};
+    ColorSwatchPanel*  m_swatchPanel     {nullptr};
+    AssetManagerPanel* m_assetPanel     {nullptr};
+    PropPanel*         m_propPanel      {nullptr};
+    HierarchyPanel*    m_hierarchyPanel {nullptr};
+    DrawView*          m_activeDrawView {nullptr};
 
     wxDECLARE_EVENT_TABLE();
 };

@@ -22,6 +22,7 @@
 #include <wx/statbmp.h>
 #include <wx/button.h>
 #include <wx/filefn.h>
+#include <algorithm>
 
 // ---------------------------------------------------------------------------
 // BeveledToolBarArt – draws a raised 3-D border on every button in its idle
@@ -103,6 +104,7 @@ MainFrame::MainFrame(wxDocManager* manager, wxFrame* parent, wxWindowID id,
     CreateColorSwatchPane();
     CreateAssetManagerPane();
     CreatePropertiesPane();
+    CreateHierarchyPane();
     CreateStatusBar_();
     CreateAuiPanes();
 
@@ -311,9 +313,24 @@ void MainFrame::CreatePropertiesPane() {
         wxAuiPaneInfo()
             .Name("Properties")
             .Caption("Properties")
+            .Right()
+            .Row(2)
+            .BestSize(220, 300)
+            .MinSize(160, 100)
+            .CloseButton(true)
+            .Floatable(true)
+            .Show(true));
+}
+
+void MainFrame::CreateHierarchyPane() {
+    m_hierarchyPanel = new HierarchyPanel(this);
+    m_auiMgr.AddPane(m_hierarchyPanel,
+        wxAuiPaneInfo()
+            .Name("Hierarchy")
+            .Caption("Object Hierarchy")
             .Bottom()
-            .BestSize(200, -1)
-            .MinSize(160, -1)
+            .BestSize(-1, 160)
+            .MinSize(-1, 80)
             .CloseButton(true)
             .Floatable(true)
             .Show(true));
@@ -321,19 +338,34 @@ void MainFrame::CreatePropertiesPane() {
 
 void MainFrame::SetActiveDrawView(DrawView* view) {
     m_activeDrawView = view;
-    if (m_propPanel) {
-        DrawDoc* doc = view ? wxDynamicCast(view->GetDocument(), DrawDoc) : nullptr;
+    DrawDoc* doc = view ? wxDynamicCast(view->GetDocument(), DrawDoc) : nullptr;
+    const std::vector<int> emptySelection;
+    if (m_propPanel)
         m_propPanel->ShowShape(doc, -1);
-    }
+    if (m_hierarchyPanel)
+        m_hierarchyPanel->RefreshTree(doc, emptySelection);
     if (m_swatchPanel)
         m_swatchPanel->UpdateColors();
 }
 
-void MainFrame::OnSelectionChanged(DrawDoc* doc, int idx) {
+void MainFrame::OnSelectionChanged(DrawDoc* doc, const std::vector<int>& selection) {
+    int propIdx = (selection.size() == 1) ? selection[0] : -1;
     if (m_propPanel)
-        m_propPanel->ShowShape(doc, idx);
+        m_propPanel->ShowShape(doc, propIdx);
+    if (m_hierarchyPanel)
+        m_hierarchyPanel->RefreshTree(doc, selection);
     if (m_swatchPanel)
         m_swatchPanel->UpdateColors();
+}
+
+void MainFrame::OnHierarchySelectionChanged(const std::vector<int>& indices) {
+    if (!m_activeDrawView || !m_activeDrawView->GetCanvas()) return;
+    DrawCanvas* canvas = m_activeDrawView->GetCanvas();
+    canvas->SetSelection(indices);
+
+    DrawDoc* doc = wxDynamicCast(m_activeDrawView->GetDocument(), DrawDoc);
+    int propIdx = (indices.size() == 1) ? indices[0] : -1;
+    if (m_propPanel) m_propPanel->ShowShape(doc, propIdx);
 }
 
 void MainFrame::CreateStatusBar_() {

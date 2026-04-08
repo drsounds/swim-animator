@@ -34,9 +34,6 @@ static wxRect NormalizedRect(const wxPoint& a, const wxPoint& b) {
 // Rounded rectangle helper
 // ---------------------------------------------------------------------------
 
-// Samples a rounded rectangle with separate horizontal (rx) and vertical (ry)
-// corner radii into a polygon. Each of the 4 corner arcs is sampled at
-// CORNER_STEPS points; straight sides are implicit polygon edges between arcs.
 static constexpr int CORNER_STEPS = 8;
 
 static std::vector<wxPoint> BuildRoundedRectPolygon(const wxRect& r, int rx, int ry) {
@@ -46,9 +43,6 @@ static std::vector<wxPoint> BuildRoundedRectPolygon(const wxRect& r, int rx, int
     std::vector<wxPoint> pts;
     pts.reserve(4 * CORNER_STEPS);
 
-    // Each arc sweeps 90° around its corner centre. We sample CORNER_STEPS points
-    // per arc (exclusive of the endpoint, which is the start of the next arc) so
-    // there are no duplicate adjacent vertices in the resulting polygon.
     auto addArc = [&](float cx, float cy, float startDeg, float endDeg) {
         for (int i = 0; i < CORNER_STEPS; i++) {
             float a = (startDeg + (endDeg - startDeg) * i / CORNER_STEPS)
@@ -58,10 +52,10 @@ static std::vector<wxPoint> BuildRoundedRectPolygon(const wxRect& r, int rx, int
         }
     };
 
-    addArc(r.x + r.width  - rx, r.y          + ry, -90.f,   0.f); // top-right
-    addArc(r.x + r.width  - rx, r.y + r.height - ry,  0.f,  90.f); // bottom-right
-    addArc(r.x          + rx, r.y + r.height - ry, 90.f, 180.f); // bottom-left
-    addArc(r.x          + rx, r.y          + ry, 180.f, 270.f); // top-left
+    addArc(r.x + r.width  - rx, r.y          + ry, -90.f,   0.f);
+    addArc(r.x + r.width  - rx, r.y + r.height - ry,  0.f,  90.f);
+    addArc(r.x          + rx, r.y + r.height - ry, 90.f, 180.f);
+    addArc(r.x          + rx, r.y          + ry, 180.f, 270.f);
 
     return pts;
 }
@@ -70,7 +64,6 @@ static std::vector<wxPoint> BuildRoundedRectPolygon(const wxRect& r, int rx, int
 // Bezier curve helpers
 // ---------------------------------------------------------------------------
 
-// Sample a cubic Bezier and draw it as polyline segments.
 static void DrawBezierCurve(wxDC& dc, const wxPoint p[4]) {
     wxPoint prev = p[0];
     for (int i = 1; i <= 48; i++) {
@@ -85,7 +78,6 @@ static void DrawBezierCurve(wxDC& dc, const wxPoint p[4]) {
     }
 }
 
-// Bounding box of the 4 Bezier control points (conservative approximation).
 static wxRect BezierBounds(const wxPoint p[4]) {
     int minX = p[0].x, maxX = p[0].x, minY = p[0].y, maxY = p[0].y;
     for (int i = 1; i < 4; i++) {
@@ -95,7 +87,6 @@ static wxRect BezierBounds(const wxPoint p[4]) {
     return wxRect(minX, minY, maxX - minX, maxY - minY);
 }
 
-// Hit-test the 4 Bezier control point handles; returns 0-3 or -1.
 static int HitTestBezierPt(const wxPoint& pt, const wxPoint p[4]) {
     for (int i = 0; i < 4; i++) {
         int dx = pt.x - p[i].x, dy = pt.y - p[i].y;
@@ -108,7 +99,6 @@ static int HitTestBezierPt(const wxPoint& pt, const wxPoint p[4]) {
 // Handle helpers (selection handles for move/resize)
 // ---------------------------------------------------------------------------
 
-// Returns the 8 handle centres (NW, N, NE, E, SE, S, SW, W) for a shape rect.
 static void GetHandleCentres(const wxRect& bounds, wxPoint out[8]) {
     wxRect sel = bounds;
     sel.Inflate(3);
@@ -128,7 +118,6 @@ static wxRect HandleRect(const wxPoint& c) {
     return wxRect(c.x - 3, c.y - 3, 7, 7);
 }
 
-// Hit-test the 8 handles; returns the matching DragMode or None.
 static DrawCanvas::DragMode HitTestHandle(const wxPoint& pt, const wxRect& bounds) {
     using DM = DrawCanvas::DragMode;
     static const DM modes[8] = {
@@ -143,7 +132,6 @@ static DrawCanvas::DragMode HitTestHandle(const wxPoint& pt, const wxRect& bound
     return DM::None;
 }
 
-// Apply a delta to a rect according to which handle is being dragged.
 static wxRect ApplyDragMode(DrawCanvas::DragMode dm, const wxRect& orig,
                              int dx, int dy) {
     using DM = DrawCanvas::DragMode;
@@ -200,7 +188,6 @@ public:
         auto* grid  = new wxFlexGridSizer(2, wxSize(8, 6));
         grid->AddGrowableCol(1);
 
-        // Label field (Text shapes only)
         if (s.kind == ShapeKind::Text) {
             grid->Add(new wxStaticText(this, wxID_ANY, "Label:"),
                       0, wxALIGN_CENTER_VERTICAL);
@@ -208,7 +195,6 @@ public:
             grid->Add(m_labelCtrl, 1, wxEXPAND);
         }
 
-        // Foreground
         grid->Add(new wxStaticText(this, wxID_ANY, "Foreground:"),
                   0, wxALIGN_CENTER_VERTICAL);
         m_fgBtn = new wxButton(this, wxID_ANY, wxEmptyString,
@@ -216,7 +202,6 @@ public:
         m_fgBtn->SetBackgroundColour(m_fg);
         grid->Add(m_fgBtn, 0);
 
-        // Background
         grid->Add(new wxStaticText(this, wxID_ANY, "Background:"),
                   0, wxALIGN_CENTER_VERTICAL);
         m_bgBtn = new wxButton(this, wxID_ANY, wxEmptyString,
@@ -224,7 +209,6 @@ public:
         m_bgBtn->SetBackgroundColour(m_bg);
         grid->Add(m_bgBtn, 0);
 
-        // Border width (not for Text)
         if (s.kind != ShapeKind::Text) {
             grid->Add(new wxStaticText(this, wxID_ANY, "Border width:"),
                       0, wxALIGN_CENTER_VERTICAL);
@@ -234,7 +218,6 @@ public:
             grid->Add(m_strokeSpin, 1, wxEXPAND);
         }
 
-        // Border radius X/Y (Rect only)
         if (s.kind == ShapeKind::Rect) {
             int maxRx = s.bounds.width  / 2;
             int maxRy = s.bounds.height / 2;
@@ -261,7 +244,6 @@ public:
         m_bgBtn->Bind(wxEVT_BUTTON, [this](wxCommandEvent&) { PickColour(m_bg, m_bgBtn); });
     }
 
-    // Apply the dialog result back to a shape.
     void Apply(DrawShape& s) const {
         s.fgColour = m_fg;
         s.bgColour = m_bg;
@@ -329,9 +311,59 @@ DrawDoc* DrawCanvas::GetDoc() {
 }
 
 // ---------------------------------------------------------------------------
+// Colour dimming for isolation mode
+// ---------------------------------------------------------------------------
+
+static wxColour DimColour(const wxColour& c) {
+    // Blend 75% toward light grey (#C0C0C0) to make out-of-scope shapes recede.
+    return wxColour(
+        (unsigned char)((c.Red()   + 192 * 3) / 4),
+        (unsigned char)((c.Green() + 192 * 3) / 4),
+        (unsigned char)((c.Blue()  + 192 * 3) / 4));
+}
+
+static DrawShape DimShape(DrawShape s) {
+    s.fgColour = DimColour(s.fgColour);
+    s.bgColour = DimColour(s.bgColour);
+    return s;
+}
+
+// ---------------------------------------------------------------------------
+// Selection helpers
+// ---------------------------------------------------------------------------
+
+void DrawCanvas::ClearSelection() {
+    m_selection.clear();
+    m_selected = -1;
+}
+
+void DrawCanvas::SetSingleSelection(int idx) {
+    m_selection = { idx };
+    m_selected  = idx;
+}
+
+const std::vector<DrawShape>* DrawCanvas::CurrentShapes(DrawDoc* doc) const {
+    if (!doc) return nullptr;
+    if (m_activeGroupIdx >= 0 &&
+        m_activeGroupIdx < (int)doc->GetShapes().size() &&
+        doc->GetShapes()[m_activeGroupIdx].kind == ShapeKind::Group)
+    {
+        return &doc->GetShapes()[m_activeGroupIdx].children;
+    }
+    return &doc->GetShapes();
+}
+
+ShapePath DrawCanvas::CurrentPath(int idx) const {
+    if (m_activeGroupIdx >= 0)
+        return { m_activeGroupIdx, idx };
+    return { idx };
+}
+
+// ---------------------------------------------------------------------------
 // DrawCanvas – rendering
 // ---------------------------------------------------------------------------
 
+// Draw a single leaf shape (not Group/SVGRef).
 void DrawCanvas::DrawShapeOnDC(wxDC& dc, const DrawShape& s, bool selected) {
     dc.SetPen(s.strokeWidth > 0 ? wxPen(s.fgColour, s.strokeWidth)
                                 : *wxTRANSPARENT_PEN);
@@ -358,7 +390,6 @@ void DrawCanvas::DrawShapeOnDC(wxDC& dc, const DrawShape& s, bool selected) {
             dc.DrawLabel(s.label, s.bounds, wxALIGN_CENTER);
             break;
         case ShapeKind::Bezier: {
-            // Sample the curve into a polygon and fill, then draw the outline.
             const int N = 48;
             wxPoint poly[N + 1];
             for (int i = 0; i <= N; i++) {
@@ -377,34 +408,41 @@ void DrawCanvas::DrawShapeOnDC(wxDC& dc, const DrawShape& s, bool selected) {
             }
             break;
         }
+        case ShapeKind::Group:
+            // Draw children recursively; selection overlay drawn below.
+            for (const DrawShape& child : s.children)
+                DrawShapeOnDCRecursive(dc, child, false);
+            break;
+        case ShapeKind::SVGRef:
+            // Placeholder: draw a hatched rectangle until SVGRef is parsed.
+            dc.SetBrush(wxBrush(wxColour(220, 220, 255)));
+            dc.SetPen(wxPen(wxColour(100, 100, 200), 1));
+            dc.DrawRectangle(s.bounds);
+            dc.DrawLine(s.bounds.GetTopLeft(),     s.bounds.GetBottomRight());
+            dc.DrawLine(s.bounds.GetTopRight(),    s.bounds.GetBottomLeft());
+            break;
     }
 
     if (selected) {
         if (s.kind == ShapeKind::Bezier) {
-            // Tangent handle lines
             dc.SetPen(wxPen(wxColour(100, 100, 100), 1, wxPENSTYLE_DOT));
             dc.DrawLine(s.pts[0], s.pts[1]);
             dc.DrawLine(s.pts[3], s.pts[2]);
 
-            // Control point handles: squares for anchors, circles for handles
             dc.SetPen(*wxBLACK_PEN);
             dc.SetBrush(*wxWHITE_BRUSH);
-            // Anchors (pt[0], pt[3]) — filled squares
             for (int i : {0, 3})
                 dc.DrawRectangle(HandleRect(s.pts[i]));
-            // Control points (pt[1], pt[2]) — filled circles
             dc.SetBrush(wxBrush(wxColour(180, 220, 255)));
             for (int i : {1, 2})
                 dc.DrawEllipse(HandleRect(s.pts[i]));
         } else {
-            // Dashed selection outline
             dc.SetPen(wxPen(*wxBLUE, 1, wxPENSTYLE_DOT));
             dc.SetBrush(*wxTRANSPARENT_BRUSH);
             wxRect sel = s.bounds;
             sel.Inflate(3);
             dc.DrawRectangle(sel);
 
-            // Resize handles
             wxPoint centres[8];
             GetHandleCentres(s.bounds, centres);
             dc.SetPen(*wxBLACK_PEN);
@@ -413,6 +451,11 @@ void DrawCanvas::DrawShapeOnDC(wxDC& dc, const DrawShape& s, bool selected) {
                 dc.DrawRectangle(HandleRect(centres[i]));
         }
     }
+}
+
+// Draw a shape recursively (used for Group children — no outer selection markup).
+void DrawCanvas::DrawShapeOnDCRecursive(wxDC& dc, const DrawShape& s, bool selected) {
+    DrawShapeOnDC(dc, s, selected);
 }
 
 // ---------------------------------------------------------------------------
@@ -434,21 +477,18 @@ wxPoint DrawCanvas::DocToScreen(wxPoint pt) const {
 void DrawCanvas::OnPaint(wxPaintEvent&) {
     wxAutoBufferedPaintDC dc(this);
 
-    // Medium-grey area outside the page
     dc.SetBackground(wxBrush(wxColour(160, 160, 160)));
     dc.Clear();
 
     auto* doc = GetDoc();
     if (!doc) return;
 
-    // Apply pan + zoom transform.  Everything below uses logical (document) coords.
     dc.SetDeviceOrigin(m_viewOffset.x, m_viewOffset.y);
     dc.SetUserScale(m_zoom, m_zoom);
 
-    // Draw page background, then an inset border in the contrast colour.
+    // Page background + contrast border.
     wxRect pageRect(0, 0, doc->GetPageWidth(), doc->GetPageHeight());
     const wxColour& bg = doc->GetBgColour();
-    // Perceived luminance (ITU-R BT.601); > 128 → light background → dark border
     int lum = (299 * bg.Red() + 587 * bg.Green() + 114 * bg.Blue()) / 1000;
     wxColour borderColour = (lum > 128) ? wxColour(0, 0, 0) : wxColour(255, 255, 255);
 
@@ -456,20 +496,87 @@ void DrawCanvas::OnPaint(wxPaintEvent&) {
     dc.SetPen(*wxTRANSPARENT_PEN);
     dc.DrawRectangle(pageRect);
 
-    // Draw the border as an inset rectangle so it sits inside the page area.
     dc.SetBrush(*wxTRANSPARENT_BRUSH);
     dc.SetPen(wxPen(borderColour, 1));
     dc.DrawRectangle(pageRect.x, pageRect.y, pageRect.width - 1, pageRect.height - 1);
 
     const auto& shapes = doc->GetShapes();
-    for (int i = 0; i < (int)shapes.size(); i++) {
-        // During a drag, render the live preview instead of the stored shape.
-        const DrawShape& s = (m_dragMode != DragMode::None && i == m_selected)
-                             ? m_dragPreview : shapes[i];
-        DrawShapeOnDC(dc, s, i == m_selected);
+
+    auto isSelected = [&](int i) -> bool {
+        return std::find(m_selection.begin(), m_selection.end(), i) != m_selection.end();
+    };
+
+    if (m_activeGroupIdx >= 0 &&
+        m_activeGroupIdx < (int)shapes.size() &&
+        shapes[m_activeGroupIdx].kind == ShapeKind::Group)
+    {
+        // --- Isolation mode ---
+        // 1. Draw all root shapes EXCEPT the active group, dimmed.
+        for (int i = 0; i < (int)shapes.size(); i++) {
+            if (i == m_activeGroupIdx) continue;
+            DrawShapeOnDC(dc, DimShape(shapes[i]), false);
+        }
+
+        // 2. Draw a dashed bounding box around the active group's bounds.
+        const DrawShape& grp = shapes[m_activeGroupIdx];
+        dc.SetPen(wxPen(wxColour(0, 100, 200), 1, wxPENSTYLE_DOT));
+        dc.SetBrush(*wxTRANSPARENT_BRUSH);
+        wxRect grpRect = grp.bounds;
+        grpRect.Inflate(4);
+        dc.DrawRectangle(grpRect);
+
+        // 3. Draw the group's children at normal colors.
+        const auto& children = grp.children;
+        for (int i = 0; i < (int)children.size(); i++) {
+            bool sel = isSelected(i);
+            const DrawShape& child = children[i];
+
+            if (m_isMultiDrag && sel) {
+                auto it = std::find(m_selection.begin(), m_selection.end(), i);
+                DrawShape preview = m_multiDragShapes[it - m_selection.begin()];
+                preview.bounds.x += m_multiDragDelta.x;
+                preview.bounds.y += m_multiDragDelta.y;
+                if (preview.kind == ShapeKind::Bezier) {
+                    for (int k = 0; k < 4; k++) {
+                        preview.pts[k].x += m_multiDragDelta.x;
+                        preview.pts[k].y += m_multiDragDelta.y;
+                    }
+                    preview.bounds = BezierBounds(preview.pts);
+                }
+                DrawShapeOnDC(dc, preview, sel);
+            } else if (m_dragMode != DragMode::None && i == m_selected) {
+                DrawShapeOnDC(dc, m_dragPreview, true);
+            } else {
+                DrawShapeOnDC(dc, child, sel);
+            }
+        }
+    } else {
+        // --- Normal mode ---
+        for (int i = 0; i < (int)shapes.size(); i++) {
+            bool sel = isSelected(i);
+
+            if (m_isMultiDrag && sel) {
+                auto it = std::find(m_selection.begin(), m_selection.end(), i);
+                DrawShape preview = m_multiDragShapes[it - m_selection.begin()];
+                preview.bounds.x += m_multiDragDelta.x;
+                preview.bounds.y += m_multiDragDelta.y;
+                if (preview.kind == ShapeKind::Bezier) {
+                    for (int k = 0; k < 4; k++) {
+                        preview.pts[k].x += m_multiDragDelta.x;
+                        preview.pts[k].y += m_multiDragDelta.y;
+                    }
+                    preview.bounds = BezierBounds(preview.pts);
+                }
+                DrawShapeOnDC(dc, preview, sel);
+            } else if (m_dragMode != DragMode::None && i == m_selected) {
+                DrawShapeOnDC(dc, m_dragPreview, true);
+            } else {
+                DrawShapeOnDC(dc, shapes[i], sel);
+            }
+        }
     }
 
-    // Rubber-band preview while drawing a new shape
+    // New-shape rubber-band preview (creation tools).
     if (m_dragging && m_tool != DrawTool::Select && m_tool != DrawTool::Bezier) {
         wxRect r = NormalizedRect(m_dragStart, m_dragCurrent);
         if (r.width > 0 && r.height > 0) {
@@ -482,9 +589,16 @@ void DrawCanvas::OnPaint(wxPaintEvent&) {
         }
     }
 
-    // Bezier creation preview
+    // Selection rubber-band.
+    if (m_rubberBanding) {
+        wxRect rb = NormalizedRect(m_rubberBandStart, m_rubberBandCurrent);
+        dc.SetPen(wxPen(wxColour(0, 120, 215), 1, wxPENSTYLE_DOT));
+        dc.SetBrush(wxBrush(wxColour(0, 120, 215, 40)));
+        dc.DrawRectangle(rb);
+    }
+
+    // Bezier creation preview.
     if (m_tool == DrawTool::Bezier && m_bezierStep > 0) {
-        // Fill in unset points with the current mouse position.
         wxPoint p[4];
         for (int i = 0; i < 4; i++)
             p[i] = (i < m_bezierStep) ? m_bezierPts[i] : m_dragCurrent;
@@ -493,12 +607,10 @@ void DrawCanvas::OnPaint(wxPaintEvent&) {
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
         DrawBezierCurve(dc, p);
 
-        // Tangent handle lines
         dc.SetPen(wxPen(wxColour(130, 130, 130), 1, wxPENSTYLE_DOT));
         dc.DrawLine(p[0], p[1]);
         dc.DrawLine(p[3], p[2]);
 
-        // Already-placed control points
         dc.SetPen(*wxBLACK_PEN);
         for (int i = 0; i < m_bezierStep; i++) {
             if (i == 0 || i == 3) {
@@ -524,10 +636,12 @@ void DrawCanvas::OnSize(wxSizeEvent& e) {
 int DrawCanvas::HitTest(const wxPoint& pt) const {
     auto* doc = m_owner ? wxDynamicCast(m_owner->GetDocument(), DrawDoc) : nullptr;
     if (!doc) return -1;
-    const auto& shapes = doc->GetShapes();
-    // Test in reverse draw order so topmost shape wins.
-    for (int i = (int)shapes.size() - 1; i >= 0; i--)
-        if (shapes[i].HitTest(pt))
+
+    const std::vector<DrawShape>* scope = CurrentShapes(doc);
+    if (!scope) return -1;
+
+    for (int i = (int)scope->size() - 1; i >= 0; i--)
+        if ((*scope)[i].HitTest(pt))
             return i;
     return -1;
 }
@@ -536,12 +650,10 @@ void DrawCanvas::OnLeftDown(wxMouseEvent& e) {
     SetFocus();
 
     if (m_tool == DrawTool::Bezier) {
-        // Place the next control point.
         m_bezierPts[m_bezierStep] = ScreenToDoc(e.GetPosition());
         m_bezierStep++;
 
         if (m_bezierStep == 4) {
-            // All 4 points placed — commit the shape.
             DrawShape s;
             s.kind     = ShapeKind::Bezier;
             s.fgColour = wxGetApp().GetFgColour();
@@ -550,8 +662,14 @@ void DrawCanvas::OnLeftDown(wxMouseEvent& e) {
             s.bounds = BezierBounds(s.pts);
             auto* doc = GetDoc();
             if (doc) {
-                doc->GetCommandProcessor()->Submit(new AddShapeCmd(doc, s));
-                m_selected = static_cast<int>(doc->GetShapes().size()) - 1;
+                const std::vector<DrawShape>* scope = CurrentShapes(doc);
+                int newIdx = scope ? (int)scope->size() : 0;
+                ShapePath parentPath = m_activeGroupIdx >= 0
+                    ? ShapePath{ m_activeGroupIdx }
+                    : ShapePath{};
+                doc->GetCommandProcessor()->Submit(
+                    new InsertShapeAtCmd(doc, parentPath, newIdx, s));
+                SetSingleSelection(newIdx);
                 m_owner->NotifySelectionChanged();
             }
             m_bezierStep = 0;
@@ -564,56 +682,109 @@ void DrawCanvas::OnLeftDown(wxMouseEvent& e) {
     if (m_tool == DrawTool::Select) {
         wxPoint pt = ScreenToDoc(e.GetPosition());
         auto* doc = GetDoc();
+        bool ctrlHeld = e.ControlDown() || e.CmdDown();
 
-        // 1. Check control-point handles on a selected Bezier first.
-        if (m_selected >= 0 && doc &&
-            m_selected < (int)doc->GetShapes().size())
-        {
-            const DrawShape& sel = doc->GetShapes()[m_selected];
-            if (sel.kind == ShapeKind::Bezier) {
-                int hi = HitTestBezierPt(pt, sel.pts);
-                if (hi >= 0) {
-                    m_dragMode         = DragMode::BezierPt;
-                    m_bezierHandleIdx  = hi;
-                    m_dragOrigin       = pt;
-                    for (int i = 0; i < 4; i++) m_dragOrigPts[i] = sel.pts[i];
-                    m_dragOrigShape    = sel;
-                    m_dragPreview      = sel;
-                    CaptureMouse();
-                    e.Skip();
-                    return;
-                }
-            } else {
-                // Check resize handles for non-Bezier shapes.
-                DragMode dm = HitTestHandle(pt, sel.bounds);
-                if (dm != DragMode::None) {
-                    m_dragMode       = dm;
-                    m_dragOrigin     = pt;
-                    m_dragOrigBounds = sel.bounds;
-                    m_dragOrigShape  = sel;
-                    m_dragPreview    = sel;
-                    CaptureMouse();
-                    e.Skip();
-                    return;
+        // --- Single-selection drag handles (only when exactly one shape selected) ---
+        if (!ctrlHeld && m_selection.size() == 1 && doc) {
+            int si = m_selection[0];
+            const std::vector<DrawShape>* scope = CurrentShapes(doc);
+            if (scope && si >= 0 && si < (int)scope->size()) {
+                const DrawShape& sel = (*scope)[si];
+
+                if (sel.kind == ShapeKind::Bezier) {
+                    int hi = HitTestBezierPt(pt, sel.pts);
+                    if (hi >= 0) {
+                        m_dragMode         = DragMode::BezierPt;
+                        m_bezierHandleIdx  = hi;
+                        m_dragOrigin       = pt;
+                        for (int i = 0; i < 4; i++) m_dragOrigPts[i] = sel.pts[i];
+                        m_dragOrigShape    = sel;
+                        m_dragPreview      = sel;
+                        CaptureMouse();
+                        e.Skip();
+                        return;
+                    }
+                } else if (sel.kind != ShapeKind::Group) {
+                    DragMode dm = HitTestHandle(pt, sel.bounds);
+                    if (dm != DragMode::None) {
+                        m_dragMode       = dm;
+                        m_dragOrigin     = pt;
+                        m_dragOrigBounds = sel.bounds;
+                        m_dragOrigShape  = sel;
+                        m_dragPreview    = sel;
+                        CaptureMouse();
+                        e.Skip();
+                        return;
+                    }
                 }
             }
         }
 
-        // 2. Hit-test all shapes.
+        // --- Hit-test shapes ---
         int hit = HitTest(pt);
+
         if (hit >= 0 && doc) {
-            m_selected   = hit;
-            const DrawShape& hs = doc->GetShapes()[hit];
-            m_dragMode       = DragMode::Move;
-            m_dragOrigin     = pt;
-            m_dragOrigBounds = hs.bounds;
-            for (int i = 0; i < 4; i++) m_dragOrigPts[i] = hs.pts[i];
-            m_dragOrigShape  = hs;
-            m_dragPreview    = hs;
+            if (ctrlHeld) {
+                // Toggle this shape in the selection.
+                auto it = std::find(m_selection.begin(), m_selection.end(), hit);
+                if (it != m_selection.end()) {
+                    m_selection.erase(it);
+                    m_selected = m_selection.empty() ? -1 : m_selection.back();
+                } else {
+                    m_selection.push_back(hit);
+                    m_selected = hit;
+                }
+                m_owner->NotifySelectionChanged();
+                Refresh();
+                e.Skip();
+                return;
+            }
+
+            // Not Ctrl: if the hit shape is NOT already in selection, replace selection.
+            bool alreadySelected = std::find(m_selection.begin(), m_selection.end(), hit)
+                                   != m_selection.end();
+            if (!alreadySelected)
+                SetSingleSelection(hit);
+            else
+                m_selected = hit;
+
+            if (m_selection.size() == 1) {
+                // Single-shape move drag.
+                const std::vector<DrawShape>* scope = CurrentShapes(doc);
+                if (!scope || hit >= (int)scope->size()) { e.Skip(); return; }
+                const DrawShape& hs = (*scope)[hit];
+                m_dragMode       = DragMode::Move;
+                m_dragOrigin     = pt;
+                m_dragOrigBounds = hs.bounds;
+                for (int i = 0; i < 4; i++) m_dragOrigPts[i] = hs.pts[i];
+                m_dragOrigShape  = hs;
+                m_dragPreview    = hs;
+            } else {
+                // Multi-shape move drag.
+                m_isMultiDrag     = true;
+                m_multiDragOrigin = pt;
+                m_multiDragDelta  = {0, 0};
+                m_multiDragShapes.clear();
+                const std::vector<DrawShape>* scope = CurrentShapes(doc);
+                for (int idx : m_selection)
+                    m_multiDragShapes.push_back((*scope)[idx]);
+            }
+            CaptureMouse();
+        } else if (!ctrlHeld) {
+            // No hit, no Ctrl: start rubber-band selection, clear existing selection.
+            ClearSelection();
+            m_rubberBanding    = true;
+            m_rubberBandStart   = pt;
+            m_rubberBandCurrent = pt;
             CaptureMouse();
         } else {
-            m_selected = -1;
+            // No hit, Ctrl: start rubber-band that ADDS to selection.
+            m_rubberBanding    = true;
+            m_rubberBandStart   = pt;
+            m_rubberBandCurrent = pt;
+            CaptureMouse();
         }
+
         m_owner->NotifySelectionChanged();
         Refresh();
     } else {
@@ -626,13 +797,11 @@ void DrawCanvas::OnLeftDown(wxMouseEvent& e) {
 }
 
 void DrawCanvas::OnMotion(wxMouseEvent& e) {
-    // Track mouse position in document coords for rubber-band and Bezier previews.
     m_dragCurrent = ScreenToDoc(e.GetPosition());
 
-    // Pan mode: middle button held — update view offset in screen space.
+    // Pan mode.
     if (m_panning) {
         if (!e.MiddleIsDown()) {
-            // Button released outside window; clean up.
             m_panning = false;
             if (HasCapture()) ReleaseMouse();
             SetCursor(wxNullCursor);
@@ -645,41 +814,116 @@ void DrawCanvas::OnMotion(wxMouseEvent& e) {
         return;
     }
 
+    if (m_rubberBanding) {
+        m_rubberBandCurrent = ScreenToDoc(e.GetPosition());
+        Refresh();
+        e.Skip();
+        return;
+    }
+
     if (m_tool == DrawTool::Bezier && m_bezierStep > 0) {
         Refresh();
-    } else if (m_tool == DrawTool::Select && m_dragMode != DragMode::None) {
-        wxPoint pt = ScreenToDoc(e.GetPosition());
-        int dx = pt.x - m_dragOrigin.x;
-        int dy = pt.y - m_dragOrigin.y;
+    } else if (m_tool == DrawTool::Select) {
+        if (m_isMultiDrag) {
+            wxPoint pt = ScreenToDoc(e.GetPosition());
+            m_multiDragDelta = pt - m_multiDragOrigin;
+            Refresh();
+        } else if (m_dragMode != DragMode::None) {
+            wxPoint pt = ScreenToDoc(e.GetPosition());
+            int dx = pt.x - m_dragOrigin.x;
+            int dy = pt.y - m_dragOrigin.y;
 
-        // Update the local preview without touching the document.
-        // The document is only committed once in OnLeftUp.
-        m_dragPreview = m_dragOrigShape;
-        if (m_dragMode == DragMode::BezierPt) {
-            m_dragPreview.pts[m_bezierHandleIdx].x += dx;
-            m_dragPreview.pts[m_bezierHandleIdx].y += dy;
-            m_dragPreview.bounds = BezierBounds(m_dragPreview.pts);
-        } else if (m_dragOrigShape.kind == ShapeKind::Bezier) {
-            for (int i = 0; i < 4; i++) {
-                m_dragPreview.pts[i].x += dx;
-                m_dragPreview.pts[i].y += dy;
+            m_dragPreview = m_dragOrigShape;
+            if (m_dragMode == DragMode::BezierPt) {
+                m_dragPreview.pts[m_bezierHandleIdx].x += dx;
+                m_dragPreview.pts[m_bezierHandleIdx].y += dy;
+                m_dragPreview.bounds = BezierBounds(m_dragPreview.pts);
+            } else if (m_dragOrigShape.kind == ShapeKind::Bezier) {
+                for (int i = 0; i < 4; i++) {
+                    m_dragPreview.pts[i].x += dx;
+                    m_dragPreview.pts[i].y += dy;
+                }
+                m_dragPreview.bounds = BezierBounds(m_dragPreview.pts);
+            } else {
+                m_dragPreview.bounds = ApplyDragMode(m_dragMode, m_dragOrigBounds, dx, dy);
             }
-            m_dragPreview.bounds = BezierBounds(m_dragPreview.pts);
-        } else {
-            m_dragPreview.bounds = ApplyDragMode(m_dragMode, m_dragOrigBounds, dx, dy);
+            Refresh();
+        } else if (m_dragging) {
+            Refresh();
         }
-        Refresh();
-    } else if (m_dragging) {
-        Refresh();
     }
     e.Skip();
 }
 
 void DrawCanvas::OnLeftUp(wxMouseEvent& e) {
-    // End a select-mode move/resize drag — commit the preview to the document.
+    // Finalize rubber-band selection.
+    if (m_rubberBanding) {
+        m_rubberBanding = false;
+        if (HasCapture()) ReleaseMouse();
+
+        wxRect rb = NormalizedRect(m_rubberBandStart, ScreenToDoc(e.GetPosition()));
+        if (rb.width > 2 && rb.height > 2) {
+            auto* doc = GetDoc();
+            bool ctrlHeld = e.ControlDown() || e.CmdDown();
+            if (!ctrlHeld) m_selection.clear();
+
+            if (doc) {
+                const std::vector<DrawShape>* scope = CurrentShapes(doc);
+                if (scope) {
+                    for (int i = 0; i < (int)scope->size(); i++) {
+                        if (rb.Intersects((*scope)[i].bounds)) {
+                            if (std::find(m_selection.begin(), m_selection.end(), i)
+                                == m_selection.end())
+                                m_selection.push_back(i);
+                        }
+                    }
+                }
+            }
+            m_selected = m_selection.empty() ? -1 : m_selection.back();
+        }
+
+        m_owner->NotifySelectionChanged();
+        Refresh();
+        e.Skip();
+        return;
+    }
+
+    // Finalize multi-shape drag.
+    if (m_isMultiDrag) {
+        m_isMultiDrag = false;
+        if (HasCapture()) ReleaseMouse();
+
+        auto* doc = GetDoc();
+        if (doc && (m_multiDragDelta.x != 0 || m_multiDragDelta.y != 0)) {
+            auto* batch = new BatchCmd("Move Shapes");
+            for (int i = 0; i < (int)m_selection.size(); i++) {
+                int idx = m_selection[i];
+                DrawShape before = m_multiDragShapes[i];
+                DrawShape after  = before;
+                after.bounds.x += m_multiDragDelta.x;
+                after.bounds.y += m_multiDragDelta.y;
+                if (after.kind == ShapeKind::Bezier) {
+                    for (int k = 0; k < 4; k++) {
+                        after.pts[k].x += m_multiDragDelta.x;
+                        after.pts[k].y += m_multiDragDelta.y;
+                    }
+                    after.bounds = BezierBounds(after.pts);
+                }
+                ShapePath path = CurrentPath(idx);
+                batch->Add(new UpdateShapeAtCmd(doc, path, before, after, "Move Shape"));
+            }
+            doc->GetCommandProcessor()->Submit(batch);
+        }
+        Refresh();
+        e.Skip();
+        return;
+    }
+
+    // Finalize single-shape move/resize drag.
     if (m_tool == DrawTool::Select && m_dragMode != DragMode::None) {
         auto* doc = GetDoc();
-        if (doc && m_selected >= 0 && m_selected < (int)doc->GetShapes().size()) {
+        const std::vector<DrawShape>* scope = CurrentShapes(doc);
+        if (doc && scope && m_selected >= 0 && m_selected < (int)scope->size()) {
             if (m_dragPreview.bounds != m_dragOrigShape.bounds ||
                 m_dragPreview.pts[0] != m_dragOrigShape.pts[0] ||
                 m_dragPreview.pts[1] != m_dragOrigShape.pts[1] ||
@@ -687,8 +931,9 @@ void DrawCanvas::OnLeftUp(wxMouseEvent& e) {
                 m_dragPreview.pts[3] != m_dragOrigShape.pts[3])
             {
                 wxString name = (m_dragMode == DragMode::Move) ? "Move Shape" : "Resize Shape";
+                ShapePath path = CurrentPath(m_selected);
                 doc->GetCommandProcessor()->Submit(
-                    new UpdateShapeCmd(doc, m_selected, m_dragOrigShape, m_dragPreview, name));
+                    new UpdateShapeAtCmd(doc, path, m_dragOrigShape, m_dragPreview, name));
             }
         }
         m_dragMode = DragMode::None;
@@ -697,13 +942,14 @@ void DrawCanvas::OnLeftUp(wxMouseEvent& e) {
         return;
     }
 
+    // Finalize new-shape creation drag.
     if (!m_dragging) { e.Skip(); return; }
 
     m_dragging = false;
     if (HasCapture()) ReleaseMouse();
 
     wxRect r = NormalizedRect(m_dragStart, ScreenToDoc(e.GetPosition()));
-    if (r.width < 4 || r.height < 4) { Refresh(); return; } // too small
+    if (r.width < 4 || r.height < 4) { Refresh(); return; }
 
     DrawShape s;
     s.bounds   = r;
@@ -725,8 +971,14 @@ void DrawCanvas::OnLeftUp(wxMouseEvent& e) {
 
     auto* doc = GetDoc();
     if (doc) {
-        doc->GetCommandProcessor()->Submit(new AddShapeCmd(doc, s));
-        m_selected = static_cast<int>(doc->GetShapes().size()) - 1;
+        const std::vector<DrawShape>* scope = CurrentShapes(doc);
+        int newIdx = scope ? (int)scope->size() : 0;
+        ShapePath parentPath = m_activeGroupIdx >= 0
+            ? ShapePath{ m_activeGroupIdx }
+            : ShapePath{};
+        doc->GetCommandProcessor()->Submit(
+            new InsertShapeAtCmd(doc, parentPath, newIdx, s));
+        SetSingleSelection(newIdx);
         m_owner->NotifySelectionChanged();
     }
 
@@ -735,28 +987,138 @@ void DrawCanvas::OnLeftUp(wxMouseEvent& e) {
 }
 
 void DrawCanvas::OnLeftDClick(wxMouseEvent& e) {
-    if (m_tool == DrawTool::Select && m_selected >= 0)
+    if (m_tool != DrawTool::Select) { e.Skip(); return; }
+
+    auto* doc = GetDoc();
+
+    // Double-click on a Group in normal mode → enter isolation mode.
+    if (m_activeGroupIdx < 0 && m_selected >= 0 && doc) {
+        const auto& shapes = doc->GetShapes();
+        if (m_selected < (int)shapes.size() &&
+            shapes[m_selected].kind == ShapeKind::Group)
+        {
+            m_activeGroupIdx = m_selected;
+            ClearSelection();
+            m_owner->NotifySelectionChanged();
+            Refresh();
+            e.Skip();
+            return;
+        }
+    }
+
+    // In isolation mode, double-click on a child Group → enter sub-group.
+    if (m_activeGroupIdx >= 0 && m_selected >= 0 && doc) {
+        const std::vector<DrawShape>* scope = CurrentShapes(doc);
+        if (scope && m_selected < (int)scope->size() &&
+            (*scope)[m_selected].kind == ShapeKind::Group)
+        {
+            // Only one level of isolation supported (Phase 4).
+            // For now, open properties dialog instead.
+        }
+    }
+
+    // Normal double-click → properties dialog.
+    if (m_selected >= 0)
         OpenPropertiesDialog(m_selected);
+
     e.Skip();
 }
 
 void DrawCanvas::OnKeyDown(wxKeyEvent& e) {
-    if (e.GetKeyCode() == WXK_ESCAPE && m_tool == DrawTool::Bezier && m_bezierStep > 0) {
-        m_bezierStep = 0;
-        Refresh();
-    } else if (e.GetKeyCode() == WXK_DELETE && m_selected >= 0) {
-        auto* doc = GetDoc();
-        if (doc && m_selected < (int)doc->GetShapes().size()) {
-            DrawShape shape = doc->GetShapes()[m_selected];
-            int idx = m_selected;
-            m_selected = -1;
+    auto* doc = GetDoc();
+
+    if (e.GetKeyCode() == WXK_ESCAPE) {
+        if (m_activeGroupIdx >= 0) {
+            // Exit group isolation mode.
+            m_activeGroupIdx = -1;
+            ClearSelection();
             m_owner->NotifySelectionChanged();
-            doc->GetCommandProcessor()->Submit(new RemoveShapeCmd(doc, idx, shape));
+            Refresh();
+        } else if (m_tool == DrawTool::Bezier && m_bezierStep > 0) {
+            m_bezierStep = 0;
             Refresh();
         }
-    } else {
         e.Skip();
+        return;
     }
+
+    if (e.GetKeyCode() == WXK_DELETE && !m_selection.empty() && doc) {
+        const std::vector<DrawShape>* scope = CurrentShapes(doc);
+        if (!scope) { e.Skip(); return; }
+
+        std::vector<int> sorted = m_selection;
+        std::sort(sorted.begin(), sorted.end(), std::greater<int>());
+
+        if (sorted.size() == 1) {
+            int idx = sorted[0];
+            DrawShape shape = (*scope)[idx];
+            ShapePath path = CurrentPath(idx);
+            ClearSelection();
+            m_owner->NotifySelectionChanged();
+            doc->GetCommandProcessor()->Submit(new RemoveShapeAtCmd(doc, path, shape));
+        } else {
+            auto* batch = new BatchCmd("Delete Shapes");
+            for (int idx : sorted) {
+                DrawShape shape = (*scope)[idx];
+                ShapePath path = CurrentPath(idx);
+                batch->Add(new RemoveShapeAtCmd(doc, path, shape));
+            }
+            ClearSelection();
+            m_owner->NotifySelectionChanged();
+            doc->GetCommandProcessor()->Submit(batch);
+        }
+        Refresh();
+        e.Skip();
+        return;
+    }
+
+    // Ctrl+G – group selected shapes (only in normal mode, root level)
+    if (e.GetKeyCode() == 'G' && (e.ControlDown() || e.CmdDown()) &&
+        !e.ShiftDown() && m_selection.size() >= 2 && doc &&
+        m_activeGroupIdx < 0)
+    {
+        // Only root-level indices supported.
+        std::vector<int> indices = m_selection;
+        std::sort(indices.begin(), indices.end());
+
+        auto* cmd = new GroupShapesCmd(doc, indices);
+        ClearSelection();
+        doc->GetCommandProcessor()->Submit(cmd);
+        // Select the newly created group.
+        SetSingleSelection(cmd->GetGroupPath()[0]);
+        m_owner->NotifySelectionChanged();
+        Refresh();
+        e.Skip();
+        return;
+    }
+
+    // Ctrl+Shift+G – ungroup selected group (only in normal mode, root level)
+    if (e.GetKeyCode() == 'G' && (e.ControlDown() || e.CmdDown()) &&
+        e.ShiftDown() && m_selection.size() == 1 && doc &&
+        m_activeGroupIdx < 0)
+    {
+        int idx = m_selection[0];
+        const auto& shapes = doc->GetShapes();
+        if (idx >= 0 && idx < (int)shapes.size() &&
+            shapes[idx].kind == ShapeKind::Group)
+        {
+            DrawShape group = shapes[idx];
+            int childCount = (int)group.children.size();
+            ClearSelection();
+            doc->GetCommandProcessor()->Submit(
+                new UngroupCmd(doc, ShapePath{idx}, group));
+            // Select the ungrouped children.
+            for (int i = idx; i < idx + childCount; i++)
+                m_selection.push_back(i);
+            m_selected = m_selection.empty() ? -1 : m_selection.back();
+            m_owner->NotifySelectionChanged();
+            Refresh();
+        }
+        e.Skip();
+        return;
+    }
+
+    e.Skip();
 }
 
 // ---------------------------------------------------------------------------
@@ -784,12 +1146,11 @@ void DrawCanvas::OnMiddleUp(wxMouseEvent& e) {
 void DrawCanvas::OnMouseWheel(wxMouseEvent& e) {
     if (!e.ControlDown()) { e.Skip(); return; }
 
-    // Zoom towards the point under the cursor.
-    static constexpr double kFactor = 1.15;
+    static constexpr double kFactor  = 1.15;
     static constexpr double kMinZoom = 0.05;
     static constexpr double kMaxZoom = 20.0;
 
-    const wxPoint mouse  = e.GetPosition();         // screen coords
+    const wxPoint mouse  = e.GetPosition();
     const double  logX   = (mouse.x - m_viewOffset.x) / m_zoom;
     const double  logY   = (mouse.y - m_viewOffset.y) / m_zoom;
     const double  newZoom = std::max(kMinZoom, std::min(kMaxZoom,
@@ -805,36 +1166,58 @@ void DrawCanvas::OnMouseWheel(wxMouseEvent& e) {
 void DrawCanvas::OpenPropertiesDialog(int idx) {
     auto* doc = GetDoc();
     if (!doc) return;
-    const auto& shapes = doc->GetShapes();
-    if (idx < 0 || idx >= (int)shapes.size()) return;
+    const std::vector<DrawShape>* scope = CurrentShapes(doc);
+    if (!scope || idx < 0 || idx >= (int)scope->size()) return;
 
-    DrawShape before = shapes[idx];
+    DrawShape before = (*scope)[idx];
     DrawShape after  = before;
+    // Groups and SVGRef don't have a leaf-properties dialog yet.
+    if (before.kind == ShapeKind::Group || before.kind == ShapeKind::SVGRef) return;
     ShapePropertiesDialog dlg(this, after);
     if (dlg.ShowModal() == wxID_OK) {
         dlg.Apply(after);
+        ShapePath path = CurrentPath(idx);
         doc->GetCommandProcessor()->Submit(
-            new UpdateShapeCmd(doc, idx, before, after, "Edit Properties"));
+            new UpdateShapeAtCmd(doc, path, before, after, "Edit Properties"));
     }
 }
 
 void DrawCanvas::ValidateSelection() {
     auto* doc = GetDoc();
-    if (!doc || m_selected >= (int)doc->GetShapes().size())
+    const std::vector<DrawShape>* scope = CurrentShapes(doc);
+    int shapeCount = scope ? (int)scope->size() : 0;
+    m_selection.erase(
+        std::remove_if(m_selection.begin(), m_selection.end(),
+                       [shapeCount](int i){ return i < 0 || i >= shapeCount; }),
+        m_selection.end());
+    if (!m_selection.empty())
+        m_selected = m_selection.back();
+    else
         m_selected = -1;
-}
 
-void DrawView::NotifySelectionChanged() {
-    auto* mf = wxDynamicCast(wxGetApp().GetTopWindow(), MainFrame);
-    if (!mf) return;
-    DrawDoc* doc = m_canvas ? wxDynamicCast(GetDocument(), DrawDoc) : nullptr;
-    int idx = m_canvas ? m_canvas->GetSelectedIndex() : -1;
-    mf->OnSelectionChanged(doc, idx);
+    // Validate the active group index.
+    if (m_activeGroupIdx >= 0) {
+        int rootCount = doc ? (int)doc->GetShapes().size() : 0;
+        if (m_activeGroupIdx >= rootCount ||
+            doc->GetShapes()[m_activeGroupIdx].kind != ShapeKind::Group)
+        {
+            m_activeGroupIdx = -1;
+        }
+    }
 }
 
 // ---------------------------------------------------------------------------
 // DrawView
 // ---------------------------------------------------------------------------
+
+void DrawView::NotifySelectionChanged() {
+    auto* mf = wxDynamicCast(wxGetApp().GetTopWindow(), MainFrame);
+    if (!mf) return;
+    DrawDoc* doc = m_canvas ? wxDynamicCast(GetDocument(), DrawDoc) : nullptr;
+    static const std::vector<int> kEmpty;
+    const std::vector<int>& sel = m_canvas ? m_canvas->GetSelection() : kEmpty;
+    mf->OnSelectionChanged(doc, sel);
+}
 
 wxIMPLEMENT_DYNAMIC_CLASS(DrawView, wxView);
 
@@ -868,39 +1251,23 @@ void DrawView::OnActivateView(bool activate, wxView*, wxView*) {
     auto* mf = wxDynamicCast(wxGetApp().GetTopWindow(), MainFrame);
     if (!mf) return;
 
-    mf->SetActiveDrawView(activate ? this : nullptr);
-
-    if (activate && m_canvas) {
-        wxAuiNotebook* nb = mf->GetNotebook();
-        if (nb) {
-            int idx = nb->GetPageIndex(m_canvas);
-            if (idx != wxNOT_FOUND && nb->GetSelection() != idx)
-                nb->SetSelection(idx);
-        }
-    }
+    if (activate)
+        NotifySelectionChanged();
+    else
+        mf->OnSelectionChanged(nullptr, {});
 }
 
 bool DrawView::OnClose(bool deleteWindow) {
     if (!wxView::OnClose(deleteWindow)) return false;
 
-    // Always clear the properties pane for this document — even if this view
-    // was not the active one — to prevent a dangling DrawDoc* in PropPanel.
     auto* mf = wxDynamicCast(wxGetApp().GetTopWindow(), MainFrame);
-    if (mf) mf->OnSelectionChanged(nullptr, -1);
-
-    Activate(false);
-
-    if (deleteWindow && m_canvas) {
-        auto* mf = wxDynamicCast(wxGetApp().GetTopWindow(), MainFrame);
-        if (mf) {
-            wxAuiNotebook* nb = mf->GetNotebook();
-            if (nb) {
-                int idx = nb->GetPageIndex(m_canvas);
-                if (idx != wxNOT_FOUND)
-                    nb->DeletePage(idx);
-            }
+    if (mf && m_canvas) {
+        wxAuiNotebook* nb = mf->GetNotebook();
+        if (nb) {
+            int idx = nb->GetPageIndex(m_canvas);
+            if (idx != wxNOT_FOUND)
+                nb->DeletePage(idx);
         }
-        m_canvas = nullptr;
     }
     return true;
 }
