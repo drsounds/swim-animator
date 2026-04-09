@@ -297,8 +297,13 @@ wxBEGIN_EVENT_TABLE(DrawCanvas, wxPanel)
     EVT_MIDDLE_DOWN(DrawCanvas::OnMiddleDown)
     EVT_MIDDLE_UP(  DrawCanvas::OnMiddleUp)
     EVT_MOUSEWHEEL( DrawCanvas::OnMouseWheel)
-    EVT_LEFT_DCLICK(DrawCanvas::OnLeftDClick)
-    EVT_KEY_DOWN(   DrawCanvas::OnKeyDown)
+    EVT_LEFT_DCLICK(   DrawCanvas::OnLeftDClick)
+    EVT_KEY_DOWN(      DrawCanvas::OnKeyDown)
+    EVT_CONTEXT_MENU(  DrawCanvas::OnContextMenu)
+    EVT_MENU(ID_CTX_DELETE,     DrawCanvas::OnCtxDelete)
+    EVT_MENU(ID_CTX_GROUP,      DrawCanvas::OnCtxGroup)
+    EVT_MENU(ID_CTX_UNGROUP,    DrawCanvas::OnCtxUngroup)
+    EVT_MENU(ID_CTX_PROPERTIES, DrawCanvas::OnCtxProperties)
 wxEND_EVENT_TABLE()
 
 DrawCanvas::DrawCanvas(DrawView* owner, wxWindow* parent)
@@ -1124,6 +1129,136 @@ void DrawCanvas::OnKeyDown(wxKeyEvent& e) {
     }
 
     e.Skip();
+}
+
+// ---------------------------------------------------------------------------
+// Context menu
+// ---------------------------------------------------------------------------
+
+void DrawCanvas::OnContextMenu(wxContextMenuEvent& e) {
+    auto* doc = GetDoc();
+    if (!doc) { e.Skip(); return; }
+
+    // If the click landed on a shape not yet selected, select it first.
+    wxPoint screenPt = e.GetPosition();
+    if (screenPt != wxDefaultPosition) {
+        wxPoint docPt = ScreenToDoc(ScreenToClient(screenPt));
+        int hit = HitTest(docPt);
+        if (hit >= 0) {
+            bool alreadySelected = std::find(m_selection.begin(),
+                                             m_selection.end(), hit)
+                                   != m_selection.end();
+            if (!alreadySelected) {
+                SetSingleSelection(hit);
+                m_owner->NotifySelectionChanged();
+                Refresh();
+            }
+        }
+    }
+
+    bool hasSel     = !m_selection.empty();
+    bool canGroup   = (m_selection.size() >= 2) && (m_activeGroupIdx < 0);
+    bool canUngroup = false;
+    if (m_selection.size() == 1 && m_activeGroupIdx < 0) {
+        const auto& shapes = doc->GetShapes();
+        int idx = m_selection[0];
+        canUngroup = (idx >= 0 && idx < (int)shapes.size() &&
+                      shapes[idx].kind == ShapeKind::Group);
+    }
+    bool hasSingle = (m_selection.size() == 1);
+
+    // Check clipboard for Paste enablement.
+    static wxDataFormat clipFmt("application/x-spacely-shapes");
+    bool hasClip = false;
+    if (wxClipboard::Get()->Open()) {
+        hasClip = wxClipboard::Get()->IsSupported(clipFmt);
+        wxClipboard::Get()->Close();
+    }
+
+    wxMenu menu;
+    menu.Append(wxID_CUT,   "&Cut\tCtrl+X")->Enable(hasSel);
+    menu.Append(wxID_COPY,  "C&opy\tCtrl+C")->Enable(hasSel);
+    menu.Append(wxID_PASTE, "&Paste\tCtrl+V")->Enable(hasClip);
+    menu.Append(ID_CTX_DELETE, "&Delete\tDel")->Enable(hasSel);
+    menu.AppendSeparator();
+    menu.Append(wxID_SELECTALL, "Select &All\tCtrl+A");
+    menu.AppendSeparator();
+    menu.Append(ID_CTX_GROUP,   "&Group\tCtrl+G")->Enable(canGroup);
+    menu.Append(ID_CTX_UNGROUP, "&Ungroup\tCtrl+Shift+G")->Enable(canUngroup);
+    menu.AppendSeparator();
+    menu.Append(ID_CTX_PROPERTIES, "&Properties…")->Enable(hasSingle);
+
+    PopupMenu(&menu);
+}
+
+void DrawCanvas::OnCtxDelete(wxCommandEvent&) {
+    auto* doc = GetDoc();
+    if (!doc || m_selection.empty()) return;
+
+    const std::vector<DrawShape>* scope = CurrentShapes(doc);
+    if (!scope) return;
+
+    std::vector<int> sorted = m_selection;
+    std::sort(sorted.begin(), sorted.end(), std::greater<int>());
+
+    if (sorted.size() == 1) {
+        int idx = sorted[0];
+        DrawShape shape = (*scope)[idx];
+        ShapePath path = CurrentPath(idx);
+        ClearSelection();
+        m_owner->NotifySelectionChanged();
+        doc->GetCommandProcessor()->Submit(new RemoveShapeAtCmd(doc, path, shape));
+    } else {
+        auto* batch = new BatchCmd("Delete Shapes");
+        for (int idx : sorted) {
+            DrawShape shape = (*scope)[idx];
+            ShapePath path = CurrentPath(idx);
+            batch->Add(new RemoveShapeAtCmd(doc, path, shape));
+        }
+        ClearSelection();
+        m_owner->NotifySelectionChanged();
+        doc->GetCommandProcessor()->Submit(batch);
+    }
+    Refresh();
+}
+
+void DrawCanvas::OnCtxGroup(wxCommandEvent&) {
+    auto* doc = GetDoc();
+    if (!doc || m_selection.size() < 2 || m_activeGroupIdx >= 0) return;
+
+    std::vector<int> indices = m_selection;
+    std::sort(indices.begin(), indices.end());
+    auto* cmd = new GroupShapesCmd(doc, indices);
+    ClearSelection();
+    doc->GetCommandProcessor()->Submit(cmd);
+    SetSingleSelection(cmd->GetGroupPath()[0]);
+    m_owner->NotifySelectionChanged();
+    Refresh();
+}
+
+void DrawCanvas::OnCtxUngroup(wxCommandEvent&) {
+    auto* doc = GetDoc();
+    if (!doc || m_selection.size() != 1 || m_activeGroupIdx >= 0) return;
+
+    int idx = m_selection[0];
+    const auto& shapes = doc->GetShapes();
+    if (idx < 0 || idx >= (int)shapes.size() ||
+        shapes[idx].kind != ShapeKind::Group) return;
+
+    DrawShape group = shapes[idx];
+    int childCount = (int)group.children.size();
+    ClearSelection();
+    doc->GetCommandProcessor()->Submit(new UngroupCmd(doc, ShapePath{idx}, group));
+    for (int i = idx; i < idx + childCount; i++)
+        m_selection.push_back(i);
+    m_selected = m_selection.empty() ? -1 : m_selection.back();
+    m_owner->NotifySelectionChanged();
+    Refresh();
+}
+
+void DrawCanvas::OnCtxProperties(wxCommandEvent&) {
+    if (m_selected >= 0)
+        OpenPropertiesDialog(m_selected);
 }
 
 // ---------------------------------------------------------------------------

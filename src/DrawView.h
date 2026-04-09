@@ -77,6 +77,11 @@ private:
     void OnMouseWheel(wxMouseEvent&);
     void OnLeftDClick(wxMouseEvent&);
     void OnKeyDown(wxKeyEvent&);
+    void OnContextMenu(wxContextMenuEvent&);
+    void OnCtxDelete(wxCommandEvent&);
+    void OnCtxGroup(wxCommandEvent&);
+    void OnCtxUngroup(wxCommandEvent&);
+    void OnCtxProperties(wxCommandEvent&);
 
     // Convert between screen pixels and document (logical) coordinates.
     wxPoint ScreenToDoc(wxPoint screenPt) const;

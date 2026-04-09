@@ -15,4 +15,9 @@ enum {
     ID_HIER_TOGGLE_VISIBLE,
     ID_HIER_TOGGLE_LOCKED,
     ID_HIER_RENAME,
+    // Context-menu actions on the drawing canvas
+    ID_CTX_DELETE,
+    ID_CTX_GROUP,
+    ID_CTX_UNGROUP,
+    ID_CTX_PROPERTIES,
 };
