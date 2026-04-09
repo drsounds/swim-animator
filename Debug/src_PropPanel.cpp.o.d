@@ -94,9 +94,10 @@ Debug/src_PropPanel.cpp.o: src/PropPanel.cpp src/PropPanel.h \
  /usr/include/wx-3.2/wx/gtk/brush.h \
  /usr/include/wx-3.2/wx/affinematrix2d.h \
  /usr/include/wx-3.2/wx/affinematrix2dbase.h \
- /usr/include/wx-3.2/wx/geometry.h src/ShapePath.h src/DrawCommands.h \
- /usr/include/wx-3.2/wx/cmdproc.h /usr/include/wx-3.2/wx/colordlg.h \
- /usr/include/wx-3.2/wx/colourdata.h \
+ /usr/include/wx-3.2/wx/geometry.h /usr/include/wx-3.2/wx/xml/xml.h \
+ /usr/include/wx-3.2/wx/textbuf.h /usr/include/wx-3.2/wx/convauto.h \
+ src/ShapePath.h src/DrawCommands.h /usr/include/wx-3.2/wx/cmdproc.h \
+ /usr/include/wx-3.2/wx/colordlg.h /usr/include/wx-3.2/wx/colourdata.h \
  /usr/include/wx-3.2/wx/gtk/colordlg.h /usr/include/wx-3.2/wx/sizer.h \
  /usr/include/wx-3.2/wx/statline.h /usr/include/wx-3.2/wx/gtk/statline.h
 src/PropPanel.h:
@@ -273,6 +274,9 @@ src/DrawDoc.h:
 /usr/include/wx-3.2/wx/affinematrix2d.h:
 /usr/include/wx-3.2/wx/affinematrix2dbase.h:
 /usr/include/wx-3.2/wx/geometry.h:
+/usr/include/wx-3.2/wx/xml/xml.h:
+/usr/include/wx-3.2/wx/textbuf.h:
+/usr/include/wx-3.2/wx/convauto.h:
 src/ShapePath.h:
 src/DrawCommands.h:
 /usr/include/wx-3.2/wx/cmdproc.h:

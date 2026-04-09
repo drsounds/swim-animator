@@ -39,7 +39,9 @@
       "Bash(cmake -B /home/alecca/Documents/spacely/build -S /home/alecca/Documents/spacely)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(cmake -B build -DCMAKE_BUILD_TYPE=Debug -G Ninja)",
+      "Bash(ninja -C build)"
     ]
   }
 }

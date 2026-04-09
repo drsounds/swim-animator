@@ -332,6 +332,8 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /usr/include/c++/14/bits/stl_multimap.h \
  /home/alecca/Documents/spacely/src/DrawIds.h \
  /home/alecca/Documents/spacely/src/ShapePath.h \
+ /home/alecca/Documents/spacely/src/SnapEngine.h \
+ /home/alecca/Documents/spacely/src/SnapSettings.h \
  /home/alecca/Documents/spacely/src/PropPanel.h \
  /usr/include/wx-3.2/wx/spinctrl.h /usr/include/wx-3.2/wx/spinbutt.h \
  /usr/include/wx-3.2/wx/range.h /usr/include/wx-3.2/wx/gtk/spinbutt.h \
@@ -391,6 +393,8 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
  /usr/include/wx-3.2/wx/gtk/app.h \
  /home/alecca/Documents/spacely/src/Palette.h \
+ /home/alecca/Documents/spacely/src/SettingsDialog.h \
+ /usr/include/wx-3.2/wx/checkbox.h /usr/include/wx-3.2/wx/gtk/checkbox.h \
  /home/alecca/Documents/spacely/src/DrawDoc.h \
  /home/alecca/Documents/spacely/src/SpaView.h \
  /usr/include/wx-3.2/wx/artprov.h /usr/include/wx-3.2/wx/msgdlg.h \

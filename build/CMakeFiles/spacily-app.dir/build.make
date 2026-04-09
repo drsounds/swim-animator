@@ -296,6 +296,48 @@ CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alecca/Documents/spacely/src/HierarchyPanel.cpp -o CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.s
 
+CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.o: CMakeFiles/spacily-app.dir/flags.make
+CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.o: /home/alecca/Documents/spacely/src/SnapSettings.cpp
+CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.o: CMakeFiles/spacily-app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alecca/Documents/spacely/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.o -MF CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.o.d -o CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.o -c /home/alecca/Documents/spacely/src/SnapSettings.cpp
+
+CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alecca/Documents/spacely/src/SnapSettings.cpp > CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.i
+
+CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alecca/Documents/spacely/src/SnapSettings.cpp -o CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.s
+
+CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.o: CMakeFiles/spacily-app.dir/flags.make
+CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.o: /home/alecca/Documents/spacely/src/SnapEngine.cpp
+CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.o: CMakeFiles/spacily-app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alecca/Documents/spacely/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.o -MF CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.o.d -o CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.o -c /home/alecca/Documents/spacely/src/SnapEngine.cpp
+
+CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alecca/Documents/spacely/src/SnapEngine.cpp > CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.i
+
+CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alecca/Documents/spacely/src/SnapEngine.cpp -o CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.s
+
+CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.o: CMakeFiles/spacily-app.dir/flags.make
+CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.o: /home/alecca/Documents/spacely/src/SettingsDialog.cpp
+CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.o: CMakeFiles/spacily-app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alecca/Documents/spacely/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.o -MF CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.o.d -o CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.o -c /home/alecca/Documents/spacely/src/SettingsDialog.cpp
+
+CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alecca/Documents/spacely/src/SettingsDialog.cpp > CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.i
+
+CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alecca/Documents/spacely/src/SettingsDialog.cpp -o CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.s
+
 # Object files for target spacily-app
 spacily__app_OBJECTS = \
 "CMakeFiles/spacily-app.dir/src/App.cpp.o" \
@@ -313,7 +355,10 @@ spacily__app_OBJECTS = \
 "CMakeFiles/spacily-app.dir/src/SpaSaveAsDialog.cpp.o" \
 "CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o" \
 "CMakeFiles/spacily-app.dir/src/NewDrawingDialog.cpp.o" \
-"CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.o"
+"CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.o" \
+"CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.o" \
+"CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.o" \
+"CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.o"
 
 # External object files for target spacily-app
 spacily__app_EXTERNAL_OBJECTS =
@@ -334,10 +379,13 @@ spacily-app: CMakeFiles/spacily-app.dir/src/SpaSaveAsDialog.cpp.o
 spacily-app: CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o
 spacily-app: CMakeFiles/spacily-app.dir/src/NewDrawingDialog.cpp.o
 spacily-app: CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.o
+spacily-app: CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.o
+spacily-app: CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.o
+spacily-app: CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.o
 spacily-app: CMakeFiles/spacily-app.dir/build.make
 spacily-app: CMakeFiles/spacily-app.dir/compiler_depend.ts
 spacily-app: CMakeFiles/spacily-app.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/alecca/Documents/spacely/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable spacily-app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/alecca/Documents/spacely/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX executable spacily-app"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/spacily-app.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

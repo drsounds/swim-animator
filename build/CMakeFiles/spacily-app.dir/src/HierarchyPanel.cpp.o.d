@@ -380,6 +380,7 @@ CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
  /usr/include/wx-3.2/wx/gtk/app.h \
  /home/alecca/Documents/spacely/src/Palette.h \
+ /home/alecca/Documents/spacely/src/SnapSettings.h \
  /home/alecca/Documents/spacely/src/MainFrame.h \
  /usr/include/wx-3.2/wx/aui/aui.h \
  /usr/include/wx-3.2/wx/aui/framemanager.h /usr/include/wx-3.2/wx/timer.h \
@@ -396,6 +397,7 @@ CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.o: \
  /usr/include/wx-3.2/wx/gtk/mdi.h /usr/include/wx-3.2/wx/toolbar.h \
  /usr/include/wx-3.2/wx/tbarbase.h /usr/include/wx-3.2/wx/gtk/toolbar.h \
  /home/alecca/Documents/spacely/src/DrawView.h \
+ /home/alecca/Documents/spacely/src/SnapEngine.h \
  /home/alecca/Documents/spacely/src/PropPanel.h \
  /usr/include/wx-3.2/wx/spinctrl.h /usr/include/wx-3.2/wx/spinbutt.h \
  /usr/include/wx-3.2/wx/range.h /usr/include/wx-3.2/wx/gtk/spinbutt.h \

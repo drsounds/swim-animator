@@ -79,7 +79,8 @@ Debug/src_DrawCommands.cpp.o: src/DrawCommands.cpp src/DrawCommands.h \
  /usr/include/wx-3.2/wx/gtk/brush.h \
  /usr/include/wx-3.2/wx/affinematrix2d.h \
  /usr/include/wx-3.2/wx/affinematrix2dbase.h \
- /usr/include/wx-3.2/wx/geometry.h
+ /usr/include/wx-3.2/wx/geometry.h /usr/include/wx-3.2/wx/xml/xml.h \
+ /usr/include/wx-3.2/wx/textbuf.h /usr/include/wx-3.2/wx/convauto.h
 src/DrawCommands.h:
 /usr/include/wx-3.2/wx/cmdproc.h:
 /usr/include/wx-3.2/wx/defs.h:
@@ -230,3 +231,6 @@ src/DrawDoc.h:
 /usr/include/wx-3.2/wx/affinematrix2d.h:
 /usr/include/wx-3.2/wx/affinematrix2dbase.h:
 /usr/include/wx-3.2/wx/geometry.h:
+/usr/include/wx-3.2/wx/xml/xml.h:
+/usr/include/wx-3.2/wx/textbuf.h:
+/usr/include/wx-3.2/wx/convauto.h:

@@ -341,6 +341,7 @@ CMakeFiles/spacily-app.dir/src/SpaView.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
  /usr/include/wx-3.2/wx/gtk/app.h \
  /home/alecca/Documents/spacely/src/Palette.h \
+ /home/alecca/Documents/spacely/src/SnapSettings.h \
  /home/alecca/Documents/spacely/src/MainFrame.h \
  /usr/include/wx-3.2/wx/aui/aui.h \
  /usr/include/wx-3.2/wx/aui/framemanager.h /usr/include/wx-3.2/wx/timer.h \
@@ -364,6 +365,7 @@ CMakeFiles/spacily-app.dir/src/SpaView.cpp.o: \
  /usr/include/c++/14/bits/stl_multimap.h \
  /home/alecca/Documents/spacely/src/DrawIds.h \
  /home/alecca/Documents/spacely/src/ShapePath.h \
+ /home/alecca/Documents/spacely/src/SnapEngine.h \
  /home/alecca/Documents/spacely/src/PropPanel.h \
  /usr/include/wx-3.2/wx/spinctrl.h /usr/include/wx-3.2/wx/spinbutt.h \
  /usr/include/wx-3.2/wx/range.h /usr/include/wx-3.2/wx/gtk/spinbutt.h \

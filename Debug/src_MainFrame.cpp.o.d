@@ -128,7 +128,12 @@ Debug/src_MainFrame.cpp.o: src/MainFrame.cpp src/MainFrame.h \
  /usr/include/wx-3.2/wx/gtk/filectrl.h /usr/include/wx-3.2/wx/filectrl.h \
  /usr/include/wx-3.2/wx/stdpaths.h /usr/include/wx-3.2/wx/unix/stdpaths.h \
  /usr/include/wx-3.2/wx/filename.h /usr/include/wx-3.2/wx/file.h \
- /usr/include/wx-3.2/wx/statbmp.h /usr/include/wx-3.2/wx/gtk/statbmp.h
+ /usr/include/wx-3.2/wx/statbmp.h /usr/include/wx-3.2/wx/gtk/statbmp.h \
+ /usr/include/wx-3.2/wx/clipbrd.h /usr/include/wx-3.2/wx/dataobj.h \
+ /usr/include/wx-3.2/wx/gtk/dataform.h \
+ /usr/include/wx-3.2/wx/gtk/dataobj.h \
+ /usr/include/wx-3.2/wx/gtk/dataobj2.h \
+ /usr/include/wx-3.2/wx/gtk/clipbrd.h
 src/MainFrame.h:
 /usr/include/wx-3.2/wx/docview.h:
 /usr/include/wx-3.2/wx/defs.h:
@@ -372,3 +377,9 @@ src/SpaView.h:
 /usr/include/wx-3.2/wx/file.h:
 /usr/include/wx-3.2/wx/statbmp.h:
 /usr/include/wx-3.2/wx/gtk/statbmp.h:
+/usr/include/wx-3.2/wx/clipbrd.h:
+/usr/include/wx-3.2/wx/dataobj.h:
+/usr/include/wx-3.2/wx/gtk/dataform.h:
+/usr/include/wx-3.2/wx/gtk/dataobj.h:
+/usr/include/wx-3.2/wx/gtk/dataobj2.h:
+/usr/include/wx-3.2/wx/gtk/clipbrd.h:

@@ -314,6 +314,8 @@ CMakeFiles/spacily-app.dir/src/DrawView.cpp.o: \
  /usr/include/c++/14/bits/stl_multimap.h \
  /home/alecca/Documents/spacely/src/DrawIds.h \
  /home/alecca/Documents/spacely/src/ShapePath.h \
+ /home/alecca/Documents/spacely/src/SnapEngine.h \
+ /home/alecca/Documents/spacely/src/SnapSettings.h \
  /home/alecca/Documents/spacely/src/DrawDoc.h \
  /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
  /usr/include/wx-3.2/wx/convauto.h \

@@ -417,6 +417,78 @@ src/PropPanel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/PropPanel.cpp.s
 .PHONY : src/PropPanel.cpp.s
 
+src/SettingsDialog.o: src/SettingsDialog.cpp.o
+.PHONY : src/SettingsDialog.o
+
+# target to build an object file
+src/SettingsDialog.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.o
+.PHONY : src/SettingsDialog.cpp.o
+
+src/SettingsDialog.i: src/SettingsDialog.cpp.i
+.PHONY : src/SettingsDialog.i
+
+# target to preprocess a source file
+src/SettingsDialog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.i
+.PHONY : src/SettingsDialog.cpp.i
+
+src/SettingsDialog.s: src/SettingsDialog.cpp.s
+.PHONY : src/SettingsDialog.s
+
+# target to generate assembly for a file
+src/SettingsDialog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.s
+.PHONY : src/SettingsDialog.cpp.s
+
+src/SnapEngine.o: src/SnapEngine.cpp.o
+.PHONY : src/SnapEngine.o
+
+# target to build an object file
+src/SnapEngine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.o
+.PHONY : src/SnapEngine.cpp.o
+
+src/SnapEngine.i: src/SnapEngine.cpp.i
+.PHONY : src/SnapEngine.i
+
+# target to preprocess a source file
+src/SnapEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.i
+.PHONY : src/SnapEngine.cpp.i
+
+src/SnapEngine.s: src/SnapEngine.cpp.s
+.PHONY : src/SnapEngine.s
+
+# target to generate assembly for a file
+src/SnapEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.s
+.PHONY : src/SnapEngine.cpp.s
+
+src/SnapSettings.o: src/SnapSettings.cpp.o
+.PHONY : src/SnapSettings.o
+
+# target to build an object file
+src/SnapSettings.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.o
+.PHONY : src/SnapSettings.cpp.o
+
+src/SnapSettings.i: src/SnapSettings.cpp.i
+.PHONY : src/SnapSettings.i
+
+# target to preprocess a source file
+src/SnapSettings.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.i
+.PHONY : src/SnapSettings.cpp.i
+
+src/SnapSettings.s: src/SnapSettings.cpp.s
+.PHONY : src/SnapSettings.s
+
+# target to generate assembly for a file
+src/SnapSettings.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.s
+.PHONY : src/SnapSettings.cpp.s
+
 src/SpaDoc.o: src/SpaDoc.cpp.o
 .PHONY : src/SpaDoc.o
 
@@ -558,6 +630,15 @@ help:
 	@echo "... src/PropPanel.o"
 	@echo "... src/PropPanel.i"
 	@echo "... src/PropPanel.s"
+	@echo "... src/SettingsDialog.o"
+	@echo "... src/SettingsDialog.i"
+	@echo "... src/SettingsDialog.s"
+	@echo "... src/SnapEngine.o"
+	@echo "... src/SnapEngine.i"
+	@echo "... src/SnapEngine.s"
+	@echo "... src/SnapSettings.o"
+	@echo "... src/SnapSettings.i"
+	@echo "... src/SnapSettings.s"
 	@echo "... src/SpaDoc.o"
 	@echo "... src/SpaDoc.i"
 	@echo "... src/SpaDoc.s"

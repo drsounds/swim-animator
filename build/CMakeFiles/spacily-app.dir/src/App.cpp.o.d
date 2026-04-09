@@ -337,6 +337,7 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o: \
  /usr/include/wx-3.2/wx/affinematrix2dbase.h \
  /usr/include/wx-3.2/wx/geometry.h \
  /home/alecca/Documents/spacely/src/Palette.h \
+ /home/alecca/Documents/spacely/src/SnapSettings.h \
  /home/alecca/Documents/spacely/src/MainFrame.h \
  /usr/include/wx-3.2/wx/aui/aui.h \
  /usr/include/wx-3.2/wx/aui/framemanager.h /usr/include/wx-3.2/wx/timer.h \
@@ -360,6 +361,7 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o: \
  /usr/include/c++/14/bits/stl_multimap.h \
  /home/alecca/Documents/spacely/src/DrawIds.h \
  /home/alecca/Documents/spacely/src/ShapePath.h \
+ /home/alecca/Documents/spacely/src/SnapEngine.h \
  /home/alecca/Documents/spacely/src/PropPanel.h \
  /usr/include/wx-3.2/wx/spinctrl.h /usr/include/wx-3.2/wx/spinbutt.h \
  /usr/include/wx-3.2/wx/range.h /usr/include/wx-3.2/wx/gtk/spinbutt.h \
