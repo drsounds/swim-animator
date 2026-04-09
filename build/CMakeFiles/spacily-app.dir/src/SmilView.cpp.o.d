@@ -320,8 +320,9 @@ CMakeFiles/spacily-app.dir/src/SmilView.cpp.o: \
  /home/alecca/Documents/spacely/src/DrawDoc.h \
  /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
  /usr/include/wx-3.2/wx/convauto.h \
- /home/alecca/Documents/spacely/src/SmilDoc.h \
+ /home/alecca/Documents/spacely/src/KeyframePanel.h \
  /home/alecca/Documents/spacely/src/SmilTypes.h \
+ /home/alecca/Documents/spacely/src/SmilDoc.h \
  /home/alecca/Documents/spacely/src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
  /usr/include/wx-3.2/wx/cmdargs.h /usr/include/wx-3.2/wx/init.h \
@@ -398,7 +399,6 @@ CMakeFiles/spacily-app.dir/src/SmilView.cpp.o: \
  /home/alecca/Documents/spacely/src/HierarchyPanel.h \
  /home/alecca/Documents/spacely/src/ScenePanel.h \
  /usr/include/wx-3.2/wx/listbox.h /usr/include/wx-3.2/wx/gtk/listbox.h \
- /home/alecca/Documents/spacely/src/KeyframePanel.h \
  /home/alecca/Documents/spacely/src/DrawCommands.h \
  /usr/include/wx-3.2/wx/cmdproc.h /usr/include/c++/14/memory \
  /usr/include/c++/14/bits/stl_raw_storage_iter.h \

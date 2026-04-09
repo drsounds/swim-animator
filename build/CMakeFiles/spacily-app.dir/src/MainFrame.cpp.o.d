@@ -366,8 +366,6 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /home/alecca/Documents/spacely/src/HierarchyPanel.h \
  /home/alecca/Documents/spacely/src/ScenePanel.h \
  /usr/include/wx-3.2/wx/listbox.h /usr/include/wx-3.2/wx/gtk/listbox.h \
- /home/alecca/Documents/spacely/src/KeyframePanel.h \
- /home/alecca/Documents/spacely/src/SmilTypes.h \
  /home/alecca/Documents/spacely/src/View.h \
  /home/alecca/Documents/spacely/src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
@@ -402,7 +400,9 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /home/alecca/Documents/spacely/src/DrawDoc.h \
  /home/alecca/Documents/spacely/src/SpaView.h \
  /home/alecca/Documents/spacely/src/SmilDoc.h \
+ /home/alecca/Documents/spacely/src/SmilTypes.h \
  /home/alecca/Documents/spacely/src/SmilView.h \
+ /home/alecca/Documents/spacely/src/KeyframePanel.h \
  /usr/include/wx-3.2/wx/artprov.h /usr/include/wx-3.2/wx/msgdlg.h \
  /usr/include/wx-3.2/wx/stockitem.h \
  /usr/include/wx-3.2/wx/generic/msgdlgg.h \

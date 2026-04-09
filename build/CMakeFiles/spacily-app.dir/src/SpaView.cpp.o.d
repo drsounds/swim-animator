@@ -395,7 +395,5 @@ CMakeFiles/spacily-app.dir/src/SpaView.cpp.o: \
  /home/alecca/Documents/spacely/src/HierarchyPanel.h \
  /home/alecca/Documents/spacely/src/ScenePanel.h \
  /usr/include/wx-3.2/wx/listbox.h /usr/include/wx-3.2/wx/gtk/listbox.h \
- /home/alecca/Documents/spacely/src/KeyframePanel.h \
- /home/alecca/Documents/spacely/src/SmilTypes.h \
  /usr/include/wx-3.2/wx/dcbuffer.h /usr/include/wx-3.2/wx/dcmemory.h \
  /usr/include/wx-3.2/wx/dcclient.h /usr/include/wx-3.2/wx/settings.h

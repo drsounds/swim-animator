@@ -326,8 +326,9 @@ CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.o: \
  /home/alecca/Documents/spacely/src/DrawDoc.h \
  /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
  /usr/include/wx-3.2/wx/convauto.h \
- /home/alecca/Documents/spacely/src/SmilDoc.h \
+ /home/alecca/Documents/spacely/src/KeyframePanel.h \
  /home/alecca/Documents/spacely/src/SmilTypes.h \
+ /home/alecca/Documents/spacely/src/SmilDoc.h \
  /usr/include/wx-3.2/wx/sizer.h /usr/include/wx-3.2/wx/textdlg.h \
  /usr/include/wx-3.2/wx/generic/textdlgg.h \
  /usr/include/wx-3.2/wx/valtext.h /usr/include/wx-3.2/wx/textctrl.h \

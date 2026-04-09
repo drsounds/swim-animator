@@ -394,14 +394,14 @@ CMakeFiles/spacily-app.dir/src/App.cpp.o: \
  /home/alecca/Documents/spacely/src/HierarchyPanel.h \
  /home/alecca/Documents/spacely/src/ScenePanel.h \
  /usr/include/wx-3.2/wx/listbox.h /usr/include/wx-3.2/wx/gtk/listbox.h \
- /home/alecca/Documents/spacely/src/KeyframePanel.h \
- /home/alecca/Documents/spacely/src/SmilTypes.h \
  /home/alecca/Documents/spacely/src/Document.h \
  /home/alecca/Documents/spacely/src/View.h \
  /home/alecca/Documents/spacely/src/DrawDoc.h \
  /home/alecca/Documents/spacely/src/SpaView.h \
  /home/alecca/Documents/spacely/src/SmilDoc.h \
+ /home/alecca/Documents/spacely/src/SmilTypes.h \
  /home/alecca/Documents/spacely/src/SmilView.h \
+ /home/alecca/Documents/spacely/src/KeyframePanel.h \
  /usr/include/wx-3.2/wx/filename.h /usr/include/wx-3.2/wx/file.h \
  /usr/include/wx-3.2/wx/stdpaths.h /usr/include/wx-3.2/wx/unix/stdpaths.h \
  /usr/include/wx-3.2/wx/splash.h /usr/include/wx-3.2/wx/generic/splash.h
