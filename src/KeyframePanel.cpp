@@ -38,6 +38,7 @@ KeyframePanel::KeyframePanel(wxWindow* parent)
     : wxPanel(parent, wxID_ANY)
 {
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
+    SetMinSize(wxSize(-1, kHeaderH + kRowHeight * 4));  // reserve space for header + a few rows
 
     auto* sizer = new wxBoxSizer(wxHORIZONTAL);
 
