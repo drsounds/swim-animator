@@ -676,6 +676,7 @@ void DrawCanvas::OnLeftDown(wxMouseEvent& e) {
                 m_owner->NotifySelectionChanged();
             }
             m_bezierStep = 0;
+            SetTool(DrawTool::Select);  // revert to pointer after creation
         }
         Refresh();
         e.Skip();
@@ -983,6 +984,7 @@ void DrawCanvas::OnLeftUp(wxMouseEvent& e) {
             new InsertShapeAtCmd(doc, parentPath, newIdx, s));
         SetSingleSelection(newIdx);
         m_owner->NotifySelectionChanged();
+        SetTool(DrawTool::Select);  // revert to pointer after creation
     }
 
     Refresh();
