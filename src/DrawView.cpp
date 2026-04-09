@@ -1251,10 +1251,13 @@ void DrawView::OnActivateView(bool activate, wxView*, wxView*) {
     auto* mf = wxDynamicCast(wxGetApp().GetTopWindow(), MainFrame);
     if (!mf) return;
 
-    if (activate)
+    if (activate) {
+        mf->SetActiveDrawView(this);
         NotifySelectionChanged();
-    else
+    } else {
+        mf->SetActiveDrawView(nullptr);
         mf->OnSelectionChanged(nullptr, {});
+    }
 }
 
 bool DrawView::OnClose(bool deleteWindow) {
