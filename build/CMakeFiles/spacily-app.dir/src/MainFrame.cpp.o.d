@@ -327,8 +327,11 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /usr/include/wx-3.2/wx/gtk/mdi.h /usr/include/wx-3.2/wx/toolbar.h \
  /usr/include/wx-3.2/wx/tbarbase.h /usr/include/wx-3.2/wx/gtk/toolbar.h \
  /home/alecca/Documents/spacely/src/DrawView.h \
- /home/alecca/Documents/spacely/src/DrawShape.h \
+ /home/alecca/Documents/spacely/src/DrawShape.h /usr/include/c++/14/map \
+ /usr/include/c++/14/bits/stl_tree.h /usr/include/c++/14/bits/stl_map.h \
+ /usr/include/c++/14/bits/stl_multimap.h \
  /home/alecca/Documents/spacely/src/DrawIds.h \
+ /home/alecca/Documents/spacely/src/ShapePath.h \
  /home/alecca/Documents/spacely/src/PropPanel.h \
  /usr/include/wx-3.2/wx/spinctrl.h /usr/include/wx-3.2/wx/spinbutt.h \
  /usr/include/wx-3.2/wx/range.h /usr/include/wx-3.2/wx/gtk/spinbutt.h \
@@ -358,6 +361,7 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /home/alecca/Documents/spacely/src/SpaDoc.h \
  /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
  /usr/include/wx-3.2/wx/convauto.h \
+ /home/alecca/Documents/spacely/src/HierarchyPanel.h \
  /home/alecca/Documents/spacely/src/View.h \
  /home/alecca/Documents/spacely/src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
@@ -398,4 +402,9 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /usr/include/wx-3.2/wx/gtk/filectrl.h /usr/include/wx-3.2/wx/filectrl.h \
  /usr/include/wx-3.2/wx/stdpaths.h /usr/include/wx-3.2/wx/unix/stdpaths.h \
  /usr/include/wx-3.2/wx/filename.h /usr/include/wx-3.2/wx/file.h \
- /usr/include/wx-3.2/wx/statbmp.h /usr/include/wx-3.2/wx/gtk/statbmp.h
+ /usr/include/wx-3.2/wx/statbmp.h /usr/include/wx-3.2/wx/gtk/statbmp.h \
+ /usr/include/wx-3.2/wx/clipbrd.h /usr/include/wx-3.2/wx/dataobj.h \
+ /usr/include/wx-3.2/wx/gtk/dataform.h \
+ /usr/include/wx-3.2/wx/gtk/dataobj.h \
+ /usr/include/wx-3.2/wx/gtk/dataobj2.h \
+ /usr/include/wx-3.2/wx/gtk/clipbrd.h

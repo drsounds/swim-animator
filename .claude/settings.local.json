@@ -31,7 +31,15 @@
       "Bash(cmake -B build-Debug -DCMAKE_BUILD_TYPE=Debug)",
       "Bash(cmake --build build-Debug --parallel)",
       "WebSearch",
-      "Bash(cmake --build build)"
+      "Bash(cmake --build build)",
+      "Bash(cmake -B build -DCMAKE_BUILD_TYPE=Debug -S .)",
+      "Bash(cmake --build build --parallel 4)",
+      "Bash(cmake --build /home/alecca/Documents/spacely/build --parallel 4)",
+      "Bash(grep -v \"^$\")",
+      "Bash(cmake -B /home/alecca/Documents/spacely/build -S /home/alecca/Documents/spacely)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }

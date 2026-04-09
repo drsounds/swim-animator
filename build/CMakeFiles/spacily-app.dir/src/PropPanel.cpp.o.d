@@ -315,7 +315,9 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: \
  /usr/include/c++/14/bits/istream.tcc \
  /usr/include/wx-3.2/wx/gtk/textctrl.h /usr/include/wx-3.2/wx/choice.h \
  /usr/include/wx-3.2/wx/ctrlsub.h /usr/include/wx-3.2/wx/gtk/choice.h \
- /home/alecca/Documents/spacely/src/DrawShape.h \
+ /home/alecca/Documents/spacely/src/DrawShape.h /usr/include/c++/14/map \
+ /usr/include/c++/14/bits/stl_tree.h /usr/include/c++/14/bits/stl_map.h \
+ /usr/include/c++/14/bits/stl_multimap.h \
  /home/alecca/Documents/spacely/src/DrawDoc.h \
  /usr/include/wx-3.2/wx/docview.h /usr/include/wx-3.2/wx/dlist.h \
  /usr/include/wx-3.2/wx/frame.h /usr/include/wx-3.2/wx/toplevel.h \
@@ -336,9 +338,26 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: \
  /usr/include/wx-3.2/wx/gtk/brush.h \
  /usr/include/wx-3.2/wx/affinematrix2d.h \
  /usr/include/wx-3.2/wx/affinematrix2dbase.h \
- /usr/include/wx-3.2/wx/geometry.h \
+ /usr/include/wx-3.2/wx/geometry.h /usr/include/wx-3.2/wx/xml/xml.h \
+ /usr/include/wx-3.2/wx/textbuf.h /usr/include/wx-3.2/wx/convauto.h \
+ /home/alecca/Documents/spacely/src/ShapePath.h \
  /home/alecca/Documents/spacely/src/DrawCommands.h \
- /usr/include/wx-3.2/wx/cmdproc.h /usr/include/wx-3.2/wx/colordlg.h \
- /usr/include/wx-3.2/wx/colourdata.h \
+ /usr/include/wx-3.2/wx/cmdproc.h /usr/include/c++/14/memory \
+ /usr/include/c++/14/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/14/bits/align.h \
+ /usr/lib/gcc/x86_64-linux-gnu/14/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
+ /usr/include/c++/14/bits/unique_ptr.h \
+ /usr/include/c++/14/bits/shared_ptr.h \
+ /usr/include/c++/14/bits/shared_ptr_base.h \
+ /usr/include/c++/14/bits/allocated_ptr.h \
+ /usr/include/c++/14/ext/concurrence.h \
+ /usr/include/c++/14/bits/shared_ptr_atomic.h \
+ /usr/include/c++/14/bits/atomic_base.h \
+ /usr/include/c++/14/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/14/backward/auto_ptr.h \
+ /usr/include/c++/14/pstl/glue_memory_defs.h \
+ /usr/include/wx-3.2/wx/colordlg.h /usr/include/wx-3.2/wx/colourdata.h \
  /usr/include/wx-3.2/wx/gtk/colordlg.h /usr/include/wx-3.2/wx/sizer.h \
  /usr/include/wx-3.2/wx/statline.h /usr/include/wx-3.2/wx/gtk/statline.h

@@ -101,9 +101,10 @@ Debug/src_App.cpp.o: src/App.cpp src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/gtk/menuitem.h /usr/include/wx-3.2/wx/gtk/menu.h \
  /usr/include/wx-3.2/wx/gtk/mdi.h /usr/include/wx-3.2/wx/toolbar.h \
  /usr/include/wx-3.2/wx/tbarbase.h /usr/include/wx-3.2/wx/gtk/toolbar.h \
- src/DrawView.h src/DrawShape.h src/DrawIds.h src/PropPanel.h \
- /usr/include/wx-3.2/wx/spinctrl.h /usr/include/wx-3.2/wx/spinbutt.h \
- /usr/include/wx-3.2/wx/range.h /usr/include/wx-3.2/wx/gtk/spinbutt.h \
+ src/DrawView.h src/DrawShape.h src/DrawIds.h src/ShapePath.h \
+ src/PropPanel.h /usr/include/wx-3.2/wx/spinctrl.h \
+ /usr/include/wx-3.2/wx/spinbutt.h /usr/include/wx-3.2/wx/range.h \
+ /usr/include/wx-3.2/wx/gtk/spinbutt.h \
  /usr/include/wx-3.2/wx/gtk/spinctrl.h /usr/include/wx-3.2/wx/button.h \
  /usr/include/wx-3.2/wx/anybutton.h \
  /usr/include/wx-3.2/wx/gtk/anybutton.h \
@@ -111,14 +112,15 @@ Debug/src_App.cpp.o: src/App.cpp src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/gtk/stattext.h /usr/include/wx-3.2/wx/textctrl.h \
  /usr/include/wx-3.2/wx/textentry.h \
  /usr/include/wx-3.2/wx/gtk/textentry.h /usr/include/wx-3.2/wx/ioswrap.h \
- /usr/include/wx-3.2/wx/gtk/textctrl.h src/ColorSwatchPanel.h \
- src/AssetManagerPanel.h /usr/include/wx-3.2/wx/treectrl.h \
- /usr/include/wx-3.2/wx/treebase.h /usr/include/wx-3.2/wx/itemid.h \
- /usr/include/wx-3.2/wx/systhemectrl.h \
+ /usr/include/wx-3.2/wx/gtk/textctrl.h /usr/include/wx-3.2/wx/choice.h \
+ /usr/include/wx-3.2/wx/ctrlsub.h /usr/include/wx-3.2/wx/gtk/choice.h \
+ src/ColorSwatchPanel.h src/AssetManagerPanel.h \
+ /usr/include/wx-3.2/wx/treectrl.h /usr/include/wx-3.2/wx/treebase.h \
+ /usr/include/wx-3.2/wx/itemid.h /usr/include/wx-3.2/wx/systhemectrl.h \
  /usr/include/wx-3.2/wx/generic/treectlg.h src/SpaDoc.h \
  /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
- /usr/include/wx-3.2/wx/convauto.h src/Document.h src/View.h \
- src/DrawDoc.h src/SpaView.h /usr/include/wx-3.2/wx/filename.h \
+ /usr/include/wx-3.2/wx/convauto.h src/HierarchyPanel.h src/Document.h \
+ src/View.h src/DrawDoc.h src/SpaView.h /usr/include/wx-3.2/wx/filename.h \
  /usr/include/wx-3.2/wx/file.h /usr/include/wx-3.2/wx/stdpaths.h \
  /usr/include/wx-3.2/wx/unix/stdpaths.h /usr/include/wx-3.2/wx/splash.h \
  /usr/include/wx-3.2/wx/generic/splash.h
@@ -312,6 +314,7 @@ src/MainFrame.h:
 src/DrawView.h:
 src/DrawShape.h:
 src/DrawIds.h:
+src/ShapePath.h:
 src/PropPanel.h:
 /usr/include/wx-3.2/wx/spinctrl.h:
 /usr/include/wx-3.2/wx/spinbutt.h:
@@ -329,6 +332,9 @@ src/PropPanel.h:
 /usr/include/wx-3.2/wx/gtk/textentry.h:
 /usr/include/wx-3.2/wx/ioswrap.h:
 /usr/include/wx-3.2/wx/gtk/textctrl.h:
+/usr/include/wx-3.2/wx/choice.h:
+/usr/include/wx-3.2/wx/ctrlsub.h:
+/usr/include/wx-3.2/wx/gtk/choice.h:
 src/ColorSwatchPanel.h:
 src/AssetManagerPanel.h:
 /usr/include/wx-3.2/wx/treectrl.h:
@@ -340,6 +346,7 @@ src/SpaDoc.h:
 /usr/include/wx-3.2/wx/xml/xml.h:
 /usr/include/wx-3.2/wx/textbuf.h:
 /usr/include/wx-3.2/wx/convauto.h:
+src/HierarchyPanel.h:
 src/Document.h:
 src/View.h:
 src/DrawDoc.h:

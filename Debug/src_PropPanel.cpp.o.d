@@ -1,14 +1,13 @@
 Debug/src_PropPanel.cpp.o: src/PropPanel.cpp src/PropPanel.h \
- /usr/include/wx-3.2/wx/scrolwin.h /usr/include/wx-3.2/wx/control.h \
- /usr/include/wx-3.2/wx/defs.h /usr/include/wx-3.2/wx/platform.h \
- /usr/include/wx-3.2/wx/compiler.h \
+ /usr/include/wx-3.2/wx/panel.h /usr/include/wx-3.2/wx/window.h \
+ /usr/include/wx-3.2/wx/event.h /usr/include/wx-3.2/wx/defs.h \
+ /usr/include/wx-3.2/wx/platform.h /usr/include/wx-3.2/wx/compiler.h \
  /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2/wx/setup.h \
  /usr/include/wx-3.2/wx/chkconf.h /usr/include/wx-3.2/wx/gtk/chkconf.h \
  /usr/include/wx-3.2/wx/unix/chkconf.h /usr/include/wx-3.2/wx/version.h \
  /usr/include/wx-3.2/wx/cpp.h /usr/include/wx-3.2/wx/dlimpexp.h \
  /usr/include/wx-3.2/wx/types.h /usr/include/wx-3.2/wx/debug.h \
  /usr/include/wx-3.2/wx/chartype.h /usr/include/wx-3.2/wx/features.h \
- /usr/include/wx-3.2/wx/window.h /usr/include/wx-3.2/wx/event.h \
  /usr/include/wx-3.2/wx/object.h /usr/include/wx-3.2/wx/memory.h \
  /usr/include/wx-3.2/wx/string.h /usr/include/wx-3.2/wx/wxcrtbase.h \
  /usr/include/wx-3.2/wx/strvararg.h /usr/include/wx-3.2/wx/strconv.h \
@@ -48,8 +47,7 @@ Debug/src_PropPanel.cpp.o: src/PropPanel.cpp src/PropPanel.h \
  /usr/include/wx-3.2/wx/generic/paletteg.h /usr/include/wx-3.2/wx/accel.h \
  /usr/include/wx-3.2/wx/gtk/accel.h \
  /usr/include/wx-3.2/wx/generic/accel.h \
- /usr/include/wx-3.2/wx/gtk/window.h /usr/include/wx-3.2/wx/gtk/control.h \
- /usr/include/wx-3.2/wx/panel.h /usr/include/wx-3.2/wx/containr.h \
+ /usr/include/wx-3.2/wx/gtk/window.h /usr/include/wx-3.2/wx/containr.h \
  /usr/include/wx-3.2/wx/generic/panelg.h /usr/include/wx-3.2/wx/bitmap.h \
  /usr/include/wx-3.2/wx/image.h /usr/include/wx-3.2/wx/stream.h \
  /usr/include/wx-3.2/wx/imagbmp.h /usr/include/wx-3.2/wx/imagpng.h \
@@ -57,25 +55,32 @@ Debug/src_PropPanel.cpp.o: src/PropPanel.cpp src/PropPanel.h \
  /usr/include/wx-3.2/wx/imagjpeg.h /usr/include/wx-3.2/wx/imagtga.h \
  /usr/include/wx-3.2/wx/imagtiff.h /usr/include/wx-3.2/wx/imagpnm.h \
  /usr/include/wx-3.2/wx/imagxpm.h /usr/include/wx-3.2/wx/imagiff.h \
- /usr/include/wx-3.2/wx/gtk/bitmap.h \
+ /usr/include/wx-3.2/wx/gtk/bitmap.h /usr/include/wx-3.2/wx/notebook.h \
+ /usr/include/wx-3.2/wx/bookctrl.h /usr/include/wx-3.2/wx/control.h \
+ /usr/include/wx-3.2/wx/gtk/control.h /usr/include/wx-3.2/wx/withimages.h \
+ /usr/include/wx-3.2/wx/bmpbndl.h /usr/include/wx-3.2/wx/icon.h \
+ /usr/include/wx-3.2/wx/iconloc.h /usr/include/wx-3.2/wx/generic/icon.h \
+ /usr/include/wx-3.2/wx/imaglist.h \
+ /usr/include/wx-3.2/wx/generic/imaglist.h \
+ /usr/include/wx-3.2/wx/gtk/notebook.h /usr/include/wx-3.2/wx/scrolwin.h \
  /usr/include/wx-3.2/wx/gtk/scrolwin.h /usr/include/wx-3.2/wx/spinctrl.h \
  /usr/include/wx-3.2/wx/spinbutt.h /usr/include/wx-3.2/wx/range.h \
  /usr/include/wx-3.2/wx/gtk/spinbutt.h \
  /usr/include/wx-3.2/wx/gtk/spinctrl.h /usr/include/wx-3.2/wx/button.h \
- /usr/include/wx-3.2/wx/anybutton.h /usr/include/wx-3.2/wx/bmpbndl.h \
+ /usr/include/wx-3.2/wx/anybutton.h \
  /usr/include/wx-3.2/wx/gtk/anybutton.h \
  /usr/include/wx-3.2/wx/gtk/button.h /usr/include/wx-3.2/wx/stattext.h \
  /usr/include/wx-3.2/wx/gtk/stattext.h /usr/include/wx-3.2/wx/textctrl.h \
  /usr/include/wx-3.2/wx/textentry.h \
  /usr/include/wx-3.2/wx/gtk/textentry.h /usr/include/wx-3.2/wx/ioswrap.h \
- /usr/include/wx-3.2/wx/gtk/textctrl.h src/DrawShape.h src/DrawDoc.h \
- /usr/include/wx-3.2/wx/docview.h /usr/include/wx-3.2/wx/dlist.h \
- /usr/include/wx-3.2/wx/frame.h /usr/include/wx-3.2/wx/toplevel.h \
- /usr/include/wx-3.2/wx/nonownedwnd.h \
+ /usr/include/wx-3.2/wx/gtk/textctrl.h /usr/include/wx-3.2/wx/choice.h \
+ /usr/include/wx-3.2/wx/ctrlsub.h /usr/include/wx-3.2/wx/gtk/choice.h \
+ src/DrawShape.h src/DrawDoc.h /usr/include/wx-3.2/wx/docview.h \
+ /usr/include/wx-3.2/wx/dlist.h /usr/include/wx-3.2/wx/frame.h \
+ /usr/include/wx-3.2/wx/toplevel.h /usr/include/wx-3.2/wx/nonownedwnd.h \
  /usr/include/wx-3.2/wx/gtk/nonownedwnd.h \
- /usr/include/wx-3.2/wx/iconbndl.h /usr/include/wx-3.2/wx/icon.h \
- /usr/include/wx-3.2/wx/iconloc.h /usr/include/wx-3.2/wx/generic/icon.h \
- /usr/include/wx-3.2/wx/weakref.h /usr/include/wx-3.2/wx/meta/int2type.h \
+ /usr/include/wx-3.2/wx/iconbndl.h /usr/include/wx-3.2/wx/weakref.h \
+ /usr/include/wx-3.2/wx/meta/int2type.h \
  /usr/include/wx-3.2/wx/gtk/toplevel.h /usr/include/wx-3.2/wx/statusbr.h \
  /usr/include/wx-3.2/wx/generic/statusbr.h /usr/include/wx-3.2/wx/pen.h \
  /usr/include/wx-3.2/wx/peninfobase.h /usr/include/wx-3.2/wx/gtk/pen.h \
@@ -89,13 +94,15 @@ Debug/src_PropPanel.cpp.o: src/PropPanel.cpp src/PropPanel.h \
  /usr/include/wx-3.2/wx/gtk/brush.h \
  /usr/include/wx-3.2/wx/affinematrix2d.h \
  /usr/include/wx-3.2/wx/affinematrix2dbase.h \
- /usr/include/wx-3.2/wx/geometry.h src/DrawCommands.h \
+ /usr/include/wx-3.2/wx/geometry.h src/ShapePath.h src/DrawCommands.h \
  /usr/include/wx-3.2/wx/cmdproc.h /usr/include/wx-3.2/wx/colordlg.h \
  /usr/include/wx-3.2/wx/colourdata.h \
- /usr/include/wx-3.2/wx/gtk/colordlg.h /usr/include/wx-3.2/wx/sizer.h
+ /usr/include/wx-3.2/wx/gtk/colordlg.h /usr/include/wx-3.2/wx/sizer.h \
+ /usr/include/wx-3.2/wx/statline.h /usr/include/wx-3.2/wx/gtk/statline.h
 src/PropPanel.h:
-/usr/include/wx-3.2/wx/scrolwin.h:
-/usr/include/wx-3.2/wx/control.h:
+/usr/include/wx-3.2/wx/panel.h:
+/usr/include/wx-3.2/wx/window.h:
+/usr/include/wx-3.2/wx/event.h:
 /usr/include/wx-3.2/wx/defs.h:
 /usr/include/wx-3.2/wx/platform.h:
 /usr/include/wx-3.2/wx/compiler.h:
@@ -110,8 +117,6 @@ src/PropPanel.h:
 /usr/include/wx-3.2/wx/debug.h:
 /usr/include/wx-3.2/wx/chartype.h:
 /usr/include/wx-3.2/wx/features.h:
-/usr/include/wx-3.2/wx/window.h:
-/usr/include/wx-3.2/wx/event.h:
 /usr/include/wx-3.2/wx/object.h:
 /usr/include/wx-3.2/wx/memory.h:
 /usr/include/wx-3.2/wx/string.h:
@@ -185,8 +190,6 @@ src/PropPanel.h:
 /usr/include/wx-3.2/wx/gtk/accel.h:
 /usr/include/wx-3.2/wx/generic/accel.h:
 /usr/include/wx-3.2/wx/gtk/window.h:
-/usr/include/wx-3.2/wx/gtk/control.h:
-/usr/include/wx-3.2/wx/panel.h:
 /usr/include/wx-3.2/wx/containr.h:
 /usr/include/wx-3.2/wx/generic/panelg.h:
 /usr/include/wx-3.2/wx/bitmap.h:
@@ -203,6 +206,19 @@ src/PropPanel.h:
 /usr/include/wx-3.2/wx/imagxpm.h:
 /usr/include/wx-3.2/wx/imagiff.h:
 /usr/include/wx-3.2/wx/gtk/bitmap.h:
+/usr/include/wx-3.2/wx/notebook.h:
+/usr/include/wx-3.2/wx/bookctrl.h:
+/usr/include/wx-3.2/wx/control.h:
+/usr/include/wx-3.2/wx/gtk/control.h:
+/usr/include/wx-3.2/wx/withimages.h:
+/usr/include/wx-3.2/wx/bmpbndl.h:
+/usr/include/wx-3.2/wx/icon.h:
+/usr/include/wx-3.2/wx/iconloc.h:
+/usr/include/wx-3.2/wx/generic/icon.h:
+/usr/include/wx-3.2/wx/imaglist.h:
+/usr/include/wx-3.2/wx/generic/imaglist.h:
+/usr/include/wx-3.2/wx/gtk/notebook.h:
+/usr/include/wx-3.2/wx/scrolwin.h:
 /usr/include/wx-3.2/wx/gtk/scrolwin.h:
 /usr/include/wx-3.2/wx/spinctrl.h:
 /usr/include/wx-3.2/wx/spinbutt.h:
@@ -211,7 +227,6 @@ src/PropPanel.h:
 /usr/include/wx-3.2/wx/gtk/spinctrl.h:
 /usr/include/wx-3.2/wx/button.h:
 /usr/include/wx-3.2/wx/anybutton.h:
-/usr/include/wx-3.2/wx/bmpbndl.h:
 /usr/include/wx-3.2/wx/gtk/anybutton.h:
 /usr/include/wx-3.2/wx/gtk/button.h:
 /usr/include/wx-3.2/wx/stattext.h:
@@ -221,6 +236,9 @@ src/PropPanel.h:
 /usr/include/wx-3.2/wx/gtk/textentry.h:
 /usr/include/wx-3.2/wx/ioswrap.h:
 /usr/include/wx-3.2/wx/gtk/textctrl.h:
+/usr/include/wx-3.2/wx/choice.h:
+/usr/include/wx-3.2/wx/ctrlsub.h:
+/usr/include/wx-3.2/wx/gtk/choice.h:
 src/DrawShape.h:
 src/DrawDoc.h:
 /usr/include/wx-3.2/wx/docview.h:
@@ -230,9 +248,6 @@ src/DrawDoc.h:
 /usr/include/wx-3.2/wx/nonownedwnd.h:
 /usr/include/wx-3.2/wx/gtk/nonownedwnd.h:
 /usr/include/wx-3.2/wx/iconbndl.h:
-/usr/include/wx-3.2/wx/icon.h:
-/usr/include/wx-3.2/wx/iconloc.h:
-/usr/include/wx-3.2/wx/generic/icon.h:
 /usr/include/wx-3.2/wx/weakref.h:
 /usr/include/wx-3.2/wx/meta/int2type.h:
 /usr/include/wx-3.2/wx/gtk/toplevel.h:
@@ -258,9 +273,12 @@ src/DrawDoc.h:
 /usr/include/wx-3.2/wx/affinematrix2d.h:
 /usr/include/wx-3.2/wx/affinematrix2dbase.h:
 /usr/include/wx-3.2/wx/geometry.h:
+src/ShapePath.h:
 src/DrawCommands.h:
 /usr/include/wx-3.2/wx/cmdproc.h:
 /usr/include/wx-3.2/wx/colordlg.h:
 /usr/include/wx-3.2/wx/colourdata.h:
 /usr/include/wx-3.2/wx/gtk/colordlg.h:
 /usr/include/wx-3.2/wx/sizer.h:
+/usr/include/wx-3.2/wx/statline.h:
+/usr/include/wx-3.2/wx/gtk/statline.h:

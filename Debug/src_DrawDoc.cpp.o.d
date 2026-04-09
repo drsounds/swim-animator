@@ -77,10 +77,22 @@ Debug/src_DrawDoc.cpp.o: src/DrawDoc.cpp src/DrawDoc.h \
  /usr/include/wx-3.2/wx/gtk/brush.h \
  /usr/include/wx-3.2/wx/affinematrix2d.h \
  /usr/include/wx-3.2/wx/affinematrix2dbase.h \
- /usr/include/wx-3.2/wx/geometry.h src/DrawShape.h \
- /usr/include/wx-3.2/wx/cmdproc.h /usr/include/wx-3.2/wx/wxcrtvararg.h \
- /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
- /usr/include/wx-3.2/wx/convauto.h
+ /usr/include/wx-3.2/wx/geometry.h src/DrawShape.h src/ShapePath.h \
+ src/NewDrawingDialog.h /usr/include/wx-3.2/wx/choice.h \
+ /usr/include/wx-3.2/wx/ctrlsub.h /usr/include/wx-3.2/wx/gtk/choice.h \
+ /usr/include/wx-3.2/wx/spinctrl.h /usr/include/wx-3.2/wx/spinbutt.h \
+ /usr/include/wx-3.2/wx/range.h /usr/include/wx-3.2/wx/gtk/spinbutt.h \
+ /usr/include/wx-3.2/wx/gtk/spinctrl.h /usr/include/wx-3.2/wx/button.h \
+ /usr/include/wx-3.2/wx/anybutton.h /usr/include/wx-3.2/wx/bmpbndl.h \
+ /usr/include/wx-3.2/wx/gtk/anybutton.h \
+ /usr/include/wx-3.2/wx/gtk/button.h /usr/include/wx-3.2/wx/app.h \
+ /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
+ /usr/include/wx-3.2/wx/cmdargs.h /usr/include/wx-3.2/wx/init.h \
+ /usr/include/wx-3.2/wx/log.h /usr/include/wx-3.2/wx/time.h \
+ /usr/include/wx-3.2/wx/generic/logg.h /usr/include/wx-3.2/wx/unix/app.h \
+ /usr/include/wx-3.2/wx/gtk/app.h /usr/include/wx-3.2/wx/cmdproc.h \
+ /usr/include/wx-3.2/wx/wxcrtvararg.h /usr/include/wx-3.2/wx/xml/xml.h \
+ /usr/include/wx-3.2/wx/textbuf.h /usr/include/wx-3.2/wx/convauto.h
 src/DrawDoc.h:
 /usr/include/wx-3.2/wx/docview.h:
 /usr/include/wx-3.2/wx/defs.h:
@@ -228,6 +240,31 @@ src/DrawDoc.h:
 /usr/include/wx-3.2/wx/affinematrix2dbase.h:
 /usr/include/wx-3.2/wx/geometry.h:
 src/DrawShape.h:
+src/ShapePath.h:
+src/NewDrawingDialog.h:
+/usr/include/wx-3.2/wx/choice.h:
+/usr/include/wx-3.2/wx/ctrlsub.h:
+/usr/include/wx-3.2/wx/gtk/choice.h:
+/usr/include/wx-3.2/wx/spinctrl.h:
+/usr/include/wx-3.2/wx/spinbutt.h:
+/usr/include/wx-3.2/wx/range.h:
+/usr/include/wx-3.2/wx/gtk/spinbutt.h:
+/usr/include/wx-3.2/wx/gtk/spinctrl.h:
+/usr/include/wx-3.2/wx/button.h:
+/usr/include/wx-3.2/wx/anybutton.h:
+/usr/include/wx-3.2/wx/bmpbndl.h:
+/usr/include/wx-3.2/wx/gtk/anybutton.h:
+/usr/include/wx-3.2/wx/gtk/button.h:
+/usr/include/wx-3.2/wx/app.h:
+/usr/include/wx-3.2/wx/eventfilter.h:
+/usr/include/wx-3.2/wx/build.h:
+/usr/include/wx-3.2/wx/cmdargs.h:
+/usr/include/wx-3.2/wx/init.h:
+/usr/include/wx-3.2/wx/log.h:
+/usr/include/wx-3.2/wx/time.h:
+/usr/include/wx-3.2/wx/generic/logg.h:
+/usr/include/wx-3.2/wx/unix/app.h:
+/usr/include/wx-3.2/wx/gtk/app.h:
 /usr/include/wx-3.2/wx/cmdproc.h:
 /usr/include/wx-3.2/wx/wxcrtvararg.h:
 /usr/include/wx-3.2/wx/xml/xml.h:

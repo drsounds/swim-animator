@@ -14,7 +14,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Alexander Forselius
-Date                   :=08/04/26
+Date                   :=09/04/26
 CodeLitePath           :=/home/alecca/.codelite
 LinkerName             :=/usr/bin/g++
 SharedObjectLinkerName :=/usr/bin/g++ -shared -fPIC
@@ -62,8 +62,8 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/src_SpaView.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_DrawCommands.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_Palette.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SpaSaveAsDialog.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_ColorSwatchPanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_AssetManagerPanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_App.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_MainFrame.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_PropPanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_View.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/src_DrawView.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_Document.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_DrawDoc.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter_bitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SpaDoc.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/src_NewDrawingDialog.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SpaView.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_DrawCommands.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_Palette.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SpaSaveAsDialog.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_ColorSwatchPanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_HierarchyPanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_AssetManagerPanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_App.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_MainFrame.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/src_PropPanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_View.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_DrawView.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_Document.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_DrawDoc.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter_bitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SpaDoc.cpp$(ObjectSuffix) 
 
 
 
@@ -94,6 +94,12 @@ PreBuild:
 ##
 ## Objects
 ##
+$(IntermediateDirectory)/src_NewDrawingDialog.cpp$(ObjectSuffix): src/NewDrawingDialog.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_NewDrawingDialog.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_NewDrawingDialog.cpp$(DependSuffix) -MM src/NewDrawingDialog.cpp
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/NewDrawingDialog.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_NewDrawingDialog.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_NewDrawingDialog.cpp$(PreprocessSuffix): src/NewDrawingDialog.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_NewDrawingDialog.cpp$(PreprocessSuffix) src/NewDrawingDialog.cpp
+
 $(IntermediateDirectory)/src_SpaView.cpp$(ObjectSuffix): src/SpaView.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_SpaView.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_SpaView.cpp$(DependSuffix) -MM src/SpaView.cpp
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/SpaView.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_SpaView.cpp$(ObjectSuffix) $(IncludePath)
@@ -123,6 +129,12 @@ $(IntermediateDirectory)/src_ColorSwatchPanel.cpp$(ObjectSuffix): src/ColorSwatc
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/ColorSwatchPanel.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_ColorSwatchPanel.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/src_ColorSwatchPanel.cpp$(PreprocessSuffix): src/ColorSwatchPanel.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_ColorSwatchPanel.cpp$(PreprocessSuffix) src/ColorSwatchPanel.cpp
+
+$(IntermediateDirectory)/src_HierarchyPanel.cpp$(ObjectSuffix): src/HierarchyPanel.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_HierarchyPanel.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_HierarchyPanel.cpp$(DependSuffix) -MM src/HierarchyPanel.cpp
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/HierarchyPanel.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_HierarchyPanel.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_HierarchyPanel.cpp$(PreprocessSuffix): src/HierarchyPanel.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_HierarchyPanel.cpp$(PreprocessSuffix) src/HierarchyPanel.cpp
 
 $(IntermediateDirectory)/src_AssetManagerPanel.cpp$(ObjectSuffix): src/AssetManagerPanel.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_AssetManagerPanel.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_AssetManagerPanel.cpp$(DependSuffix) -MM src/AssetManagerPanel.cpp

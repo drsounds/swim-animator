@@ -101,9 +101,10 @@ Debug/src_SpaView.cpp.o: src/SpaView.cpp src/SpaView.h \
  /usr/include/wx-3.2/wx/gtk/menuitem.h /usr/include/wx-3.2/wx/gtk/menu.h \
  /usr/include/wx-3.2/wx/gtk/mdi.h /usr/include/wx-3.2/wx/toolbar.h \
  /usr/include/wx-3.2/wx/tbarbase.h /usr/include/wx-3.2/wx/gtk/toolbar.h \
- src/DrawView.h src/DrawShape.h src/DrawIds.h src/PropPanel.h \
- /usr/include/wx-3.2/wx/spinctrl.h /usr/include/wx-3.2/wx/spinbutt.h \
- /usr/include/wx-3.2/wx/range.h /usr/include/wx-3.2/wx/gtk/spinbutt.h \
+ src/DrawView.h src/DrawShape.h src/DrawIds.h src/ShapePath.h \
+ src/PropPanel.h /usr/include/wx-3.2/wx/spinctrl.h \
+ /usr/include/wx-3.2/wx/spinbutt.h /usr/include/wx-3.2/wx/range.h \
+ /usr/include/wx-3.2/wx/gtk/spinbutt.h \
  /usr/include/wx-3.2/wx/gtk/spinctrl.h /usr/include/wx-3.2/wx/button.h \
  /usr/include/wx-3.2/wx/anybutton.h \
  /usr/include/wx-3.2/wx/gtk/anybutton.h \
@@ -111,11 +112,12 @@ Debug/src_SpaView.cpp.o: src/SpaView.cpp src/SpaView.h \
  /usr/include/wx-3.2/wx/gtk/stattext.h /usr/include/wx-3.2/wx/textctrl.h \
  /usr/include/wx-3.2/wx/textentry.h \
  /usr/include/wx-3.2/wx/gtk/textentry.h /usr/include/wx-3.2/wx/ioswrap.h \
- /usr/include/wx-3.2/wx/gtk/textctrl.h src/ColorSwatchPanel.h \
- src/AssetManagerPanel.h /usr/include/wx-3.2/wx/treectrl.h \
- /usr/include/wx-3.2/wx/treebase.h /usr/include/wx-3.2/wx/itemid.h \
- /usr/include/wx-3.2/wx/systhemectrl.h \
- /usr/include/wx-3.2/wx/generic/treectlg.h \
+ /usr/include/wx-3.2/wx/gtk/textctrl.h /usr/include/wx-3.2/wx/choice.h \
+ /usr/include/wx-3.2/wx/ctrlsub.h /usr/include/wx-3.2/wx/gtk/choice.h \
+ src/ColorSwatchPanel.h src/AssetManagerPanel.h \
+ /usr/include/wx-3.2/wx/treectrl.h /usr/include/wx-3.2/wx/treebase.h \
+ /usr/include/wx-3.2/wx/itemid.h /usr/include/wx-3.2/wx/systhemectrl.h \
+ /usr/include/wx-3.2/wx/generic/treectlg.h src/HierarchyPanel.h \
  /usr/include/wx-3.2/wx/dcbuffer.h /usr/include/wx-3.2/wx/dcmemory.h \
  /usr/include/wx-3.2/wx/dcclient.h /usr/include/wx-3.2/wx/settings.h
 src/SpaView.h:
@@ -313,6 +315,7 @@ src/MainFrame.h:
 src/DrawView.h:
 src/DrawShape.h:
 src/DrawIds.h:
+src/ShapePath.h:
 src/PropPanel.h:
 /usr/include/wx-3.2/wx/spinctrl.h:
 /usr/include/wx-3.2/wx/spinbutt.h:
@@ -330,6 +333,9 @@ src/PropPanel.h:
 /usr/include/wx-3.2/wx/gtk/textentry.h:
 /usr/include/wx-3.2/wx/ioswrap.h:
 /usr/include/wx-3.2/wx/gtk/textctrl.h:
+/usr/include/wx-3.2/wx/choice.h:
+/usr/include/wx-3.2/wx/ctrlsub.h:
+/usr/include/wx-3.2/wx/gtk/choice.h:
 src/ColorSwatchPanel.h:
 src/AssetManagerPanel.h:
 /usr/include/wx-3.2/wx/treectrl.h:
@@ -337,6 +343,7 @@ src/AssetManagerPanel.h:
 /usr/include/wx-3.2/wx/itemid.h:
 /usr/include/wx-3.2/wx/systhemectrl.h:
 /usr/include/wx-3.2/wx/generic/treectlg.h:
+src/HierarchyPanel.h:
 /usr/include/wx-3.2/wx/dcbuffer.h:
 /usr/include/wx-3.2/wx/dcmemory.h:
 /usr/include/wx-3.2/wx/dcclient.h:

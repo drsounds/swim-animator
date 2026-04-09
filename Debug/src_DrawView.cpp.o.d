@@ -78,8 +78,8 @@ Debug/src_DrawView.cpp.o: src/DrawView.cpp src/DrawView.h \
  /usr/include/wx-3.2/wx/affinematrix2d.h \
  /usr/include/wx-3.2/wx/affinematrix2dbase.h \
  /usr/include/wx-3.2/wx/geometry.h src/DrawShape.h src/DrawIds.h \
- src/DrawDoc.h src/DrawCommands.h /usr/include/wx-3.2/wx/cmdproc.h \
- src/App.h /usr/include/wx-3.2/wx/app.h \
+ src/ShapePath.h src/DrawDoc.h src/DrawCommands.h \
+ /usr/include/wx-3.2/wx/cmdproc.h src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
  /usr/include/wx-3.2/wx/cmdargs.h /usr/include/wx-3.2/wx/init.h \
  /usr/include/wx-3.2/wx/log.h /usr/include/wx-3.2/wx/time.h \
@@ -111,16 +111,17 @@ Debug/src_DrawView.cpp.o: src/DrawView.cpp src/DrawView.h \
  /usr/include/wx-3.2/wx/gtk/stattext.h /usr/include/wx-3.2/wx/textctrl.h \
  /usr/include/wx-3.2/wx/textentry.h \
  /usr/include/wx-3.2/wx/gtk/textentry.h /usr/include/wx-3.2/wx/ioswrap.h \
- /usr/include/wx-3.2/wx/gtk/textctrl.h src/ColorSwatchPanel.h \
- src/AssetManagerPanel.h /usr/include/wx-3.2/wx/treectrl.h \
- /usr/include/wx-3.2/wx/treebase.h /usr/include/wx-3.2/wx/itemid.h \
- /usr/include/wx-3.2/wx/systhemectrl.h \
+ /usr/include/wx-3.2/wx/gtk/textctrl.h /usr/include/wx-3.2/wx/choice.h \
+ /usr/include/wx-3.2/wx/ctrlsub.h /usr/include/wx-3.2/wx/gtk/choice.h \
+ src/ColorSwatchPanel.h src/AssetManagerPanel.h \
+ /usr/include/wx-3.2/wx/treectrl.h /usr/include/wx-3.2/wx/treebase.h \
+ /usr/include/wx-3.2/wx/itemid.h /usr/include/wx-3.2/wx/systhemectrl.h \
  /usr/include/wx-3.2/wx/generic/treectlg.h src/SpaDoc.h \
  /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
- /usr/include/wx-3.2/wx/convauto.h /usr/include/wx-3.2/wx/dcbuffer.h \
- /usr/include/wx-3.2/wx/dcmemory.h /usr/include/wx-3.2/wx/dcclient.h \
- /usr/include/wx-3.2/wx/settings.h /usr/include/wx-3.2/wx/colordlg.h \
- /usr/include/wx-3.2/wx/colourdata.h \
+ /usr/include/wx-3.2/wx/convauto.h src/HierarchyPanel.h \
+ /usr/include/wx-3.2/wx/dcbuffer.h /usr/include/wx-3.2/wx/dcmemory.h \
+ /usr/include/wx-3.2/wx/dcclient.h /usr/include/wx-3.2/wx/settings.h \
+ /usr/include/wx-3.2/wx/colordlg.h /usr/include/wx-3.2/wx/colourdata.h \
  /usr/include/wx-3.2/wx/gtk/colordlg.h /usr/include/wx-3.2/wx/textdlg.h \
  /usr/include/wx-3.2/wx/generic/textdlgg.h \
  /usr/include/wx-3.2/wx/valtext.h /usr/include/wx-3.2/wx/msgdlg.h \
@@ -275,6 +276,7 @@ src/DrawView.h:
 /usr/include/wx-3.2/wx/geometry.h:
 src/DrawShape.h:
 src/DrawIds.h:
+src/ShapePath.h:
 src/DrawDoc.h:
 src/DrawCommands.h:
 /usr/include/wx-3.2/wx/cmdproc.h:
@@ -337,6 +339,9 @@ src/PropPanel.h:
 /usr/include/wx-3.2/wx/gtk/textentry.h:
 /usr/include/wx-3.2/wx/ioswrap.h:
 /usr/include/wx-3.2/wx/gtk/textctrl.h:
+/usr/include/wx-3.2/wx/choice.h:
+/usr/include/wx-3.2/wx/ctrlsub.h:
+/usr/include/wx-3.2/wx/gtk/choice.h:
 src/ColorSwatchPanel.h:
 src/AssetManagerPanel.h:
 /usr/include/wx-3.2/wx/treectrl.h:
@@ -348,6 +353,7 @@ src/SpaDoc.h:
 /usr/include/wx-3.2/wx/xml/xml.h:
 /usr/include/wx-3.2/wx/textbuf.h:
 /usr/include/wx-3.2/wx/convauto.h:
+src/HierarchyPanel.h:
 /usr/include/wx-3.2/wx/dcbuffer.h:
 /usr/include/wx-3.2/wx/dcmemory.h:
 /usr/include/wx-3.2/wx/dcclient.h:

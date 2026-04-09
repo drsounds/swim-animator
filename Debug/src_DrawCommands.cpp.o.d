@@ -28,7 +28,7 @@ Debug/src_DrawCommands.cpp.o: src/DrawCommands.cpp src/DrawCommands.h \
  /usr/include/wx-3.2/wx/typeinfo.h /usr/include/wx-3.2/wx/gtk/colour.h \
  /usr/include/wx-3.2/wx/gdicmn.h /usr/include/wx-3.2/wx/hashmap.h \
  /usr/include/wx-3.2/wx/wxcrt.h /usr/include/wx-3.2/wx/math.h \
- src/DrawDoc.h /usr/include/wx-3.2/wx/docview.h \
+ src/ShapePath.h src/DrawDoc.h /usr/include/wx-3.2/wx/docview.h \
  /usr/include/wx-3.2/wx/dlist.h /usr/include/wx-3.2/wx/utils.h \
  /usr/include/wx-3.2/wx/filefn.h /usr/include/wx-3.2/wx/versioninfo.h \
  /usr/include/wx-3.2/wx/meta/implicitconversion.h \
@@ -138,6 +138,7 @@ src/DrawShape.h:
 /usr/include/wx-3.2/wx/hashmap.h:
 /usr/include/wx-3.2/wx/wxcrt.h:
 /usr/include/wx-3.2/wx/math.h:
+src/ShapePath.h:
 src/DrawDoc.h:
 /usr/include/wx-3.2/wx/docview.h:
 /usr/include/wx-3.2/wx/dlist.h:

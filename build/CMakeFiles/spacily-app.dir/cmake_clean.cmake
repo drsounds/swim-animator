@@ -14,6 +14,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o.d"
   "CMakeFiles/spacily-app.dir/src/DrawView.cpp.o"
   "CMakeFiles/spacily-app.dir/src/DrawView.cpp.o.d"
+  "CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.o"
+  "CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.o.d"
   "CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o"
   "CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o.d"
   "CMakeFiles/spacily-app.dir/src/NewDrawingDialog.cpp.o"

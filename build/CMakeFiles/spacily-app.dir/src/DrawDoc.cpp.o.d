@@ -308,8 +308,12 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: \
  /usr/include/wx-3.2/wx/gtk/brush.h \
  /usr/include/wx-3.2/wx/affinematrix2d.h \
  /usr/include/wx-3.2/wx/affinematrix2dbase.h \
- /usr/include/wx-3.2/wx/geometry.h \
- /home/alecca/Documents/spacely/src/DrawShape.h \
+ /usr/include/wx-3.2/wx/geometry.h /usr/include/wx-3.2/wx/xml/xml.h \
+ /usr/include/wx-3.2/wx/textbuf.h /usr/include/wx-3.2/wx/convauto.h \
+ /home/alecca/Documents/spacely/src/DrawShape.h /usr/include/c++/14/map \
+ /usr/include/c++/14/bits/stl_tree.h /usr/include/c++/14/bits/stl_map.h \
+ /usr/include/c++/14/bits/stl_multimap.h \
+ /home/alecca/Documents/spacely/src/ShapePath.h \
  /home/alecca/Documents/spacely/src/NewDrawingDialog.h \
  /usr/include/wx-3.2/wx/choice.h /usr/include/wx-3.2/wx/ctrlsub.h \
  /usr/include/wx-3.2/wx/gtk/choice.h /usr/include/wx-3.2/wx/spinctrl.h \
@@ -346,5 +350,4 @@ CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
  /usr/include/wx-3.2/wx/gtk/app.h /usr/include/wx-3.2/wx/cmdproc.h \
- /usr/include/wx-3.2/wx/wxcrtvararg.h /usr/include/wx-3.2/wx/xml/xml.h \
- /usr/include/wx-3.2/wx/textbuf.h /usr/include/wx-3.2/wx/convauto.h
+ /usr/include/wx-3.2/wx/wxcrtvararg.h

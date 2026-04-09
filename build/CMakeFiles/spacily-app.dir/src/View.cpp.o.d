@@ -357,8 +357,11 @@ CMakeFiles/spacily-app.dir/src/View.cpp.o: \
  /usr/include/wx-3.2/wx/gtk/mdi.h /usr/include/wx-3.2/wx/toolbar.h \
  /usr/include/wx-3.2/wx/tbarbase.h /usr/include/wx-3.2/wx/gtk/toolbar.h \
  /home/alecca/Documents/spacely/src/DrawView.h \
- /home/alecca/Documents/spacely/src/DrawShape.h \
+ /home/alecca/Documents/spacely/src/DrawShape.h /usr/include/c++/14/map \
+ /usr/include/c++/14/bits/stl_tree.h /usr/include/c++/14/bits/stl_map.h \
+ /usr/include/c++/14/bits/stl_multimap.h \
  /home/alecca/Documents/spacely/src/DrawIds.h \
+ /home/alecca/Documents/spacely/src/ShapePath.h \
  /home/alecca/Documents/spacely/src/PropPanel.h \
  /usr/include/wx-3.2/wx/spinctrl.h /usr/include/wx-3.2/wx/spinbutt.h \
  /usr/include/wx-3.2/wx/range.h /usr/include/wx-3.2/wx/gtk/spinbutt.h \
@@ -387,6 +390,7 @@ CMakeFiles/spacily-app.dir/src/View.cpp.o: \
  /usr/include/wx-3.2/wx/generic/treectlg.h \
  /home/alecca/Documents/spacely/src/SpaDoc.h \
  /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
- /usr/include/wx-3.2/wx/convauto.h /usr/include/wx-3.2/wx/dcbuffer.h \
- /usr/include/wx-3.2/wx/dcmemory.h /usr/include/wx-3.2/wx/dcclient.h \
- /usr/include/wx-3.2/wx/settings.h
+ /usr/include/wx-3.2/wx/convauto.h \
+ /home/alecca/Documents/spacely/src/HierarchyPanel.h \
+ /usr/include/wx-3.2/wx/dcbuffer.h /usr/include/wx-3.2/wx/dcmemory.h \
+ /usr/include/wx-3.2/wx/dcclient.h /usr/include/wx-3.2/wx/settings.h

@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/alecca/Documents/spacely/src/DrawCommands.cpp" "CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o.d"
   "/home/alecca/Documents/spacely/src/DrawDoc.cpp" "CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/DrawDoc.cpp.o.d"
   "/home/alecca/Documents/spacely/src/DrawView.cpp" "CMakeFiles/spacily-app.dir/src/DrawView.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/DrawView.cpp.o.d"
+  "/home/alecca/Documents/spacely/src/HierarchyPanel.cpp" "CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.o.d"
   "/home/alecca/Documents/spacely/src/MainFrame.cpp" "CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o.d"
   "/home/alecca/Documents/spacely/src/NewDrawingDialog.cpp" "CMakeFiles/spacily-app.dir/src/NewDrawingDialog.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/NewDrawingDialog.cpp.o.d"
   "/home/alecca/Documents/spacely/src/Palette.cpp" "CMakeFiles/spacily-app.dir/src/Palette.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/Palette.cpp.o.d"

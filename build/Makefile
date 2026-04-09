@@ -297,6 +297,30 @@ src/DrawView.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/DrawView.cpp.s
 .PHONY : src/DrawView.cpp.s
 
+src/HierarchyPanel.o: src/HierarchyPanel.cpp.o
+.PHONY : src/HierarchyPanel.o
+
+# target to build an object file
+src/HierarchyPanel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.o
+.PHONY : src/HierarchyPanel.cpp.o
+
+src/HierarchyPanel.i: src/HierarchyPanel.cpp.i
+.PHONY : src/HierarchyPanel.i
+
+# target to preprocess a source file
+src/HierarchyPanel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.i
+.PHONY : src/HierarchyPanel.cpp.i
+
+src/HierarchyPanel.s: src/HierarchyPanel.cpp.s
+.PHONY : src/HierarchyPanel.s
+
+# target to generate assembly for a file
+src/HierarchyPanel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.s
+.PHONY : src/HierarchyPanel.cpp.s
+
 src/MainFrame.o: src/MainFrame.cpp.o
 .PHONY : src/MainFrame.o
 
@@ -519,6 +543,9 @@ help:
 	@echo "... src/DrawView.o"
 	@echo "... src/DrawView.i"
 	@echo "... src/DrawView.s"
+	@echo "... src/HierarchyPanel.o"
+	@echo "... src/HierarchyPanel.i"
+	@echo "... src/HierarchyPanel.s"
 	@echo "... src/MainFrame.o"
 	@echo "... src/MainFrame.i"
 	@echo "... src/MainFrame.s"

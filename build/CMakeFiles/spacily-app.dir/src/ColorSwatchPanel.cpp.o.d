@@ -328,8 +328,11 @@ CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o: \
  /usr/include/wx-3.2/wx/gtk/mdi.h /usr/include/wx-3.2/wx/toolbar.h \
  /usr/include/wx-3.2/wx/tbarbase.h /usr/include/wx-3.2/wx/gtk/toolbar.h \
  /home/alecca/Documents/spacely/src/DrawView.h \
- /home/alecca/Documents/spacely/src/DrawShape.h \
+ /home/alecca/Documents/spacely/src/DrawShape.h /usr/include/c++/14/map \
+ /usr/include/c++/14/bits/stl_tree.h /usr/include/c++/14/bits/stl_map.h \
+ /usr/include/c++/14/bits/stl_multimap.h \
  /home/alecca/Documents/spacely/src/DrawIds.h \
+ /home/alecca/Documents/spacely/src/ShapePath.h \
  /home/alecca/Documents/spacely/src/PropPanel.h \
  /usr/include/wx-3.2/wx/spinctrl.h /usr/include/wx-3.2/wx/spinbutt.h \
  /usr/include/wx-3.2/wx/range.h /usr/include/wx-3.2/wx/gtk/spinbutt.h \
@@ -358,6 +361,7 @@ CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o: \
  /home/alecca/Documents/spacely/src/SpaDoc.h \
  /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
  /usr/include/wx-3.2/wx/convauto.h \
+ /home/alecca/Documents/spacely/src/HierarchyPanel.h \
  /home/alecca/Documents/spacely/src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
  /usr/include/wx-3.2/wx/cmdargs.h /usr/include/wx-3.2/wx/init.h \
@@ -388,7 +392,23 @@ CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o: \
  /home/alecca/Documents/spacely/src/Palette.h \
  /home/alecca/Documents/spacely/src/DrawDoc.h \
  /home/alecca/Documents/spacely/src/DrawCommands.h \
- /usr/include/wx-3.2/wx/cmdproc.h /usr/include/wx-3.2/wx/dcbuffer.h \
- /usr/include/wx-3.2/wx/dcmemory.h /usr/include/wx-3.2/wx/dcclient.h \
- /usr/include/wx-3.2/wx/colordlg.h /usr/include/wx-3.2/wx/colourdata.h \
+ /usr/include/wx-3.2/wx/cmdproc.h /usr/include/c++/14/memory \
+ /usr/include/c++/14/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/14/bits/align.h \
+ /usr/lib/gcc/x86_64-linux-gnu/14/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
+ /usr/include/c++/14/bits/unique_ptr.h \
+ /usr/include/c++/14/bits/shared_ptr.h \
+ /usr/include/c++/14/bits/shared_ptr_base.h \
+ /usr/include/c++/14/bits/allocated_ptr.h \
+ /usr/include/c++/14/ext/concurrence.h \
+ /usr/include/c++/14/bits/shared_ptr_atomic.h \
+ /usr/include/c++/14/bits/atomic_base.h \
+ /usr/include/c++/14/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/14/backward/auto_ptr.h \
+ /usr/include/c++/14/pstl/glue_memory_defs.h \
+ /usr/include/wx-3.2/wx/dcbuffer.h /usr/include/wx-3.2/wx/dcmemory.h \
+ /usr/include/wx-3.2/wx/dcclient.h /usr/include/wx-3.2/wx/colordlg.h \
+ /usr/include/wx-3.2/wx/colourdata.h \
  /usr/include/wx-3.2/wx/gtk/colordlg.h
