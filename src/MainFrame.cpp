@@ -22,6 +22,7 @@
 #include <wx/statbmp.h>
 #include <wx/button.h>
 #include <wx/filefn.h>
+#include <wx/clipbrd.h>
 #include <algorithm>
 
 // ---------------------------------------------------------------------------
@@ -83,6 +84,14 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxDocParentFrame)
     EVT_UPDATE_UI(ID_TOOL_CIRCLE, MainFrame::OnUpdateDrawTool)
     EVT_UPDATE_UI(ID_TOOL_TEXT,   MainFrame::OnUpdateDrawTool)
     EVT_UPDATE_UI(ID_TOOL_BEZIER, MainFrame::OnUpdateDrawTool)
+    EVT_MENU(wxID_CUT,            MainFrame::OnCut)
+    EVT_MENU(wxID_COPY,           MainFrame::OnCopy)
+    EVT_MENU(wxID_PASTE,          MainFrame::OnPaste)
+    EVT_MENU(wxID_SELECTALL,      MainFrame::OnSelectAll)
+    EVT_UPDATE_UI(wxID_CUT,       MainFrame::OnUpdateCutCopy)
+    EVT_UPDATE_UI(wxID_COPY,      MainFrame::OnUpdateCutCopy)
+    EVT_UPDATE_UI(wxID_PASTE,     MainFrame::OnUpdatePaste)
+    EVT_UPDATE_UI(wxID_SELECTALL, MainFrame::OnUpdateSelectAll)
     EVT_MENU(ID_PALETTE_IMPORT,   MainFrame::OnPaletteImport)
     EVT_MENU(ID_PALETTE_EXPORT,   MainFrame::OnPaletteExport)
 wxEND_EVENT_TABLE()
@@ -313,7 +322,7 @@ void MainFrame::CreatePropertiesPane() {
         wxAuiPaneInfo()
             .Name("Properties")
             .Caption("Properties")
-            .Right()
+            .Bottom()
             .Row(2)
             .BestSize(220, 300)
             .MinSize(160, 100)
@@ -328,7 +337,7 @@ void MainFrame::CreateHierarchyPane() {
         wxAuiPaneInfo()
             .Name("Hierarchy")
             .Caption("Object Hierarchy")
-            .Bottom()
+            .Right()
             .BestSize(-1, 160)
             .MinSize(-1, 80)
             .CloseButton(true)
@@ -420,6 +429,50 @@ void MainFrame::OnUpdateDrawTool(wxUpdateUIEvent& e) {
             (e.GetId() == ID_TOOL_CIRCLE && cur == DrawTool::Circle) ||
             (e.GetId() == ID_TOOL_TEXT   && cur == DrawTool::Text)   ||
             (e.GetId() == ID_TOOL_BEZIER && cur == DrawTool::Bezier));
+}
+
+void MainFrame::OnCut(wxCommandEvent&) {
+    if (!m_activeDrawView || !m_activeDrawView->GetCanvas()) return;
+    m_activeDrawView->GetCanvas()->CutShapes();
+}
+
+void MainFrame::OnCopy(wxCommandEvent&) {
+    if (!m_activeDrawView || !m_activeDrawView->GetCanvas()) return;
+    m_activeDrawView->GetCanvas()->CopyShapes();
+}
+
+void MainFrame::OnPaste(wxCommandEvent&) {
+    if (!m_activeDrawView || !m_activeDrawView->GetCanvas()) return;
+    m_activeDrawView->GetCanvas()->PasteShapes();
+}
+
+void MainFrame::OnSelectAll(wxCommandEvent&) {
+    if (!m_activeDrawView || !m_activeDrawView->GetCanvas()) return;
+    m_activeDrawView->GetCanvas()->SelectAll();
+}
+
+void MainFrame::OnUpdateCutCopy(wxUpdateUIEvent& e) {
+    if (!m_activeDrawView || !m_activeDrawView->GetCanvas()) {
+        e.Enable(false); return;
+    }
+    e.Enable(!m_activeDrawView->GetCanvas()->GetSelection().empty());
+}
+
+void MainFrame::OnUpdatePaste(wxUpdateUIEvent& e) {
+    if (!m_activeDrawView || !m_activeDrawView->GetCanvas()) {
+        e.Enable(false); return;
+    }
+    static wxDataFormat fmt("application/x-spacely-shapes");
+    bool hasData = false;
+    if (wxClipboard::Get()->Open()) {
+        hasData = wxClipboard::Get()->IsSupported(fmt);
+        wxClipboard::Get()->Close();
+    }
+    e.Enable(hasData);
+}
+
+void MainFrame::OnUpdateSelectAll(wxUpdateUIEvent& e) {
+    e.Enable(m_activeDrawView != nullptr && m_activeDrawView->GetCanvas() != nullptr);
 }
 
 void MainFrame::OnNotebookPageClose(wxAuiNotebookEvent& event) {

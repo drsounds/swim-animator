@@ -14,6 +14,9 @@
 #include <wx/button.h>
 #include <wx/textctrl.h>
 #include <wx/spinctrl.h>
+#include <wx/clipbrd.h>
+#include <wx/xml/xml.h>
+#include <wx/sstream.h>
 #include <algorithm>
 #include <cmath>
 #include <vector>
@@ -1119,6 +1122,182 @@ void DrawCanvas::OnKeyDown(wxKeyEvent& e) {
     }
 
     e.Skip();
+}
+
+// ---------------------------------------------------------------------------
+// Cut / Copy / Paste / SelectAll
+// ---------------------------------------------------------------------------
+
+// Custom clipboard format used to avoid conflicts with plain-text clipboard.
+static const wxDataFormat& ShapesClipboardFormat() {
+    static wxDataFormat fmt("application/x-spacely-shapes");
+    return fmt;
+}
+
+// Recursively offset a shape's bounds (and Bezier points) by (dx, dy).
+static void OffsetShape(DrawShape& s, int dx, int dy) {
+    s.bounds.Offset(dx, dy);
+    if (s.kind == ShapeKind::Bezier) {
+        for (auto& pt : s.pts)
+            pt += wxPoint(dx, dy);
+    }
+    for (auto& child : s.children)
+        OffsetShape(child, dx, dy);
+}
+
+// Serialise a list of shapes to an XML string.
+static wxString SerializeShapes(const std::vector<DrawShape>& shapes) {
+    wxXmlDocument doc;
+    auto* root = new wxXmlNode(nullptr, wxXML_ELEMENT_NODE, "spacely-clipboard");
+    doc.SetRoot(root);
+    for (const auto& s : shapes) {
+        wxXmlNode* node = DrawDoc::ShapeToXml(s);
+        if (node) root->AddChild(node);
+    }
+    wxStringOutputStream stream;
+    doc.Save(stream);
+    return stream.GetString();
+}
+
+// Deserialise a list of shapes from an XML string produced by SerializeShapes.
+static std::vector<DrawShape> DeserializeShapes(const wxString& xml) {
+    std::vector<DrawShape> result;
+    wxStringInputStream stream(xml);
+    wxXmlDocument doc(stream);
+    if (!doc.IsOk()) return result;
+    wxXmlNode* root = doc.GetRoot();
+    if (!root || root->GetName() != "spacely-clipboard") return result;
+    for (wxXmlNode* child = root->GetChildren(); child; child = child->GetNext()) {
+        if (child->GetType() != wxXML_ELEMENT_NODE) continue;
+        DrawShape s;
+        if (DrawDoc::XmlToShape(child, s))
+            result.push_back(s);
+    }
+    return result;
+}
+
+void DrawCanvas::CopyShapes() {
+    auto* doc = GetDoc();
+    if (!doc || m_selection.empty()) return;
+
+    const std::vector<DrawShape>* scope = CurrentShapes(doc);
+    if (!scope) return;
+
+    std::vector<int> sorted = m_selection;
+    std::sort(sorted.begin(), sorted.end());
+
+    std::vector<DrawShape> toCopy;
+    for (int idx : sorted) {
+        if (idx < (int)scope->size())
+            toCopy.push_back((*scope)[idx]);
+    }
+
+    wxString xml = SerializeShapes(toCopy);
+    wxCharBuffer buf = xml.utf8_str();
+
+    wxClipboardLocker locker;
+    if (!locker) return;
+    auto* obj = new wxCustomDataObject(ShapesClipboardFormat());
+    obj->SetData(buf.length(), buf.data());
+    wxClipboard::Get()->SetData(obj);
+}
+
+void DrawCanvas::CutShapes() {
+    auto* doc = GetDoc();
+    if (!doc || m_selection.empty()) return;
+
+    // Copy first, then delete the selection (mirrors the Delete key handler).
+    CopyShapes();
+
+    const std::vector<DrawShape>* scope = CurrentShapes(doc);
+    if (!scope) return;
+
+    std::vector<int> sorted = m_selection;
+    std::sort(sorted.begin(), sorted.end(), std::greater<int>());
+
+    if (sorted.size() == 1) {
+        int idx = sorted[0];
+        DrawShape shape = (*scope)[idx];
+        ShapePath path = CurrentPath(idx);
+        ClearSelection();
+        m_owner->NotifySelectionChanged();
+        doc->GetCommandProcessor()->Submit(new RemoveShapeAtCmd(doc, path, shape));
+    } else {
+        auto* batch = new BatchCmd("Cut Shapes");
+        for (int idx : sorted) {
+            DrawShape shape = (*scope)[idx];
+            ShapePath path = CurrentPath(idx);
+            batch->Add(new RemoveShapeAtCmd(doc, path, shape));
+        }
+        ClearSelection();
+        m_owner->NotifySelectionChanged();
+        doc->GetCommandProcessor()->Submit(batch);
+    }
+    Refresh();
+}
+
+void DrawCanvas::PasteShapes() {
+    auto* doc = GetDoc();
+    if (!doc) return;
+
+    // Read from clipboard.
+    std::vector<DrawShape> shapes;
+    {
+        wxClipboardLocker locker;
+        if (!locker) return;
+        if (!wxClipboard::Get()->IsSupported(ShapesClipboardFormat())) return;
+        wxCustomDataObject obj(ShapesClipboardFormat());
+        if (!wxClipboard::Get()->GetData(obj)) return;
+        wxString xml = wxString::FromUTF8(
+            static_cast<const char*>(obj.GetData()),
+            obj.GetSize());
+        shapes = DeserializeShapes(xml);
+    }
+    if (shapes.empty()) return;
+
+    // Offset pasted shapes so they don't land exactly on top of the originals.
+    constexpr int kPasteOffset = 10;
+    for (auto& s : shapes)
+        OffsetShape(s, kPasteOffset, kPasteOffset);
+
+    const std::vector<DrawShape>* scope = CurrentShapes(doc);
+    int baseIdx = scope ? (int)scope->size() : 0;
+    ShapePath parentPath = m_activeGroupIdx >= 0
+        ? ShapePath{ m_activeGroupIdx }
+        : ShapePath{};
+
+    ClearSelection();
+
+    if (shapes.size() == 1) {
+        doc->GetCommandProcessor()->Submit(
+            new InsertShapeAtCmd(doc, parentPath, baseIdx, shapes[0]));
+        SetSingleSelection(baseIdx);
+    } else {
+        auto* batch = new BatchCmd("Paste Shapes");
+        for (int i = 0; i < (int)shapes.size(); i++) {
+            batch->Add(new InsertShapeAtCmd(doc, parentPath, baseIdx + i, shapes[i]));
+            m_selection.push_back(baseIdx + i);
+        }
+        m_selected = m_selection.empty() ? -1 : m_selection.back();
+        doc->GetCommandProcessor()->Submit(batch);
+    }
+
+    m_owner->NotifySelectionChanged();
+    Refresh();
+}
+
+void DrawCanvas::SelectAll() {
+    auto* doc = GetDoc();
+    if (!doc) return;
+    const std::vector<DrawShape>* scope = CurrentShapes(doc);
+    if (!scope || scope->empty()) return;
+
+    m_selection.clear();
+    for (int i = 0; i < (int)scope->size(); i++)
+        m_selection.push_back(i);
+    m_selected = m_selection.back();
+    m_owner->NotifySelectionChanged();
+    Refresh();
 }
 
 // ---------------------------------------------------------------------------

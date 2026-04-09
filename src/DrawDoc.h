@@ -1,6 +1,7 @@
 #pragma once
 #include <wx/docview.h>
 #include <wx/colour.h>
+#include <wx/xml/xml.h>
 #include <vector>
 #include "DrawShape.h"
 #include "ShapePath.h"
@@ -50,6 +51,10 @@ public:
     const wxColour& GetBgColour() const  { return m_bgColour;   }
     void SetPageSize(int w, int h);
     void SetBgColour(const wxColour& c);
+
+    // Clipboard serialisation helpers (used by DrawCanvas cut/copy/paste).
+    static wxXmlNode* ShapeToXml(const DrawShape& s);
+    static bool       XmlToShape(wxXmlNode* node, DrawShape& s);
 
     bool OnNewDocument() override;
     bool IsModified() const override;

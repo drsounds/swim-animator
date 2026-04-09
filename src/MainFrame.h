@@ -59,6 +59,14 @@ private:
     void OnDrawTool(wxCommandEvent& event);
     void OnUpdateDrawTool(wxUpdateUIEvent& event);
 
+    void OnCut(wxCommandEvent& event);
+    void OnCopy(wxCommandEvent& event);
+    void OnPaste(wxCommandEvent& event);
+    void OnSelectAll(wxCommandEvent& event);
+    void OnUpdateCutCopy(wxUpdateUIEvent& event);
+    void OnUpdatePaste(wxUpdateUIEvent& event);
+    void OnUpdateSelectAll(wxUpdateUIEvent& event);
+
     void OnPaletteImport(wxCommandEvent& event);
     void OnPaletteExport(wxCommandEvent& event);
 

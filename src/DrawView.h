@@ -37,6 +37,12 @@ public:
 
     void ValidateSelection();
 
+    // Edit menu operations (called by MainFrame handlers).
+    void CutShapes();
+    void CopyShapes();
+    void PasteShapes();
+    void SelectAll();
+
     // Which select-mode drag is active (public so file-scope helpers can use it)
     enum class DragMode {
         None,

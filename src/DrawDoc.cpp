@@ -484,3 +484,15 @@ bool DrawDoc::DoOpenDocument(const wxString& filename) {
     UpdateAllViews();
     return true;
 }
+
+// ---------------------------------------------------------------------------
+// Public static clipboard serialisation wrappers
+// ---------------------------------------------------------------------------
+
+/*static*/ wxXmlNode* DrawDoc::ShapeToXml(const DrawShape& s) {
+    return ShapeToXmlNode(s);
+}
+
+/*static*/ bool DrawDoc::XmlToShape(wxXmlNode* node, DrawShape& s) {
+    return XmlNodeToShape(node, s);
+}
