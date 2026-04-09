@@ -1,4 +1,6 @@
-# Spacely / Swim Animator
+<img width="1920" height="1052" alt="Screenshoot" src="https://github.com/user-attachments/assets/af8ed9ef-ce0b-42f8-99cd-e5bf782b997b" />
+
+# Swim Animator
 
 A vector drawing and SMIL animation authoring tool built with C++23 and wxWidgets.
 
