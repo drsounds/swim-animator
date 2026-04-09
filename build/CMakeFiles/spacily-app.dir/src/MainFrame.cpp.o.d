@@ -355,15 +355,19 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /usr/include/c++/14/bits/istream.tcc \
  /usr/include/wx-3.2/wx/gtk/textctrl.h /usr/include/wx-3.2/wx/choice.h \
  /usr/include/wx-3.2/wx/ctrlsub.h /usr/include/wx-3.2/wx/gtk/choice.h \
+ /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
+ /usr/include/wx-3.2/wx/convauto.h \
  /home/alecca/Documents/spacely/src/ColorSwatchPanel.h \
  /home/alecca/Documents/spacely/src/AssetManagerPanel.h \
  /usr/include/wx-3.2/wx/treectrl.h /usr/include/wx-3.2/wx/treebase.h \
  /usr/include/wx-3.2/wx/itemid.h /usr/include/wx-3.2/wx/systhemectrl.h \
  /usr/include/wx-3.2/wx/generic/treectlg.h \
  /home/alecca/Documents/spacely/src/SpaDoc.h \
- /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
- /usr/include/wx-3.2/wx/convauto.h \
  /home/alecca/Documents/spacely/src/HierarchyPanel.h \
+ /home/alecca/Documents/spacely/src/ScenePanel.h \
+ /usr/include/wx-3.2/wx/listbox.h /usr/include/wx-3.2/wx/gtk/listbox.h \
+ /home/alecca/Documents/spacely/src/KeyframePanel.h \
+ /home/alecca/Documents/spacely/src/SmilTypes.h \
  /home/alecca/Documents/spacely/src/View.h \
  /home/alecca/Documents/spacely/src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
@@ -397,6 +401,8 @@ CMakeFiles/spacily-app.dir/src/MainFrame.cpp.o: \
  /usr/include/wx-3.2/wx/checkbox.h /usr/include/wx-3.2/wx/gtk/checkbox.h \
  /home/alecca/Documents/spacely/src/DrawDoc.h \
  /home/alecca/Documents/spacely/src/SpaView.h \
+ /home/alecca/Documents/spacely/src/SmilDoc.h \
+ /home/alecca/Documents/spacely/src/SmilView.h \
  /usr/include/wx-3.2/wx/artprov.h /usr/include/wx-3.2/wx/msgdlg.h \
  /usr/include/wx-3.2/wx/stockitem.h \
  /usr/include/wx-3.2/wx/generic/msgdlgg.h \

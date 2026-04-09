@@ -338,6 +338,76 @@ CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alecca/Documents/spacely/src/SettingsDialog.cpp -o CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.s
 
+CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.o: CMakeFiles/spacily-app.dir/flags.make
+CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.o: /home/alecca/Documents/spacely/src/SmilTypes.cpp
+CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.o: CMakeFiles/spacily-app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alecca/Documents/spacely/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.o -MF CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.o.d -o CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.o -c /home/alecca/Documents/spacely/src/SmilTypes.cpp
+
+CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alecca/Documents/spacely/src/SmilTypes.cpp > CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.i
+
+CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alecca/Documents/spacely/src/SmilTypes.cpp -o CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.s
+
+CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.o: CMakeFiles/spacily-app.dir/flags.make
+CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.o: /home/alecca/Documents/spacely/src/SmilDoc.cpp
+CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.o: CMakeFiles/spacily-app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alecca/Documents/spacely/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.o -MF CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.o.d -o CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.o -c /home/alecca/Documents/spacely/src/SmilDoc.cpp
+
+CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alecca/Documents/spacely/src/SmilDoc.cpp > CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.i
+
+CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alecca/Documents/spacely/src/SmilDoc.cpp -o CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.s
+
+CMakeFiles/spacily-app.dir/src/SmilView.cpp.o: CMakeFiles/spacily-app.dir/flags.make
+CMakeFiles/spacily-app.dir/src/SmilView.cpp.o: /home/alecca/Documents/spacely/src/SmilView.cpp
+CMakeFiles/spacily-app.dir/src/SmilView.cpp.o: CMakeFiles/spacily-app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alecca/Documents/spacely/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/spacily-app.dir/src/SmilView.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/spacily-app.dir/src/SmilView.cpp.o -MF CMakeFiles/spacily-app.dir/src/SmilView.cpp.o.d -o CMakeFiles/spacily-app.dir/src/SmilView.cpp.o -c /home/alecca/Documents/spacely/src/SmilView.cpp
+
+CMakeFiles/spacily-app.dir/src/SmilView.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/spacily-app.dir/src/SmilView.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alecca/Documents/spacely/src/SmilView.cpp > CMakeFiles/spacily-app.dir/src/SmilView.cpp.i
+
+CMakeFiles/spacily-app.dir/src/SmilView.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/spacily-app.dir/src/SmilView.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alecca/Documents/spacely/src/SmilView.cpp -o CMakeFiles/spacily-app.dir/src/SmilView.cpp.s
+
+CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.o: CMakeFiles/spacily-app.dir/flags.make
+CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.o: /home/alecca/Documents/spacely/src/ScenePanel.cpp
+CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.o: CMakeFiles/spacily-app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alecca/Documents/spacely/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.o -MF CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.o.d -o CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.o -c /home/alecca/Documents/spacely/src/ScenePanel.cpp
+
+CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alecca/Documents/spacely/src/ScenePanel.cpp > CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.i
+
+CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alecca/Documents/spacely/src/ScenePanel.cpp -o CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.s
+
+CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.o: CMakeFiles/spacily-app.dir/flags.make
+CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.o: /home/alecca/Documents/spacely/src/KeyframePanel.cpp
+CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.o: CMakeFiles/spacily-app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alecca/Documents/spacely/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.o -MF CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.o.d -o CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.o -c /home/alecca/Documents/spacely/src/KeyframePanel.cpp
+
+CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alecca/Documents/spacely/src/KeyframePanel.cpp > CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.i
+
+CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alecca/Documents/spacely/src/KeyframePanel.cpp -o CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.s
+
 # Object files for target spacily-app
 spacily__app_OBJECTS = \
 "CMakeFiles/spacily-app.dir/src/App.cpp.o" \
@@ -358,7 +428,12 @@ spacily__app_OBJECTS = \
 "CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.o" \
 "CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.o" \
 "CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.o" \
-"CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.o"
+"CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.o" \
+"CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.o" \
+"CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.o" \
+"CMakeFiles/spacily-app.dir/src/SmilView.cpp.o" \
+"CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.o" \
+"CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.o"
 
 # External object files for target spacily-app
 spacily__app_EXTERNAL_OBJECTS =
@@ -382,10 +457,15 @@ spacily-app: CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.o
 spacily-app: CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.o
 spacily-app: CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.o
 spacily-app: CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.o
+spacily-app: CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.o
+spacily-app: CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.o
+spacily-app: CMakeFiles/spacily-app.dir/src/SmilView.cpp.o
+spacily-app: CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.o
+spacily-app: CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.o
 spacily-app: CMakeFiles/spacily-app.dir/build.make
 spacily-app: CMakeFiles/spacily-app.dir/compiler_depend.ts
 spacily-app: CMakeFiles/spacily-app.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/alecca/Documents/spacely/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX executable spacily-app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/alecca/Documents/spacely/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Linking CXX executable spacily-app"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/spacily-app.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

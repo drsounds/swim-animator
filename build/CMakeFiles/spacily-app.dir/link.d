@@ -21,6 +21,11 @@ spacily-app: \
   CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.o \
   CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.o \
   CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.o \
+  CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.o \
+  CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.o \
+  CMakeFiles/spacily-app.dir/src/SmilView.cpp.o \
+  CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.o \
+  CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.o \
   /usr/lib/x86_64-linux-gnu/libwx_gtk3u_core-3.2.so \
   /usr/lib/x86_64-linux-gnu/libwx_baseu-3.2.so \
   /usr/lib/x86_64-linux-gnu/libwx_gtk3u_aui-3.2.so \
@@ -175,6 +180,16 @@ CMakeFiles/spacily-app.dir/src/SnapSettings.cpp.o:
 CMakeFiles/spacily-app.dir/src/SnapEngine.cpp.o:
 
 CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.o:
+
+CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.o:
+
+CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.o:
+
+CMakeFiles/spacily-app.dir/src/SmilView.cpp.o:
+
+CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.o:
+
+CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.o:
 
 /usr/lib/x86_64-linux-gnu/libwx_gtk3u_core-3.2.so:
 

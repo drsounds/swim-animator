@@ -84,8 +84,8 @@ Debug/src_SpaView.cpp.o: src/SpaView.cpp src/SpaView.h \
  /usr/include/wx-3.2/wx/cmdargs.h /usr/include/wx-3.2/wx/init.h \
  /usr/include/wx-3.2/wx/log.h /usr/include/wx-3.2/wx/time.h \
  /usr/include/wx-3.2/wx/generic/logg.h /usr/include/wx-3.2/wx/unix/app.h \
- /usr/include/wx-3.2/wx/gtk/app.h src/Palette.h src/MainFrame.h \
- /usr/include/wx-3.2/wx/aui/aui.h \
+ /usr/include/wx-3.2/wx/gtk/app.h src/Palette.h src/SnapSettings.h \
+ src/MainFrame.h /usr/include/wx-3.2/wx/aui/aui.h \
  /usr/include/wx-3.2/wx/aui/framemanager.h /usr/include/wx-3.2/wx/timer.h \
  /usr/include/wx-3.2/wx/stopwatch.h /usr/include/wx-3.2/wx/sizer.h \
  /usr/include/wx-3.2/wx/bmpbndl.h /usr/include/wx-3.2/wx/aui/dockart.h \
@@ -102,7 +102,7 @@ Debug/src_SpaView.cpp.o: src/SpaView.cpp src/SpaView.h \
  /usr/include/wx-3.2/wx/gtk/mdi.h /usr/include/wx-3.2/wx/toolbar.h \
  /usr/include/wx-3.2/wx/tbarbase.h /usr/include/wx-3.2/wx/gtk/toolbar.h \
  src/DrawView.h src/DrawShape.h src/DrawIds.h src/ShapePath.h \
- src/PropPanel.h /usr/include/wx-3.2/wx/spinctrl.h \
+ src/SnapEngine.h src/PropPanel.h /usr/include/wx-3.2/wx/spinctrl.h \
  /usr/include/wx-3.2/wx/spinbutt.h /usr/include/wx-3.2/wx/range.h \
  /usr/include/wx-3.2/wx/gtk/spinbutt.h \
  /usr/include/wx-3.2/wx/gtk/spinctrl.h /usr/include/wx-3.2/wx/button.h \
@@ -118,6 +118,8 @@ Debug/src_SpaView.cpp.o: src/SpaView.cpp src/SpaView.h \
  /usr/include/wx-3.2/wx/treectrl.h /usr/include/wx-3.2/wx/treebase.h \
  /usr/include/wx-3.2/wx/itemid.h /usr/include/wx-3.2/wx/systhemectrl.h \
  /usr/include/wx-3.2/wx/generic/treectlg.h src/HierarchyPanel.h \
+ src/ScenePanel.h /usr/include/wx-3.2/wx/listbox.h \
+ /usr/include/wx-3.2/wx/gtk/listbox.h src/KeyframePanel.h src/SmilTypes.h \
  /usr/include/wx-3.2/wx/dcbuffer.h /usr/include/wx-3.2/wx/dcmemory.h \
  /usr/include/wx-3.2/wx/dcclient.h /usr/include/wx-3.2/wx/settings.h
 src/SpaView.h:
@@ -282,6 +284,7 @@ src/App.h:
 /usr/include/wx-3.2/wx/unix/app.h:
 /usr/include/wx-3.2/wx/gtk/app.h:
 src/Palette.h:
+src/SnapSettings.h:
 src/MainFrame.h:
 /usr/include/wx-3.2/wx/aui/aui.h:
 /usr/include/wx-3.2/wx/aui/framemanager.h:
@@ -316,6 +319,7 @@ src/DrawView.h:
 src/DrawShape.h:
 src/DrawIds.h:
 src/ShapePath.h:
+src/SnapEngine.h:
 src/PropPanel.h:
 /usr/include/wx-3.2/wx/spinctrl.h:
 /usr/include/wx-3.2/wx/spinbutt.h:
@@ -344,6 +348,11 @@ src/AssetManagerPanel.h:
 /usr/include/wx-3.2/wx/systhemectrl.h:
 /usr/include/wx-3.2/wx/generic/treectlg.h:
 src/HierarchyPanel.h:
+src/ScenePanel.h:
+/usr/include/wx-3.2/wx/listbox.h:
+/usr/include/wx-3.2/wx/gtk/listbox.h:
+src/KeyframePanel.h:
+src/SmilTypes.h:
 /usr/include/wx-3.2/wx/dcbuffer.h:
 /usr/include/wx-3.2/wx/dcmemory.h:
 /usr/include/wx-3.2/wx/dcclient.h:

@@ -315,6 +315,8 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: \
  /usr/include/c++/14/bits/istream.tcc \
  /usr/include/wx-3.2/wx/gtk/textctrl.h /usr/include/wx-3.2/wx/choice.h \
  /usr/include/wx-3.2/wx/ctrlsub.h /usr/include/wx-3.2/wx/gtk/choice.h \
+ /usr/include/wx-3.2/wx/sizer.h /usr/include/wx-3.2/wx/xml/xml.h \
+ /usr/include/wx-3.2/wx/textbuf.h /usr/include/wx-3.2/wx/convauto.h \
  /home/alecca/Documents/spacely/src/DrawShape.h /usr/include/c++/14/map \
  /usr/include/c++/14/bits/stl_tree.h /usr/include/c++/14/bits/stl_map.h \
  /usr/include/c++/14/bits/stl_multimap.h \
@@ -338,8 +340,7 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: \
  /usr/include/wx-3.2/wx/gtk/brush.h \
  /usr/include/wx-3.2/wx/affinematrix2d.h \
  /usr/include/wx-3.2/wx/affinematrix2dbase.h \
- /usr/include/wx-3.2/wx/geometry.h /usr/include/wx-3.2/wx/xml/xml.h \
- /usr/include/wx-3.2/wx/textbuf.h /usr/include/wx-3.2/wx/convauto.h \
+ /usr/include/wx-3.2/wx/geometry.h \
  /home/alecca/Documents/spacely/src/ShapePath.h \
  /home/alecca/Documents/spacely/src/DrawCommands.h \
  /usr/include/wx-3.2/wx/cmdproc.h /usr/include/c++/14/memory \
@@ -358,6 +359,8 @@ CMakeFiles/spacily-app.dir/src/PropPanel.cpp.o: \
  /usr/include/c++/14/bits/atomic_lockfree_defines.h \
  /usr/include/c++/14/backward/auto_ptr.h \
  /usr/include/c++/14/pstl/glue_memory_defs.h \
+ /home/alecca/Documents/spacely/src/SmilDoc.h \
+ /home/alecca/Documents/spacely/src/SmilTypes.h \
  /usr/include/wx-3.2/wx/colordlg.h /usr/include/wx-3.2/wx/colourdata.h \
- /usr/include/wx-3.2/wx/gtk/colordlg.h /usr/include/wx-3.2/wx/sizer.h \
- /usr/include/wx-3.2/wx/statline.h /usr/include/wx-3.2/wx/gtk/statline.h
+ /usr/include/wx-3.2/wx/gtk/colordlg.h /usr/include/wx-3.2/wx/statline.h \
+ /usr/include/wx-3.2/wx/gtk/statline.h

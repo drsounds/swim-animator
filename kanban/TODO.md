@@ -1,0 +1,6 @@
+1	F /feature-dev:feature-dev Create a new document type, .spmx, (Swim Animator Movie file), an XML based format which can house a set of .smil files in custom order in a storyboard shown as a tab in the bottom panel which now house a single tab with properties, that is a storyboard to become scenes in a editable movie storyboard, provided as a (at default at bottom) dockable panel at the bottom. Apart to playing the scens, it should support a timeline which allows adding music and voice imported to the project assets.
+2	F /feature-dev:feature-dev Add support for reusing any other .smil file in a project as ref with editable location in the editor.
+3	F /feature-dev:feature-dev Add support for text file editing using a third party wxWidgets compatible Syntax highlighting editor.
+4	F Current and future specific Swim features is stored in the namespace xmlns:swim. All links src is relative to the project directory.
+5	F /feature-dev:feature-dev Add support for exporting the .spm as a .ogv through ffmpeg.
+6	F /feature-dev:feature-dev Add support for interactivity to the .svg and .smil, based on SMIL interactivity in JS, with flash like code editing panels, utilizing wxWidgets code editor.

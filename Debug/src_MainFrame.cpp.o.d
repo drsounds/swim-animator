@@ -95,9 +95,9 @@ Debug/src_MainFrame.cpp.o: src/MainFrame.cpp src/MainFrame.h \
  /usr/include/wx-3.2/wx/gtk/mdi.h /usr/include/wx-3.2/wx/toolbar.h \
  /usr/include/wx-3.2/wx/tbarbase.h /usr/include/wx-3.2/wx/gtk/toolbar.h \
  src/DrawView.h src/DrawShape.h src/DrawIds.h src/ShapePath.h \
- src/PropPanel.h /usr/include/wx-3.2/wx/spinctrl.h \
- /usr/include/wx-3.2/wx/spinbutt.h /usr/include/wx-3.2/wx/range.h \
- /usr/include/wx-3.2/wx/gtk/spinbutt.h \
+ src/SnapEngine.h src/SnapSettings.h src/PropPanel.h \
+ /usr/include/wx-3.2/wx/spinctrl.h /usr/include/wx-3.2/wx/spinbutt.h \
+ /usr/include/wx-3.2/wx/range.h /usr/include/wx-3.2/wx/gtk/spinbutt.h \
  /usr/include/wx-3.2/wx/gtk/spinctrl.h /usr/include/wx-3.2/wx/button.h \
  /usr/include/wx-3.2/wx/anybutton.h \
  /usr/include/wx-3.2/wx/gtk/anybutton.h \
@@ -107,20 +107,23 @@ Debug/src_MainFrame.cpp.o: src/MainFrame.cpp src/MainFrame.h \
  /usr/include/wx-3.2/wx/gtk/textentry.h /usr/include/wx-3.2/wx/ioswrap.h \
  /usr/include/wx-3.2/wx/gtk/textctrl.h /usr/include/wx-3.2/wx/choice.h \
  /usr/include/wx-3.2/wx/ctrlsub.h /usr/include/wx-3.2/wx/gtk/choice.h \
- src/ColorSwatchPanel.h src/AssetManagerPanel.h \
- /usr/include/wx-3.2/wx/treectrl.h /usr/include/wx-3.2/wx/treebase.h \
- /usr/include/wx-3.2/wx/itemid.h /usr/include/wx-3.2/wx/systhemectrl.h \
- /usr/include/wx-3.2/wx/generic/treectlg.h src/SpaDoc.h \
  /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
- /usr/include/wx-3.2/wx/convauto.h src/HierarchyPanel.h src/View.h \
- src/App.h /usr/include/wx-3.2/wx/app.h \
+ /usr/include/wx-3.2/wx/convauto.h src/ColorSwatchPanel.h \
+ src/AssetManagerPanel.h /usr/include/wx-3.2/wx/treectrl.h \
+ /usr/include/wx-3.2/wx/treebase.h /usr/include/wx-3.2/wx/itemid.h \
+ /usr/include/wx-3.2/wx/systhemectrl.h \
+ /usr/include/wx-3.2/wx/generic/treectlg.h src/SpaDoc.h \
+ src/HierarchyPanel.h src/ScenePanel.h /usr/include/wx-3.2/wx/listbox.h \
+ /usr/include/wx-3.2/wx/gtk/listbox.h src/KeyframePanel.h src/SmilTypes.h \
+ src/View.h src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
  /usr/include/wx-3.2/wx/cmdargs.h /usr/include/wx-3.2/wx/init.h \
  /usr/include/wx-3.2/wx/log.h /usr/include/wx-3.2/wx/generic/logg.h \
  /usr/include/wx-3.2/wx/unix/app.h /usr/include/wx-3.2/wx/gtk/app.h \
- src/Palette.h src/DrawDoc.h src/SpaView.h \
- /usr/include/wx-3.2/wx/artprov.h /usr/include/wx-3.2/wx/msgdlg.h \
- /usr/include/wx-3.2/wx/stockitem.h \
+ src/Palette.h src/SettingsDialog.h /usr/include/wx-3.2/wx/checkbox.h \
+ /usr/include/wx-3.2/wx/gtk/checkbox.h src/DrawDoc.h src/SpaView.h \
+ src/SmilDoc.h src/SmilView.h /usr/include/wx-3.2/wx/artprov.h \
+ /usr/include/wx-3.2/wx/msgdlg.h /usr/include/wx-3.2/wx/stockitem.h \
  /usr/include/wx-3.2/wx/generic/msgdlgg.h \
  /usr/include/wx-3.2/wx/gtk/msgdlg.h /usr/include/wx-3.2/wx/settings.h \
  /usr/include/wx-3.2/wx/dcmemory.h /usr/include/wx-3.2/wx/filedlg.h \
@@ -314,6 +317,8 @@ src/DrawView.h:
 src/DrawShape.h:
 src/DrawIds.h:
 src/ShapePath.h:
+src/SnapEngine.h:
+src/SnapSettings.h:
 src/PropPanel.h:
 /usr/include/wx-3.2/wx/spinctrl.h:
 /usr/include/wx-3.2/wx/spinbutt.h:
@@ -334,6 +339,9 @@ src/PropPanel.h:
 /usr/include/wx-3.2/wx/choice.h:
 /usr/include/wx-3.2/wx/ctrlsub.h:
 /usr/include/wx-3.2/wx/gtk/choice.h:
+/usr/include/wx-3.2/wx/xml/xml.h:
+/usr/include/wx-3.2/wx/textbuf.h:
+/usr/include/wx-3.2/wx/convauto.h:
 src/ColorSwatchPanel.h:
 src/AssetManagerPanel.h:
 /usr/include/wx-3.2/wx/treectrl.h:
@@ -342,10 +350,12 @@ src/AssetManagerPanel.h:
 /usr/include/wx-3.2/wx/systhemectrl.h:
 /usr/include/wx-3.2/wx/generic/treectlg.h:
 src/SpaDoc.h:
-/usr/include/wx-3.2/wx/xml/xml.h:
-/usr/include/wx-3.2/wx/textbuf.h:
-/usr/include/wx-3.2/wx/convauto.h:
 src/HierarchyPanel.h:
+src/ScenePanel.h:
+/usr/include/wx-3.2/wx/listbox.h:
+/usr/include/wx-3.2/wx/gtk/listbox.h:
+src/KeyframePanel.h:
+src/SmilTypes.h:
 src/View.h:
 src/App.h:
 /usr/include/wx-3.2/wx/app.h:
@@ -358,8 +368,13 @@ src/App.h:
 /usr/include/wx-3.2/wx/unix/app.h:
 /usr/include/wx-3.2/wx/gtk/app.h:
 src/Palette.h:
+src/SettingsDialog.h:
+/usr/include/wx-3.2/wx/checkbox.h:
+/usr/include/wx-3.2/wx/gtk/checkbox.h:
 src/DrawDoc.h:
 src/SpaView.h:
+src/SmilDoc.h:
+src/SmilView.h:
 /usr/include/wx-3.2/wx/artprov.h:
 /usr/include/wx-3.2/wx/msgdlg.h:
 /usr/include/wx-3.2/wx/stockitem.h:

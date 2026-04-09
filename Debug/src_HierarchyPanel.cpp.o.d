@@ -96,8 +96,8 @@ Debug/src_HierarchyPanel.cpp.o: src/HierarchyPanel.cpp \
  /usr/include/wx-3.2/wx/cmdargs.h /usr/include/wx-3.2/wx/init.h \
  /usr/include/wx-3.2/wx/log.h /usr/include/wx-3.2/wx/time.h \
  /usr/include/wx-3.2/wx/generic/logg.h /usr/include/wx-3.2/wx/unix/app.h \
- /usr/include/wx-3.2/wx/gtk/app.h src/Palette.h src/MainFrame.h \
- /usr/include/wx-3.2/wx/aui/aui.h \
+ /usr/include/wx-3.2/wx/gtk/app.h src/Palette.h src/SnapSettings.h \
+ src/MainFrame.h /usr/include/wx-3.2/wx/aui/aui.h \
  /usr/include/wx-3.2/wx/aui/framemanager.h /usr/include/wx-3.2/wx/timer.h \
  /usr/include/wx-3.2/wx/stopwatch.h /usr/include/wx-3.2/wx/sizer.h \
  /usr/include/wx-3.2/wx/aui/dockart.h \
@@ -111,9 +111,9 @@ Debug/src_HierarchyPanel.cpp.o: src/HierarchyPanel.cpp \
  /usr/include/wx-3.2/wx/gtk/menuitem.h /usr/include/wx-3.2/wx/gtk/menu.h \
  /usr/include/wx-3.2/wx/gtk/mdi.h /usr/include/wx-3.2/wx/toolbar.h \
  /usr/include/wx-3.2/wx/tbarbase.h /usr/include/wx-3.2/wx/gtk/toolbar.h \
- src/DrawView.h src/PropPanel.h /usr/include/wx-3.2/wx/spinctrl.h \
- /usr/include/wx-3.2/wx/spinbutt.h /usr/include/wx-3.2/wx/range.h \
- /usr/include/wx-3.2/wx/gtk/spinbutt.h \
+ src/DrawView.h src/SnapEngine.h src/PropPanel.h \
+ /usr/include/wx-3.2/wx/spinctrl.h /usr/include/wx-3.2/wx/spinbutt.h \
+ /usr/include/wx-3.2/wx/range.h /usr/include/wx-3.2/wx/gtk/spinbutt.h \
  /usr/include/wx-3.2/wx/gtk/spinctrl.h /usr/include/wx-3.2/wx/button.h \
  /usr/include/wx-3.2/wx/anybutton.h \
  /usr/include/wx-3.2/wx/gtk/anybutton.h \
@@ -121,6 +121,8 @@ Debug/src_HierarchyPanel.cpp.o: src/HierarchyPanel.cpp \
  /usr/include/wx-3.2/wx/gtk/stattext.h /usr/include/wx-3.2/wx/choice.h \
  /usr/include/wx-3.2/wx/ctrlsub.h /usr/include/wx-3.2/wx/gtk/choice.h \
  src/ColorSwatchPanel.h src/AssetManagerPanel.h src/SpaDoc.h \
+ src/ScenePanel.h /usr/include/wx-3.2/wx/listbox.h \
+ /usr/include/wx-3.2/wx/gtk/listbox.h src/KeyframePanel.h src/SmilTypes.h \
  /usr/include/wx-3.2/wx/filename.h /usr/include/wx-3.2/wx/file.h \
  /usr/include/wx-3.2/wx/textdlg.h \
  /usr/include/wx-3.2/wx/generic/textdlgg.h \
@@ -306,6 +308,7 @@ src/App.h:
 /usr/include/wx-3.2/wx/unix/app.h:
 /usr/include/wx-3.2/wx/gtk/app.h:
 src/Palette.h:
+src/SnapSettings.h:
 src/MainFrame.h:
 /usr/include/wx-3.2/wx/aui/aui.h:
 /usr/include/wx-3.2/wx/aui/framemanager.h:
@@ -333,6 +336,7 @@ src/MainFrame.h:
 /usr/include/wx-3.2/wx/tbarbase.h:
 /usr/include/wx-3.2/wx/gtk/toolbar.h:
 src/DrawView.h:
+src/SnapEngine.h:
 src/PropPanel.h:
 /usr/include/wx-3.2/wx/spinctrl.h:
 /usr/include/wx-3.2/wx/spinbutt.h:
@@ -351,6 +355,11 @@ src/PropPanel.h:
 src/ColorSwatchPanel.h:
 src/AssetManagerPanel.h:
 src/SpaDoc.h:
+src/ScenePanel.h:
+/usr/include/wx-3.2/wx/listbox.h:
+/usr/include/wx-3.2/wx/gtk/listbox.h:
+src/KeyframePanel.h:
+src/SmilTypes.h:
 /usr/include/wx-3.2/wx/filename.h:
 /usr/include/wx-3.2/wx/file.h:
 /usr/include/wx-3.2/wx/textdlg.h:

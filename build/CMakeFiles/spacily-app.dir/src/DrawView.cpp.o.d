@@ -410,6 +410,10 @@ CMakeFiles/spacily-app.dir/src/DrawView.cpp.o: \
  /usr/include/wx-3.2/wx/generic/treectlg.h \
  /home/alecca/Documents/spacely/src/SpaDoc.h \
  /home/alecca/Documents/spacely/src/HierarchyPanel.h \
+ /home/alecca/Documents/spacely/src/ScenePanel.h \
+ /usr/include/wx-3.2/wx/listbox.h /usr/include/wx-3.2/wx/gtk/listbox.h \
+ /home/alecca/Documents/spacely/src/KeyframePanel.h \
+ /home/alecca/Documents/spacely/src/SmilTypes.h \
  /usr/include/wx-3.2/wx/dcbuffer.h /usr/include/wx-3.2/wx/dcmemory.h \
  /usr/include/wx-3.2/wx/dcclient.h /usr/include/wx-3.2/wx/settings.h \
  /usr/include/wx-3.2/wx/colordlg.h /usr/include/wx-3.2/wx/colourdata.h \

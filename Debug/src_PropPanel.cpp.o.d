@@ -75,6 +75,8 @@ Debug/src_PropPanel.cpp.o: src/PropPanel.cpp src/PropPanel.h \
  /usr/include/wx-3.2/wx/gtk/textentry.h /usr/include/wx-3.2/wx/ioswrap.h \
  /usr/include/wx-3.2/wx/gtk/textctrl.h /usr/include/wx-3.2/wx/choice.h \
  /usr/include/wx-3.2/wx/ctrlsub.h /usr/include/wx-3.2/wx/gtk/choice.h \
+ /usr/include/wx-3.2/wx/sizer.h /usr/include/wx-3.2/wx/xml/xml.h \
+ /usr/include/wx-3.2/wx/textbuf.h /usr/include/wx-3.2/wx/convauto.h \
  src/DrawShape.h src/DrawDoc.h /usr/include/wx-3.2/wx/docview.h \
  /usr/include/wx-3.2/wx/dlist.h /usr/include/wx-3.2/wx/frame.h \
  /usr/include/wx-3.2/wx/toplevel.h /usr/include/wx-3.2/wx/nonownedwnd.h \
@@ -94,12 +96,11 @@ Debug/src_PropPanel.cpp.o: src/PropPanel.cpp src/PropPanel.h \
  /usr/include/wx-3.2/wx/gtk/brush.h \
  /usr/include/wx-3.2/wx/affinematrix2d.h \
  /usr/include/wx-3.2/wx/affinematrix2dbase.h \
- /usr/include/wx-3.2/wx/geometry.h /usr/include/wx-3.2/wx/xml/xml.h \
- /usr/include/wx-3.2/wx/textbuf.h /usr/include/wx-3.2/wx/convauto.h \
- src/ShapePath.h src/DrawCommands.h /usr/include/wx-3.2/wx/cmdproc.h \
+ /usr/include/wx-3.2/wx/geometry.h src/ShapePath.h src/DrawCommands.h \
+ /usr/include/wx-3.2/wx/cmdproc.h src/SmilDoc.h src/SmilTypes.h \
  /usr/include/wx-3.2/wx/colordlg.h /usr/include/wx-3.2/wx/colourdata.h \
- /usr/include/wx-3.2/wx/gtk/colordlg.h /usr/include/wx-3.2/wx/sizer.h \
- /usr/include/wx-3.2/wx/statline.h /usr/include/wx-3.2/wx/gtk/statline.h
+ /usr/include/wx-3.2/wx/gtk/colordlg.h /usr/include/wx-3.2/wx/statline.h \
+ /usr/include/wx-3.2/wx/gtk/statline.h
 src/PropPanel.h:
 /usr/include/wx-3.2/wx/panel.h:
 /usr/include/wx-3.2/wx/window.h:
@@ -240,6 +241,10 @@ src/PropPanel.h:
 /usr/include/wx-3.2/wx/choice.h:
 /usr/include/wx-3.2/wx/ctrlsub.h:
 /usr/include/wx-3.2/wx/gtk/choice.h:
+/usr/include/wx-3.2/wx/sizer.h:
+/usr/include/wx-3.2/wx/xml/xml.h:
+/usr/include/wx-3.2/wx/textbuf.h:
+/usr/include/wx-3.2/wx/convauto.h:
 src/DrawShape.h:
 src/DrawDoc.h:
 /usr/include/wx-3.2/wx/docview.h:
@@ -274,15 +279,13 @@ src/DrawDoc.h:
 /usr/include/wx-3.2/wx/affinematrix2d.h:
 /usr/include/wx-3.2/wx/affinematrix2dbase.h:
 /usr/include/wx-3.2/wx/geometry.h:
-/usr/include/wx-3.2/wx/xml/xml.h:
-/usr/include/wx-3.2/wx/textbuf.h:
-/usr/include/wx-3.2/wx/convauto.h:
 src/ShapePath.h:
 src/DrawCommands.h:
 /usr/include/wx-3.2/wx/cmdproc.h:
+src/SmilDoc.h:
+src/SmilTypes.h:
 /usr/include/wx-3.2/wx/colordlg.h:
 /usr/include/wx-3.2/wx/colourdata.h:
 /usr/include/wx-3.2/wx/gtk/colordlg.h:
-/usr/include/wx-3.2/wx/sizer.h:
 /usr/include/wx-3.2/wx/statline.h:
 /usr/include/wx-3.2/wx/gtk/statline.h:

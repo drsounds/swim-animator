@@ -410,6 +410,10 @@ CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.o: \
  /home/alecca/Documents/spacely/src/ColorSwatchPanel.h \
  /home/alecca/Documents/spacely/src/AssetManagerPanel.h \
  /home/alecca/Documents/spacely/src/SpaDoc.h \
+ /home/alecca/Documents/spacely/src/ScenePanel.h \
+ /usr/include/wx-3.2/wx/listbox.h /usr/include/wx-3.2/wx/gtk/listbox.h \
+ /home/alecca/Documents/spacely/src/KeyframePanel.h \
+ /home/alecca/Documents/spacely/src/SmilTypes.h \
  /usr/include/wx-3.2/wx/filename.h /usr/include/wx-3.2/wx/file.h \
  /usr/include/wx-3.2/wx/textdlg.h \
  /usr/include/wx-3.2/wx/generic/textdlgg.h \

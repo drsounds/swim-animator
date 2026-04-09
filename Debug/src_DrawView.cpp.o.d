@@ -78,15 +78,16 @@ Debug/src_DrawView.cpp.o: src/DrawView.cpp src/DrawView.h \
  /usr/include/wx-3.2/wx/affinematrix2d.h \
  /usr/include/wx-3.2/wx/affinematrix2dbase.h \
  /usr/include/wx-3.2/wx/geometry.h src/DrawShape.h src/DrawIds.h \
- src/ShapePath.h src/DrawDoc.h /usr/include/wx-3.2/wx/xml/xml.h \
- /usr/include/wx-3.2/wx/textbuf.h /usr/include/wx-3.2/wx/convauto.h \
- src/DrawCommands.h /usr/include/wx-3.2/wx/cmdproc.h src/App.h \
- /usr/include/wx-3.2/wx/app.h /usr/include/wx-3.2/wx/eventfilter.h \
- /usr/include/wx-3.2/wx/build.h /usr/include/wx-3.2/wx/cmdargs.h \
- /usr/include/wx-3.2/wx/init.h /usr/include/wx-3.2/wx/log.h \
- /usr/include/wx-3.2/wx/time.h /usr/include/wx-3.2/wx/generic/logg.h \
- /usr/include/wx-3.2/wx/unix/app.h /usr/include/wx-3.2/wx/gtk/app.h \
- src/Palette.h src/MainFrame.h /usr/include/wx-3.2/wx/aui/aui.h \
+ src/ShapePath.h src/SnapEngine.h src/SnapSettings.h src/DrawDoc.h \
+ /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
+ /usr/include/wx-3.2/wx/convauto.h src/DrawCommands.h \
+ /usr/include/wx-3.2/wx/cmdproc.h src/App.h /usr/include/wx-3.2/wx/app.h \
+ /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
+ /usr/include/wx-3.2/wx/cmdargs.h /usr/include/wx-3.2/wx/init.h \
+ /usr/include/wx-3.2/wx/log.h /usr/include/wx-3.2/wx/time.h \
+ /usr/include/wx-3.2/wx/generic/logg.h /usr/include/wx-3.2/wx/unix/app.h \
+ /usr/include/wx-3.2/wx/gtk/app.h src/Palette.h src/MainFrame.h \
+ /usr/include/wx-3.2/wx/aui/aui.h \
  /usr/include/wx-3.2/wx/aui/framemanager.h /usr/include/wx-3.2/wx/timer.h \
  /usr/include/wx-3.2/wx/stopwatch.h /usr/include/wx-3.2/wx/sizer.h \
  /usr/include/wx-3.2/wx/bmpbndl.h /usr/include/wx-3.2/wx/aui/dockart.h \
@@ -118,10 +119,11 @@ Debug/src_DrawView.cpp.o: src/DrawView.cpp src/DrawView.h \
  /usr/include/wx-3.2/wx/treectrl.h /usr/include/wx-3.2/wx/treebase.h \
  /usr/include/wx-3.2/wx/itemid.h /usr/include/wx-3.2/wx/systhemectrl.h \
  /usr/include/wx-3.2/wx/generic/treectlg.h src/SpaDoc.h \
- src/HierarchyPanel.h /usr/include/wx-3.2/wx/dcbuffer.h \
- /usr/include/wx-3.2/wx/dcmemory.h /usr/include/wx-3.2/wx/dcclient.h \
- /usr/include/wx-3.2/wx/settings.h /usr/include/wx-3.2/wx/colordlg.h \
- /usr/include/wx-3.2/wx/colourdata.h \
+ src/HierarchyPanel.h src/ScenePanel.h /usr/include/wx-3.2/wx/listbox.h \
+ /usr/include/wx-3.2/wx/gtk/listbox.h src/KeyframePanel.h src/SmilTypes.h \
+ /usr/include/wx-3.2/wx/dcbuffer.h /usr/include/wx-3.2/wx/dcmemory.h \
+ /usr/include/wx-3.2/wx/dcclient.h /usr/include/wx-3.2/wx/settings.h \
+ /usr/include/wx-3.2/wx/colordlg.h /usr/include/wx-3.2/wx/colourdata.h \
  /usr/include/wx-3.2/wx/gtk/colordlg.h /usr/include/wx-3.2/wx/textdlg.h \
  /usr/include/wx-3.2/wx/generic/textdlgg.h \
  /usr/include/wx-3.2/wx/valtext.h /usr/include/wx-3.2/wx/msgdlg.h \
@@ -281,6 +283,8 @@ src/DrawView.h:
 src/DrawShape.h:
 src/DrawIds.h:
 src/ShapePath.h:
+src/SnapEngine.h:
+src/SnapSettings.h:
 src/DrawDoc.h:
 /usr/include/wx-3.2/wx/xml/xml.h:
 /usr/include/wx-3.2/wx/textbuf.h:
@@ -358,6 +362,11 @@ src/AssetManagerPanel.h:
 /usr/include/wx-3.2/wx/generic/treectlg.h:
 src/SpaDoc.h:
 src/HierarchyPanel.h:
+src/ScenePanel.h:
+/usr/include/wx-3.2/wx/listbox.h:
+/usr/include/wx-3.2/wx/gtk/listbox.h:
+src/KeyframePanel.h:
+src/SmilTypes.h:
 /usr/include/wx-3.2/wx/dcbuffer.h:
 /usr/include/wx-3.2/wx/dcmemory.h:
 /usr/include/wx-3.2/wx/dcclient.h:

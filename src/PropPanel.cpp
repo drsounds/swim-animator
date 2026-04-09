@@ -13,7 +13,7 @@
 // ---------------------------------------------------------------------------
 
 static wxString KindName(ShapeKind k) {
-    switch (k) {
+    switch (k) {    
         case ShapeKind::Rect:   return "Rectangle";
         case ShapeKind::Circle: return "Circle";
         case ShapeKind::Text:   return "Text";
@@ -317,12 +317,16 @@ void PropPanel::BuildXmlTab() {
 
 void PropPanel::PopulateXmlTab() {
     // Destroy old controls.
-    m_xmlGrid->Clear(true);
+    if (m_xmlGrid != nullptr) {
+        m_xmlGrid->Clear(true);
+    }
     m_xmlAttrNames.clear();
     m_xmlValueCtrls.clear();
 
     if (!m_doc || m_idx < 0 || m_idx >= (int)m_doc->GetShapes().size()) {
-        m_xmlPage->Layout();
+        if (m_xmlPage != nullptr) {
+            m_xmlPage->Layout();
+        }
         return;
     }
 

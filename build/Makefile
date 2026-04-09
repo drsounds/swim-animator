@@ -321,6 +321,30 @@ src/HierarchyPanel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.s
 .PHONY : src/HierarchyPanel.cpp.s
 
+src/KeyframePanel.o: src/KeyframePanel.cpp.o
+.PHONY : src/KeyframePanel.o
+
+# target to build an object file
+src/KeyframePanel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.o
+.PHONY : src/KeyframePanel.cpp.o
+
+src/KeyframePanel.i: src/KeyframePanel.cpp.i
+.PHONY : src/KeyframePanel.i
+
+# target to preprocess a source file
+src/KeyframePanel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.i
+.PHONY : src/KeyframePanel.cpp.i
+
+src/KeyframePanel.s: src/KeyframePanel.cpp.s
+.PHONY : src/KeyframePanel.s
+
+# target to generate assembly for a file
+src/KeyframePanel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.s
+.PHONY : src/KeyframePanel.cpp.s
+
 src/MainFrame.o: src/MainFrame.cpp.o
 .PHONY : src/MainFrame.o
 
@@ -417,6 +441,30 @@ src/PropPanel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/PropPanel.cpp.s
 .PHONY : src/PropPanel.cpp.s
 
+src/ScenePanel.o: src/ScenePanel.cpp.o
+.PHONY : src/ScenePanel.o
+
+# target to build an object file
+src/ScenePanel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.o
+.PHONY : src/ScenePanel.cpp.o
+
+src/ScenePanel.i: src/ScenePanel.cpp.i
+.PHONY : src/ScenePanel.i
+
+# target to preprocess a source file
+src/ScenePanel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.i
+.PHONY : src/ScenePanel.cpp.i
+
+src/ScenePanel.s: src/ScenePanel.cpp.s
+.PHONY : src/ScenePanel.s
+
+# target to generate assembly for a file
+src/ScenePanel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.s
+.PHONY : src/ScenePanel.cpp.s
+
 src/SettingsDialog.o: src/SettingsDialog.cpp.o
 .PHONY : src/SettingsDialog.o
 
@@ -440,6 +488,78 @@ src/SettingsDialog.s: src/SettingsDialog.cpp.s
 src/SettingsDialog.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SettingsDialog.cpp.s
 .PHONY : src/SettingsDialog.cpp.s
+
+src/SmilDoc.o: src/SmilDoc.cpp.o
+.PHONY : src/SmilDoc.o
+
+# target to build an object file
+src/SmilDoc.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.o
+.PHONY : src/SmilDoc.cpp.o
+
+src/SmilDoc.i: src/SmilDoc.cpp.i
+.PHONY : src/SmilDoc.i
+
+# target to preprocess a source file
+src/SmilDoc.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.i
+.PHONY : src/SmilDoc.cpp.i
+
+src/SmilDoc.s: src/SmilDoc.cpp.s
+.PHONY : src/SmilDoc.s
+
+# target to generate assembly for a file
+src/SmilDoc.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SmilDoc.cpp.s
+.PHONY : src/SmilDoc.cpp.s
+
+src/SmilTypes.o: src/SmilTypes.cpp.o
+.PHONY : src/SmilTypes.o
+
+# target to build an object file
+src/SmilTypes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.o
+.PHONY : src/SmilTypes.cpp.o
+
+src/SmilTypes.i: src/SmilTypes.cpp.i
+.PHONY : src/SmilTypes.i
+
+# target to preprocess a source file
+src/SmilTypes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.i
+.PHONY : src/SmilTypes.cpp.i
+
+src/SmilTypes.s: src/SmilTypes.cpp.s
+.PHONY : src/SmilTypes.s
+
+# target to generate assembly for a file
+src/SmilTypes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SmilTypes.cpp.s
+.PHONY : src/SmilTypes.cpp.s
+
+src/SmilView.o: src/SmilView.cpp.o
+.PHONY : src/SmilView.o
+
+# target to build an object file
+src/SmilView.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SmilView.cpp.o
+.PHONY : src/SmilView.cpp.o
+
+src/SmilView.i: src/SmilView.cpp.i
+.PHONY : src/SmilView.i
+
+# target to preprocess a source file
+src/SmilView.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SmilView.cpp.i
+.PHONY : src/SmilView.cpp.i
+
+src/SmilView.s: src/SmilView.cpp.s
+.PHONY : src/SmilView.s
+
+# target to generate assembly for a file
+src/SmilView.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/SmilView.cpp.s
+.PHONY : src/SmilView.cpp.s
 
 src/SnapEngine.o: src/SnapEngine.cpp.o
 .PHONY : src/SnapEngine.o
@@ -618,6 +738,9 @@ help:
 	@echo "... src/HierarchyPanel.o"
 	@echo "... src/HierarchyPanel.i"
 	@echo "... src/HierarchyPanel.s"
+	@echo "... src/KeyframePanel.o"
+	@echo "... src/KeyframePanel.i"
+	@echo "... src/KeyframePanel.s"
 	@echo "... src/MainFrame.o"
 	@echo "... src/MainFrame.i"
 	@echo "... src/MainFrame.s"
@@ -630,9 +753,21 @@ help:
 	@echo "... src/PropPanel.o"
 	@echo "... src/PropPanel.i"
 	@echo "... src/PropPanel.s"
+	@echo "... src/ScenePanel.o"
+	@echo "... src/ScenePanel.i"
+	@echo "... src/ScenePanel.s"
 	@echo "... src/SettingsDialog.o"
 	@echo "... src/SettingsDialog.i"
 	@echo "... src/SettingsDialog.s"
+	@echo "... src/SmilDoc.o"
+	@echo "... src/SmilDoc.i"
+	@echo "... src/SmilDoc.s"
+	@echo "... src/SmilTypes.o"
+	@echo "... src/SmilTypes.i"
+	@echo "... src/SmilTypes.s"
+	@echo "... src/SmilView.o"
+	@echo "... src/SmilView.i"
+	@echo "... src/SmilView.s"
 	@echo "... src/SnapEngine.o"
 	@echo "... src/SnapEngine.i"
 	@echo "... src/SnapEngine.s"

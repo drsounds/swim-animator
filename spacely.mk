@@ -62,15 +62,13 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/src_DrawView.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_Palette.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_View.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SpaSaveAsDialog.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_DrawCommands.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SnapEngine.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_HierarchyPanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_NewDrawingDialog.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SpaDoc.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/src_SnapSettings.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SpaView.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SettingsDialog.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_PropPanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_MainFrame.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_App.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_AssetManagerPanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter_bitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_DrawDoc.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_Document.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/src_ColorSwatchPanel.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/src_SmilTypes.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SmilDoc.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SmilView.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/src_ScenePanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_KeyframePanel.cpp$(ObjectSuffix)
+Objects0=$(IntermediateDirectory)/src_SmilTypes.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_ScenePanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SmilView.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SmilDoc.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_DrawView.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_KeyframePanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_Palette.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_View.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SpaSaveAsDialog.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/src_DrawCommands.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SnapEngine.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_HierarchyPanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_NewDrawingDialog.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SpaDoc.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SnapSettings.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SpaView.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_SettingsDialog.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_PropPanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_MainFrame.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/src_App.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_AssetManagerPanel.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter_bitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_DrawDoc.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_Document.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_ColorSwatchPanel.cpp$(ObjectSuffix) 
 
 
 
-Objects=$(Objects0)
+Objects=$(Objects0) 
 
 ##
 ## Main Build Targets 
@@ -97,6 +95,30 @@ PreBuild:
 ##
 ## Objects
 ##
+$(IntermediateDirectory)/src_SmilTypes.cpp$(ObjectSuffix): src/SmilTypes.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_SmilTypes.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_SmilTypes.cpp$(DependSuffix) -MM src/SmilTypes.cpp
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/SmilTypes.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_SmilTypes.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_SmilTypes.cpp$(PreprocessSuffix): src/SmilTypes.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_SmilTypes.cpp$(PreprocessSuffix) src/SmilTypes.cpp
+
+$(IntermediateDirectory)/src_ScenePanel.cpp$(ObjectSuffix): src/ScenePanel.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_ScenePanel.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_ScenePanel.cpp$(DependSuffix) -MM src/ScenePanel.cpp
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/ScenePanel.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_ScenePanel.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_ScenePanel.cpp$(PreprocessSuffix): src/ScenePanel.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_ScenePanel.cpp$(PreprocessSuffix) src/ScenePanel.cpp
+
+$(IntermediateDirectory)/src_SmilView.cpp$(ObjectSuffix): src/SmilView.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_SmilView.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_SmilView.cpp$(DependSuffix) -MM src/SmilView.cpp
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/SmilView.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_SmilView.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_SmilView.cpp$(PreprocessSuffix): src/SmilView.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_SmilView.cpp$(PreprocessSuffix) src/SmilView.cpp
+
+$(IntermediateDirectory)/src_SmilDoc.cpp$(ObjectSuffix): src/SmilDoc.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_SmilDoc.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_SmilDoc.cpp$(DependSuffix) -MM src/SmilDoc.cpp
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/SmilDoc.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_SmilDoc.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_SmilDoc.cpp$(PreprocessSuffix): src/SmilDoc.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_SmilDoc.cpp$(PreprocessSuffix) src/SmilDoc.cpp
+
 $(IntermediateDirectory)/src_DrawView.cpp$(ObjectSuffix): src/DrawView.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_DrawView.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_DrawView.cpp$(DependSuffix) -MM src/DrawView.cpp
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/DrawView.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_DrawView.cpp$(ObjectSuffix) $(IncludePath)
@@ -108,6 +130,12 @@ $(IntermediateDirectory)/wxcrafter.cpp$(ObjectSuffix): wxcrafter.cpp
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/wxcrafter.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/wxcrafter.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/wxcrafter.cpp$(PreprocessSuffix): wxcrafter.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/wxcrafter.cpp$(PreprocessSuffix) wxcrafter.cpp
+
+$(IntermediateDirectory)/src_KeyframePanel.cpp$(ObjectSuffix): src/KeyframePanel.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_KeyframePanel.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_KeyframePanel.cpp$(DependSuffix) -MM src/KeyframePanel.cpp
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/KeyframePanel.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_KeyframePanel.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_KeyframePanel.cpp$(PreprocessSuffix): src/KeyframePanel.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_KeyframePanel.cpp$(PreprocessSuffix) src/KeyframePanel.cpp
 
 $(IntermediateDirectory)/src_Palette.cpp$(ObjectSuffix): src/Palette.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_Palette.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_Palette.cpp$(DependSuffix) -MM src/Palette.cpp
@@ -222,36 +250,6 @@ $(IntermediateDirectory)/src_ColorSwatchPanel.cpp$(ObjectSuffix): src/ColorSwatc
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/ColorSwatchPanel.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_ColorSwatchPanel.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/src_ColorSwatchPanel.cpp$(PreprocessSuffix): src/ColorSwatchPanel.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_ColorSwatchPanel.cpp$(PreprocessSuffix) src/ColorSwatchPanel.cpp
-
-$(IntermediateDirectory)/src_SmilTypes.cpp$(ObjectSuffix): src/SmilTypes.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_SmilTypes.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_SmilTypes.cpp$(DependSuffix) -MM src/SmilTypes.cpp
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/SmilTypes.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_SmilTypes.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/src_SmilTypes.cpp$(PreprocessSuffix): src/SmilTypes.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_SmilTypes.cpp$(PreprocessSuffix) src/SmilTypes.cpp
-
-$(IntermediateDirectory)/src_SmilDoc.cpp$(ObjectSuffix): src/SmilDoc.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_SmilDoc.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_SmilDoc.cpp$(DependSuffix) -MM src/SmilDoc.cpp
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/SmilDoc.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_SmilDoc.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/src_SmilDoc.cpp$(PreprocessSuffix): src/SmilDoc.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_SmilDoc.cpp$(PreprocessSuffix) src/SmilDoc.cpp
-
-$(IntermediateDirectory)/src_SmilView.cpp$(ObjectSuffix): src/SmilView.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_SmilView.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_SmilView.cpp$(DependSuffix) -MM src/SmilView.cpp
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/SmilView.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_SmilView.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/src_SmilView.cpp$(PreprocessSuffix): src/SmilView.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_SmilView.cpp$(PreprocessSuffix) src/SmilView.cpp
-
-$(IntermediateDirectory)/src_ScenePanel.cpp$(ObjectSuffix): src/ScenePanel.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_ScenePanel.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_ScenePanel.cpp$(DependSuffix) -MM src/ScenePanel.cpp
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/ScenePanel.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_ScenePanel.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/src_ScenePanel.cpp$(PreprocessSuffix): src/ScenePanel.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_ScenePanel.cpp$(PreprocessSuffix) src/ScenePanel.cpp
-
-$(IntermediateDirectory)/src_KeyframePanel.cpp$(ObjectSuffix): src/KeyframePanel.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_KeyframePanel.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_KeyframePanel.cpp$(DependSuffix) -MM src/KeyframePanel.cpp
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/alecca/Documents/spacely/src/KeyframePanel.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_KeyframePanel.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/src_KeyframePanel.cpp$(PreprocessSuffix): src/KeyframePanel.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_KeyframePanel.cpp$(PreprocessSuffix) src/KeyframePanel.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

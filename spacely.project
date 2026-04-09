@@ -3,6 +3,14 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <File Name="src/SmilTypes.cpp"/>
+    <File Name="src/ScenePanel.cpp"/>
+    <File Name="src/KeyframePanel.cpp"/>
+    <File Name="src/SmilView.cpp"/>
+    <File Name="src/SmilDoc.cpp"/>
+    <File Name="src/SnapEngine.cpp"/>
+    <File Name="src/SettingsDialog.cpp"/>
+    <File Name="src/SnapSettings.cpp"/>
     <File Name="src/NewDrawingDialog.cpp"/>
     <File Name="src/HierarchyPanel.cpp"/>
     <File Name="src/AssetManagerPanel.cpp"/>
