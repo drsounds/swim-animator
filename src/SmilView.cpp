@@ -5,6 +5,7 @@
 #include "DrawCommands.h"
 #include <wx/dcbuffer.h>
 #include <wx/settings.h>
+#include <wx/sizer.h>
 #include <algorithm>
 
 // ---------------------------------------------------------------------------
@@ -41,8 +42,9 @@ void SmilProxyView::NotifySelectionChanged() {
     const std::vector<int>& sel = m_canvas ? m_canvas->GetSelection() : kEmpty;
     // Forward to MainFrame as if this were a normal DrawDoc selection.
     mf->OnSelectionChanged(doc, sel);
-    // Also notify the SMIL-specific keyframe panel.
-    mf->OnSmilSelectionChanged(m_smilView, sel);
+    // Refresh the keyframe panel embedded in the SmilCanvas.
+    SmilCanvas* sc = m_smilView->GetCanvas();
+    if (sc) sc->RefreshKeyframes();
 }
 
 // ---------------------------------------------------------------------------
@@ -66,12 +68,21 @@ SmilCanvas::SmilCanvas(SmilView* owner, wxWindow* parent, SmilDoc* smilDoc)
     m_proxyView->m_smilView = m_owner;
     m_proxyView->OnCreate(m_syntheticDoc, 0L);
 
-    // Create DrawCanvas as a child filling this panel.
+    // Vertical layout: keyframe timeline at top, drawing canvas below.
+    auto* sizer = new wxBoxSizer(wxVERTICAL);
+
+    m_keyframePanel = new KeyframePanel(this);
+    sizer->Add(m_keyframePanel, 0, wxEXPAND);
+
     m_drawCanvas = new DrawCanvas(m_proxyView, this);
     m_proxyView->SetCanvas(m_drawCanvas);
+    sizer->Add(m_drawCanvas, 1, wxEXPAND);
+
+    SetSizer(sizer);
 
     // Load initial scene content.
     LoadFromScene();
+    RefreshKeyframes();
 }
 
 SmilCanvas::~SmilCanvas() {
@@ -89,8 +100,7 @@ SmilCanvas::~SmilCanvas() {
 }
 
 void SmilCanvas::OnSize(wxSizeEvent& e) {
-    if (m_drawCanvas)
-        m_drawCanvas->SetSize(GetClientSize());
+    Layout();
     e.Skip();
 }
 
@@ -193,10 +203,17 @@ void SmilCanvas::WriteBackToScene() {
     m_smilDoc->Modify(true);
 
     m_syncing = false;
+    RefreshKeyframes();
 }
 
 void SmilCanvas::RefreshFromDoc() {
     LoadFromScene();
+    RefreshKeyframes();
+}
+
+void SmilCanvas::RefreshKeyframes() {
+    if (m_keyframePanel)
+        m_keyframePanel->Refresh(m_owner);
 }
 
 // ---------------------------------------------------------------------------

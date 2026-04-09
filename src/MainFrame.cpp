@@ -126,7 +126,6 @@ MainFrame::MainFrame(wxDocManager* manager, wxFrame* parent, wxWindowID id,
     CreatePropertiesPane();
     CreateHierarchyPane();
     CreateScenePane();
-    CreateKeyframePane();
     CreateStatusBar_();
     CreateAuiPanes();
 
@@ -459,33 +458,13 @@ void MainFrame::CreateScenePane() {
 }
 
 void MainFrame::CreateKeyframePane() {
-    m_keyframePanel = new KeyframePanel(this);
-    m_auiMgr.AddPane(m_keyframePanel,
-        wxAuiPaneInfo()
-            .Name("Keyframes")
-            .Caption("Keyframes")
-            .Top()
-            .Row(2)
-            .BestSize(-1, 160)
-            .MinSize(-1, 80)
-            .CloseButton(true)
-            .Floatable(true)
-            .Show(false));  // hidden until a SmilDoc is active
+    // KeyframePanel is now embedded inside SmilCanvas, not a separate AUI pane.
 }
 
 void MainFrame::SetActiveSmilView(SmilView* view) {
     m_activeSmilView = view;
 
-    if (m_scenePanel)    m_scenePanel->Refresh(view);
-    if (m_keyframePanel) {
-        m_keyframePanel->Refresh(view);
-        // Show the keyframe panel when a SMIL doc is active.
-        wxAuiPaneInfo& pi = m_auiMgr.GetPane(m_keyframePanel);
-        if (pi.IsOk()) {
-            pi.Show(view != nullptr);
-            m_auiMgr.Update();
-        }
-    }
+    if (m_scenePanel) m_scenePanel->Refresh(view);
 
     // Also wire the draw-tool toolbar to the SmilCanvas's DrawCanvas.
     if (view && view->GetCanvas() && view->GetCanvas()->GetDrawCanvas()) {
@@ -505,8 +484,8 @@ void MainFrame::SetActiveSmilView(SmilView* view) {
     }
 }
 
-void MainFrame::OnSmilSelectionChanged(SmilView* view, const std::vector<int>& sel) {
-    if (m_keyframePanel) m_keyframePanel->Refresh(view);
+void MainFrame::OnSmilSelectionChanged(SmilView* /*view*/, const std::vector<int>& /*sel*/) {
+    // Keyframe panel is now embedded in SmilCanvas and refreshes itself.
 }
 
 void MainFrame::CreateStatusBar_() {

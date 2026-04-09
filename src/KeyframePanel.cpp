@@ -226,7 +226,7 @@ void KeyframePanel::OnPaintTimeline(wxPaintEvent&) {
     wxAutoBufferedPaintDC dc(m_timelinePanel);
     wxSize sz = m_timelinePanel->GetClientSize();
 
-    dc.SetBackground(wxBrush(wxColour(30, 30, 30)));
+    dc.SetBackground(*wxWHITE_BRUSH);
     dc.Clear();
 
     SmilDoc* doc = m_view ? wxDynamicCast(m_view->GetDocument(), SmilDoc) : nullptr;
@@ -234,13 +234,13 @@ void KeyframePanel::OnPaintTimeline(wxPaintEvent&) {
     int totalFrames = TotalFrames();
 
     // ---- Header: frame ruler ----
-    dc.SetBrush(wxBrush(wxColour(50, 50, 50)));
+    dc.SetBrush(wxBrush(wxColour(220, 220, 220)));
     dc.SetPen(*wxTRANSPARENT_PEN);
     dc.DrawRectangle(0, 0, sz.x, kHeaderH);
 
-    dc.SetPen(wxPen(wxColour(80, 80, 80)));
+    dc.SetPen(wxPen(wxColour(140, 140, 140)));
     dc.SetFont(wxFont(7, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
-    dc.SetTextForeground(wxColour(180, 180, 180));
+    dc.SetTextForeground(wxColour(40, 40, 40));
 
     int fps = doc ? doc->GetFps() : 24;
     // Tick every second.
@@ -256,10 +256,10 @@ void KeyframePanel::OnPaintTimeline(wxPaintEvent&) {
     int y = kHeaderH;
     for (const Row& r : m_rows) {
         bool isShape = !r.isProperty;
-        dc.SetBrush(wxBrush(isShape ? wxColour(45, 45, 45) : wxColour(38, 38, 38)));
+        dc.SetBrush(wxBrush(isShape ? wxColour(235, 235, 235) : wxColour(248, 248, 248)));
         dc.SetPen(*wxTRANSPARENT_PEN);
         dc.DrawRectangle(0, y, sz.x, kRowHeight);
-        dc.SetPen(wxPen(wxColour(60, 60, 60)));
+        dc.SetPen(wxPen(wxColour(200, 200, 200)));
         dc.DrawLine(0, y + kRowHeight - 1, sz.x, y + kRowHeight - 1);
 
         if (r.isProperty && sc) {

@@ -3,6 +3,7 @@
 #include <wx/panel.h>
 #include "DrawView.h"
 #include "DrawDoc.h"
+#include "KeyframePanel.h"
 
 class SmilView;
 class SmilDoc;
@@ -68,6 +69,11 @@ public:
     // Reload the SyntheticDrawDoc from the current scene/frame state.
     void RefreshFromDoc();
 
+    // Refresh the embedded keyframe timeline.
+    void RefreshKeyframes();
+
+    KeyframePanel* GetKeyframePanel() { return m_keyframePanel; }
+
 private:
     // Copy current scene shapes → SyntheticDrawDoc (applying animated values).
     void LoadFromScene();
@@ -81,6 +87,7 @@ private:
     SyntheticDrawDoc* m_syntheticDoc{nullptr};
     SmilProxyView*    m_proxyView{nullptr};
     DrawCanvas*       m_drawCanvas{nullptr};
+    KeyframePanel*    m_keyframePanel{nullptr};
     bool              m_syncing{false};
 
     wxDECLARE_EVENT_TABLE();

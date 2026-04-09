@@ -10,7 +10,6 @@
 #include "AssetManagerPanel.h"
 #include "HierarchyPanel.h"
 #include "ScenePanel.h"
-#include "KeyframePanel.h"
 #include <vector>
 
 class DrawDoc;
@@ -114,7 +113,6 @@ private:
     PropPanel*         m_propPanel      {nullptr};
     HierarchyPanel*    m_hierarchyPanel {nullptr};
     ScenePanel*        m_scenePanel     {nullptr};
-    KeyframePanel*     m_keyframePanel  {nullptr};
     DrawView*          m_activeDrawView {nullptr};
     SmilView*          m_activeSmilView {nullptr};
 
