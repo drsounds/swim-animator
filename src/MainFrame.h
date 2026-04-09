@@ -70,6 +70,8 @@ private:
     void OnPaletteImport(wxCommandEvent& event);
     void OnPaletteExport(wxCommandEvent& event);
 
+    void OnSettingsSnap(wxCommandEvent& event);
+
 public:
     // Draw-tool routing – called by DrawView::OnActivateView.
     void SetActiveDrawView(DrawView* view);

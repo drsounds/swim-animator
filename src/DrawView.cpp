@@ -2,6 +2,7 @@
 #include "DrawDoc.h"
 #include "DrawCommands.h"
 #include "App.h"
+#include "SnapEngine.h"
 #include "MainFrame.h"
 #include "PropPanel.h"
 #include <wx/dcbuffer.h>
@@ -630,6 +631,17 @@ void DrawCanvas::OnPaint(wxPaintEvent&) {
             }
         }
     }
+
+    // Snap guide lines — drawn last so they appear above all shapes.
+    // The DC transform (SetDeviceOrigin + SetUserScale) is still active, so
+    // guide coordinates in document space are rendered correctly at any zoom.
+    for (const SnapGuideLine& g : m_snapGuides) {
+        dc.SetPen(wxPen(g.colour, g.lineWidth));
+        if (g.isVertical)
+            dc.DrawLine(g.pos, g.extentMin, g.pos, g.extentMax);
+        else
+            dc.DrawLine(g.extentMin, g.pos, g.extentMax, g.pos);
+    }
 }
 
 void DrawCanvas::OnSize(wxSizeEvent& e) {
@@ -834,13 +846,69 @@ void DrawCanvas::OnMotion(wxMouseEvent& e) {
         Refresh();
     } else if (m_tool == DrawTool::Select) {
         if (m_isMultiDrag) {
-            wxPoint pt = ScreenToDoc(e.GetPosition());
-            m_multiDragDelta = pt - m_multiDragOrigin;
+            wxPoint pt       = ScreenToDoc(e.GetPosition());
+            wxPoint rawDelta = pt - m_multiDragOrigin;
+
+            const SnapSettings& ss = wxGetApp().GetSnapSettings();
+            if (ss.enabled) {
+                auto* doc = GetDoc();
+                const auto* scope = CurrentShapes(doc);
+                if (doc && scope) {
+                    wxRect docBounds = (m_activeGroupIdx >= 0)
+                        ? doc->GetShapes()[m_activeGroupIdx].bounds
+                        : wxRect(0, 0, doc->GetPageWidth(), doc->GetPageHeight());
+                    std::vector<DrawShape> moving;
+                    moving.reserve(m_selection.size());
+                    for (int idx : m_selection) moving.push_back((*scope)[idx]);
+                    SnapEngine eng(ss);
+                    SnapResult sr = eng.Snap(moving, rawDelta, *scope, m_selection, docBounds, m_zoom);
+                    m_multiDragDelta = sr.snappedDelta;
+                    m_snapGuides     = std::move(sr.guides);
+                } else {
+                    m_multiDragDelta = rawDelta;
+                    m_snapGuides.clear();
+                }
+            } else {
+                m_multiDragDelta = rawDelta;
+                m_snapGuides.clear();
+            }
             Refresh();
         } else if (m_dragMode != DragMode::None) {
             wxPoint pt = ScreenToDoc(e.GetPosition());
             int dx = pt.x - m_dragOrigin.x;
             int dy = pt.y - m_dragOrigin.y;
+
+            // Apply snapping to the raw delta before updating the preview.
+            const SnapSettings& ss = wxGetApp().GetSnapSettings();
+            if (ss.enabled) {
+                auto* doc = GetDoc();
+                const auto* scope = CurrentShapes(doc);
+                if (doc && scope) {
+                    wxRect docBounds = (m_activeGroupIdx >= 0)
+                        ? doc->GetShapes()[m_activeGroupIdx].bounds
+                        : wxRect(0, 0, doc->GetPageWidth(), doc->GetPageHeight());
+                    std::vector<int> exclude = { m_selected };
+                    SnapEngine eng(ss);
+                    if (m_dragMode == DragMode::BezierPt) {
+                        wxPoint origPt    = m_dragOrigShape.pts[m_bezierHandleIdx];
+                        wxPoint proposed  = { origPt.x + dx, origPt.y + dy };
+                        SnapResult sr = eng.SnapBezierHandle(proposed, origPt, *scope, exclude, docBounds, m_zoom);
+                        dx = sr.snappedDelta.x;
+                        dy = sr.snappedDelta.y;
+                        m_snapGuides = std::move(sr.guides);
+                    } else {
+                        std::vector<DrawShape> moving = { m_dragOrigShape };
+                        SnapResult sr = eng.Snap(moving, wxPoint(dx, dy), *scope, exclude, docBounds, m_zoom);
+                        dx = sr.snappedDelta.x;
+                        dy = sr.snappedDelta.y;
+                        m_snapGuides = std::move(sr.guides);
+                    }
+                } else {
+                    m_snapGuides.clear();
+                }
+            } else {
+                m_snapGuides.clear();
+            }
 
             m_dragPreview = m_dragOrigShape;
             if (m_dragMode == DragMode::BezierPt) {
@@ -857,14 +925,36 @@ void DrawCanvas::OnMotion(wxMouseEvent& e) {
                 m_dragPreview.bounds = ApplyDragMode(m_dragMode, m_dragOrigBounds, dx, dy);
             }
             Refresh();
-        } else if (m_dragging) {
-            Refresh();
         }
+    } else if (m_dragging) {
+        // Creation rubber-band: snap the moving corner to nearby shapes.
+        const SnapSettings& ss = wxGetApp().GetSnapSettings();
+        if (ss.enabled) {
+            auto* doc = GetDoc();
+            const auto* scope = CurrentShapes(doc);
+            if (doc && scope) {
+                wxRect docBounds = (m_activeGroupIdx >= 0)
+                    ? doc->GetShapes()[m_activeGroupIdx].bounds
+                    : wxRect(0, 0, doc->GetPageWidth(), doc->GetPageHeight());
+                SnapEngine eng(ss);
+                SnapResult sr = eng.SnapRubberBandCorner(m_dragCurrent, *scope, docBounds, m_zoom);
+                m_dragCurrent += sr.snappedDelta;
+                m_snapGuides   = std::move(sr.guides);
+            } else {
+                m_snapGuides.clear();
+            }
+        } else {
+            m_snapGuides.clear();
+        }
+        Refresh();
     }
     e.Skip();
 }
 
 void DrawCanvas::OnLeftUp(wxMouseEvent& e) {
+    // Clear snap guides whenever a drag ends.
+    m_snapGuides.clear();
+
     // Finalize rubber-band selection.
     if (m_rubberBanding) {
         m_rubberBanding = false;

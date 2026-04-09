@@ -2,6 +2,7 @@
 #include "View.h"
 #include "App.h"
 #include "DrawIds.h"
+#include "SettingsDialog.h"
 #include "DrawDoc.h"
 #include "SpaDoc.h"
 #include "SpaView.h"
@@ -94,6 +95,7 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxDocParentFrame)
     EVT_UPDATE_UI(wxID_SELECTALL, MainFrame::OnUpdateSelectAll)
     EVT_MENU(ID_PALETTE_IMPORT,   MainFrame::OnPaletteImport)
     EVT_MENU(ID_PALETTE_EXPORT,   MainFrame::OnPaletteExport)
+    EVT_MENU(ID_SETTINGS_SNAP,    MainFrame::OnSettingsSnap)
 wxEND_EVENT_TABLE()
 
 // ---------------------------------------------------------------------------
@@ -161,6 +163,10 @@ void MainFrame::CreateMenuBar() {
     auto* viewMenu = new wxMenu();
     viewMenu->AppendCheckItem(wxID_ANY, "&Toolbar\tCtrl+Shift+T", "Show or hide the toolbar");
 
+    auto* settingsMenu = new wxMenu();
+    settingsMenu->Append(ID_SETTINGS_SNAP, "&Snapping...\tCtrl+Shift+,",
+                         "Configure snap and alignment settings");
+
     auto* windowMenu = new wxMenu();
     // wxDocManager will populate this with the open document list.
 
@@ -168,11 +174,12 @@ void MainFrame::CreateMenuBar() {
     helpMenu->Append(wxID_ABOUT);
 
     auto* menuBar = new wxMenuBar();
-    menuBar->Append(fileMenu,   "&File");
-    menuBar->Append(editMenu,   "&Edit");
-    menuBar->Append(viewMenu,   "&View");
-    menuBar->Append(windowMenu, "&Window");
-    menuBar->Append(helpMenu,   "&Help");
+    menuBar->Append(fileMenu,     "&File");
+    menuBar->Append(editMenu,     "&Edit");
+    menuBar->Append(viewMenu,     "&View");
+    menuBar->Append(settingsMenu, "&Settings");
+    menuBar->Append(windowMenu,   "&Window");
+    menuBar->Append(helpMenu,     "&Help");
 
     SetMenuBar(menuBar);
 
@@ -576,5 +583,13 @@ void MainFrame::OnPaletteExport(wxCommandEvent& /*event*/) {
     if (!SaveGplPalette(dlg.GetPath(), wxGetApp().GetPalette())) {
         wxMessageBox("Failed to save palette file.", "Export Palette",
                      wxOK | wxICON_ERROR, this);
+    }
+}
+
+void MainFrame::OnSettingsSnap(wxCommandEvent& /*event*/) {
+    SettingsDialog dlg(this, wxGetApp().GetSnapSettings());
+    if (dlg.ShowModal() == wxID_OK) {
+        wxGetApp().GetSnapSettings() = dlg.GetSettings();
+        wxGetApp().GetSnapSettings().SaveToXml(SnapSettings::DefaultPath());
     }
 }

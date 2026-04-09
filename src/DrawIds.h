@@ -20,4 +20,7 @@ enum {
     ID_CTX_GROUP,
     ID_CTX_UNGROUP,
     ID_CTX_PROPERTIES,
+    // Settings dialog
+    ID_SETTINGS_SNAP,
+    ID_SETTINGS_GUIDE_COLOUR,
 };

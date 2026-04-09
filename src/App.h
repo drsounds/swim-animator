@@ -3,6 +3,7 @@
 #include <wx/docview.h>
 #include <wx/colour.h>
 #include "Palette.h"
+#include "SnapSettings.h"
 
 class MainFrame;
 
@@ -29,11 +30,16 @@ public:
     // Persist the current palette to the user data directory.
     void SavePaletteToConfig();
 
+    // Global snap settings — read/written by SettingsDialog.
+    SnapSettings&       GetSnapSettings()       { return m_snapSettings; }
+    const SnapSettings& GetSnapSettings() const { return m_snapSettings; }
+
 private:
     wxDocManager* m_docManager{nullptr};
     wxColour      m_fgColour{  0,   0,   0};
     wxColour      m_bgColour{255, 255, 255};
     Palette       m_palette;
+    SnapSettings  m_snapSettings;
 };
 
 wxDECLARE_APP(App);

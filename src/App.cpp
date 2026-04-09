@@ -44,6 +44,9 @@ bool App::OnInit() {
             m_palette = std::move(loaded);
     }
 
+    // Load snap settings (silently uses defaults if the file is absent).
+    m_snapSettings.LoadFromXml(SnapSettings::DefaultPath());
+
     m_docManager = new wxDocManager();
 
     // Register the document/view template.

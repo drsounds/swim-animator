@@ -5,6 +5,7 @@
 #include "DrawShape.h"
 #include "DrawIds.h"
 #include "ShapePath.h"
+#include "SnapEngine.h"
 
 class DrawDoc;
 class DrawView;
@@ -19,7 +20,7 @@ public:
     DrawCanvas(DrawView* owner, wxWindow* parent);
 
     DrawTool  GetTool() const       { return m_tool; }
-    void      SetTool(DrawTool t)   { m_tool = t; m_bezierStep = 0; Refresh(); }
+    void      SetTool(DrawTool t)   { m_tool = t; m_bezierStep = 0; m_snapGuides.clear(); Refresh(); }
     DrawView* GetView()             { return m_owner; }
 
     // Returns the single "primary" selected shape index (-1 if none or multi).
@@ -136,6 +137,9 @@ private:
     bool    m_panning{false};
     wxPoint m_panStart;           // screen position where pan began
     wxPoint m_panStartOffset;     // m_viewOffset at the start of the pan
+
+    // ---- Snap guide lines (cleared on drag end, repopulated each OnMotion) ----
+    std::vector<SnapGuideLine> m_snapGuides;
 
     wxDECLARE_EVENT_TABLE();
 };

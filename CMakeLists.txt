@@ -24,6 +24,9 @@ set(SOURCES
     src/AssetManagerPanel.cpp
     src/NewDrawingDialog.cpp
     src/HierarchyPanel.cpp
+    src/SnapSettings.cpp
+    src/SnapEngine.cpp
+    src/SettingsDialog.cpp
 )
 
 add_executable(spacily-app WIN32 MACOSX_BUNDLE ${SOURCES})
