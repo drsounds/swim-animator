@@ -7,9 +7,13 @@
 #include <wx/stattext.h>
 #include <wx/textctrl.h>
 #include <wx/choice.h>
+#include <wx/sizer.h>
+#include <wx/xml/xml.h>
+#include <vector>
 #include "DrawShape.h"
 
 class DrawDoc;
+class SmilDoc;
 
 // ---------------------------------------------------------------------------
 // PropPanel – dockable pane with a tab bar.  Currently a single "Properties"
@@ -30,8 +34,15 @@ public:
     // doc!=nullptr, idx>=0 → shape properties
     void ShowShape(DrawDoc* doc, int idx);
 
+    // Set SMIL context for keyframe diamond buttons.
+    // Pass nullptr to clear (non-SMIL mode).
+    void SetSmilContext(SmilDoc* smilDoc, const wxString& elemId);
+
 private:
     void BuildUI();
+    void BuildXmlTab();
+    void PopulateXmlTab();
+    void OnXmlAttrChanged(wxCommandEvent& e);
 
     // Submit helpers – read current control values → build after-state → Submit cmd.
     void SubmitBoundsChange();
@@ -88,6 +99,18 @@ private:
     // Bezier control points (hidden for non-Bezier)
     wxPanel*      m_bezierPanel  {nullptr};
     wxSpinCtrl*   m_ptSpin[4][2] {};  // [point 0-3][x=0, y=1]
+
+    // ---- XML Attributes tab ----
+    wxScrolledWindow*        m_xmlPage       {nullptr};
+    wxFlexGridSizer*         m_xmlGrid       {nullptr};
+    std::vector<wxString>    m_xmlAttrNames;
+    std::vector<wxTextCtrl*> m_xmlValueCtrls;
+
+    // ---- SMIL keyframe context ----
+    SmilDoc*  m_smilDoc   {nullptr};
+    wxString  m_smilElemId;
+    wxPanel*  m_kfPanel   {nullptr};  // keyframe section inside Properties tab
+    wxStaticText* m_kfLabel{nullptr};
 
     // ---- State ----
     DrawDoc* m_doc      {nullptr};

@@ -6,6 +6,8 @@
 #include "DrawView.h"
 #include "SpaDoc.h"
 #include "SpaView.h"
+#include "SmilDoc.h"
+#include "SmilView.h"
 #include "Palette.h"
 #include <wx/filefn.h>
 #include <wx/filename.h>
@@ -85,6 +87,18 @@ bool App::OnInit() {
         "SpaView",
         wxCLASSINFO(SpaDoc),
         wxCLASSINFO(SpaView)
+    );
+
+    new wxDocTemplate(
+        m_docManager,
+        "SMIL Animation",
+        "*.smil",
+        "",
+        "smil",
+        "SmilDoc",
+        "SmilView",
+        wxCLASSINFO(SmilDoc),
+        wxCLASSINFO(SmilView)
     );
 
     // Limit to one view per document; change to 0 for unlimited.

@@ -161,8 +161,8 @@ public:
     DrawCanvas* GetCanvas() { return m_canvas; }
 
     // Called by DrawCanvas and OnUpdate to push selection state to the properties pane.
-    void NotifySelectionChanged();
+    virtual void NotifySelectionChanged();
 
-private:
+protected:
     DrawCanvas* m_canvas{ nullptr };
 };

@@ -9,10 +9,13 @@
 #include "ColorSwatchPanel.h"
 #include "AssetManagerPanel.h"
 #include "HierarchyPanel.h"
+#include "ScenePanel.h"
+#include "KeyframePanel.h"
 #include <vector>
 
 class DrawDoc;
 class SpaDoc;
+class SmilView;
 
 // ---------------------------------------------------------------------------
 // MainFrame
@@ -43,10 +46,13 @@ private:
     void CreateMenuBar();
     void CreateToolBar();
     void CreateDrawToolBar();
+    void CreateAnimToolBar();
     void CreateColorSwatchPane();
     void CreateAssetManagerPane();
     void CreatePropertiesPane();
     void CreateHierarchyPane();
+    void CreateScenePane();
+    void CreateKeyframePane();
     void CreateStatusBar_();
     void CreateAuiPanes();
 
@@ -72,6 +78,11 @@ private:
 
     void OnSettingsSnap(wxCommandEvent& event);
 
+    void OnSmilRec(wxCommandEvent& event);
+    void OnSmilPlayFwd(wxCommandEvent& event);
+    void OnSmilPlayBwd(wxCommandEvent& event);
+    void OnUpdateSmilTool(wxUpdateUIEvent& event);
+
 public:
     // Draw-tool routing – called by DrawView::OnActivateView.
     void SetActiveDrawView(DrawView* view);
@@ -85,16 +96,27 @@ public:
     // Asset manager pane – called by SpaView when the active project changes.
     void SetActiveSpaDoc(SpaDoc* doc);
 
+    // SMIL animation – called by SmilView on activation.
+    void SetActiveSmilView(SmilView* view);
+    SmilView* GetActiveSmilView() { return m_activeSmilView; }
+
+    // Called by SmilProxyView when the selection inside a SmilCanvas changes.
+    void OnSmilSelectionChanged(SmilView* view, const std::vector<int>& sel);
+
 private:
     wxAuiManager      m_auiMgr;
     wxAuiNotebook*    m_notebook{nullptr};
     wxToolBar*        m_toolbar{nullptr};
     wxToolBar*        m_drawToolbar{nullptr};
+    wxToolBar*        m_animToolbar{nullptr};
     ColorSwatchPanel*  m_swatchPanel     {nullptr};
     AssetManagerPanel* m_assetPanel     {nullptr};
     PropPanel*         m_propPanel      {nullptr};
     HierarchyPanel*    m_hierarchyPanel {nullptr};
+    ScenePanel*        m_scenePanel     {nullptr};
+    KeyframePanel*     m_keyframePanel  {nullptr};
     DrawView*          m_activeDrawView {nullptr};
+    SmilView*          m_activeSmilView {nullptr};
 
     wxDECLARE_EVENT_TABLE();
 };

@@ -27,6 +27,11 @@ set(SOURCES
     src/SnapSettings.cpp
     src/SnapEngine.cpp
     src/SettingsDialog.cpp
+    src/SmilTypes.cpp
+    src/SmilDoc.cpp
+    src/SmilView.cpp
+    src/ScenePanel.cpp
+    src/KeyframePanel.cpp
 )
 
 add_executable(spacily-app WIN32 MACOSX_BUNDLE ${SOURCES})

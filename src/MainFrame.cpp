@@ -6,6 +6,8 @@
 #include "DrawDoc.h"
 #include "SpaDoc.h"
 #include "SpaView.h"
+#include "SmilDoc.h"
+#include "SmilView.h"
 #include "Palette.h"
 #include <wx/aui/aui.h>
 #include <wx/panel.h>
@@ -96,6 +98,12 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxDocParentFrame)
     EVT_MENU(ID_PALETTE_IMPORT,   MainFrame::OnPaletteImport)
     EVT_MENU(ID_PALETTE_EXPORT,   MainFrame::OnPaletteExport)
     EVT_MENU(ID_SETTINGS_SNAP,    MainFrame::OnSettingsSnap)
+    EVT_MENU(ID_SMIL_REC,         MainFrame::OnSmilRec)
+    EVT_MENU(ID_SMIL_PLAY_FWD,    MainFrame::OnSmilPlayFwd)
+    EVT_MENU(ID_SMIL_PLAY_BWD,    MainFrame::OnSmilPlayBwd)
+    EVT_UPDATE_UI(ID_SMIL_REC,      MainFrame::OnUpdateSmilTool)
+    EVT_UPDATE_UI(ID_SMIL_PLAY_FWD, MainFrame::OnUpdateSmilTool)
+    EVT_UPDATE_UI(ID_SMIL_PLAY_BWD, MainFrame::OnUpdateSmilTool)
 wxEND_EVENT_TABLE()
 
 // ---------------------------------------------------------------------------
@@ -112,10 +120,13 @@ MainFrame::MainFrame(wxDocManager* manager, wxFrame* parent, wxWindowID id,
     CreateMenuBar();
     CreateToolBar();
     CreateDrawToolBar();
+    CreateAnimToolBar();
     CreateColorSwatchPane();
     CreateAssetManagerPane();
     CreatePropertiesPane();
     CreateHierarchyPane();
+    CreateScenePane();
+    CreateKeyframePane();
     CreateStatusBar_();
     CreateAuiPanes();
 
@@ -384,6 +395,120 @@ void MainFrame::OnHierarchySelectionChanged(const std::vector<int>& indices) {
     if (m_propPanel) m_propPanel->ShowShape(doc, propIdx);
 }
 
+void MainFrame::CreateAnimToolBar() {
+    m_animToolbar = new wxToolBar(this, wxID_ANY, wxDefaultPosition, wxDefaultSize,
+                                  wxTB_HORIZONTAL);
+
+    auto bwdBmp = MakeBmp([](wxMemoryDC& dc) {
+        dc.SetPen(*wxBLACK_PEN);
+        dc.SetBrush(*wxBLACK_BRUSH);
+        // Double-left-arrow (play backward)
+        wxPoint a1[] = {{10,3},{3,8},{10,13}};
+        wxPoint a2[] = {{15,3},{8,8},{15,13}};
+        dc.DrawPolygon(3, a1);
+        dc.DrawPolygon(3, a2);
+    });
+    auto recBmp = MakeBmp([](wxMemoryDC& dc) {
+        dc.SetBrush(wxBrush(wxColour(200, 20, 20)));
+        dc.SetPen(*wxTRANSPARENT_PEN);
+        dc.DrawCircle(8, 8, 5);
+    });
+    auto fwdBmp = MakeBmp([](wxMemoryDC& dc) {
+        dc.SetPen(*wxBLACK_PEN);
+        dc.SetBrush(*wxBLACK_BRUSH);
+        // Double-right-arrow (play forward)
+        wxPoint a1[] = {{6,3},{13,8},{6,13}};
+        wxPoint a2[] = {{1,3},{8,8},{1,13}};
+        dc.DrawPolygon(3, a1);
+        dc.DrawPolygon(3, a2);
+    });
+
+    m_animToolbar->AddTool(ID_SMIL_PLAY_BWD, "Play Backward", bwdBmp,
+                           "Play Backward (not yet implemented)", wxITEM_NORMAL);
+    m_animToolbar->AddTool(ID_SMIL_REC,      "Record",        recBmp,
+                           "Toggle keyframe recording", wxITEM_CHECK);
+    m_animToolbar->AddTool(ID_SMIL_PLAY_FWD, "Play Forward",  fwdBmp,
+                           "Play Forward (not yet implemented)", wxITEM_NORMAL);
+    m_animToolbar->Realize();
+
+    m_auiMgr.AddPane(m_animToolbar,
+        wxAuiPaneInfo()
+            .Name("AnimToolbar")
+            .Caption("Animation")
+            .ToolbarPane()
+            .Top()
+            .Row(1)
+            .LeftDockable(false)
+            .RightDockable(false)
+            .Floatable(false));
+}
+
+void MainFrame::CreateScenePane() {
+    m_scenePanel = new ScenePanel(this);
+    m_auiMgr.AddPane(m_scenePanel,
+        wxAuiPaneInfo()
+            .Name("Scenes")
+            .Caption("Scenes")
+            .Right()
+            .Row(2)
+            .BestSize(200, 200)
+            .MinSize(140, 80)
+            .CloseButton(true)
+            .Floatable(true)
+            .Show(true));
+}
+
+void MainFrame::CreateKeyframePane() {
+    m_keyframePanel = new KeyframePanel(this);
+    m_auiMgr.AddPane(m_keyframePanel,
+        wxAuiPaneInfo()
+            .Name("Keyframes")
+            .Caption("Keyframes")
+            .Top()
+            .Row(2)
+            .BestSize(-1, 160)
+            .MinSize(-1, 80)
+            .CloseButton(true)
+            .Floatable(true)
+            .Show(false));  // hidden until a SmilDoc is active
+}
+
+void MainFrame::SetActiveSmilView(SmilView* view) {
+    m_activeSmilView = view;
+
+    if (m_scenePanel)    m_scenePanel->Refresh(view);
+    if (m_keyframePanel) {
+        m_keyframePanel->Refresh(view);
+        // Show the keyframe panel when a SMIL doc is active.
+        wxAuiPaneInfo& pi = m_auiMgr.GetPane(m_keyframePanel);
+        if (pi.IsOk()) {
+            pi.Show(view != nullptr);
+            m_auiMgr.Update();
+        }
+    }
+
+    // Also wire the draw-tool toolbar to the SmilCanvas's DrawCanvas.
+    if (view && view->GetCanvas() && view->GetCanvas()->GetDrawCanvas()) {
+        // Route draw-tool events through a proxy DrawView.
+        // The SmilCanvas's proxy view is set as the active draw view so
+        // the existing draw-tool dispatch in OnDrawTool works naturally.
+        DrawCanvas* dc = view->GetCanvas()->GetDrawCanvas();
+        // We cast to DrawView* because SmilProxyView IS-A DrawView.
+        DrawView* proxy = dynamic_cast<DrawView*>(dc->GetView());
+        m_activeDrawView = proxy;
+    } else if (view == nullptr) {
+        // Clear draw view if no SMIL doc active (unless a DrawView is active).
+        if (m_activeSmilView == nullptr && m_activeDrawView != nullptr) {
+            // Only clear if the active draw view was a proxy.
+            // A real DrawView will clear itself via OnActivateView.
+        }
+    }
+}
+
+void MainFrame::OnSmilSelectionChanged(SmilView* view, const std::vector<int>& sel) {
+    if (m_keyframePanel) m_keyframePanel->Refresh(view);
+}
+
 void MainFrame::CreateStatusBar_() {
     auto* sb = wxFrame::CreateStatusBar(3);
     int widths[] = {-1, 120, 80};
@@ -493,6 +618,8 @@ void MainFrame::OnNotebookPageClose(wxAuiNotebookEvent& event) {
         view = c->GetView();
     else if (auto* c = dynamic_cast<SpaCanvas*>(page))
         view = c->GetView();
+    else if (auto* c = dynamic_cast<SmilCanvas*>(page))
+        view = c->GetView();
 
     if (!view) { event.Skip(); return; }
 
@@ -516,6 +643,8 @@ void MainFrame::OnNotebookPageChanged(wxAuiNotebookEvent& event) {
     } else if (auto* c = wxDynamicCast(page, DrawCanvas)) {
         if (c->GetView()) c->GetView()->Activate(true);
     } else if (auto* c = dynamic_cast<SpaCanvas*>(page)) {
+        if (c->GetView()) c->GetView()->Activate(true);
+    } else if (auto* c = dynamic_cast<SmilCanvas*>(page)) {
         if (c->GetView()) c->GetView()->Activate(true);
     }
 
@@ -584,6 +713,32 @@ void MainFrame::OnPaletteExport(wxCommandEvent& /*event*/) {
         wxMessageBox("Failed to save palette file.", "Export Palette",
                      wxOK | wxICON_ERROR, this);
     }
+}
+
+void MainFrame::OnSmilRec(wxCommandEvent& /*event*/) {
+    if (!m_activeSmilView) return;
+    SmilDoc* doc = wxDynamicCast(m_activeSmilView->GetDocument(), SmilDoc);
+    if (!doc) return;
+    doc->SetRecMode(!doc->GetRecMode());
+}
+
+void MainFrame::OnSmilPlayFwd(wxCommandEvent& /*event*/) {
+    // Playback not yet implemented; button is present as a placeholder.
+    wxMessageBox("Playback will be implemented in a future version.", "Play Forward",
+                 wxOK | wxICON_INFORMATION, this);
+}
+
+void MainFrame::OnSmilPlayBwd(wxCommandEvent& /*event*/) {
+    wxMessageBox("Playback will be implemented in a future version.", "Play Backward",
+                 wxOK | wxICON_INFORMATION, this);
+}
+
+void MainFrame::OnUpdateSmilTool(wxUpdateUIEvent& e) {
+    SmilDoc* doc = m_activeSmilView
+        ? wxDynamicCast(m_activeSmilView->GetDocument(), SmilDoc) : nullptr;
+    e.Enable(doc != nullptr);
+    if (e.GetId() == ID_SMIL_REC && doc)
+        e.Check(doc->GetRecMode());
 }
 
 void MainFrame::OnSettingsSnap(wxCommandEvent& /*event*/) {

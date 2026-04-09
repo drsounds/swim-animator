@@ -23,4 +23,18 @@ enum {
     // Settings dialog
     ID_SETTINGS_SNAP,
     ID_SETTINGS_GUIDE_COLOUR,
+    // SMIL animation toolbar
+    ID_SMIL_PLAY_BWD,
+    ID_SMIL_REC,
+    ID_SMIL_PLAY_FWD,
+    // Scene panel
+    ID_SCENE_ADD,
+    ID_SCENE_REMOVE,
+    ID_SCENE_RENAME,
+    ID_SCENE_MOVE_UP,
+    ID_SCENE_MOVE_DOWN,
+    ID_SCENE_LIST,
+    // Keyframe panel
+    ID_KF_SET,
+    ID_KF_REMOVE,
 };

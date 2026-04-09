@@ -1,6 +1,7 @@
 #include "PropPanel.h"
 #include "DrawDoc.h"
 #include "DrawCommands.h"
+#include "SmilDoc.h"
 #include <wx/colordlg.h>
 #include <wx/sizer.h>
 #include <wx/colour.h>
@@ -284,8 +285,106 @@ void PropPanel::BuildUI() {
     }
     shapeSizer->Add(m_bezierPanel, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, M);
 
+    // ---- Keyframe panel (shown at bottom of Properties tab when SMIL is active) ---
+    m_kfPanel = new wxPanel(m_propsPage, wxID_ANY);
+    {
+        auto* ks = new wxBoxSizer(wxVERTICAL);
+        ks->Add(new wxStaticLine(m_kfPanel), 0, wxEXPAND | wxLEFT | wxRIGHT | wxTOP, M);
+        m_kfLabel = new wxStaticText(m_kfPanel, wxID_ANY, "Keyframe");
+        m_kfLabel->SetForegroundColour(wxColour(160, 100, 20));
+        ks->Add(m_kfLabel, 0, wxALL, M);
+        m_kfPanel->SetSizer(ks);
+    }
+    outer->Add(m_kfPanel, 0, wxEXPAND);
+
     m_propsPage->SetSizer(outer);
     ShowShape(nullptr, -1);
+
+    BuildXmlTab();
+}
+
+void PropPanel::BuildXmlTab() {
+    m_xmlPage = new wxScrolledWindow(m_notebook, wxID_ANY);
+    m_xmlPage->SetScrollRate(0, 5);
+    m_notebook->AddPage(m_xmlPage, "XML Attributes");
+
+    auto* outer = new wxBoxSizer(wxVERTICAL);
+    m_xmlGrid = new wxFlexGridSizer(2, wxSize(4, 3));
+    m_xmlGrid->AddGrowableCol(1);
+    outer->Add(m_xmlGrid, 0, wxEXPAND | wxALL, 6);
+    m_xmlPage->SetSizer(outer);
+}
+
+void PropPanel::PopulateXmlTab() {
+    // Destroy old controls.
+    m_xmlGrid->Clear(true);
+    m_xmlAttrNames.clear();
+    m_xmlValueCtrls.clear();
+
+    if (!m_doc || m_idx < 0 || m_idx >= (int)m_doc->GetShapes().size()) {
+        m_xmlPage->Layout();
+        return;
+    }
+
+    // Serialize shape to XML to obtain attribute list.
+    wxXmlNode* node = DrawDoc::ShapeToXml(m_doc->GetShapes()[m_idx]);
+    if (!node) { m_xmlPage->Layout(); return; }
+
+    for (wxXmlAttribute* attr = node->GetAttributes(); attr; attr = attr->GetNext()) {
+        m_xmlAttrNames.push_back(attr->GetName());
+
+        auto* label = new wxStaticText(m_xmlPage, wxID_ANY, attr->GetName() + ":");
+        auto* ctrl  = new wxTextCtrl(m_xmlPage, wxID_ANY, attr->GetValue(),
+                                     wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+        ctrl->Bind(wxEVT_TEXT_ENTER, &PropPanel::OnXmlAttrChanged, this);
+        ctrl->Bind(wxEVT_KILL_FOCUS, [this](wxFocusEvent& e) {
+            wxCommandEvent dummy; OnXmlAttrChanged(dummy); e.Skip();
+        });
+
+        m_xmlGrid->Add(label, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 4);
+        m_xmlGrid->Add(ctrl,  1, wxEXPAND | wxALIGN_CENTER_VERTICAL);
+        m_xmlValueCtrls.push_back(ctrl);
+    }
+    delete node;
+
+    m_xmlPage->FitInside();
+    m_xmlPage->Layout();
+}
+
+void PropPanel::OnXmlAttrChanged(wxCommandEvent& /*e*/) {
+    if (m_updating || !m_doc || m_idx < 0) return;
+    if (m_idx >= (int)m_doc->GetShapes().size()) return;
+
+    // Build a modified XML node with updated attributes, then parse back to DrawShape.
+    wxXmlNode* node = DrawDoc::ShapeToXml(m_doc->GetShapes()[m_idx]);
+    if (!node) return;
+
+    bool changed = false;
+    for (size_t i = 0; i < m_xmlAttrNames.size() && i < m_xmlValueCtrls.size(); ++i) {
+        wxString newVal = m_xmlValueCtrls[i]->GetValue();
+        wxString oldVal = node->GetAttribute(m_xmlAttrNames[i]);
+        if (newVal != oldVal) {
+            node->DeleteAttribute(m_xmlAttrNames[i]);
+            node->AddAttribute(m_xmlAttrNames[i], newVal);
+            changed = true;
+        }
+    }
+
+    if (changed) {
+        DrawShape updated;
+        if (DrawDoc::XmlToShape(node, updated)) {
+            DrawShape before = m_doc->GetShapes()[m_idx];
+            m_doc->GetCommandProcessor()->Submit(
+                new UpdateShapeCmd(m_doc, m_idx, before, updated));
+        }
+    }
+    delete node;
+}
+
+void PropPanel::SetSmilContext(SmilDoc* smilDoc, const wxString& elemId) {
+    m_smilDoc    = smilDoc;
+    m_smilElemId = elemId;
+    // The kfPanel visibility and label will be updated by the next ShowShape call.
 }
 
 // ---------------------------------------------------------------------------
@@ -382,9 +481,37 @@ void PropPanel::ShowShape(DrawDoc* doc, int idx) {
         m_shapePanel->Layout();
     }
 
+    // Update keyframe indicator in Properties tab.
+    if (m_kfPanel) {
+        bool smilActive = (m_smilDoc != nullptr && hasSel);
+        m_kfPanel->Show(smilActive);
+        if (smilActive && m_kfLabel) {
+            int frame = m_smilDoc->GetCurrentFrame();
+            bool hasKf = false;
+            // Check if any property has a keyframe at the current frame.
+            const SmilScene* sc = m_smilDoc->GetCurrentScene();
+            if (sc) {
+                auto eit = sc->elements.find(m_smilElemId);
+                if (eit != sc->elements.end()) {
+                    for (const auto& [prop, track] : eit->second.tracks) {
+                        if (track.HasKeyframeAt(frame - (sc ? sc->startFrame : 0))) {
+                            hasKf = true; break;
+                        }
+                    }
+                }
+            }
+            m_kfLabel->SetLabel(
+                wxString::Format("Keyframe at frame %d: %s",
+                                 frame, hasKf ? "◆ YES" : "◇ none"));
+        }
+    }
+
     m_propsPage->GetSizer()->Layout();
     m_propsPage->FitInside();
     m_propsPage->Refresh();
+
+    // Refresh XML Attributes tab.
+    PopulateXmlTab();
 
     m_updating = false;
 }
