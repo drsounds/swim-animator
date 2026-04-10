@@ -1266,12 +1266,12 @@ void DrawCanvas::OnContextMenu(wxContextMenuEvent& e) {
     }
 
     wxMenu menu;
-    menu.Append(wxID_CUT,   "&Cut\tCtrl+X")->Enable(hasSel);
-    menu.Append(wxID_COPY,  "C&opy\tCtrl+C")->Enable(hasSel);
-    menu.Append(wxID_PASTE, "&Paste\tCtrl+V")->Enable(hasClip);
-    menu.Append(ID_CTX_DELETE, "&Delete\tDel")->Enable(hasSel);
+    menu.Append(wxID_CUT,        "&Cut\tCtrl+X")->Enable(hasSel);
+    menu.Append(wxID_COPY,       "C&opy\tCtrl+C")->Enable(hasSel);
+    menu.Append(wxID_PASTE,      "&Paste\tCtrl+V")->Enable(hasClip);
+    menu.Append(ID_CTX_DELETE,   "&Delete\tDel")->Enable(hasSel);
     menu.AppendSeparator();
-    menu.Append(wxID_SELECTALL, "Select &All\tCtrl+A");
+    menu.Append(ID_EDIT_SELECTALL, "Select &All\tCtrl+A");
     menu.AppendSeparator();
     menu.Append(ID_CTX_GROUP,   "&Group\tCtrl+G")->Enable(canGroup);
     menu.Append(ID_CTX_UNGROUP, "&Ungroup\tCtrl+Shift+G")->Enable(canUngroup);
