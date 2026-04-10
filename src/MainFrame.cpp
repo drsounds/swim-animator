@@ -22,7 +22,9 @@
 #include <wx/filename.h>
 #include <wx/dialog.h>
 #include <wx/sizer.h>
+#include <wx/wrapsizer.h>
 #include <wx/statbmp.h>
+#include <wx/bmpbuttn.h>
 #include <wx/cmdproc.h>
 #include <wx/button.h>
 #include <wx/filefn.h>
@@ -266,8 +268,27 @@ void MainFrame::CreateToolBar() {
 }
 
 void MainFrame::CreateDrawToolBar() {
-    m_drawToolbar = new wxToolBar(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_VERTICAL);
+    // Layout constants for 2-column draw toolbar
+    const int BUTTON_SIZE = 34;  // 32px button + 2px margins
+    const int COLS = 2;
 
+    // 1. Create a Panel to act as the container for the AUI Pane
+    // This replaces the raw wxToolBar
+    wxPanel* toolContainer = new wxPanel(this, wxID_ANY);
+
+    // 2. Initialize the WrapSizer with 2-column layout
+    // wxWrapSizer will automatically wrap to the next row when it reaches the width constraint
+    wxWrapSizer* wrapSizer = new wxWrapSizer(wxHORIZONTAL);
+
+    // Helper lambda to create buttons that behave like ToolBar items
+    auto AddToolToSizer = [&](wxWindowID id, const wxBitmap& bmp, const wxString& help) {
+        // wxBitmapButton creates tool-like buttons for the drawing toolbar
+        wxBitmapButton* btn = new wxBitmapButton(toolContainer, id, bmp,
+                                        wxDefaultPosition, wxSize(32, 32), wxBU_AUTODRAW | wxBORDER_NONE);
+        btn->SetToolTip(help);
+        // Add with 1px all-around margin for spacing between buttons
+        wrapSizer->Add(btn, 0, wxALL, 1);
+    };
     auto selectBmp = MakeBmp([](wxMemoryDC& dc) {
         dc.SetPen(*wxBLACK_PEN);
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
@@ -309,23 +330,32 @@ void MainFrame::CreateDrawToolBar() {
         dc.DrawCircle(p[3], 2);
     });
 
-    m_drawToolbar->AddTool(ID_TOOL_SELECT, "Select", selectBmp, "Select",       wxITEM_CHECK);
-    m_drawToolbar->AddTool(ID_TOOL_RECT,   "Rect",   rectBmp,   "Rectangle",    wxITEM_CHECK);
-    m_drawToolbar->AddTool(ID_TOOL_CIRCLE, "Circle", circleBmp, "Circle",       wxITEM_CHECK);
-    m_drawToolbar->AddTool(ID_TOOL_TEXT,   "Text",   textBmp,   "Text",         wxITEM_CHECK);
-    m_drawToolbar->AddTool(ID_TOOL_BEZIER, "Bezier", bezierBmp, "Bezier Curve", wxITEM_CHECK);
+    // 3. Add the "tools" to the sizer
+    AddToolToSizer(ID_TOOL_SELECT, selectBmp, "Select");
+    AddToolToSizer(ID_TOOL_RECT,   rectBmp,   "Rectangle");
+    AddToolToSizer(ID_TOOL_CIRCLE, circleBmp, "Circle");
+    AddToolToSizer(ID_TOOL_TEXT,   textBmp,   "Text");
+    AddToolToSizer(ID_TOOL_BEZIER, bezierBmp, "Bezier Curve");
 
-    m_drawToolbar->SetRows(3);
-    m_drawToolbar->Realize();
+    toolContainer->SetSizer(wrapSizer);
 
-    m_auiMgr.AddPane(m_drawToolbar,
+    // 4. Calculate the width for exactly 2 columns
+    // Button(32) + Margins(1+1) = 34px per tool. 34 * COLS + padding = total width.
+    // Add 8px for panel border/padding on each side.
+    int paneWidth = (BUTTON_SIZE * COLS) + 8;
+    toolContainer->SetMinSize(wxSize(paneWidth, -1));
+
+    // 5. Add to AUI Manager
+    m_auiMgr.AddPane(toolContainer,
         wxAuiPaneInfo()
             .Name("DrawToolbar")
             .Caption("Draw")
-            .Floatable()
+            .ToolbarPane() // Tells AUI to treat it like a toolbar
             .Left()
             .Layer(2)
-            .Row(0));
+            .BestSize(paneWidth, -1)        // Encourages the 2-column width
+            .MinSize(paneWidth, -1)         // Prevent horizontal scrolling
+            .FloatingSize(paneWidth, 200)); // Keeps 2 columns when undocked
 }
 
 void MainFrame::CreateColorSwatchPane() {

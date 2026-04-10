@@ -115,7 +115,6 @@ private:
     wxAuiManager      m_auiMgr;
     wxAuiNotebook*    m_notebook{nullptr};
     wxToolBar*        m_toolbar{nullptr};
-    wxToolBar*        m_drawToolbar{nullptr};
     wxToolBar*        m_animToolbar{nullptr};
     ColorSwatchPanel*  m_swatchPanel     {nullptr};
     AssetManagerPanel* m_assetPanel     {nullptr};
