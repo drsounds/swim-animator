@@ -44,9 +44,10 @@ bool SpaView::OnCreate(wxDocument* doc, long flags) {
     wxCHECK_MSG(nb, false, "MainFrame has no AUI notebook");
 
     m_canvas = new SpaCanvas(this, nb);
-    nb->AddPage(m_canvas, doc->GetUserReadableName(), /*select=*/true);
 
-    // Embed the index.smil SmilView inside the SpaCanvas.
+    // Embed the index.smil SmilView inside the SpaCanvas before adding the
+    // page to the notebook, so the sizer is in place for the notebook's
+    // initial layout pass.
     auto* spaDoc = wxDynamicCast(doc, SpaDoc);
     SmilDoc* indexSmilDoc = spaDoc ? spaDoc->GetIndexSmilDoc() : nullptr;
     if (indexSmilDoc) {
@@ -55,7 +56,10 @@ bool SpaView::OnCreate(wxDocument* doc, long flags) {
         auto* sizer = new wxBoxSizer(wxVERTICAL);
         sizer->Add(smilCanvas, 1, wxEXPAND);
         m_canvas->SetSizer(sizer);
+        m_canvas->Layout();
     }
+
+    nb->AddPage(m_canvas, doc->GetUserReadableName(), /*select=*/true);
 
     Activate(true);
     return true;
