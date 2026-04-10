@@ -158,27 +158,27 @@ void MainFrame::CreateMenuBar() {
     // File menu – wxDocParentFrame / wxDocManager provides the standard items
     // when we pass the doc manager; we just need to add our own extras.
     auto* fileMenu = new wxMenu();
-    fileMenu->Append(wxID_NEW);
-    fileMenu->Append(wxID_OPEN);
-    fileMenu->Append(wxID_CLOSE);
+    fileMenu->Append(wxID_NEW,    "&New",      "Create a new document");
+    fileMenu->Append(wxID_OPEN,   "&Open",     "Open a document");
+    fileMenu->Append(wxID_CLOSE,  "&Close",    "Close the current document");
     fileMenu->AppendSeparator();
-    fileMenu->Append(wxID_SAVE);
-    fileMenu->Append(wxID_SAVEAS);
+    fileMenu->Append(wxID_SAVE,   "&Save",     "Save the current document");
+    fileMenu->Append(wxID_SAVEAS, "Save &As",  "Save the current document with a new name");
     fileMenu->AppendSeparator();
     fileMenu->Append(ID_PALETTE_IMPORT, "Import Palette...", "Load a GIMP palette (.gpl) file");
     fileMenu->Append(ID_PALETTE_EXPORT, "Export Palette...", "Save the current palette as a GIMP palette (.gpl) file");
     fileMenu->AppendSeparator();
     // Recent files will be inserted here by wxDocManager automatically.
-    fileMenu->Append(wxID_EXIT);
+    fileMenu->Append(wxID_EXIT,   "E&xit",     "Exit the application");
 
     auto* editMenu = new wxMenu();
-    editMenu->Append(wxID_UNDO);
-    editMenu->Append(wxID_REDO);
+    editMenu->Append(wxID_UNDO,     "&Undo",       "Undo the last action");
+    editMenu->Append(wxID_REDO,     "&Redo",       "Redo the last action");
     editMenu->AppendSeparator();
-    editMenu->Append(wxID_CUT);
-    editMenu->Append(wxID_COPY);
-    editMenu->Append(wxID_PASTE);
-    editMenu->Append(wxID_SELECTALL);
+    editMenu->Append(wxID_CUT,      "Cu&t",        "Cut the selection");
+    editMenu->Append(wxID_COPY,     "&Copy",       "Copy the selection");
+    editMenu->Append(wxID_PASTE,    "&Paste",      "Paste from clipboard");
+    editMenu->Append(wxID_SELECTALL,"Select &All", "Select all items");
 
     auto* viewMenu = new wxMenu();
     viewMenu->AppendCheckItem(wxID_ANY, "&Toolbar\tCtrl+Shift+T", "Show or hide the toolbar");
@@ -191,7 +191,7 @@ void MainFrame::CreateMenuBar() {
     // wxDocManager will populate this with the open document list.
 
     auto* helpMenu = new wxMenu();
-    helpMenu->Append(wxID_ABOUT);
+    helpMenu->Append(wxID_ABOUT, "&About", "About this application");
 
     auto* menuBar = new wxMenuBar();
     menuBar->Append(fileMenu,     "&File");
@@ -212,7 +212,7 @@ static wxBitmap MakeBmp(void (*draw)(wxMemoryDC&)) {
     wxMemoryDC dc(bmp);
     dc.SetBackground(*wxWHITE_BRUSH);
     dc.Clear();
-    draw(dc);
+    draw(dc); 
     return bmp;
 }
 
@@ -225,15 +225,15 @@ void MainFrame::CreateToolBar() {
     m_toolbar->SetToolBitmapSize(wxSize(16,16));
 
     m_toolbar->AddTool(wxID_NEW,  "New",  wxArtProvider::GetBitmap(wxART_NEW,        wxART_TOOLBAR, wxSize(16, 16)));
-    m_toolbar->AddTool(wxID_OPEN, "Open", wxArtProvider::GetBitmap(wxART_FILE_OPEN,  wxART_TOOLBAR));
-    m_toolbar->AddTool(wxID_SAVE, "Save", wxArtProvider::GetBitmap(wxART_FILE_SAVE,  wxART_TOOLBAR));
+    m_toolbar->AddTool(wxID_OPEN, "Open", wxArtProvider::GetBitmap(wxART_FILE_OPEN,  wxART_TOOLBAR, wxSize(16, 16)));
+    m_toolbar->AddTool(wxID_SAVE, "Save", wxArtProvider::GetBitmap(wxART_FILE_SAVE,  wxART_TOOLBAR, wxSize(16, 16)));
     m_toolbar->AddSeparator();
-    m_toolbar->AddTool(wxID_UNDO, "Undo", wxArtProvider::GetBitmap(wxART_UNDO,       wxART_TOOLBAR));
-    m_toolbar->AddTool(wxID_REDO, "Redo", wxArtProvider::GetBitmap(wxART_REDO,       wxART_TOOLBAR));
+    m_toolbar->AddTool(wxID_UNDO, "Undo", wxArtProvider::GetBitmap(wxART_UNDO,       wxART_TOOLBAR, wxSize(16, 16)));
+    m_toolbar->AddTool(wxID_REDO, "Redo", wxArtProvider::GetBitmap(wxART_REDO,       wxART_TOOLBAR, wxSize(16, 16)));
     m_toolbar->AddSeparator();
-    m_toolbar->AddTool(wxID_CUT,  "Cut",  wxArtProvider::GetBitmap(wxART_CUT,        wxART_TOOLBAR));
-    m_toolbar->AddTool(wxID_COPY, "Copy", wxArtProvider::GetBitmap(wxART_COPY,       wxART_TOOLBAR));
-    m_toolbar->AddTool(wxID_PASTE,"Paste",wxArtProvider::GetBitmap(wxART_PASTE,      wxART_TOOLBAR));
+    m_toolbar->AddTool(wxID_CUT,  "Cut",  wxArtProvider::GetBitmap(wxART_CUT,        wxART_TOOLBAR, wxSize(16, 16)));
+    m_toolbar->AddTool(wxID_COPY, "Copy", wxArtProvider::GetBitmap(wxART_COPY,       wxART_TOOLBAR, wxSize(16, 16)));
+    m_toolbar->AddTool(wxID_PASTE,"Paste",wxArtProvider::GetBitmap(wxART_PASTE,      wxART_TOOLBAR, wxSize(16, 16)));
 
 
     m_toolbar->Realize();
