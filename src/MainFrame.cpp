@@ -160,7 +160,7 @@ void MainFrame::CreateMenuBar() {
     auto* fileMenu = new wxMenu();
     fileMenu->Append(wxID_NEW,    "&New",      "Create a new document");
     fileMenu->Append(wxID_OPEN,   "&Open",     "Open a document");
-    fileMenu->Append(wxID_CLOSE,  "&Close",    "Close the current document");
+    fileMenu->Append(ID_FILE_CLOSE, "&Close",    "Close the current document");
     fileMenu->AppendSeparator();
     fileMenu->Append(wxID_SAVE,   "&Save",     "Save the current document");
     fileMenu->Append(wxID_SAVEAS, "Save &As",  "Save the current document with a new name");
@@ -178,10 +178,10 @@ void MainFrame::CreateMenuBar() {
     editMenu->Append(wxID_CUT,      "Cu&t",        "Cut the selection");
     editMenu->Append(wxID_COPY,     "&Copy",       "Copy the selection");
     editMenu->Append(wxID_PASTE,    "&Paste",      "Paste from clipboard");
-    editMenu->Append(wxID_SELECTALL,"Select &All", "Select all items");
+    editMenu->Append(ID_EDIT_SELECTALL,"Select &All", "Select all items");
 
     auto* viewMenu = new wxMenu();
-    viewMenu->AppendCheckItem(wxID_ANY, "&Toolbar\tCtrl+Shift+T", "Show or hide the toolbar");
+    viewMenu->AppendCheckItem(ID_VIEW_TOOLBAR, "&Toolbar\tCtrl+Shift+T", "Show or hide the toolbar");
 
     auto* settingsMenu = new wxMenu();
     settingsMenu->Append(ID_SETTINGS_SNAP, "&Snapping...\tCtrl+Shift+,",
@@ -191,7 +191,7 @@ void MainFrame::CreateMenuBar() {
     // wxDocManager will populate this with the open document list.
 
     auto* helpMenu = new wxMenu();
-    helpMenu->Append(wxID_ABOUT, "&About", "About this application");
+    helpMenu->Append(ID_HELP_ABOUT, "&About", "About this application");
 
     auto* menuBar = new wxMenuBar();
     menuBar->Append(fileMenu,     "&File");

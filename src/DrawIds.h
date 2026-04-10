@@ -37,4 +37,12 @@ enum {
     // Keyframe panel
     ID_KF_SET,
     ID_KF_REMOVE,
+    // File menu
+    ID_FILE_CLOSE,
+    // Edit menu
+    ID_EDIT_SELECTALL,
+    // View menu
+    ID_VIEW_TOOLBAR,
+    // Help menu
+    ID_HELP_ABOUT,
 };
