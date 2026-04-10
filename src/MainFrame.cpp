@@ -225,15 +225,15 @@ void MainFrame::CreateMenuBar() {
 }
 
 static wxBitmap MakeBmp(void (*draw)(wxMemoryDC&)) {
-    wxImage img(16, 16);
-    img.InitAlpha();
-
-    wxBitmap bmp(img);
+    // Use magenta as mask color (transparent)
+    wxBitmap bmp(16, 16);
     wxMemoryDC dc(bmp);
-    dc.SetBackground(*wxTRANSPARENT_BRUSH);
+    dc.SetBackground(wxBrush(wxColour(255, 0, 255)));  // Magenta
     dc.Clear();
     draw(dc);
 
+    // Set magenta as the transparent mask color
+    bmp.SetMask(new wxMask(bmp, wxColour(255, 0, 255)));
     return bmp;
 }
 
