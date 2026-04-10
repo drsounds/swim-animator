@@ -22,13 +22,12 @@
 #include <wx/filename.h>
 #include <wx/dialog.h>
 #include <wx/sizer.h>
-#include <wx/wrapsizer.h>
 #include <wx/statbmp.h>
-#include <wx/bmpbuttn.h>
-#include <wx/cmdproc.h>
 #include <wx/button.h>
 #include <wx/filefn.h>
 #include <wx/clipbrd.h>
+#include <wx/wrapsizer.h>
+#include <wx/bmpbuttn.h>
 #include <algorithm>
 
 // ---------------------------------------------------------------------------
@@ -78,7 +77,7 @@ public:
 wxBEGIN_EVENT_TABLE(MainFrame, wxDocParentFrame)
     EVT_AUINOTEBOOK_PAGE_CLOSE(  wxID_ANY, MainFrame::OnNotebookPageClose)
     EVT_AUINOTEBOOK_PAGE_CHANGED(wxID_ANY, MainFrame::OnNotebookPageChanged)
-    EVT_MENU(ID_HELP_ABOUT,     MainFrame::OnAbout)
+    EVT_MENU(wxID_ABOUT,        MainFrame::OnAbout)
     EVT_CLOSE(                  MainFrame::OnClose)
     EVT_MENU(ID_TOOL_SELECT,    MainFrame::OnDrawTool)
     EVT_MENU(ID_TOOL_RECT,      MainFrame::OnDrawTool)
@@ -90,28 +89,14 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxDocParentFrame)
     EVT_UPDATE_UI(ID_TOOL_CIRCLE, MainFrame::OnUpdateDrawTool)
     EVT_UPDATE_UI(ID_TOOL_TEXT,   MainFrame::OnUpdateDrawTool)
     EVT_UPDATE_UI(ID_TOOL_BEZIER, MainFrame::OnUpdateDrawTool)
-    EVT_MENU(ID_EDIT_UNDO,        MainFrame::OnEditUndo)
-    EVT_MENU(ID_EDIT_REDO,        MainFrame::OnEditRedo)
-    EVT_MENU(ID_EDIT_CUT,         MainFrame::OnCut)
-    EVT_MENU(ID_EDIT_COPY,        MainFrame::OnCopy)
-    EVT_MENU(ID_EDIT_PASTE,       MainFrame::OnPaste)
-    EVT_MENU(ID_CTX_CUT,          MainFrame::OnCut)
-    EVT_MENU(ID_CTX_COPY,         MainFrame::OnCopy)
-    EVT_MENU(ID_CTX_PASTE,        MainFrame::OnPaste)
-    EVT_MENU(ID_EDIT_SELECTALL,   MainFrame::OnSelectAll)
-    EVT_UPDATE_UI(ID_EDIT_CUT,    MainFrame::OnUpdateCutCopy)
-    EVT_UPDATE_UI(ID_EDIT_COPY,   MainFrame::OnUpdateCutCopy)
-    EVT_UPDATE_UI(ID_EDIT_PASTE,  MainFrame::OnUpdatePaste)
-    EVT_UPDATE_UI(ID_CTX_CUT,     MainFrame::OnUpdateCutCopy)
-    EVT_UPDATE_UI(ID_CTX_COPY,    MainFrame::OnUpdateCutCopy)
-    EVT_UPDATE_UI(ID_CTX_PASTE,   MainFrame::OnUpdatePaste)
-    EVT_UPDATE_UI(ID_EDIT_SELECTALL, MainFrame::OnUpdateSelectAll)
-    EVT_MENU(ID_FILE_NEW,         MainFrame::OnFileNew)
-    EVT_MENU(ID_FILE_OPEN,        MainFrame::OnFileOpen)
-    EVT_MENU(ID_FILE_CLOSE,       MainFrame::OnFileClose)
-    EVT_MENU(ID_FILE_SAVE,        MainFrame::OnFileSave)
-    EVT_MENU(ID_FILE_SAVEAS,      MainFrame::OnFileSaveAs)
-    EVT_MENU(ID_FILE_EXIT,        MainFrame::OnFileExit)
+    EVT_MENU(wxID_CUT,            MainFrame::OnCut)
+    EVT_MENU(wxID_COPY,           MainFrame::OnCopy)
+    EVT_MENU(wxID_PASTE,          MainFrame::OnPaste)
+    EVT_MENU(wxID_SELECTALL,      MainFrame::OnSelectAll)
+    EVT_UPDATE_UI(wxID_CUT,       MainFrame::OnUpdateCutCopy)
+    EVT_UPDATE_UI(wxID_COPY,      MainFrame::OnUpdateCutCopy)
+    EVT_UPDATE_UI(wxID_PASTE,     MainFrame::OnUpdatePaste)
+    EVT_UPDATE_UI(wxID_SELECTALL, MainFrame::OnUpdateSelectAll)
     EVT_MENU(ID_PALETTE_IMPORT,   MainFrame::OnPaletteImport)
     EVT_MENU(ID_PALETTE_EXPORT,   MainFrame::OnPaletteExport)
     EVT_MENU(ID_SETTINGS_SNAP,    MainFrame::OnSettingsSnap)
@@ -175,30 +160,30 @@ void MainFrame::CreateMenuBar() {
     // File menu – wxDocParentFrame / wxDocManager provides the standard items
     // when we pass the doc manager; we just need to add our own extras.
     auto* fileMenu = new wxMenu();
-    fileMenu->Append(ID_FILE_NEW,    "&New",      "Create a new document");
-    fileMenu->Append(ID_FILE_OPEN,   "&Open",     "Open a document");
-    fileMenu->Append(ID_FILE_CLOSE,  "&Close",    "Close the current document");
+    fileMenu->Append(wxID_NEW);
+    fileMenu->Append(wxID_OPEN);
+    fileMenu->Append(wxID_CLOSE);
     fileMenu->AppendSeparator();
-    fileMenu->Append(ID_FILE_SAVE,   "&Save",     "Save the current document");
-    fileMenu->Append(ID_FILE_SAVEAS, "Save &As",  "Save the current document with a new name");
+    fileMenu->Append(wxID_SAVE);
+    fileMenu->Append(wxID_SAVEAS);
     fileMenu->AppendSeparator();
     fileMenu->Append(ID_PALETTE_IMPORT, "Import Palette...", "Load a GIMP palette (.gpl) file");
     fileMenu->Append(ID_PALETTE_EXPORT, "Export Palette...", "Save the current palette as a GIMP palette (.gpl) file");
     fileMenu->AppendSeparator();
     // Recent files will be inserted here by wxDocManager automatically.
-    fileMenu->Append(ID_FILE_EXIT,   "E&xit",     "Exit the application");
+    fileMenu->Append(wxID_EXIT);
 
     auto* editMenu = new wxMenu();
-    editMenu->Append(ID_EDIT_UNDO,     "&Undo",       "Undo the last action");
-    editMenu->Append(ID_EDIT_REDO,     "&Redo",       "Redo the last action");
+    editMenu->Append(wxID_UNDO);
+    editMenu->Append(wxID_REDO);
     editMenu->AppendSeparator();
-    editMenu->Append(ID_EDIT_CUT,      "Cu&t",        "Cut the selection");
-    editMenu->Append(ID_EDIT_COPY,     "&Copy",       "Copy the selection");
-    editMenu->Append(ID_EDIT_PASTE,    "&Paste",      "Paste from clipboard");
-    editMenu->Append(ID_EDIT_SELECTALL,"Select &All", "Select all items");
+    editMenu->Append(wxID_CUT);
+    editMenu->Append(wxID_COPY);
+    editMenu->Append(wxID_PASTE);
+    editMenu->Append(wxID_SELECTALL);
 
     auto* viewMenu = new wxMenu();
-    viewMenu->AppendCheckItem(ID_VIEW_TOOLBAR, "&Toolbar\tCtrl+Shift+T", "Show or hide the toolbar");
+    viewMenu->AppendCheckItem(wxID_ANY, "&Toolbar\tCtrl+Shift+T", "Show or hide the toolbar");
 
     auto* settingsMenu = new wxMenu();
     settingsMenu->Append(ID_SETTINGS_SNAP, "&Snapping...\tCtrl+Shift+,",
@@ -208,7 +193,7 @@ void MainFrame::CreateMenuBar() {
     // wxDocManager will populate this with the open document list.
 
     auto* helpMenu = new wxMenu();
-    helpMenu->Append(ID_HELP_ABOUT, "&About", "About this application");
+    helpMenu->Append(wxID_ABOUT);
 
     auto* menuBar = new wxMenuBar();
     menuBar->Append(fileMenu,     "&File");
@@ -241,16 +226,16 @@ void MainFrame::CreateToolBar() {
     
     m_toolbar->SetToolBitmapSize(wxSize(16,16));
 
-    m_toolbar->AddTool(ID_FILE_NEW,  "New",  wxArtProvider::GetBitmap(wxART_NEW,        wxART_TOOLBAR, wxSize(16, 16)));
-    m_toolbar->AddTool(ID_FILE_OPEN, "Open", wxArtProvider::GetBitmap(wxART_FILE_OPEN,  wxART_TOOLBAR, wxSize(16, 16)));
-    m_toolbar->AddTool(ID_FILE_SAVE, "Save", wxArtProvider::GetBitmap(wxART_FILE_SAVE,  wxART_TOOLBAR, wxSize(16, 16)));
+    m_toolbar->AddTool(wxID_NEW,  "New",  wxArtProvider::GetBitmap(wxART_NEW,        wxART_TOOLBAR, wxSize(16, 16)));
+    m_toolbar->AddTool(wxID_OPEN, "Open", wxArtProvider::GetBitmap(wxART_FILE_OPEN,  wxART_TOOLBAR, wxSize(16, 16)));
+    m_toolbar->AddTool(wxID_SAVE, "Save", wxArtProvider::GetBitmap(wxART_FILE_SAVE,  wxART_TOOLBAR, wxSize(16, 16)));
     m_toolbar->AddSeparator();
-    m_toolbar->AddTool(ID_EDIT_UNDO, "Undo", wxArtProvider::GetBitmap(wxART_UNDO,       wxART_TOOLBAR, wxSize(16, 16)));
-    m_toolbar->AddTool(ID_EDIT_REDO, "Redo", wxArtProvider::GetBitmap(wxART_REDO,       wxART_TOOLBAR, wxSize(16, 16)));
+    m_toolbar->AddTool(wxID_UNDO, "Undo", wxArtProvider::GetBitmap(wxART_UNDO,       wxART_TOOLBAR, wxSize(16, 16)));
+    m_toolbar->AddTool(wxID_REDO, "Redo", wxArtProvider::GetBitmap(wxART_REDO,       wxART_TOOLBAR, wxSize(16, 16)));
     m_toolbar->AddSeparator();
-    m_toolbar->AddTool(ID_EDIT_CUT,  "Cut",  wxArtProvider::GetBitmap(wxART_CUT,        wxART_TOOLBAR, wxSize(16, 16)));
-    m_toolbar->AddTool(ID_EDIT_COPY, "Copy", wxArtProvider::GetBitmap(wxART_COPY,       wxART_TOOLBAR, wxSize(16, 16)));
-    m_toolbar->AddTool(ID_EDIT_PASTE,"Paste",wxArtProvider::GetBitmap(wxART_PASTE,      wxART_TOOLBAR, wxSize(16, 16)));
+    m_toolbar->AddTool(wxID_CUT,  "Cut",  wxArtProvider::GetBitmap(wxART_CUT,        wxART_TOOLBAR, wxSize(16, 16)));
+    m_toolbar->AddTool(wxID_COPY, "Copy", wxArtProvider::GetBitmap(wxART_COPY,       wxART_TOOLBAR, wxSize(16, 16)));
+    m_toolbar->AddTool(wxID_PASTE,"Paste",wxArtProvider::GetBitmap(wxART_PASTE,      wxART_TOOLBAR, wxSize(16, 16)));
 
 
     m_toolbar->Realize();
@@ -272,23 +257,20 @@ void MainFrame::CreateDrawToolBar() {
     const int BUTTON_SIZE = 34;  // 32px button + 2px margins
     const int COLS = 2;
 
-    // 1. Create a Panel to act as the container for the AUI Pane
-    // This replaces the raw wxToolBar
+    // Create a Panel container for the AUI Pane (instead of wxToolBar)
     wxPanel* toolContainer = new wxPanel(this, wxID_ANY);
 
-    // 2. Initialize the WrapSizer with 2-column layout
-    // wxWrapSizer will automatically wrap to the next row when it reaches the width constraint
+    // Initialize WrapSizer for 2-column layout
     wxWrapSizer* wrapSizer = new wxWrapSizer(wxHORIZONTAL);
 
-    // Helper lambda to create buttons that behave like ToolBar items
+    // Helper lambda to add buttons to the sizer
     auto AddToolToSizer = [&](wxWindowID id, const wxBitmap& bmp, const wxString& help) {
-        // wxBitmapButton creates tool-like buttons for the drawing toolbar
         wxBitmapButton* btn = new wxBitmapButton(toolContainer, id, bmp,
                                         wxDefaultPosition, wxSize(32, 32), wxBU_AUTODRAW | wxBORDER_NONE);
         btn->SetToolTip(help);
-        // Add with 1px all-around margin for spacing between buttons
         wrapSizer->Add(btn, 0, wxALL, 1);
     };
+
     auto selectBmp = MakeBmp([](wxMemoryDC& dc) {
         dc.SetPen(*wxBLACK_PEN);
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
@@ -330,7 +312,7 @@ void MainFrame::CreateDrawToolBar() {
         dc.DrawCircle(p[3], 2);
     });
 
-    // 3. Add the "tools" to the sizer
+    // Add tools to the sizer
     AddToolToSizer(ID_TOOL_SELECT, selectBmp, "Select");
     AddToolToSizer(ID_TOOL_RECT,   rectBmp,   "Rectangle");
     AddToolToSizer(ID_TOOL_CIRCLE, circleBmp, "Circle");
@@ -339,23 +321,21 @@ void MainFrame::CreateDrawToolBar() {
 
     toolContainer->SetSizer(wrapSizer);
 
-    // 4. Calculate the width for exactly 2 columns
-    // Button(32) + Margins(1+1) = 34px per tool. 34 * COLS + padding = total width.
-    // Add 8px for panel border/padding on each side.
-    int paneWidth = (BUTTON_SIZE * COLS) + 8;
+    // Calculate width for exactly 2 columns
+    int paneWidth = (BUTTON_SIZE * COLS) + 8;  // 8px for padding
     toolContainer->SetMinSize(wxSize(paneWidth, -1));
 
-    // 5. Add to AUI Manager
+    // Add to AUI Manager
     m_auiMgr.AddPane(toolContainer,
         wxAuiPaneInfo()
             .Name("DrawToolbar")
             .Caption("Draw")
-            .ToolbarPane() // Tells AUI to treat it like a toolbar
+            .ToolbarPane()
             .Left()
             .Layer(2)
-            .BestSize(paneWidth, -1)        // Encourages the 2-column width
-            .MinSize(paneWidth, -1)         // Prevent horizontal scrolling
-            .FloatingSize(paneWidth, 200)); // Keeps 2 columns when undocked
+            .BestSize(paneWidth, -1)
+            .MinSize(paneWidth, -1)
+            .FloatingSize(paneWidth, 200));
 }
 
 void MainFrame::CreateColorSwatchPane() {
@@ -725,46 +705,6 @@ void MainFrame::OnAbout(wxCommandEvent& /*event*/) {
     dlg.SetSizerAndFit(sizer);
     dlg.Centre();
     dlg.ShowModal();
-}
-
-void MainFrame::OnFileNew(wxCommandEvent& event) {
-    wxGetApp().GetDocManager()->OnFileNew(event);
-}
-
-void MainFrame::OnFileOpen(wxCommandEvent& event) {
-    wxGetApp().GetDocManager()->OnFileOpen(event);
-}
-
-void MainFrame::OnFileClose(wxCommandEvent& event) {
-    wxGetApp().GetDocManager()->OnFileClose(event);
-}
-
-void MainFrame::OnFileSave(wxCommandEvent& event) {
-    wxGetApp().GetDocManager()->OnFileSave(event);
-}
-
-void MainFrame::OnFileSaveAs(wxCommandEvent& event) {
-    wxGetApp().GetDocManager()->OnFileSaveAs(event);
-}
-
-void MainFrame::OnFileExit(wxCommandEvent& event) {
-    Close(true);
-}
-
-void MainFrame::OnEditUndo(wxCommandEvent& /*event*/) {
-    if (m_activeDrawView && m_activeDrawView->GetDocument()) {
-        wxCommandProcessor* cmdProc = m_activeDrawView->GetDocument()->GetCommandProcessor();
-        if (cmdProc && cmdProc->CanUndo())
-            cmdProc->Undo();
-    }
-}
-
-void MainFrame::OnEditRedo(wxCommandEvent& /*event*/) {
-    if (m_activeDrawView && m_activeDrawView->GetDocument()) {
-        wxCommandProcessor* cmdProc = m_activeDrawView->GetDocument()->GetCommandProcessor();
-        if (cmdProc && cmdProc->CanRedo())
-            cmdProc->Redo();
-    }
 }
 
 void MainFrame::OnClose(wxCloseEvent& event) {
