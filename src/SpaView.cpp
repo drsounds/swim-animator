@@ -63,6 +63,11 @@ bool SpaView::OnCreate(wxDocument* doc, long flags) {
     nb->AddPage(m_canvas, doc->GetUserReadableName(), /*select=*/true);
     m_canvas->Layout();   // force layout after the notebook has sized the page
 
+    // Wire the embedded SmilView to MainFrame immediately, before Activate(),
+    // so panels update even if activation is delayed.
+    if (m_embeddedSmilView)
+        mainFrame->SetActiveSmilView(m_embeddedSmilView);
+
     Activate(true);
     return true;
 }
