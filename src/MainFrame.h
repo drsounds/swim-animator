@@ -10,6 +10,7 @@
 #include "AssetManagerPanel.h"
 #include "HierarchyPanel.h"
 #include "ScenePanel.h"
+#include "CollapseManager.h"
 #include <vector>
 
 class DrawDoc;
@@ -115,6 +116,9 @@ private:
     ScenePanel*        m_scenePanel     {nullptr};
     DrawView*          m_activeDrawView {nullptr};
     SmilView*          m_activeSmilView {nullptr};
+    CollapseManager*   m_collapseManager{nullptr};
+
+    void OnAuiCaptionClick(wxMouseEvent& e);
 
     wxDECLARE_EVENT_TABLE();
 };

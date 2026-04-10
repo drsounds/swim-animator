@@ -4,6 +4,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/spacily-app.dir/src/App.cpp.o.d"
   "CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o"
   "CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o.d"
+  "CMakeFiles/spacily-app.dir/src/CollapseManager.cpp.o"
+  "CMakeFiles/spacily-app.dir/src/CollapseManager.cpp.o.d"
   "CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o"
   "CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o.d"
   "CMakeFiles/spacily-app.dir/src/Document.cpp.o"

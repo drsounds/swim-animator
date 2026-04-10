@@ -122,7 +122,7 @@ Debug/src_HierarchyPanel.cpp.o: src/HierarchyPanel.cpp \
  /usr/include/wx-3.2/wx/ctrlsub.h /usr/include/wx-3.2/wx/gtk/choice.h \
  src/ColorSwatchPanel.h src/AssetManagerPanel.h src/SpaDoc.h \
  src/ScenePanel.h /usr/include/wx-3.2/wx/listbox.h \
- /usr/include/wx-3.2/wx/gtk/listbox.h src/KeyframePanel.h src/SmilTypes.h \
+ /usr/include/wx-3.2/wx/gtk/listbox.h src/CollapseManager.h \
  /usr/include/wx-3.2/wx/filename.h /usr/include/wx-3.2/wx/file.h \
  /usr/include/wx-3.2/wx/textdlg.h \
  /usr/include/wx-3.2/wx/generic/textdlgg.h \
@@ -358,8 +358,7 @@ src/SpaDoc.h:
 src/ScenePanel.h:
 /usr/include/wx-3.2/wx/listbox.h:
 /usr/include/wx-3.2/wx/gtk/listbox.h:
-src/KeyframePanel.h:
-src/SmilTypes.h:
+src/CollapseManager.h:
 /usr/include/wx-3.2/wx/filename.h:
 /usr/include/wx-3.2/wx/file.h:
 /usr/include/wx-3.2/wx/textdlg.h:

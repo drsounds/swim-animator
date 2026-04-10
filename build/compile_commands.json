@@ -142,5 +142,11 @@
   "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2  -pthread -g -std=gnu++17 -o CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.o -c /home/alecca/Documents/spacely/src/KeyframePanel.cpp",
   "file": "/home/alecca/Documents/spacely/src/KeyframePanel.cpp",
   "output": "CMakeFiles/spacily-app.dir/src/KeyframePanel.cpp.o"
+},
+{
+  "directory": "/home/alecca/Documents/spacely/build",
+  "command": "/usr/bin/c++ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -I/home/alecca/Documents/spacely/src -isystem /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2 -isystem /usr/include/wx-3.2  -pthread -g -std=gnu++17 -o CMakeFiles/spacily-app.dir/src/CollapseManager.cpp.o -c /home/alecca/Documents/spacely/src/CollapseManager.cpp",
+  "file": "/home/alecca/Documents/spacely/src/CollapseManager.cpp",
+  "output": "CMakeFiles/spacily-app.dir/src/CollapseManager.cpp.o"
 }
 ]

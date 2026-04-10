@@ -32,6 +32,7 @@ set(SOURCES
     src/SmilView.cpp
     src/ScenePanel.cpp
     src/KeyframePanel.cpp
+    src/CollapseManager.cpp
 )
 
 add_executable(spacily-app WIN32 MACOSX_BUNDLE ${SOURCES})

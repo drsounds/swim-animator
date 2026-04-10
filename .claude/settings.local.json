@@ -42,7 +42,8 @@
       "Bash(git push:*)",
       "Bash(cmake -B build -DCMAKE_BUILD_TYPE=Debug -G Ninja)",
       "Bash(ninja -C build)",
-      "Bash(cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug)"
+      "Bash(cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug)",
+      "Bash(git pull:*)"
     ]
   }
 }

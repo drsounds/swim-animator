@@ -115,16 +115,16 @@ Debug/src_ColorSwatchPanel.cpp.o: src/ColorSwatchPanel.cpp \
  /usr/include/wx-3.2/wx/itemid.h /usr/include/wx-3.2/wx/systhemectrl.h \
  /usr/include/wx-3.2/wx/generic/treectlg.h src/SpaDoc.h \
  src/HierarchyPanel.h src/ScenePanel.h /usr/include/wx-3.2/wx/listbox.h \
- /usr/include/wx-3.2/wx/gtk/listbox.h src/KeyframePanel.h src/SmilTypes.h \
- src/App.h /usr/include/wx-3.2/wx/app.h \
- /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
- /usr/include/wx-3.2/wx/cmdargs.h /usr/include/wx-3.2/wx/init.h \
- /usr/include/wx-3.2/wx/log.h /usr/include/wx-3.2/wx/generic/logg.h \
- /usr/include/wx-3.2/wx/unix/app.h /usr/include/wx-3.2/wx/gtk/app.h \
- src/Palette.h src/DrawDoc.h src/DrawCommands.h \
- /usr/include/wx-3.2/wx/cmdproc.h /usr/include/wx-3.2/wx/dcbuffer.h \
- /usr/include/wx-3.2/wx/dcmemory.h /usr/include/wx-3.2/wx/dcclient.h \
- /usr/include/wx-3.2/wx/colordlg.h /usr/include/wx-3.2/wx/colourdata.h \
+ /usr/include/wx-3.2/wx/gtk/listbox.h src/CollapseManager.h src/App.h \
+ /usr/include/wx-3.2/wx/app.h /usr/include/wx-3.2/wx/eventfilter.h \
+ /usr/include/wx-3.2/wx/build.h /usr/include/wx-3.2/wx/cmdargs.h \
+ /usr/include/wx-3.2/wx/init.h /usr/include/wx-3.2/wx/log.h \
+ /usr/include/wx-3.2/wx/generic/logg.h /usr/include/wx-3.2/wx/unix/app.h \
+ /usr/include/wx-3.2/wx/gtk/app.h src/Palette.h src/DrawDoc.h \
+ src/DrawCommands.h /usr/include/wx-3.2/wx/cmdproc.h \
+ /usr/include/wx-3.2/wx/dcbuffer.h /usr/include/wx-3.2/wx/dcmemory.h \
+ /usr/include/wx-3.2/wx/dcclient.h /usr/include/wx-3.2/wx/colordlg.h \
+ /usr/include/wx-3.2/wx/colourdata.h \
  /usr/include/wx-3.2/wx/gtk/colordlg.h
 src/ColorSwatchPanel.h:
 /usr/include/wx-3.2/wx/panel.h:
@@ -343,8 +343,7 @@ src/HierarchyPanel.h:
 src/ScenePanel.h:
 /usr/include/wx-3.2/wx/listbox.h:
 /usr/include/wx-3.2/wx/gtk/listbox.h:
-src/KeyframePanel.h:
-src/SmilTypes.h:
+src/CollapseManager.h:
 src/App.h:
 /usr/include/wx-3.2/wx/app.h:
 /usr/include/wx-3.2/wx/eventfilter.h:

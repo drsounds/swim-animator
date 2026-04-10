@@ -114,16 +114,17 @@ Debug/src_MainFrame.cpp.o: src/MainFrame.cpp src/MainFrame.h \
  /usr/include/wx-3.2/wx/systhemectrl.h \
  /usr/include/wx-3.2/wx/generic/treectlg.h src/SpaDoc.h \
  src/HierarchyPanel.h src/ScenePanel.h /usr/include/wx-3.2/wx/listbox.h \
- /usr/include/wx-3.2/wx/gtk/listbox.h src/KeyframePanel.h src/SmilTypes.h \
- src/View.h src/App.h /usr/include/wx-3.2/wx/app.h \
+ /usr/include/wx-3.2/wx/gtk/listbox.h src/CollapseManager.h src/View.h \
+ src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
  /usr/include/wx-3.2/wx/cmdargs.h /usr/include/wx-3.2/wx/init.h \
  /usr/include/wx-3.2/wx/log.h /usr/include/wx-3.2/wx/generic/logg.h \
  /usr/include/wx-3.2/wx/unix/app.h /usr/include/wx-3.2/wx/gtk/app.h \
  src/Palette.h src/SettingsDialog.h /usr/include/wx-3.2/wx/checkbox.h \
  /usr/include/wx-3.2/wx/gtk/checkbox.h src/DrawDoc.h src/SpaView.h \
- src/SmilDoc.h src/SmilView.h /usr/include/wx-3.2/wx/artprov.h \
- /usr/include/wx-3.2/wx/msgdlg.h /usr/include/wx-3.2/wx/stockitem.h \
+ src/SmilDoc.h src/SmilTypes.h src/SmilView.h src/KeyframePanel.h \
+ /usr/include/wx-3.2/wx/artprov.h /usr/include/wx-3.2/wx/msgdlg.h \
+ /usr/include/wx-3.2/wx/stockitem.h \
  /usr/include/wx-3.2/wx/generic/msgdlgg.h \
  /usr/include/wx-3.2/wx/gtk/msgdlg.h /usr/include/wx-3.2/wx/settings.h \
  /usr/include/wx-3.2/wx/dcmemory.h /usr/include/wx-3.2/wx/filedlg.h \
@@ -354,8 +355,7 @@ src/HierarchyPanel.h:
 src/ScenePanel.h:
 /usr/include/wx-3.2/wx/listbox.h:
 /usr/include/wx-3.2/wx/gtk/listbox.h:
-src/KeyframePanel.h:
-src/SmilTypes.h:
+src/CollapseManager.h:
 src/View.h:
 src/App.h:
 /usr/include/wx-3.2/wx/app.h:
@@ -374,7 +374,9 @@ src/SettingsDialog.h:
 src/DrawDoc.h:
 src/SpaView.h:
 src/SmilDoc.h:
+src/SmilTypes.h:
 src/SmilView.h:
+src/KeyframePanel.h:
 /usr/include/wx-3.2/wx/artprov.h:
 /usr/include/wx-3.2/wx/msgdlg.h:
 /usr/include/wx-3.2/wx/stockitem.h:

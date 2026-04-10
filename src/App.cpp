@@ -33,8 +33,8 @@ bool App::OnInit() {
     if (!wxApp::OnInit())
         return false;
 
-    SetAppName("Spacely");
-    SetVendorName("Example");
+    SetAppName("Swim Animator");
+    SetVendorName("Alexander Forselius");
 
     // Load palette: start with the built-in default, then try the saved one.
     m_palette = DefaultPalette();
@@ -50,6 +50,18 @@ bool App::OnInit() {
     m_snapSettings.LoadFromXml(SnapSettings::DefaultPath());
 
     m_docManager = new wxDocManager();
+
+    new wxDocTemplate(
+        m_docManager,
+        "Swim Animator Project",
+        "*.spa",
+        "",
+        "spa",
+        "SpaDoc",
+        "SpaView",
+        wxCLASSINFO(SpaDoc),
+        wxCLASSINFO(SpaView)
+    );
 
     // Register the document/view template.
     // Extend the wildcard and extension list as the project grows.
@@ -75,18 +87,6 @@ bool App::OnInit() {
         "DrawView",
         wxCLASSINFO(DrawDoc),
         wxCLASSINFO(DrawView)
-    );
-
-    new wxDocTemplate(
-        m_docManager,
-        "Swim Animator Project",
-        "*.spa",
-        "",
-        "spa",
-        "SpaDoc",
-        "SpaView",
-        wxCLASSINFO(SpaDoc),
-        wxCLASSINFO(SpaView)
     );
 
     new wxDocTemplate(

@@ -177,6 +177,30 @@ src/AssetManagerPanel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.s
 .PHONY : src/AssetManagerPanel.cpp.s
 
+src/CollapseManager.o: src/CollapseManager.cpp.o
+.PHONY : src/CollapseManager.o
+
+# target to build an object file
+src/CollapseManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/CollapseManager.cpp.o
+.PHONY : src/CollapseManager.cpp.o
+
+src/CollapseManager.i: src/CollapseManager.cpp.i
+.PHONY : src/CollapseManager.i
+
+# target to preprocess a source file
+src/CollapseManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/CollapseManager.cpp.i
+.PHONY : src/CollapseManager.cpp.i
+
+src/CollapseManager.s: src/CollapseManager.cpp.s
+.PHONY : src/CollapseManager.s
+
+# target to generate assembly for a file
+src/CollapseManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spacily-app.dir/build.make CMakeFiles/spacily-app.dir/src/CollapseManager.cpp.s
+.PHONY : src/CollapseManager.cpp.s
+
 src/ColorSwatchPanel.o: src/ColorSwatchPanel.cpp.o
 .PHONY : src/ColorSwatchPanel.o
 
@@ -720,6 +744,9 @@ help:
 	@echo "... src/AssetManagerPanel.o"
 	@echo "... src/AssetManagerPanel.i"
 	@echo "... src/AssetManagerPanel.s"
+	@echo "... src/CollapseManager.o"
+	@echo "... src/CollapseManager.i"
+	@echo "... src/CollapseManager.s"
 	@echo "... src/ColorSwatchPanel.o"
 	@echo "... src/ColorSwatchPanel.i"
 	@echo "... src/ColorSwatchPanel.s"

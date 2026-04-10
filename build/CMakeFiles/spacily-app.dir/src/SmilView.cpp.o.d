@@ -399,6 +399,7 @@ CMakeFiles/spacily-app.dir/src/SmilView.cpp.o: \
  /home/alecca/Documents/spacely/src/HierarchyPanel.h \
  /home/alecca/Documents/spacely/src/ScenePanel.h \
  /usr/include/wx-3.2/wx/listbox.h /usr/include/wx-3.2/wx/gtk/listbox.h \
+ /home/alecca/Documents/spacely/src/CollapseManager.h \
  /home/alecca/Documents/spacely/src/DrawCommands.h \
  /usr/include/wx-3.2/wx/cmdproc.h /usr/include/c++/14/memory \
  /usr/include/c++/14/bits/stl_raw_storage_iter.h \

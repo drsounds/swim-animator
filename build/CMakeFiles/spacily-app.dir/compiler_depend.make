@@ -1059,13 +1059,11 @@ CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o: /home/alecca/Documents/sp
   /home/alecca/Documents/spacely/src/DrawShape.h \
   /home/alecca/Documents/spacely/src/DrawView.h \
   /home/alecca/Documents/spacely/src/HierarchyPanel.h \
-  /home/alecca/Documents/spacely/src/KeyframePanel.h \
   /home/alecca/Documents/spacely/src/MainFrame.h \
   /home/alecca/Documents/spacely/src/Palette.h \
   /home/alecca/Documents/spacely/src/PropPanel.h \
   /home/alecca/Documents/spacely/src/ScenePanel.h \
   /home/alecca/Documents/spacely/src/ShapePath.h \
-  /home/alecca/Documents/spacely/src/SmilTypes.h \
   /home/alecca/Documents/spacely/src/SnapEngine.h \
   /home/alecca/Documents/spacely/src/SnapSettings.h \
   /home/alecca/Documents/spacely/src/SpaDoc.h \
@@ -3009,13 +3007,11 @@ CMakeFiles/spacily-app.dir/src/DrawView.cpp.o: /home/alecca/Documents/spacely/sr
   /home/alecca/Documents/spacely/src/DrawShape.h \
   /home/alecca/Documents/spacely/src/DrawView.h \
   /home/alecca/Documents/spacely/src/HierarchyPanel.h \
-  /home/alecca/Documents/spacely/src/KeyframePanel.h \
   /home/alecca/Documents/spacely/src/MainFrame.h \
   /home/alecca/Documents/spacely/src/Palette.h \
   /home/alecca/Documents/spacely/src/PropPanel.h \
   /home/alecca/Documents/spacely/src/ScenePanel.h \
   /home/alecca/Documents/spacely/src/ShapePath.h \
-  /home/alecca/Documents/spacely/src/SmilTypes.h \
   /home/alecca/Documents/spacely/src/SnapEngine.h \
   /home/alecca/Documents/spacely/src/SnapSettings.h \
   /home/alecca/Documents/spacely/src/SpaDoc.h \
@@ -3600,13 +3596,11 @@ CMakeFiles/spacily-app.dir/src/HierarchyPanel.cpp.o: /home/alecca/Documents/spac
   /home/alecca/Documents/spacely/src/DrawShape.h \
   /home/alecca/Documents/spacely/src/DrawView.h \
   /home/alecca/Documents/spacely/src/HierarchyPanel.h \
-  /home/alecca/Documents/spacely/src/KeyframePanel.h \
   /home/alecca/Documents/spacely/src/MainFrame.h \
   /home/alecca/Documents/spacely/src/Palette.h \
   /home/alecca/Documents/spacely/src/PropPanel.h \
   /home/alecca/Documents/spacely/src/ScenePanel.h \
   /home/alecca/Documents/spacely/src/ShapePath.h \
-  /home/alecca/Documents/spacely/src/SmilTypes.h \
   /home/alecca/Documents/spacely/src/SnapEngine.h \
   /home/alecca/Documents/spacely/src/SnapSettings.h \
   /home/alecca/Documents/spacely/src/SpaDoc.h \
@@ -6459,6 +6453,7 @@ CMakeFiles/spacily-app.dir/src/ScenePanel.cpp.o: /home/alecca/Documents/spacely/
   /home/alecca/Documents/spacely/src/DrawIds.h \
   /home/alecca/Documents/spacely/src/DrawShape.h \
   /home/alecca/Documents/spacely/src/DrawView.h \
+  /home/alecca/Documents/spacely/src/KeyframePanel.h \
   /home/alecca/Documents/spacely/src/ScenePanel.h \
   /home/alecca/Documents/spacely/src/ShapePath.h \
   /home/alecca/Documents/spacely/src/SmilDoc.h \
@@ -10354,13 +10349,11 @@ CMakeFiles/spacily-app.dir/src/SpaView.cpp.o: /home/alecca/Documents/spacely/src
   /home/alecca/Documents/spacely/src/DrawShape.h \
   /home/alecca/Documents/spacely/src/DrawView.h \
   /home/alecca/Documents/spacely/src/HierarchyPanel.h \
-  /home/alecca/Documents/spacely/src/KeyframePanel.h \
   /home/alecca/Documents/spacely/src/MainFrame.h \
   /home/alecca/Documents/spacely/src/Palette.h \
   /home/alecca/Documents/spacely/src/PropPanel.h \
   /home/alecca/Documents/spacely/src/ScenePanel.h \
   /home/alecca/Documents/spacely/src/ShapePath.h \
-  /home/alecca/Documents/spacely/src/SmilTypes.h \
   /home/alecca/Documents/spacely/src/SnapEngine.h \
   /home/alecca/Documents/spacely/src/SnapSettings.h \
   /home/alecca/Documents/spacely/src/SpaDoc.h \
@@ -10910,13 +10903,11 @@ CMakeFiles/spacily-app.dir/src/View.cpp.o: /home/alecca/Documents/spacely/src/Vi
   /home/alecca/Documents/spacely/src/DrawShape.h \
   /home/alecca/Documents/spacely/src/DrawView.h \
   /home/alecca/Documents/spacely/src/HierarchyPanel.h \
-  /home/alecca/Documents/spacely/src/KeyframePanel.h \
   /home/alecca/Documents/spacely/src/MainFrame.h \
   /home/alecca/Documents/spacely/src/Palette.h \
   /home/alecca/Documents/spacely/src/PropPanel.h \
   /home/alecca/Documents/spacely/src/ScenePanel.h \
   /home/alecca/Documents/spacely/src/ShapePath.h \
-  /home/alecca/Documents/spacely/src/SmilTypes.h \
   /home/alecca/Documents/spacely/src/SnapEngine.h \
   /home/alecca/Documents/spacely/src/SnapSettings.h \
   /home/alecca/Documents/spacely/src/SpaDoc.h \

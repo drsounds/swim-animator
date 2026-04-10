@@ -119,7 +119,7 @@ Debug/src_SpaView.cpp.o: src/SpaView.cpp src/SpaView.h \
  /usr/include/wx-3.2/wx/itemid.h /usr/include/wx-3.2/wx/systhemectrl.h \
  /usr/include/wx-3.2/wx/generic/treectlg.h src/HierarchyPanel.h \
  src/ScenePanel.h /usr/include/wx-3.2/wx/listbox.h \
- /usr/include/wx-3.2/wx/gtk/listbox.h src/KeyframePanel.h src/SmilTypes.h \
+ /usr/include/wx-3.2/wx/gtk/listbox.h src/CollapseManager.h \
  /usr/include/wx-3.2/wx/dcbuffer.h /usr/include/wx-3.2/wx/dcmemory.h \
  /usr/include/wx-3.2/wx/dcclient.h /usr/include/wx-3.2/wx/settings.h
 src/SpaView.h:
@@ -351,8 +351,7 @@ src/HierarchyPanel.h:
 src/ScenePanel.h:
 /usr/include/wx-3.2/wx/listbox.h:
 /usr/include/wx-3.2/wx/gtk/listbox.h:
-src/KeyframePanel.h:
-src/SmilTypes.h:
+src/CollapseManager.h:
 /usr/include/wx-3.2/wx/dcbuffer.h:
 /usr/include/wx-3.2/wx/dcmemory.h:
 /usr/include/wx-3.2/wx/dcclient.h:

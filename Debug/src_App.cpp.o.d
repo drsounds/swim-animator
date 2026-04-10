@@ -121,12 +121,12 @@ Debug/src_App.cpp.o: src/App.cpp src/App.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/systhemectrl.h \
  /usr/include/wx-3.2/wx/generic/treectlg.h src/SpaDoc.h \
  src/HierarchyPanel.h src/ScenePanel.h /usr/include/wx-3.2/wx/listbox.h \
- /usr/include/wx-3.2/wx/gtk/listbox.h src/KeyframePanel.h src/SmilTypes.h \
+ /usr/include/wx-3.2/wx/gtk/listbox.h src/CollapseManager.h \
  src/Document.h src/View.h src/DrawDoc.h src/SpaView.h src/SmilDoc.h \
- src/SmilView.h /usr/include/wx-3.2/wx/filename.h \
- /usr/include/wx-3.2/wx/file.h /usr/include/wx-3.2/wx/stdpaths.h \
- /usr/include/wx-3.2/wx/unix/stdpaths.h /usr/include/wx-3.2/wx/splash.h \
- /usr/include/wx-3.2/wx/generic/splash.h
+ src/SmilTypes.h src/SmilView.h src/KeyframePanel.h \
+ /usr/include/wx-3.2/wx/filename.h /usr/include/wx-3.2/wx/file.h \
+ /usr/include/wx-3.2/wx/stdpaths.h /usr/include/wx-3.2/wx/unix/stdpaths.h \
+ /usr/include/wx-3.2/wx/splash.h /usr/include/wx-3.2/wx/generic/splash.h
 src/App.h:
 /usr/include/wx-3.2/wx/app.h:
 /usr/include/wx-3.2/wx/event.h:
@@ -355,14 +355,15 @@ src/HierarchyPanel.h:
 src/ScenePanel.h:
 /usr/include/wx-3.2/wx/listbox.h:
 /usr/include/wx-3.2/wx/gtk/listbox.h:
-src/KeyframePanel.h:
-src/SmilTypes.h:
+src/CollapseManager.h:
 src/Document.h:
 src/View.h:
 src/DrawDoc.h:
 src/SpaView.h:
 src/SmilDoc.h:
+src/SmilTypes.h:
 src/SmilView.h:
+src/KeyframePanel.h:
 /usr/include/wx-3.2/wx/filename.h:
 /usr/include/wx-3.2/wx/file.h:
 /usr/include/wx-3.2/wx/stdpaths.h:

@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/alecca/Documents/spacely/src/App.cpp" "CMakeFiles/spacily-app.dir/src/App.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/App.cpp.o.d"
   "/home/alecca/Documents/spacely/src/AssetManagerPanel.cpp" "CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/AssetManagerPanel.cpp.o.d"
+  "/home/alecca/Documents/spacely/src/CollapseManager.cpp" "CMakeFiles/spacily-app.dir/src/CollapseManager.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/CollapseManager.cpp.o.d"
   "/home/alecca/Documents/spacely/src/ColorSwatchPanel.cpp" "CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/ColorSwatchPanel.cpp.o.d"
   "/home/alecca/Documents/spacely/src/Document.cpp" "CMakeFiles/spacily-app.dir/src/Document.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/Document.cpp.o.d"
   "/home/alecca/Documents/spacely/src/DrawCommands.cpp" "CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o" "gcc" "CMakeFiles/spacily-app.dir/src/DrawCommands.cpp.o.d"

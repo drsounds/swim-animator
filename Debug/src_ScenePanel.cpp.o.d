@@ -85,8 +85,9 @@ Debug/src_ScenePanel.cpp.o: src/ScenePanel.cpp src/ScenePanel.h \
  /usr/include/wx-3.2/wx/geometry.h src/DrawView.h src/DrawShape.h \
  src/ShapePath.h src/SnapEngine.h src/SnapSettings.h src/DrawDoc.h \
  /usr/include/wx-3.2/wx/xml/xml.h /usr/include/wx-3.2/wx/textbuf.h \
- /usr/include/wx-3.2/wx/convauto.h src/SmilDoc.h src/SmilTypes.h \
- /usr/include/wx-3.2/wx/sizer.h /usr/include/wx-3.2/wx/textdlg.h \
+ /usr/include/wx-3.2/wx/convauto.h src/KeyframePanel.h src/SmilTypes.h \
+ src/SmilDoc.h /usr/include/wx-3.2/wx/sizer.h \
+ /usr/include/wx-3.2/wx/textdlg.h \
  /usr/include/wx-3.2/wx/generic/textdlgg.h \
  /usr/include/wx-3.2/wx/valtext.h /usr/include/wx-3.2/wx/textctrl.h \
  /usr/include/wx-3.2/wx/textentry.h \
@@ -259,8 +260,9 @@ src/DrawDoc.h:
 /usr/include/wx-3.2/wx/xml/xml.h:
 /usr/include/wx-3.2/wx/textbuf.h:
 /usr/include/wx-3.2/wx/convauto.h:
-src/SmilDoc.h:
+src/KeyframePanel.h:
 src/SmilTypes.h:
+src/SmilDoc.h:
 /usr/include/wx-3.2/wx/sizer.h:
 /usr/include/wx-3.2/wx/textdlg.h:
 /usr/include/wx-3.2/wx/generic/textdlgg.h:

@@ -129,13 +129,23 @@ MainFrame::MainFrame(wxDocManager* manager, wxFrame* parent, wxWindowID id,
     CreateStatusBar_();
     CreateAuiPanes();
 
+    // Install the custom art provider that draws collapse arrows, then set up
+    // the collapse manager.  Art provider must be set before Update().
+    m_collapseManager = new CollapseManager(&m_auiMgr);
+    m_auiMgr.SetArtProvider(new SpacelyDockArt(m_collapseManager));
+
     m_auiMgr.Update();
+
+    // Bind AFTER wxAuiManager has connected its own handlers so ours runs
+    // first (Bind is LIFO: last-bound executes first).
+    Bind(wxEVT_LEFT_DOWN, &MainFrame::OnAuiCaptionClick, this);
 
     SetMinSize(wxSize(640, 480));
 }
 
 MainFrame::~MainFrame() {
     m_auiMgr.UnInit();
+    delete m_collapseManager;
 }
 
 // ---------------------------------------------------------------------------
@@ -488,6 +498,17 @@ void MainFrame::SetActiveSmilView(SmilView* view) {
 
 void MainFrame::OnSmilSelectionChanged(SmilView* /*view*/, const std::vector<int>& /*sel*/) {
     // Keyframe panel is now embedded in SmilCanvas and refreshes itself.
+}
+
+void MainFrame::OnAuiCaptionClick(wxMouseEvent& e) {
+    if (m_collapseManager) {
+        wxString name = m_collapseManager->HitTestArrow(e.GetPosition());
+        if (!name.IsEmpty()) {
+            m_collapseManager->Toggle(name);
+            return;   // swallow event: prevent wxAUI from starting a drag
+        }
+    }
+    e.Skip();
 }
 
 void MainFrame::CreateStatusBar_() {
