@@ -296,6 +296,7 @@ void MainFrame::CreateDrawToolBar() {
             .Caption("Draw")
             .Floatable()
             .Left()
+            .Layer(2)
             .Row(0));
 }
 
@@ -306,6 +307,7 @@ void MainFrame::CreateColorSwatchPane() {
             .Name("ColorSwatches")
             .Caption("Color Swatches")
             .Right()
+            .Layer(2)
             .BestSize(200, 180)
             .MinSize(160, 80)
             .CloseButton(true)
@@ -320,7 +322,7 @@ void MainFrame::CreateAssetManagerPane() {
             .Name("AssetManager")
             .Caption("Asset Manager")
             .Right()
-            .Row(1)          // Row 1 = below ColorSwatches (Row 0)
+            .Layer(2)
             .BestSize(200, 260)
             .MinSize(160, 100)
             .CloseButton(true)
@@ -340,7 +342,7 @@ void MainFrame::CreatePropertiesPane() {
             .Name("Properties")
             .Caption("Properties")
             .Bottom()
-            .Row(2)
+            .Layer(1)
             .BestSize(220, 300)
             .MinSize(160, 100)
             .CloseButton(true)
@@ -355,6 +357,7 @@ void MainFrame::CreateHierarchyPane() {
             .Name("Hierarchy")
             .Caption("Object Hierarchy")
             .Right()
+            .Layer(2)
             .BestSize(-1, 160)
             .MinSize(-1, 80)
             .CloseButton(true)
@@ -436,7 +439,6 @@ void MainFrame::CreateAnimToolBar() {
             .Caption("Animation")
             .ToolbarPane()
             .Top()
-            .Row(1)
             .LeftDockable(false)
             .RightDockable(false)
             .Floatable(false));
@@ -449,7 +451,7 @@ void MainFrame::CreateScenePane() {
             .Name("Scenes")
             .Caption("Scenes")
             .Right()
-            .Row(2)
+            .Layer(2)
             .BestSize(200, 200)
             .MinSize(140, 80)
             .CloseButton(true)
