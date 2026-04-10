@@ -23,6 +23,7 @@
 #include <wx/dialog.h>
 #include <wx/sizer.h>
 #include <wx/statbmp.h>
+#include <wx/cmdproc.h>
 #include <wx/button.h>
 #include <wx/filefn.h>
 #include <wx/clipbrd.h>
@@ -87,6 +88,8 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxDocParentFrame)
     EVT_UPDATE_UI(ID_TOOL_CIRCLE, MainFrame::OnUpdateDrawTool)
     EVT_UPDATE_UI(ID_TOOL_TEXT,   MainFrame::OnUpdateDrawTool)
     EVT_UPDATE_UI(ID_TOOL_BEZIER, MainFrame::OnUpdateDrawTool)
+    EVT_MENU(ID_EDIT_UNDO,        MainFrame::OnEditUndo)
+    EVT_MENU(ID_EDIT_REDO,        MainFrame::OnEditRedo)
     EVT_MENU(ID_EDIT_CUT,         MainFrame::OnCut)
     EVT_MENU(ID_EDIT_COPY,        MainFrame::OnCopy)
     EVT_MENU(ID_EDIT_PASTE,       MainFrame::OnPaste)
@@ -101,6 +104,12 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxDocParentFrame)
     EVT_UPDATE_UI(ID_CTX_COPY,    MainFrame::OnUpdateCutCopy)
     EVT_UPDATE_UI(ID_CTX_PASTE,   MainFrame::OnUpdatePaste)
     EVT_UPDATE_UI(ID_EDIT_SELECTALL, MainFrame::OnUpdateSelectAll)
+    EVT_MENU(ID_FILE_NEW,         MainFrame::OnFileNew)
+    EVT_MENU(ID_FILE_OPEN,        MainFrame::OnFileOpen)
+    EVT_MENU(ID_FILE_CLOSE,       MainFrame::OnFileClose)
+    EVT_MENU(ID_FILE_SAVE,        MainFrame::OnFileSave)
+    EVT_MENU(ID_FILE_SAVEAS,      MainFrame::OnFileSaveAs)
+    EVT_MENU(ID_FILE_EXIT,        MainFrame::OnFileExit)
     EVT_MENU(ID_PALETTE_IMPORT,   MainFrame::OnPaletteImport)
     EVT_MENU(ID_PALETTE_EXPORT,   MainFrame::OnPaletteExport)
     EVT_MENU(ID_SETTINGS_SNAP,    MainFrame::OnSettingsSnap)
@@ -686,6 +695,46 @@ void MainFrame::OnAbout(wxCommandEvent& /*event*/) {
     dlg.SetSizerAndFit(sizer);
     dlg.Centre();
     dlg.ShowModal();
+}
+
+void MainFrame::OnFileNew(wxCommandEvent& event) {
+    wxGetApp().GetDocManager()->OnFileNew(event);
+}
+
+void MainFrame::OnFileOpen(wxCommandEvent& event) {
+    wxGetApp().GetDocManager()->OnFileOpen(event);
+}
+
+void MainFrame::OnFileClose(wxCommandEvent& event) {
+    wxGetApp().GetDocManager()->OnFileClose(event);
+}
+
+void MainFrame::OnFileSave(wxCommandEvent& event) {
+    wxGetApp().GetDocManager()->OnFileSave(event);
+}
+
+void MainFrame::OnFileSaveAs(wxCommandEvent& event) {
+    wxGetApp().GetDocManager()->OnFileSaveAs(event);
+}
+
+void MainFrame::OnFileExit(wxCommandEvent& event) {
+    Close(true);
+}
+
+void MainFrame::OnEditUndo(wxCommandEvent& /*event*/) {
+    if (m_activeDrawView && m_activeDrawView->GetDocument()) {
+        wxCommandProcessor* cmdProc = m_activeDrawView->GetDocument()->GetCommandProcessor();
+        if (cmdProc && cmdProc->CanUndo())
+            cmdProc->Undo();
+    }
+}
+
+void MainFrame::OnEditRedo(wxCommandEvent& /*event*/) {
+    if (m_activeDrawView && m_activeDrawView->GetDocument()) {
+        wxCommandProcessor* cmdProc = m_activeDrawView->GetDocument()->GetCommandProcessor();
+        if (cmdProc && cmdProc->CanRedo())
+            cmdProc->Redo();
+    }
 }
 
 void MainFrame::OnClose(wxCloseEvent& event) {

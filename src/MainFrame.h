@@ -60,11 +60,19 @@ private:
     void OnNotebookPageClose(wxAuiNotebookEvent& event);
     void OnNotebookPageChanged(wxAuiNotebookEvent& event);
     void OnAbout(wxCommandEvent& event);
+    void OnFileNew(wxCommandEvent& event);
+    void OnFileOpen(wxCommandEvent& event);
+    void OnFileClose(wxCommandEvent& event);
+    void OnFileSave(wxCommandEvent& event);
+    void OnFileSaveAs(wxCommandEvent& event);
+    void OnFileExit(wxCommandEvent& event);
     void OnClose(wxCloseEvent& event);
 
     void OnDrawTool(wxCommandEvent& event);
     void OnUpdateDrawTool(wxUpdateUIEvent& event);
 
+    void OnEditUndo(wxCommandEvent& event);
+    void OnEditRedo(wxCommandEvent& event);
     void OnCut(wxCommandEvent& event);
     void OnCopy(wxCommandEvent& event);
     void OnPaste(wxCommandEvent& event);
