@@ -13,7 +13,9 @@
 SpaCanvas::SpaCanvas(SpaView* owner, wxWindow* parent)
     : wxPanel(parent, wxID_ANY)
     , m_owner(owner)
-{}
+{
+    Bind(wxEVT_SIZE, [this](wxSizeEvent& e) { Layout(); e.Skip(); });
+}
 
 // ---------------------------------------------------------------------------
 // SpaView
@@ -56,10 +58,10 @@ bool SpaView::OnCreate(wxDocument* doc, long flags) {
         auto* sizer = new wxBoxSizer(wxVERTICAL);
         sizer->Add(smilCanvas, 1, wxEXPAND);
         m_canvas->SetSizer(sizer);
-        m_canvas->Layout();
     }
 
     nb->AddPage(m_canvas, doc->GetUserReadableName(), /*select=*/true);
+    m_canvas->Layout();   // force layout after the notebook has sized the page
 
     Activate(true);
     return true;
@@ -75,21 +77,27 @@ void SpaView::OnUpdate(wxView* /*sender*/, wxObject* /*hint*/) {
 }
 
 void SpaView::OnActivateView(bool activate, wxView* /*active*/, wxView* /*deactive*/) {
-    if (!activate || !m_canvas) return;
-
     auto* mainFrame = wxDynamicCast(wxGetApp().GetTopWindow(), MainFrame);
     if (!mainFrame) return;
 
-    // Sync notebook tab selection.
-    wxAuiNotebook* nb = mainFrame->GetNotebook();
-    if (nb) {
-        int idx = nb->GetPageIndex(m_canvas);
-        if (idx != wxNOT_FOUND && nb->GetSelection() != idx)
-            nb->SetSelection(idx);
-    }
+    if (activate) {
+        if (!m_canvas) return;
 
-    // Drive the asset manager pane.
-    mainFrame->SetActiveSpaDoc(wxDynamicCast(GetDocument(), SpaDoc));
+        // Sync notebook tab selection.
+        wxAuiNotebook* nb = mainFrame->GetNotebook();
+        if (nb) {
+            int idx = nb->GetPageIndex(m_canvas);
+            if (idx != wxNOT_FOUND && nb->GetSelection() != idx)
+                nb->SetSelection(idx);
+        }
+
+        // Drive the asset manager and scene/draw-tool panels.
+        mainFrame->SetActiveSpaDoc(wxDynamicCast(GetDocument(), SpaDoc));
+        mainFrame->SetActiveSmilView(m_embeddedSmilView);
+    } else {
+        mainFrame->SetActiveSpaDoc(nullptr);
+        mainFrame->SetActiveSmilView(nullptr);
+    }
 }
 
 bool SpaView::OnClose(bool deleteWindow) {
@@ -103,8 +111,10 @@ bool SpaView::OnClose(bool deleteWindow) {
     Activate(false);
 
     auto* mainFrame = wxDynamicCast(wxGetApp().GetTopWindow(), MainFrame);
-    if (mainFrame)
+    if (mainFrame) {
         mainFrame->SetActiveSpaDoc(nullptr);
+        mainFrame->SetActiveSmilView(nullptr);
+    }
 
     if (deleteWindow && m_canvas) {
         if (mainFrame) {

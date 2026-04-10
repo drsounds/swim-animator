@@ -266,8 +266,9 @@ bool SpaDoc::LoadFromFolder(const wxString& path) {
 
     wxString indexPath = path + wxFILE_SEP_PATH + "index.smil";
     delete m_indexSmilDoc;
-    m_indexSmilDoc = new SmilDoc();
+    m_indexSmilDoc = nullptr;
     if (wxFileExists(indexPath)) {
+        m_indexSmilDoc = new SmilDoc();
         if (!m_indexSmilDoc->DoOpenDocument(indexPath)) {
             delete m_indexSmilDoc;
             m_indexSmilDoc = nullptr;
