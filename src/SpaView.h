@@ -4,10 +4,11 @@
 
 class SpaView;
 class SpaDoc;
+class SmilView;
 
 // ---------------------------------------------------------------------------
-// SpaCanvas – the notebook tab panel that represents an open .spa project.
-// Shows a read-only project overview (scene list, asset count, file path).
+// SpaCanvas – the notebook tab panel for an open .spa project.
+// Hosts an embedded SmilCanvas (via SmilView) that shows index.smil.
 // ---------------------------------------------------------------------------
 class SpaCanvas : public wxPanel {
 public:
@@ -15,19 +16,18 @@ public:
     SpaView* GetView() { return m_owner; }
 
 private:
-    void OnPaint(wxPaintEvent&);
-    void OnSize(wxSizeEvent& e) { Refresh(); e.Skip(); }
     SpaView* m_owner;
-    wxDECLARE_EVENT_TABLE();
 };
 
 // ---------------------------------------------------------------------------
-// SpaView – connects SpaDoc to a SpaCanvas notebook tab.
+// SpaView – connects SpaDoc to a SpaCanvas notebook tab that embeds the
+// index.smil SmilView.
 // ---------------------------------------------------------------------------
 class SpaView : public wxView {
     wxDECLARE_DYNAMIC_CLASS(SpaView);
 public:
     SpaView() = default;
+    ~SpaView() override;
 
     bool OnCreate(wxDocument* doc, long flags) override;
     void OnDraw(wxDC* dc) override;
@@ -39,4 +39,5 @@ public:
 
 private:
     SpaCanvas* m_canvas{nullptr};
+    SmilView*  m_embeddedSmilView{nullptr};
 };

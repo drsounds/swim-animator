@@ -112,6 +112,15 @@ public:
 
     SmilCanvas* GetCanvas() { return m_canvas; }
 
+    // Embedded-mode creation: creates SmilCanvas as a child of `parent` and
+    // registers this view with `doc`, without adding a notebook tab.
+    // Returns the new SmilCanvas (owned by `parent`'s window hierarchy).
+    SmilCanvas* CreateEmbedded(SmilDoc* doc, wxWindow* parent);
+
+    // Null out the canvas pointer without destroying the window.
+    // Call this before the parent window destroys the SmilCanvas.
+    void DetachCanvas() { m_canvas = nullptr; }
+
 private:
     SmilCanvas* m_canvas{nullptr};
 };

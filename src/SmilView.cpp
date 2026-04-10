@@ -241,6 +241,13 @@ bool SmilView::OnCreate(wxDocument* doc, long flags) {
     return true;
 }
 
+SmilCanvas* SmilView::CreateEmbedded(SmilDoc* doc, wxWindow* parent) {
+    SetDocument(doc);
+    doc->AddView(this);
+    m_canvas = new SmilCanvas(this, parent, doc);
+    return m_canvas;
+}
+
 void SmilView::OnDraw(wxDC* /*dc*/) {}
 
 void SmilView::OnUpdate(wxView* /*sender*/, wxObject* /*hint*/) {

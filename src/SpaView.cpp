@@ -2,39 +2,36 @@
 #include "SpaDoc.h"
 #include "App.h"
 #include "MainFrame.h"
-#include <wx/dcbuffer.h>
-#include <wx/settings.h>
+#include "SmilView.h"
+#include "SmilDoc.h"
+#include <wx/sizer.h>
 
 // ---------------------------------------------------------------------------
 // SpaCanvas
 // ---------------------------------------------------------------------------
 
-wxBEGIN_EVENT_TABLE(SpaCanvas, wxPanel)
-    EVT_PAINT(SpaCanvas::OnPaint)
-    EVT_SIZE(SpaCanvas::OnSize)
-wxEND_EVENT_TABLE()
-
 SpaCanvas::SpaCanvas(SpaView* owner, wxWindow* parent)
-    : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize,
-              wxFULL_REPAINT_ON_RESIZE)
+    : wxPanel(parent, wxID_ANY)
     , m_owner(owner)
-{
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
-}
-
-void SpaCanvas::OnPaint(wxPaintEvent&) {
-    wxAutoBufferedPaintDC dc(this);
-    dc.SetBackground(*wxWHITE_BRUSH);
-    dc.Clear();
-    if (m_owner)
-        m_owner->OnDraw(&dc);
-}
+{}
 
 // ---------------------------------------------------------------------------
 // SpaView
 // ---------------------------------------------------------------------------
 
 wxIMPLEMENT_DYNAMIC_CLASS(SpaView, wxView);
+
+SpaView::~SpaView() {
+    // m_embeddedSmilView is cleaned up in OnClose(); guard against double-free
+    // if the framework destroys the view without calling OnClose first.
+    if (m_embeddedSmilView) {
+        m_embeddedSmilView->DetachCanvas();
+        if (m_embeddedSmilView->GetDocument())
+            m_embeddedSmilView->GetDocument()->RemoveView(m_embeddedSmilView);
+        delete m_embeddedSmilView;
+        m_embeddedSmilView = nullptr;
+    }
+}
 
 bool SpaView::OnCreate(wxDocument* doc, long flags) {
     if (!wxView::OnCreate(doc, flags))
@@ -49,38 +46,28 @@ bool SpaView::OnCreate(wxDocument* doc, long flags) {
     m_canvas = new SpaCanvas(this, nb);
     nb->AddPage(m_canvas, doc->GetUserReadableName(), /*select=*/true);
 
+    // Embed the index.smil SmilView inside the SpaCanvas.
+    auto* spaDoc = wxDynamicCast(doc, SpaDoc);
+    SmilDoc* indexSmilDoc = spaDoc ? spaDoc->GetIndexSmilDoc() : nullptr;
+    if (indexSmilDoc) {
+        m_embeddedSmilView = new SmilView();
+        SmilCanvas* smilCanvas = m_embeddedSmilView->CreateEmbedded(indexSmilDoc, m_canvas);
+        auto* sizer = new wxBoxSizer(wxVERTICAL);
+        sizer->Add(smilCanvas, 1, wxEXPAND);
+        m_canvas->SetSizer(sizer);
+    }
+
     Activate(true);
     return true;
 }
 
-void SpaView::OnDraw(wxDC* dc) {
-    auto* doc = wxDynamicCast(GetDocument(), SpaDoc);
-    if (!doc) return;
-
-    dc->SetFont(wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT));
-    dc->SetTextForeground(*wxBLACK);
-
-    int y = 12;
-    const int lineH = dc->GetCharHeight() + 2;
-
-    auto line = [&](const wxString& s) { dc->DrawText(s, 12, y); y += lineH; };
-
-    line(wxString::Format("Project: %s", doc->GetFilename().IsEmpty()
-                          ? "[Unsaved]" : doc->GetFilename()));
-    y += 4;
-    line(wxString::Format("Scenes:  %d", (int)doc->GetSceneOrder().size()));
-    line(wxString::Format("Assets:  %d", (int)doc->GetAssets().size()));
-
-    if (!doc->GetSceneOrder().empty()) {
-        y += 6;
-        line("--- Scenes ---");
-        for (const auto& p : doc->GetSceneOrder())
-            line("  " + p);
-    }
+void SpaView::OnDraw(wxDC* /*dc*/) {
+    // Drawing is handled by the embedded SmilCanvas.
 }
 
 void SpaView::OnUpdate(wxView* /*sender*/, wxObject* /*hint*/) {
-    if (m_canvas) m_canvas->Refresh();
+    if (m_embeddedSmilView && m_embeddedSmilView->GetCanvas())
+        m_embeddedSmilView->GetCanvas()->RefreshFromDoc();
 }
 
 void SpaView::OnActivateView(bool activate, wxView* /*active*/, wxView* /*deactive*/) {
@@ -102,6 +89,10 @@ void SpaView::OnActivateView(bool activate, wxView* /*active*/, wxView* /*deacti
 }
 
 bool SpaView::OnClose(bool deleteWindow) {
+    // Detach the embedded canvas before the window hierarchy destroys it.
+    if (m_embeddedSmilView)
+        m_embeddedSmilView->DetachCanvas();
+
     if (!wxView::OnClose(deleteWindow))
         return false;
 
@@ -117,10 +108,18 @@ bool SpaView::OnClose(bool deleteWindow) {
             if (nb) {
                 int idx = nb->GetPageIndex(m_canvas);
                 if (idx != wxNOT_FOUND)
-                    nb->DeletePage(idx);
+                    nb->DeletePage(idx);  // destroys SpaCanvas and SmilCanvas
             }
         }
         m_canvas = nullptr;
+    }
+
+    // Unregister and delete the embedded SmilView now that its canvas is gone.
+    if (m_embeddedSmilView) {
+        if (m_embeddedSmilView->GetDocument())
+            m_embeddedSmilView->GetDocument()->RemoveView(m_embeddedSmilView);
+        delete m_embeddedSmilView;
+        m_embeddedSmilView = nullptr;
     }
 
     return true;

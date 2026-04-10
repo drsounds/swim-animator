@@ -1,6 +1,7 @@
 #include "SpaDoc.h"
 #include "SpaView.h"
 #include "SpaSaveAsDialog.h"
+#include "SmilDoc.h"
 #include <wx/app.h>
 #include <wx/cmdproc.h>
 #include <wx/wfstream.h>
@@ -43,6 +44,7 @@ static wxString MimeFromExt(const wxString& ext) {
 // ---------------------------------------------------------------------------
 
 SpaDoc::~SpaDoc() {
+    delete m_indexSmilDoc;
     if (!m_cacheDir.IsEmpty() && wxFileName::DirExists(m_cacheDir))
         wxFileName::Rmdir(m_cacheDir, wxPATH_RMDIR_RECURSIVE);
 }
@@ -50,6 +52,14 @@ SpaDoc::~SpaDoc() {
 // ---------------------------------------------------------------------------
 // wxDocument overrides
 // ---------------------------------------------------------------------------
+
+bool SpaDoc::OnNewDocument() {
+    if (!wxDocument::OnNewDocument()) return false;
+    delete m_indexSmilDoc;
+    m_indexSmilDoc = new SmilDoc();
+    m_indexSmilDoc->InitDefaults(24);
+    return true;
+}
 
 bool SpaDoc::IsModified() const {
     return wxDocument::IsModified() || m_modified;
@@ -128,7 +138,29 @@ bool SpaDoc::LoadFromZip(const wxString& path) {
             wxXmlDocument xmlDoc;
             if (xmlDoc.Load(memIn))
                 ParseAssetsXml(xmlDoc);
+        } else if (entry->GetName() == "index.smil") {
+            wxString tmpPath = wxFileName::CreateTempFileName("spa_index");
+            {
+                wxMemoryOutputStream buf;
+                zipIn.Read(buf);
+                wxMemoryInputStream memIn(buf);
+                wxFFileOutputStream tmpOut(tmpPath);
+                if (tmpOut.IsOk())
+                    memIn.Read(tmpOut);
+            }
+            delete m_indexSmilDoc;
+            m_indexSmilDoc = new SmilDoc();
+            if (!m_indexSmilDoc->DoOpenDocument(tmpPath)) {
+                delete m_indexSmilDoc;
+                m_indexSmilDoc = nullptr;
+            }
+            wxRemoveFile(tmpPath);
         }
+    }
+
+    if (!m_indexSmilDoc) {
+        m_indexSmilDoc = new SmilDoc();
+        m_indexSmilDoc->InitDefaults(24);
     }
     return true;
 }
@@ -164,6 +196,19 @@ bool SpaDoc::SaveAsZip(const wxString& targetPath) {
             zipOut.PutNextEntry(new wxZipEntry("assets.xml"));
             wxMemoryInputStream xmlIn(xmlBuf);
             xmlIn.Read(zipOut);
+        }
+
+        // Write index.smil.
+        if (m_indexSmilDoc) {
+            wxString tmpSmil = wxFileName::CreateTempFileName("spa_index");
+            if (m_indexSmilDoc->DoSaveDocument(tmpSmil)) {
+                wxFFileInputStream smilIn(tmpSmil);
+                if (smilIn.IsOk()) {
+                    zipOut.PutNextEntry(new wxZipEntry("index.smil"));
+                    smilIn.Read(zipOut);
+                }
+                wxRemoveFile(tmpSmil);
+            }
         }
 
         // Write cached entries.
@@ -213,10 +258,25 @@ bool SpaDoc::SaveAsZip(const wxString& targetPath) {
 
 bool SpaDoc::LoadFromFolder(const wxString& path) {
     wxString xmlPath = path + wxFILE_SEP_PATH + "assets.xml";
-    if (!wxFileExists(xmlPath)) return true;  // empty project is valid
-    wxXmlDocument xmlDoc;
-    if (!xmlDoc.Load(xmlPath)) return false;
-    ParseAssetsXml(xmlDoc);
+    if (wxFileExists(xmlPath)) {
+        wxXmlDocument xmlDoc;
+        if (!xmlDoc.Load(xmlPath)) return false;
+        ParseAssetsXml(xmlDoc);
+    }
+
+    wxString indexPath = path + wxFILE_SEP_PATH + "index.smil";
+    delete m_indexSmilDoc;
+    m_indexSmilDoc = new SmilDoc();
+    if (wxFileExists(indexPath)) {
+        if (!m_indexSmilDoc->DoOpenDocument(indexPath)) {
+            delete m_indexSmilDoc;
+            m_indexSmilDoc = nullptr;
+        }
+    }
+    if (!m_indexSmilDoc) {
+        m_indexSmilDoc = new SmilDoc();
+        m_indexSmilDoc->InitDefaults(24);
+    }
     return true;
 }
 
@@ -228,6 +288,10 @@ bool SpaDoc::SaveAsFolder(const wxString& targetPath) {
     wxXmlDocument xmlDoc = BuildAssetsXml();
     if (!xmlDoc.Save(targetPath + wxFILE_SEP_PATH + "assets.xml"))
         return false;
+
+    // Write index.smil.
+    if (m_indexSmilDoc)
+        m_indexSmilDoc->DoSaveDocument(targetPath + wxFILE_SEP_PATH + "index.smil");
 
     // Copy asset files into the folder.
     for (const auto& a : m_assets) {

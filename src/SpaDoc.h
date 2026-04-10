@@ -4,6 +4,8 @@
 #include <wx/xml/xml.h>
 #include <vector>
 
+class SmilDoc;
+
 // ---------------------------------------------------------------------------
 // SpaAsset – metadata for one file stored inside a .spa project bundle.
 // Binary content is never loaded eagerly; it is extracted to a cache
@@ -34,12 +36,16 @@ public:
     ~SpaDoc() override;
 
     // wxDocument overrides
+    bool OnNewDocument() override;
     bool DoSaveDocument(const wxString& filename) override;
     bool DoOpenDocument(const wxString& filename) override;
     bool IsModified() const override;
     void Modify(bool modified) override;
     bool Save() override;
     bool SaveAs() override;
+
+    // Returns the embedded index.smil document (never null after construction).
+    SmilDoc* GetIndexSmilDoc() const { return m_indexSmilDoc; }
 
     // Asset CRUD – each method calls Modify(true) + UpdateAllViews() on success
     void     AddAsset(const wxString& srcPath);
@@ -73,4 +79,5 @@ private:
     bool                   m_isFolderBundle{false};
     wxString               m_cacheDir;     // OS temp dir created on first use
     bool                   m_modified{false};
+    SmilDoc*               m_indexSmilDoc{nullptr}; // embedded index.smil
 };

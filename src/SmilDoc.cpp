@@ -86,6 +86,19 @@ bool SmilDoc::OnNewDocument() {
     return true;
 }
 
+void SmilDoc::InitDefaults(int fps) {
+    m_fps = fps;
+    m_scenes.clear();
+    SmilScene first;
+    first.id             = "scene_1";
+    first.name           = "Scene 1";
+    first.startFrame     = 0;
+    first.durationFrames = fps * 10;
+    m_scenes.push_back(first);
+    m_currentScene = 0;
+    m_currentFrame = 0;
+}
+
 // ---------------------------------------------------------------------------
 // Scene accessors
 // ---------------------------------------------------------------------------

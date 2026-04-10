@@ -19,6 +19,11 @@ public:
     SmilDoc();
 
     bool OnNewDocument() override;
+
+    // Initialise document content with defaults without showing any UI.
+    // Used when creating an embedded index.smil inside a SpaDoc.
+    void InitDefaults(int fps = 24);
+
     bool DoSaveDocument(const wxString& filename) override;
     bool DoOpenDocument(const wxString& filename) override;
     bool IsModified() const override;
