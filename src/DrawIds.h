@@ -16,6 +16,9 @@ enum {
     ID_HIER_TOGGLE_LOCKED,
     ID_HIER_RENAME,
     // Context-menu actions on the drawing canvas
+    ID_CTX_CUT,
+    ID_CTX_COPY,
+    ID_CTX_PASTE,
     ID_CTX_DELETE,
     ID_CTX_GROUP,
     ID_CTX_UNGROUP,
@@ -38,8 +41,18 @@ enum {
     ID_KF_SET,
     ID_KF_REMOVE,
     // File menu
+    ID_FILE_NEW,
+    ID_FILE_OPEN,
     ID_FILE_CLOSE,
+    ID_FILE_SAVE,
+    ID_FILE_SAVEAS,
+    ID_FILE_EXIT,
     // Edit menu
+    ID_EDIT_UNDO,
+    ID_EDIT_REDO,
+    ID_EDIT_CUT,
+    ID_EDIT_COPY,
+    ID_EDIT_PASTE,
     ID_EDIT_SELECTALL,
     // View menu
     ID_VIEW_TOOLBAR,
