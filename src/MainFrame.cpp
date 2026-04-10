@@ -225,11 +225,15 @@ void MainFrame::CreateMenuBar() {
 }
 
 static wxBitmap MakeBmp(void (*draw)(wxMemoryDC&)) {
-    wxBitmap bmp(16, 16);
+    wxImage img(16, 16);
+    img.InitAlpha();
+
+    wxBitmap bmp(img);
     wxMemoryDC dc(bmp);
-    dc.SetBackground(*wxWHITE_BRUSH);
+    dc.SetBackground(*wxTRANSPARENT_BRUSH);
     dc.Clear();
-    draw(dc); 
+    draw(dc);
+
     return bmp;
 }
 
@@ -241,16 +245,16 @@ void MainFrame::CreateToolBar() {
     
     m_toolbar->SetToolBitmapSize(wxSize(16,16));
 
-    m_toolbar->AddTool(ID_FILE_NEW,  "New",  wxArtProvider::GetBitmap(wxART_NEW,        wxART_TOOLBAR, wxSize(16, 16)));
-    m_toolbar->AddTool(ID_FILE_OPEN, "Open", wxArtProvider::GetBitmap(wxART_FILE_OPEN,  wxART_TOOLBAR, wxSize(16, 16)));
-    m_toolbar->AddTool(ID_FILE_SAVE, "Save", wxArtProvider::GetBitmap(wxART_FILE_SAVE,  wxART_TOOLBAR, wxSize(16, 16)));
+    m_toolbar->AddTool(ID_FILE_NEW,  "New",  wxArtProvider::GetBitmap(wxART_NEW,        wxART_TOOLBAR, wxSize(24, 24)));
+    m_toolbar->AddTool(ID_FILE_OPEN, "Open", wxArtProvider::GetBitmap(wxART_FILE_OPEN,  wxART_TOOLBAR, wxSize(24, 24)));
+    m_toolbar->AddTool(ID_FILE_SAVE, "Save", wxArtProvider::GetBitmap(wxART_FILE_SAVE,  wxART_TOOLBAR, wxSize(24, 24)));
     m_toolbar->AddSeparator();
-    m_toolbar->AddTool(ID_EDIT_UNDO, "Undo", wxArtProvider::GetBitmap(wxART_UNDO,       wxART_TOOLBAR, wxSize(16, 16)));
-    m_toolbar->AddTool(ID_EDIT_REDO, "Redo", wxArtProvider::GetBitmap(wxART_REDO,       wxART_TOOLBAR, wxSize(16, 16)));
+    m_toolbar->AddTool(ID_EDIT_UNDO, "Undo", wxArtProvider::GetBitmap(wxART_UNDO,       wxART_TOOLBAR, wxSize(24, 24)));
+    m_toolbar->AddTool(ID_EDIT_REDO, "Redo", wxArtProvider::GetBitmap(wxART_REDO,       wxART_TOOLBAR, wxSize(24, 24)));
     m_toolbar->AddSeparator();
-    m_toolbar->AddTool(ID_EDIT_CUT,  "Cut",  wxArtProvider::GetBitmap(wxART_CUT,        wxART_TOOLBAR, wxSize(16, 16)));
-    m_toolbar->AddTool(ID_EDIT_COPY, "Copy", wxArtProvider::GetBitmap(wxART_COPY,       wxART_TOOLBAR, wxSize(16, 16)));
-    m_toolbar->AddTool(ID_EDIT_PASTE,"Paste",wxArtProvider::GetBitmap(wxART_PASTE,      wxART_TOOLBAR, wxSize(16, 16)));
+    m_toolbar->AddTool(ID_EDIT_CUT,  "Cut",  wxArtProvider::GetBitmap(wxART_CUT,        wxART_TOOLBAR, wxSize(24, 24)));
+    m_toolbar->AddTool(ID_EDIT_COPY, "Copy", wxArtProvider::GetBitmap(wxART_COPY,       wxART_TOOLBAR, wxSize(24, 24)));
+    m_toolbar->AddTool(ID_EDIT_PASTE,"Paste",wxArtProvider::GetBitmap(wxART_PASTE,      wxART_TOOLBAR, wxSize(24, 24)));
 
 
     m_toolbar->Realize();
@@ -284,7 +288,7 @@ void MainFrame::CreateDrawToolBar() {
     auto AddToolToSizer = [&](wxWindowID id, const wxBitmap& bmp, const wxString& help) {
         // wxBitmapButton creates tool-like buttons for the drawing toolbar
         wxBitmapButton* btn = new wxBitmapButton(toolContainer, id, bmp,
-                                        wxDefaultPosition, wxSize(32, 32), wxBU_AUTODRAW | wxBORDER_NONE);
+                                        wxDefaultPosition, wxSize(28, 28), wxBU_AUTODRAW | wxBORDER_NONE);
         btn->SetToolTip(help);
         // Add with 1px all-around margin for spacing between buttons
         wrapSizer->Add(btn, 0, wxALL, 1);
@@ -350,7 +354,6 @@ void MainFrame::CreateDrawToolBar() {
         wxAuiPaneInfo()
             .Name("DrawToolbar")
             .Caption("Draw")
-            .ToolbarPane() // Tells AUI to treat it like a toolbar
             .Left()
             .Layer(2)
             .BestSize(paneWidth, -1)        // Encourages the 2-column width
