@@ -32,7 +32,7 @@ struct SpaAsset {
 class SpaDoc : public wxDocument {
     wxDECLARE_DYNAMIC_CLASS(SpaDoc);
 public:
-    SpaDoc() = default;
+    SpaDoc();
     ~SpaDoc() override;
 
     // wxDocument overrides
@@ -45,7 +45,8 @@ public:
     bool SaveAs() override;
 
     // Returns the embedded index.smil document (never null after construction).
-    SmilDoc* GetIndexSmilDoc() const { return m_indexSmilDoc; }
+    SmilDoc* GetIndexSmilDoc() { return m_indexSmilDoc; }
+    SmilDoc* GetIndexSmilDoc() const { return const_cast<SpaDoc*>(this)->GetIndexSmilDoc(); }
 
     // Asset CRUD – each method calls Modify(true) + UpdateAllViews() on success
     void     AddAsset(const wxString& srcPath);

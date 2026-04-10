@@ -18,6 +18,15 @@
 wxIMPLEMENT_DYNAMIC_CLASS(SpaDoc, wxDocument);
 
 // ---------------------------------------------------------------------------
+// Construction
+// ---------------------------------------------------------------------------
+
+SpaDoc::SpaDoc() {
+    // Ensure index.smil is always available (even before OnNewDocument is called).
+    m_indexSmilDoc = new SmilDoc();
+}
+
+// ---------------------------------------------------------------------------
 // Internal helpers
 // ---------------------------------------------------------------------------
 
@@ -55,9 +64,12 @@ SpaDoc::~SpaDoc() {
 
 bool SpaDoc::OnNewDocument() {
     if (!wxDocument::OnNewDocument()) return false;
-    delete m_indexSmilDoc;
-    m_indexSmilDoc = new SmilDoc();
-    m_indexSmilDoc->InitDefaults(24);
+    if (m_indexSmilDoc)
+        m_indexSmilDoc->InitDefaults(24);
+    else {
+        m_indexSmilDoc = new SmilDoc();
+        m_indexSmilDoc->InitDefaults(24);
+    }
     return true;
 }
 
