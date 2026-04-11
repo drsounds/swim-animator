@@ -66,12 +66,50 @@ private:
     // Draw a keyframe diamond centred at (cx, cy).
     void DrawDiamond(wxDC& dc, int cx, int cy, bool selected, bool hasKf);
 
+    // Keyframe drag/edit state
+    struct KeyframeDrag {
+        wxString elemId;
+        wxString propName;
+        size_t   kfIdx{0};
+        int      originalFrame{0};
+        bool     isDragging{false};
+    };
+
+    // Clipboard for copy/paste operations
+    struct KeyframeClip {
+        wxString value;
+        SmilInterp interp;
+    };
+
+    // Helper: find keyframe at given pixel coordinates
+    // Returns (elemId, propName, kfIdx, frame) or empty if no hit
+    bool HitTestKeyframe(int x, int y, wxString& elemId, wxString& propName, size_t& kfIdx, int& frame);
+
+    // Helper: interpolate value at frame between two keyframes
+    wxString InterpolateKeyframeValue(const wxString& elemId, const wxString& propName, int frame);
+
+    // Context menu handlers
+    void OnTimelineRightDown(wxMouseEvent&);
+    void OnKeyframeContextMenu(wxCommandEvent&);
+
     wxPanel*         m_labelPanel{nullptr};
     wxPanel*         m_timelinePanel{nullptr};
     SmilView*        m_view{nullptr};
     std::vector<Row> m_rows;
     std::vector<bool> m_expanded;  // one per shape (true = sub-rows visible)
     bool             m_draggingPlayhead{false};
+    KeyframeDrag     m_kfDrag;       // current keyframe drag state
+    KeyframeClip     m_clipboard;    // clipboard for copy/paste
+    wxString         m_clipElemId;   // which element the clipboard came from
+
+    // Event IDs for context menu
+    enum {
+        ID_KF_DELETE = 10001,
+        ID_KF_COPY = 10002,
+        ID_KF_DUPLICATE = 10003,
+        ID_KF_PASTE = 10004,
+        ID_KF_PASTE_OFFSET = 10005,
+    };
 
     wxDECLARE_EVENT_TABLE();
 };

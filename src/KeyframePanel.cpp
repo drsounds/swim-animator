@@ -7,6 +7,7 @@
 #include <wx/dcmemory.h>
 #include <wx/dcbuffer.h>
 #include <wx/settings.h>
+#include <wx/menu.h>
 #include <algorithm>
 #include <set>
 
@@ -28,6 +29,11 @@ static std::vector<wxString> PropsForShape(const DrawShape& s) {
 // ---------------------------------------------------------------------------
 
 wxBEGIN_EVENT_TABLE(KeyframePanel, wxPanel)
+    EVT_MENU(KeyframePanel::ID_KF_DELETE,        KeyframePanel::OnKeyframeContextMenu)
+    EVT_MENU(KeyframePanel::ID_KF_COPY,          KeyframePanel::OnKeyframeContextMenu)
+    EVT_MENU(KeyframePanel::ID_KF_DUPLICATE,     KeyframePanel::OnKeyframeContextMenu)
+    EVT_MENU(KeyframePanel::ID_KF_PASTE,         KeyframePanel::OnKeyframeContextMenu)
+    EVT_MENU(KeyframePanel::ID_KF_PASTE_OFFSET,  KeyframePanel::OnKeyframeContextMenu)
 wxEND_EVENT_TABLE()
 
 // ---------------------------------------------------------------------------
@@ -53,10 +59,11 @@ KeyframePanel::KeyframePanel(wxWindow* parent)
     // Timeline area.
     m_timelinePanel = new wxPanel(this, wxID_ANY);
     m_timelinePanel->SetBackgroundStyle(wxBG_STYLE_PAINT);
-    m_timelinePanel->Bind(wxEVT_PAINT,      &KeyframePanel::OnPaintTimeline,    this);
-    m_timelinePanel->Bind(wxEVT_LEFT_DOWN,  &KeyframePanel::OnTimelineLeftDown, this);
-    m_timelinePanel->Bind(wxEVT_LEFT_UP,    &KeyframePanel::OnTimelineLeftUp,   this);
-    m_timelinePanel->Bind(wxEVT_MOTION,     &KeyframePanel::OnTimelineMotion,   this);
+    m_timelinePanel->Bind(wxEVT_PAINT,        &KeyframePanel::OnPaintTimeline,    this);
+    m_timelinePanel->Bind(wxEVT_LEFT_DOWN,    &KeyframePanel::OnTimelineLeftDown, this);
+    m_timelinePanel->Bind(wxEVT_LEFT_UP,      &KeyframePanel::OnTimelineLeftUp,   this);
+    m_timelinePanel->Bind(wxEVT_MOTION,       &KeyframePanel::OnTimelineMotion,   this);
+    m_timelinePanel->Bind(wxEVT_RIGHT_DOWN,   &KeyframePanel::OnTimelineRightDown, this);
     sizer->Add(m_timelinePanel, 1, wxEXPAND);
 
     SetSizer(sizer);
@@ -319,14 +326,36 @@ void KeyframePanel::OnPaintTimeline(wxPaintEvent&) {
 // ---------------------------------------------------------------------------
 
 void KeyframePanel::OnTimelineLeftDown(wxMouseEvent& e) {
-    m_draggingPlayhead = true;
-    m_timelinePanel->CaptureMouse();
-    MovePlayhead(FrameAtX(e.GetX()));
+    wxString elemId;
+    wxString propName;
+    size_t kfIdx;
+    int frame;
+
+    // Check if clicking on a keyframe
+    if (HitTestKeyframe(e.GetX(), e.GetY(), elemId, propName, kfIdx, frame)) {
+        // Start keyframe drag
+        m_kfDrag.elemId = elemId;
+        m_kfDrag.propName = propName;
+        m_kfDrag.kfIdx = kfIdx;
+        m_kfDrag.originalFrame = frame;
+        m_kfDrag.isDragging = true;
+        m_timelinePanel->CaptureMouse();
+    } else {
+        // Dragging playhead
+        m_draggingPlayhead = true;
+        m_timelinePanel->CaptureMouse();
+        MovePlayhead(FrameAtX(e.GetX()));
+    }
     e.Skip();
 }
 
 void KeyframePanel::OnTimelineLeftUp(wxMouseEvent& e) {
-    if (m_draggingPlayhead) {
+    if (m_kfDrag.isDragging) {
+        m_kfDrag.isDragging = false;
+        if (m_timelinePanel->HasCapture())
+            m_timelinePanel->ReleaseMouse();
+        // Keyframe has already been updated during drag; mark document as modified
+    } else if (m_draggingPlayhead) {
         m_draggingPlayhead = false;
         if (m_timelinePanel->HasCapture())
             m_timelinePanel->ReleaseMouse();
@@ -335,8 +364,36 @@ void KeyframePanel::OnTimelineLeftUp(wxMouseEvent& e) {
 }
 
 void KeyframePanel::OnTimelineMotion(wxMouseEvent& e) {
-    if (m_draggingPlayhead && e.LeftIsDown())
+    if (m_kfDrag.isDragging && e.LeftIsDown()) {
+        // Drag keyframe to new frame
+        SmilDoc* doc = m_view ? wxDynamicCast(m_view->GetDocument(), SmilDoc) : nullptr;
+        if (doc) {
+            SmilScene* sc = doc->GetCurrentScene();
+            if (sc) {
+                int newFrame = std::max(0, std::min(FrameAtX(e.GetX()), sc->durationFrames - 1));
+
+                // Get the current keyframe value and interpolate if needed
+                wxString newValue = InterpolateKeyframeValue(m_kfDrag.elemId, m_kfDrag.propName, newFrame);
+
+                // Update the document (without undo yet, we'll do it on release)
+                auto eit = sc->elements.find(m_kfDrag.elemId);
+                if (eit != sc->elements.end()) {
+                    auto tit = eit->second.tracks.find(m_kfDrag.propName);
+                    if (tit != eit->second.tracks.end() && m_kfDrag.kfIdx < tit->second.keyframes.size()) {
+                        const SmilKeyframe& oldKf = tit->second.keyframes[m_kfDrag.kfIdx];
+                        // Remove old keyframe and set new one
+                        tit->second.RemoveKeyframe(m_kfDrag.originalFrame);
+                        tit->second.SetKeyframe(newFrame, newValue, oldKf.interp);
+                        m_kfDrag.originalFrame = newFrame;  // Track current position
+                        doc->Modify(true);
+                        if (m_timelinePanel) m_timelinePanel->Refresh();
+                    }
+                }
+            }
+        }
+    } else if (m_draggingPlayhead && e.LeftIsDown()) {
         MovePlayhead(FrameAtX(e.GetX()));
+    }
     e.Skip();
 }
 
@@ -362,4 +419,173 @@ void KeyframePanel::OnLabelLeftDown(wxMouseEvent& e) {
         }
     }
     e.Skip();
+}
+
+// ---------------------------------------------------------------------------
+// Keyframe hit testing and editing
+// ---------------------------------------------------------------------------
+
+bool KeyframePanel::HitTestKeyframe(int x, int y, wxString& elemId, wxString& propName, size_t& kfIdx, int& frame) {
+    SmilDoc* doc = m_view ? wxDynamicCast(m_view->GetDocument(), SmilDoc) : nullptr;
+    const SmilScene* sc = doc ? doc->GetCurrentScene() : nullptr;
+    if (!sc) return false;
+
+    const int HIT_RADIUS = 8;
+
+    int rowY = kHeaderH;
+    for (const Row& r : m_rows) {
+        int rowYEnd = rowY + kRowHeight;
+        if (y >= rowY && y < rowYEnd && r.isProperty && sc) {
+            // Check for keyframe hit in this property row
+            auto eit = sc->elements.find(r.elemId);
+            if (eit != sc->elements.end()) {
+                auto tit = eit->second.tracks.find(r.propName);
+                if (tit != eit->second.tracks.end()) {
+                    int cy = rowY + kRowHeight / 2;
+                    for (size_t i = 0; i < tit->second.keyframes.size(); ++i) {
+                        const SmilKeyframe& kf = tit->second.keyframes[i];
+                        int cx = XAtFrame(kf.frame);
+                        int dx = x - cx;
+                        int dy = y - cy;
+                        if (dx * dx + dy * dy <= HIT_RADIUS * HIT_RADIUS) {
+                            elemId = r.elemId;
+                            propName = r.propName;
+                            kfIdx = i;
+                            frame = kf.frame;
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        rowY = rowYEnd;
+    }
+    return false;
+}
+
+wxString KeyframePanel::InterpolateKeyframeValue(const wxString& elemId, const wxString& propName, int frame) {
+    SmilDoc* doc = m_view ? wxDynamicCast(m_view->GetDocument(), SmilDoc) : nullptr;
+    if (!doc) return wxEmptyString;
+
+    // For now, just return the value at the frame (SmilTrack::GetValueAt handles interpolation)
+    const SmilScene* sc = doc->GetCurrentScene();
+    if (!sc) return wxEmptyString;
+
+    auto eit = sc->elements.find(elemId);
+    if (eit == sc->elements.end()) return wxEmptyString;
+
+    auto tit = eit->second.tracks.find(propName);
+    if (tit == eit->second.tracks.end()) return wxEmptyString;
+
+    return tit->second.GetValueAt(frame);
+}
+
+// ---------------------------------------------------------------------------
+// Right-click context menu
+// ---------------------------------------------------------------------------
+
+void KeyframePanel::OnTimelineRightDown(wxMouseEvent& e) {
+    wxString elemId;
+    wxString propName;
+    size_t kfIdx;
+    int frame;
+
+    if (HitTestKeyframe(e.GetX(), e.GetY(), elemId, propName, kfIdx, frame)) {
+        m_kfDrag.elemId = elemId;
+        m_kfDrag.propName = propName;
+        m_kfDrag.kfIdx = kfIdx;
+
+        wxMenu menu;
+        menu.Append(ID_KF_DELETE,       "Delete Keyframe");
+        menu.Append(ID_KF_COPY,         "Copy Value");
+        menu.Append(ID_KF_DUPLICATE,    "Duplicate Keyframe");
+        menu.AppendSeparator();
+
+        SmilDoc* doc = m_view ? wxDynamicCast(m_view->GetDocument(), SmilDoc) : nullptr;
+        if (doc && !m_clipElemId.IsEmpty()) {
+            menu.Append(ID_KF_PASTE,        "Paste Value");
+            menu.Append(ID_KF_PASTE_OFFSET, "Paste + Offset");
+        } else {
+            menu.Enable(ID_KF_PASTE, false);
+            menu.Enable(ID_KF_PASTE_OFFSET, false);
+        }
+
+        PopupMenu(&menu);
+    }
+    e.Skip();
+}
+
+void KeyframePanel::OnKeyframeContextMenu(wxCommandEvent& event) {
+    SmilDoc* doc = m_view ? wxDynamicCast(m_view->GetDocument(), SmilDoc) : nullptr;
+    if (!doc) return;
+
+    SmilScene* sc = doc->GetCurrentScene();
+    if (!sc) return;
+
+    if (event.GetId() == ID_KF_DELETE) {
+        doc->RemoveKeyframe(m_kfDrag.elemId, m_kfDrag.propName,
+                           doc->GetCurrentFrame() - sc->startFrame);
+        doc->Modify(true);
+        if (m_timelinePanel) m_timelinePanel->Refresh();
+
+    } else if (event.GetId() == ID_KF_COPY) {
+        auto eit = sc->elements.find(m_kfDrag.elemId);
+        if (eit != sc->elements.end()) {
+            auto tit = eit->second.tracks.find(m_kfDrag.propName);
+            if (tit != eit->second.tracks.end() && m_kfDrag.kfIdx < tit->second.keyframes.size()) {
+                const SmilKeyframe& kf = tit->second.keyframes[m_kfDrag.kfIdx];
+                m_clipboard.value = kf.value;
+                m_clipboard.interp = kf.interp;
+                m_clipElemId = m_kfDrag.elemId;
+            }
+        }
+
+    } else if (event.GetId() == ID_KF_DUPLICATE) {
+        auto eit = sc->elements.find(m_kfDrag.elemId);
+        if (eit != sc->elements.end()) {
+            auto tit = eit->second.tracks.find(m_kfDrag.propName);
+            if (tit != eit->second.tracks.end() && m_kfDrag.kfIdx < tit->second.keyframes.size()) {
+                const SmilKeyframe& kf = tit->second.keyframes[m_kfDrag.kfIdx];
+                // Create a duplicate at the next available frame
+                int newFrame = kf.frame + 1;
+                doc->SetKeyframe(m_kfDrag.elemId, m_kfDrag.propName, newFrame, kf.value, kf.interp);
+                doc->Modify(true);
+            }
+        }
+        if (m_timelinePanel) m_timelinePanel->Refresh();
+
+    } else if (event.GetId() == ID_KF_PASTE) {
+        if (!m_clipElemId.IsEmpty()) {
+            int relFrame = doc->GetCurrentFrame() - sc->startFrame;
+            doc->SetKeyframe(m_kfDrag.elemId, m_kfDrag.propName, relFrame,
+                           m_clipboard.value, m_clipboard.interp);
+            doc->Modify(true);
+            if (m_timelinePanel) m_timelinePanel->Refresh();
+        }
+
+    } else if (event.GetId() == ID_KF_PASTE_OFFSET) {
+        // Paste with frame offset from original
+        if (!m_clipElemId.IsEmpty()) {
+            auto eit = sc->elements.find(m_kfDrag.elemId);
+            if (eit != sc->elements.end()) {
+                auto tit = eit->second.tracks.find(m_kfDrag.propName);
+                if (tit != eit->second.tracks.end() && m_kfDrag.kfIdx < tit->second.keyframes.size()) {
+                    const SmilKeyframe& currentKf = tit->second.keyframes[m_kfDrag.kfIdx];
+                    int relFrame = doc->GetCurrentFrame() - sc->startFrame;
+                    int frameOffset = relFrame - currentKf.frame;
+
+                    // Paste at each existing keyframe location plus the offset
+                    for (const SmilKeyframe& kf : tit->second.keyframes) {
+                        int newFrame = kf.frame + frameOffset;
+                        if (newFrame >= 0 && newFrame < sc->durationFrames) {
+                            doc->SetKeyframe(m_kfDrag.elemId, m_kfDrag.propName, newFrame,
+                                           m_clipboard.value, m_clipboard.interp);
+                        }
+                    }
+                    doc->Modify(true);
+                }
+            }
+            if (m_timelinePanel) m_timelinePanel->Refresh();
+        }
+    }
 }
