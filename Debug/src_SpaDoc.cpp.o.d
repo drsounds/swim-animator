@@ -86,7 +86,8 @@ Debug/src_SpaDoc.cpp.o: src/SpaDoc.cpp src/SpaDoc.h \
  /usr/include/wx-3.2/wx/ctrlsub.h /usr/include/wx-3.2/wx/gtk/radiobox.h \
  /usr/include/wx-3.2/wx/button.h /usr/include/wx-3.2/wx/anybutton.h \
  /usr/include/wx-3.2/wx/bmpbndl.h /usr/include/wx-3.2/wx/gtk/anybutton.h \
- /usr/include/wx-3.2/wx/gtk/button.h /usr/include/wx-3.2/wx/app.h \
+ /usr/include/wx-3.2/wx/gtk/button.h src/SmilDoc.h src/SmilTypes.h \
+ src/DrawShape.h /usr/include/wx-3.2/wx/app.h \
  /usr/include/wx-3.2/wx/eventfilter.h /usr/include/wx-3.2/wx/build.h \
  /usr/include/wx-3.2/wx/cmdargs.h /usr/include/wx-3.2/wx/init.h \
  /usr/include/wx-3.2/wx/log.h /usr/include/wx-3.2/wx/time.h \
@@ -261,6 +262,9 @@ src/SpaSaveAsDialog.h:
 /usr/include/wx-3.2/wx/bmpbndl.h:
 /usr/include/wx-3.2/wx/gtk/anybutton.h:
 /usr/include/wx-3.2/wx/gtk/button.h:
+src/SmilDoc.h:
+src/SmilTypes.h:
+src/DrawShape.h:
 /usr/include/wx-3.2/wx/app.h:
 /usr/include/wx-3.2/wx/eventfilter.h:
 /usr/include/wx-3.2/wx/build.h:

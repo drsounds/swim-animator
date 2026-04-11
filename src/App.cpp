@@ -84,6 +84,7 @@ bool App::OnInit() {
         "",
         "svg",
         "DrawDoc",
+
         "DrawView",
         wxCLASSINFO(DrawDoc),
         wxCLASSINFO(DrawView)

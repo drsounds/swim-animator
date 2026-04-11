@@ -1,13 +1,13 @@
 {
- "find_what_array": ["Spacely"],
- "find_what": "Spacely",
+ "find_what_array": ["Cancel", "CAncel", "bitmapbutt", "wxMenu", "wxID_PASTE", "Spacely"],
+ "find_what": "Cancel",
  "replace_with_array": [],
  "replace_with": "",
- "files_array": ["*.cpp;*.cc;*.c;*.hpp;*.h;CMakeLists.txt;*.plist;*.rc", "*.c;*.cpp;*.cxx;*.cc;*.h;*.hpp;*.inc;*.mm;*.m;*.xrc"],
+ "files_array": ["*.cpp;*.cc;*.c;*.hpp;*.h;CMakeLists.txt;*.plist;*.rc", "*.c;*.cpp;*.cxx;*.cc;*.h;*.hpp;*.inc;*.mm;*.m;*.xrc", "*.c;*.cpp;*.cxx;*.cc;*.h;*.hpp;*.inc;*.mm;*.m;*.xrc"],
  "files": "*.cpp;*.cc;*.c;*.hpp;*.h;CMakeLists.txt;*.plist;*.rc",
  "where_array": ["<Workspace Folder>"],
  "where": "<Workspace Folder>",
  "encoding": "ISO-8859-1",
- "flags": 4099,
+ "flags": 4098,
  "files_scanner_flags": 1
 }

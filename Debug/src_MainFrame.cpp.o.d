@@ -132,7 +132,9 @@ Debug/src_MainFrame.cpp.o: src/MainFrame.cpp src/MainFrame.h \
  /usr/include/wx-3.2/wx/gtk/filectrl.h /usr/include/wx-3.2/wx/filectrl.h \
  /usr/include/wx-3.2/wx/stdpaths.h /usr/include/wx-3.2/wx/unix/stdpaths.h \
  /usr/include/wx-3.2/wx/filename.h /usr/include/wx-3.2/wx/file.h \
- /usr/include/wx-3.2/wx/statbmp.h /usr/include/wx-3.2/wx/gtk/statbmp.h \
+ /usr/include/wx-3.2/wx/wrapsizer.h /usr/include/wx-3.2/wx/statbmp.h \
+ /usr/include/wx-3.2/wx/gtk/statbmp.h /usr/include/wx-3.2/wx/bmpbuttn.h \
+ /usr/include/wx-3.2/wx/gtk/bmpbuttn.h /usr/include/wx-3.2/wx/cmdproc.h \
  /usr/include/wx-3.2/wx/clipbrd.h /usr/include/wx-3.2/wx/dataobj.h \
  /usr/include/wx-3.2/wx/gtk/dataform.h \
  /usr/include/wx-3.2/wx/gtk/dataobj.h \
@@ -392,8 +394,12 @@ src/KeyframePanel.h:
 /usr/include/wx-3.2/wx/unix/stdpaths.h:
 /usr/include/wx-3.2/wx/filename.h:
 /usr/include/wx-3.2/wx/file.h:
+/usr/include/wx-3.2/wx/wrapsizer.h:
 /usr/include/wx-3.2/wx/statbmp.h:
 /usr/include/wx-3.2/wx/gtk/statbmp.h:
+/usr/include/wx-3.2/wx/bmpbuttn.h:
+/usr/include/wx-3.2/wx/gtk/bmpbuttn.h:
+/usr/include/wx-3.2/wx/cmdproc.h:
 /usr/include/wx-3.2/wx/clipbrd.h:
 /usr/include/wx-3.2/wx/dataobj.h:
 /usr/include/wx-3.2/wx/gtk/dataform.h:

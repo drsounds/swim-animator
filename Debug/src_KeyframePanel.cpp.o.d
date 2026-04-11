@@ -84,7 +84,9 @@ Debug/src_KeyframePanel.cpp.o: src/KeyframePanel.cpp src/KeyframePanel.h \
  /usr/include/wx-3.2/wx/convauto.h src/SmilDoc.h \
  /usr/include/wx-3.2/wx/sizer.h /usr/include/wx-3.2/wx/dcclient.h \
  /usr/include/wx-3.2/wx/dcmemory.h /usr/include/wx-3.2/wx/dcbuffer.h \
- /usr/include/wx-3.2/wx/settings.h
+ /usr/include/wx-3.2/wx/settings.h /usr/include/wx-3.2/wx/menu.h \
+ /usr/include/wx-3.2/wx/menuitem.h /usr/include/wx-3.2/wx/bmpbndl.h \
+ /usr/include/wx-3.2/wx/gtk/menuitem.h /usr/include/wx-3.2/wx/gtk/menu.h
 src/KeyframePanel.h:
 /usr/include/wx-3.2/wx/panel.h:
 /usr/include/wx-3.2/wx/window.h:
@@ -249,3 +251,8 @@ src/SmilDoc.h:
 /usr/include/wx-3.2/wx/dcmemory.h:
 /usr/include/wx-3.2/wx/dcbuffer.h:
 /usr/include/wx-3.2/wx/settings.h:
+/usr/include/wx-3.2/wx/menu.h:
+/usr/include/wx-3.2/wx/menuitem.h:
+/usr/include/wx-3.2/wx/bmpbndl.h:
+/usr/include/wx-3.2/wx/gtk/menuitem.h:
+/usr/include/wx-3.2/wx/gtk/menu.h:

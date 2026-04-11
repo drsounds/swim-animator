@@ -124,6 +124,7 @@ private:
     DrawView*          m_activeDrawView {nullptr};
     SmilView*          m_activeSmilView {nullptr};
     CollapseManager*   m_collapseManager{nullptr};
+    wxToolBar*         m_drawToolbar;
 
     void OnAuiCaptionClick(wxMouseEvent& e);
 

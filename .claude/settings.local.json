@@ -43,7 +43,20 @@
       "Bash(cmake -B build -DCMAKE_BUILD_TYPE=Debug -G Ninja)",
       "Bash(ninja -C build)",
       "Bash(cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(grep -r \"refPath\\\\|embedded\" /home/alecca/Documents/spacely/src/*.h)",
+      "Bash(find:*)",
+      "Bash(grep -n \"OnSelectAll\\\\|ID_EDIT_SELECTALL\\\\|wxID_SELECTALL\" /home/alecca/Documents/spacely/src/*.cpp)",
+      "Bash(grep -rn \"wxID_CUT\\\\|wxID_COPY\\\\|wxID_PASTE\\\\|wxID_UNDO\\\\|wxID_REDO\\\\|wxID_OPEN\\\\|wxID_SAVE\\\\|wxID_SAVEAS\\\\|wxID_NEW\\\\|wxID_EXIT\" /home/alecca/Documents/spacely/src/*.cpp)",
+      "Bash(grep:*)",
+      "Bash(rm -rf build)",
+      "Bash(mkdir build:*)",
+      "Bash(cmake ..)",
+      "Bash(cmake -B build -S .)",
+      "Bash(./build/spacily-app)",
+      "Bash(git checkout:*)",
+      "Bash(git revert:*)",
+      "Bash(make)"
     ]
   }
 }

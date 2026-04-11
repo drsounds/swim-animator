@@ -1276,7 +1276,7 @@ void DrawCanvas::OnContextMenu(wxContextMenuEvent& e) {
     menu.Append(ID_CTX_GROUP,   "&Group\tCtrl+G")->Enable(canGroup);
     menu.Append(ID_CTX_UNGROUP, "&Ungroup\tCtrl+Shift+G")->Enable(canUngroup);
     menu.AppendSeparator();
-    menu.Append(ID_CTX_PROPERTIES, "&Properties…")->Enable(hasSingle);
+    // menu.Append(ID_CTX_PROPERTIES, "&Properties…")->Enable(hasSingle);
 
     PopupMenu(&menu);
 }

@@ -3,6 +3,7 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <File Name="src/CollapseManager.cpp"/>
     <File Name="src/SmilTypes.cpp"/>
     <File Name="src/ScenePanel.cpp"/>
     <File Name="src/KeyframePanel.cpp"/>
